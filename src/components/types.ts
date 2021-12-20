@@ -14,4 +14,5 @@ export type ListGroupType = {
 
 export type MoviesTableType = {
   movies: MoviesType[];
+  onDelete: Function;
 };

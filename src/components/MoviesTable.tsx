@@ -1,6 +1,6 @@
 import { MoviesTableType } from "./types";
 
-const MoviesTable: React.FC<MoviesTableType> = ({ movies }) => {
+const MoviesTable: React.FC<MoviesTableType> = ({ movies, onDelete }) => {
   return (
     <table className="table">
       <thead>
@@ -20,7 +20,12 @@ const MoviesTable: React.FC<MoviesTableType> = ({ movies }) => {
             <td>{movie.numberInStock}</td>
             <td>{movie.dailyRentalRate}</td>
             <td>
-              <button className="btn btn-danger btn-sm">Delete</button>
+              <button
+                onClick={() => onDelete(movie._id)}
+                className="btn btn-danger btn-sm"
+              >
+                Delete
+              </button>
             </td>
           </tr>
         ))}

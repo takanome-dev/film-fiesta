@@ -23,6 +23,12 @@ export default class Movies extends Component<{}, IState> {
     this.setState({ movies: getMovies(), genres: getGenres() });
   }
 
+  handleDelete = (id: string) => {
+    const movies = this.state.movies.filter((m) => m._id !== id);
+
+    this.setState({ movies });
+  };
+
   hanlePageChange = (page: number) => {
     console.log(page);
   };
@@ -45,7 +51,7 @@ export default class Movies extends Component<{}, IState> {
         </div>
         <div className="col">
           <p>Showing {count} movies in the database</p>
-          <MoviesTable movies={movies} />
+          <MoviesTable movies={movies} onDelete={this.handleDelete} />
           <Pagination
             pageSize={pageSize}
             itemsCount={count}
