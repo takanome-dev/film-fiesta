@@ -1,4 +1,6 @@
-const movies = [
+import { MoviesType } from "./types";
+
+const movies: MoviesType[] = [
   {
     _id: "5b21ca3eeb7f6fbccd471815",
     title: "Terminator",
