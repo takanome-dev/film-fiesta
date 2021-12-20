@@ -1,13 +1,22 @@
 import { ListGroupType } from "./types";
 
-const ListGroup: React.FC<ListGroupType> = ({ items, onItemSelected }) => {
+const ListGroup: React.FC<ListGroupType> = ({
+  items,
+  onItemSelected,
+  selectedItem,
+}) => {
   return (
     <ul className="list-group">
-      {items.map((item) => (
+      {items.map((item, i) => (
         <li
-          key={item._id}
+          key={i}
           onClick={() => onItemSelected(item)}
-          className="list-group-item"
+          className={
+            selectedItem.name === item.name
+              ? "list-group-item active"
+              : "list-group-item"
+          }
+          style={{ cursor: "pointer" }}
         >
           {item.name}
         </li>

@@ -1,5 +1,13 @@
 import { GenreType, MoviesType } from "../services/types";
 
+export type StateType = {
+  movies: MoviesType[];
+  genres: GenreType[];
+  pageSize: number;
+  currentPage: number;
+  selectedGenre: GenreType;
+};
+
 export type PaginationProps = {
   currentPage: number;
   onPageChange: Function;
@@ -9,6 +17,7 @@ export type PaginationProps = {
 
 export type ListGroupType = {
   items: GenreType[];
+  selectedItem: GenreType;
   onItemSelected: Function;
 };
 

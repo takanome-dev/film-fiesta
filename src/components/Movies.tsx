@@ -6,24 +6,19 @@ import { paginate } from "../utils/paginate";
 import ListGroup from "./ListGroup";
 import MoviesTable from "./MoviesTable";
 import Pagination from "./Pagination";
-
-interface IState {
-  movies: MoviesType[];
-  genres: GenreType[];
-  pageSize: number;
-  currentPage: number;
-}
-
-export default class Movies extends Component<{}, IState> {
-  state: Readonly<IState> = {
+import { StateType } from "./types";
+export default class Movies extends Component<{}, StateType> {
+  state: Readonly<StateType> = {
     movies: [],
     genres: [],
     pageSize: 4,
     currentPage: 1,
+    selectedGenre: { _id: "", name: "" },
   };
 
   componentDidMount() {
-    this.setState({ movies: getMovies(), genres: getGenres() });
+    const genres = [{ name: "All Genres" }, ...getGenres()];
+    this.setState({ movies: getMovies(), genres });
   }
 
   handleLike = (movie: MoviesType) => {
@@ -39,6 +34,7 @@ export default class Movies extends Component<{}, IState> {
   handleDelete = (id: string) => {
     const movies = this.state.movies.filter((m) => m._id !== id);
 
+    // deepcode ignore ReactNextState: <please specify a reason of ignoring this>
     this.setState({ movies });
   };
 
@@ -46,14 +42,25 @@ export default class Movies extends Component<{}, IState> {
     this.setState({ currentPage: page });
   };
 
-  handleGenreChange = (item: GenreType) => {
-    console.log(item);
+  handleGenreSelect = (genre: GenreType) => {
+    this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 
   render() {
-    const { movies: allMovies, pageSize, currentPage, genres } = this.state;
+    const {
+      movies: allMovies,
+      pageSize,
+      currentPage,
+      genres,
+      selectedGenre,
+    } = this.state;
 
-    const movies = paginate(allMovies, currentPage, pageSize);
+    const filtered =
+      selectedGenre && selectedGenre._id
+        ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
+        : allMovies;
+
+    const movies = paginate(filtered, currentPage, pageSize);
 
     const { length: count } = this.state.movies;
 
@@ -62,10 +69,14 @@ export default class Movies extends Component<{}, IState> {
     return (
       <div className="row">
         <div className="col-3">
-          <ListGroup items={genres} onItemSelected={this.handleGenreChange} />
+          <ListGroup
+            items={genres}
+            selectedItem={selectedGenre}
+            onItemSelected={this.handleGenreSelect}
+          />
         </div>
         <div className="col">
-          <p>Showing {count} movies in the database</p>
+          <p>Showing {filtered.length} movies in the database</p>
           <MoviesTable
             movies={movies}
             onDelete={this.handleDelete}
@@ -73,7 +84,7 @@ export default class Movies extends Component<{}, IState> {
           />
           <Pagination
             pageSize={pageSize}
-            itemsCount={count}
+            itemsCount={filtered.length}
             currentPage={currentPage}
             onPageChange={this.handlePageChange}
           />

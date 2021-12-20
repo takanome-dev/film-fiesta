@@ -9,6 +9,6 @@ export type MoviesType = {
 };
 
 export type GenreType = {
-  _id: string;
+  _id?: string;
   name: string;
 };
