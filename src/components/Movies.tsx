@@ -26,6 +26,16 @@ export default class Movies extends Component<{}, IState> {
     this.setState({ movies: getMovies(), genres: getGenres() });
   }
 
+  handleLike = (movie: MoviesType) => {
+    const movies = [...this.state.movies];
+    const index = movies.indexOf(movie);
+
+    movies[index] = { ...movies[index] };
+    movies[index].liked = !movies[index].liked;
+
+    this.setState({ movies });
+  };
+
   handleDelete = (id: string) => {
     const movies = this.state.movies.filter((m) => m._id !== id);
 
@@ -56,7 +66,11 @@ export default class Movies extends Component<{}, IState> {
         </div>
         <div className="col">
           <p>Showing {count} movies in the database</p>
-          <MoviesTable movies={movies} onDelete={this.handleDelete} />
+          <MoviesTable
+            movies={movies}
+            onDelete={this.handleDelete}
+            onLike={this.handleLike}
+          />
           <Pagination
             pageSize={pageSize}
             itemsCount={count}

@@ -15,4 +15,10 @@ export type ListGroupType = {
 export type MoviesTableType = {
   movies: MoviesType[];
   onDelete: Function;
+  onLike: Function;
+};
+
+export type LikeType = {
+  liked: boolean;
+  onLike: Function;
 };
