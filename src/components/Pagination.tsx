@@ -5,6 +5,7 @@ const Pagination: React.FC<PaginationProps> = ({
   pageSize,
   onPageChange,
   itemsCount,
+  currentPage,
 }) => {
   const pagesCount = Math.ceil(itemsCount / pageSize);
 
@@ -18,10 +19,13 @@ const Pagination: React.FC<PaginationProps> = ({
         {pages.map((page) => (
           <li
             key={page}
-            onClick={() => onPageChange(page)}
-            className="page-item"
+            className={currentPage === page ? "page-item active" : "page-item"}
           >
-            <a href="!#" className="page-link">
+            <a
+              href="!#"
+              onClick={() => onPageChange(page)}
+              className="page-link"
+            >
               {page}
             </a>
           </li>

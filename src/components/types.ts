@@ -1,7 +1,7 @@
 import { GenreType, MoviesType } from "../services/types";
 
 export type PaginationProps = {
-  // currentPage: number;
+  currentPage: number;
   onPageChange: Function;
   itemsCount: number;
   pageSize: number;
