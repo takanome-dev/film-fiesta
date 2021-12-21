@@ -38,6 +38,30 @@ export type MoviesTableType = {
   handleSort: Function;
 };
 
+export type ColumnType = {
+  path?: string;
+  label?: string;
+  content?: Function;
+};
+
+export type TableType = {
+  columns: ColumnType[];
+  sortColumn: SortColumnType;
+  handleSort: Function;
+  data: MovieType[];
+};
+
+export type TableHeaderType = {
+  handleSort: Function;
+  columns: ColumnType[];
+  sortColumn: SortColumnType;
+};
+
+export type TableBodyType = {
+  data: MovieType[];
+  columns: ColumnType[];
+};
+
 export type LikeType = {
   liked: boolean;
   onLike: Function;

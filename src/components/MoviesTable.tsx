@@ -1,60 +1,47 @@
-import Like from "./common/Like";
+import { Component } from "react";
+//* Types
+import { MovieType } from "../types/MovieType";
 import { MoviesTableType } from "./types";
+//* Components
+import Like from "./common/Like";
+import Table from "./common/Table";
 
-const MoviesTable: React.FC<MoviesTableType> = ({
-  movies,
-  handleDelete,
-  handleLike,
-  handleSort,
-  sortColumn,
-}) => {
-  const sortMovie = (path: string) => {
-    const sortMovieColumn = { ...sortColumn };
+export default class MoviesTable extends Component<MoviesTableType> {
+  columns = [
+    { path: "title", label: "Title" },
+    { path: "genre.name", label: "Genre" },
+    { path: "numberInStock", label: "Stock" },
+    { path: "dailyRentalRate", label: "Rate" },
+    {
+      content: (movie: MovieType) => (
+        <Like
+          liked={movie.liked!}
+          onLike={() => this.props.handleLike(movie)}
+        />
+      ),
+    },
+    {
+      content: (movie: MovieType) => (
+        <button
+          onClick={() => this.props.handleDelete(movie._id)}
+          className="btn btn-danger btn-sm"
+        >
+          Delete
+        </button>
+      ),
+    },
+  ];
 
-    if (sortMovieColumn.path === path) {
-      sortMovieColumn.order = sortMovieColumn.order === "asc" ? "desc" : "asc";
-    } else {
-      sortMovieColumn.path = path;
-      sortMovieColumn.order = "asc";
-    }
+  render() {
+    const { movies, handleSort, sortColumn } = this.props;
 
-    return handleSort(sortMovieColumn);
-  };
-
-  return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th onClick={() => sortMovie("title")}>Title</th>
-          <th onClick={() => sortMovie("genre.name")}>Genre</th>
-          <th onClick={() => sortMovie("numberInStock")}>Stock</th>
-          <th onClick={() => sortMovie("dailyRentalRate")}>Rate</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {movies.map((movie) => (
-          <tr key={movie._id}>
-            <td>{movie.title}</td>
-            <td>{movie.genre.name}</td>
-            <td>{movie.numberInStock}</td>
-            <td>{movie.dailyRentalRate}</td>
-            <td>
-              <Like liked={movie.liked!} onLike={() => handleLike(movie)} />
-            </td>
-            <td>
-              <button
-                onClick={() => handleDelete(movie._id)}
-                className="btn btn-danger btn-sm"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-};
-
-export default MoviesTable;
+    return (
+      <Table
+        data={movies}
+        handleSort={handleSort}
+        sortColumn={sortColumn}
+        columns={this.columns}
+      />
+    );
+  }
+}
