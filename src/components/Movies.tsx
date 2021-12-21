@@ -13,6 +13,7 @@ import ListGroup from "./common/ListGroup";
 import Pagination from "./common/Pagination";
 import MoviesTable from "./MoviesTable";
 export default class Movies extends Component<{}, StateType> {
+  //* Initial State
   state: Readonly<StateType> = {
     movies: [],
     genres: [],
@@ -30,16 +31,13 @@ export default class Movies extends Component<{}, StateType> {
   handleLikeMovie = (movie: MovieType) => {
     const movies = [...this.state.movies];
     const index = movies.indexOf(movie);
-
     movies[index] = { ...movies[index] };
     movies[index].liked = !movies[index].liked;
-
     this.setState({ movies });
   };
 
   handleDeleteMovie = (id: string) => {
     const movies = this.state.movies.filter((m) => m._id !== id);
-
     // deepcode ignore ReactNextState: <please specify a reason of ignoring this>
     this.setState({ movies });
   };
@@ -56,12 +54,11 @@ export default class Movies extends Component<{}, StateType> {
     this.setState({ sortColumn });
   };
 
-  render() {
+  handleGetData = () => {
     const {
       movies: allMovies,
       pageSize,
       currentPage,
-      genres,
       selectedGenre,
       sortColumn,
     } = this.state;
@@ -72,12 +69,16 @@ export default class Movies extends Component<{}, StateType> {
         : allMovies;
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
-
     const movies = paginate(sorted, currentPage, pageSize);
+    return { totalCount: filtered.length, movies };
+  };
 
-    const { length: count } = this.state.movies;
+  render() {
+    const { pageSize, currentPage, genres, selectedGenre } = this.state;
+    const { totalCount, movies } = this.handleGetData();
 
-    if (count === 0) return <p>There are no movies in the database</p>;
+    if (this.state.movies.length === 0)
+      return <p>There are no movies in the database</p>;
 
     return (
       <div className="row">
@@ -89,7 +90,7 @@ export default class Movies extends Component<{}, StateType> {
           />
         </div>
         <div className="col">
-          <p>Showing {filtered.length} movies in the database</p>
+          <p>Showing {totalCount} movies in the database</p>
           <MoviesTable
             movies={movies}
             sortColumn={this.state.sortColumn}
@@ -99,7 +100,7 @@ export default class Movies extends Component<{}, StateType> {
           />
           <Pagination
             pageSize={pageSize}
-            itemsCount={filtered.length}
+            itemsCount={totalCount}
             currentPage={currentPage}
             onPageChange={this.handlePageChange}
           />
