@@ -1,8 +1,8 @@
 import _ from "lodash";
-import { MoviesType } from "../services/types";
+import { MovieType } from "../types/MovieType";
 
 export const paginate = (
-  items: MoviesType[],
+  items: MovieType[],
   pageNumber: number,
   pageSize: number
 ) => {

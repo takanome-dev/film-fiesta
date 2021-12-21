@@ -1,4 +1,6 @@
-export type MoviesType = {
+import { GenreType } from "./GenreType";
+
+export type MovieType = {
   _id: string;
   title: string;
   genre: GenreType;
@@ -6,9 +8,4 @@ export type MoviesType = {
   dailyRentalRate: number;
   publishDate?: string;
   liked?: boolean;
-};
-
-export type GenreType = {
-  _id?: string;
-  name: string;
 };

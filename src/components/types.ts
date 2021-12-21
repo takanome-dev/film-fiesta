@@ -1,7 +1,8 @@
-import { GenreType, MoviesType } from "../services/types";
+import { GenreType } from "../types/GenreType";
+import { MovieType } from "../types/MovieType";
 
 export type StateType = {
-  movies: MoviesType[];
+  movies: MovieType[];
   genres: GenreType[];
   pageSize: number;
   currentPage: number;
@@ -22,7 +23,7 @@ export type ListGroupType = {
 };
 
 export type MoviesTableType = {
-  movies: MoviesType[];
+  movies: MovieType[];
   onDelete: Function;
   onLike: Function;
 };

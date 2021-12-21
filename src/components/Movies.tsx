@@ -1,12 +1,16 @@
 import { Component } from "react";
+//* Services
 import { getGenres } from "../services/fakeGenreService";
 import { getMovies } from "../services/fakeMovieService";
-import { GenreType, MoviesType } from "../services/types";
 import { paginate } from "../utils/paginate";
+//* Types
+import { GenreType } from "../types/GenreType";
+import { MovieType } from "../types/MovieType";
+import { StateType } from "./types";
+//* Components
 import ListGroup from "./ListGroup";
 import MoviesTable from "./MoviesTable";
 import Pagination from "./Pagination";
-import { StateType } from "./types";
 export default class Movies extends Component<{}, StateType> {
   state: Readonly<StateType> = {
     movies: [],
@@ -21,7 +25,7 @@ export default class Movies extends Component<{}, StateType> {
     this.setState({ movies: getMovies(), genres });
   }
 
-  handleLike = (movie: MoviesType) => {
+  handleLike = (movie: MovieType) => {
     const movies = [...this.state.movies];
     const index = movies.indexOf(movie);
 
