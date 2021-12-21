@@ -1,12 +1,20 @@
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
 
+type OrderType = boolean | "asc" | "desc";
+
+export type SortColumnType = {
+  path: string;
+  order: OrderType;
+};
+
 export type StateType = {
   movies: MovieType[];
   genres: GenreType[];
   pageSize: number;
   currentPage: number;
   selectedGenre: GenreType;
+  sortColumn: SortColumnType;
 };
 
 export type PaginationProps = {
@@ -24,8 +32,10 @@ export type ListGroupType = {
 
 export type MoviesTableType = {
   movies: MovieType[];
-  onDelete: Function;
-  onLike: Function;
+  sortColumn: SortColumnType;
+  handleDelete: Function;
+  handleLike: Function;
+  handleSort: Function;
 };
 
 export type LikeType = {
