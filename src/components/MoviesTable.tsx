@@ -1,4 +1,4 @@
-import Like from "./Like";
+import Like from "./common/Like";
 import { MoviesTableType } from "./types";
 
 const MoviesTable: React.FC<MoviesTableType> = ({

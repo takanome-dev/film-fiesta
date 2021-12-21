@@ -1,4 +1,4 @@
-import { ListGroupType } from "./types";
+import { ListGroupType } from "../types";
 
 const ListGroup: React.FC<ListGroupType> = ({
   items,

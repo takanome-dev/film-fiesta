@@ -8,9 +8,9 @@ import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
 import { StateType } from "./types";
 //* Components
-import ListGroup from "./ListGroup";
+import ListGroup from "./common/ListGroup";
+import Pagination from "./common/Pagination";
 import MoviesTable from "./MoviesTable";
-import Pagination from "./Pagination";
 export default class Movies extends Component<{}, StateType> {
   state: Readonly<StateType> = {
     movies: [],

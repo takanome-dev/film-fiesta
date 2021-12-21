@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { PaginationProps } from "./types";
+import { PaginationProps } from "../types";
 
 const Pagination: React.FC<PaginationProps> = ({
   pageSize,
