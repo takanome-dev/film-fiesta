@@ -7,9 +7,9 @@ const ListGroup: React.FC<ListGroupType> = ({
 }) => {
   return (
     <ul className="list-group">
-      {items.map((item, i) => (
+      {items.map((item) => (
         <li
-          key={i}
+          key={item._id}
           onClick={() => onItemSelected(item)}
           className={
             selectedItem.name === item.name

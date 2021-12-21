@@ -1,4 +1,5 @@
 import { Component } from "react";
+import _ from "lodash";
 //* Services
 import { getGenres } from "../services/fakeGenreService";
 import { getMovies } from "../services/fakeMovieService";
@@ -6,7 +7,7 @@ import { paginate } from "../utils/paginate";
 //* Types
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
-import { StateType } from "./types";
+import { SortColumnType, StateType } from "./types";
 //* Components
 import ListGroup from "./common/ListGroup";
 import Pagination from "./common/Pagination";
@@ -18,14 +19,15 @@ export default class Movies extends Component<{}, StateType> {
     pageSize: 4,
     currentPage: 1,
     selectedGenre: { _id: "", name: "" },
+    sortColumn: { path: "title", order: "asc" },
   };
 
   componentDidMount() {
-    const genres = [{ name: "All Genres" }, ...getGenres()];
+    const genres = [{ _id: "", name: "All Genres" }, ...getGenres()];
     this.setState({ movies: getMovies(), genres });
   }
 
-  handleLike = (movie: MovieType) => {
+  handleLikeMovie = (movie: MovieType) => {
     const movies = [...this.state.movies];
     const index = movies.indexOf(movie);
 
@@ -35,7 +37,7 @@ export default class Movies extends Component<{}, StateType> {
     this.setState({ movies });
   };
 
-  handleDelete = (id: string) => {
+  handleDeleteMovie = (id: string) => {
     const movies = this.state.movies.filter((m) => m._id !== id);
 
     // deepcode ignore ReactNextState: <please specify a reason of ignoring this>
@@ -50,6 +52,10 @@ export default class Movies extends Component<{}, StateType> {
     this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 
+  handleSortMovie = (sortColumn: SortColumnType) => {
+    this.setState({ sortColumn });
+  };
+
   render() {
     const {
       movies: allMovies,
@@ -57,6 +63,7 @@ export default class Movies extends Component<{}, StateType> {
       currentPage,
       genres,
       selectedGenre,
+      sortColumn,
     } = this.state;
 
     const filtered =
@@ -64,7 +71,9 @@ export default class Movies extends Component<{}, StateType> {
         ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
         : allMovies;
 
-    const movies = paginate(filtered, currentPage, pageSize);
+    const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
+
+    const movies = paginate(sorted, currentPage, pageSize);
 
     const { length: count } = this.state.movies;
 
@@ -83,8 +92,10 @@ export default class Movies extends Component<{}, StateType> {
           <p>Showing {filtered.length} movies in the database</p>
           <MoviesTable
             movies={movies}
-            onDelete={this.handleDelete}
-            onLike={this.handleLike}
+            sortColumn={this.state.sortColumn}
+            handleDelete={this.handleDeleteMovie}
+            handleLike={this.handleLikeMovie}
+            handleSort={this.handleSortMovie}
           />
           <Pagination
             pageSize={pageSize}
