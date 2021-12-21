@@ -1,6 +1,6 @@
 import { Component } from "react";
 //* Types
-import { TableHeaderType } from "../types";
+import { ColumnType, TableHeaderType } from "../types";
 
 export default class TableHeader extends Component<TableHeaderType> {
   handleSort = (path: string) => {
@@ -16,6 +16,16 @@ export default class TableHeader extends Component<TableHeaderType> {
     return this.props.handleSort(sortColumn);
   };
 
+  handleSortIcon = (column: ColumnType) => {
+    const { sortColumn } = this.props;
+
+    if (column.path !== sortColumn.path) return null;
+
+    if (sortColumn.order === "asc") return <i className="fa fa-sort-asc"></i>;
+
+    return <i className="fa fa-sort-desc"></i>;
+  };
+
   render() {
     const { columns } = this.props;
 
@@ -28,7 +38,7 @@ export default class TableHeader extends Component<TableHeaderType> {
               onClick={() => this.handleSort(column.path!)}
               style={{ cursor: "pointer" }}
             >
-              {column.label}
+              {column.label} {this.handleSortIcon(column)}
             </th>
           ))}
         </tr>
