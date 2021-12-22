@@ -1,6 +1,18 @@
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
 
+type ParamsType = {
+  id: string;
+};
+
+type MatchType = {
+  params: ParamsType;
+};
+
+export type MovieFormType = {
+  match: MatchType;
+};
+
 type OrderType = boolean | "asc" | "desc";
 
 export type SortColumnType = {

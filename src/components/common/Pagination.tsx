@@ -21,13 +21,13 @@ const Pagination: React.FC<PaginationProps> = ({
             key={page}
             className={currentPage === page ? "page-item active" : "page-item"}
           >
-            <a
-              href="!#"
+            <span
               onClick={() => onPageChange(page)}
               className="page-link"
+              style={{ cursor: "pointer" }}
             >
               {page}
-            </a>
+            </span>
           </li>
         ))}
       </ul>
