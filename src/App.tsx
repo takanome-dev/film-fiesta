@@ -1,4 +1,5 @@
 import { Redirect, Route, Switch } from "react-router-dom";
+//* Components
 import {
   NotFound,
   Customers,
@@ -6,6 +7,7 @@ import {
   Movies,
   NavBar,
   Rentals,
+  LoginForm,
 } from "./components";
 
 const App = () => {
@@ -14,6 +16,7 @@ const App = () => {
       <NavBar />
       <main className="container">
         <Switch>
+          <Route path="/login" component={LoginForm} />
           <Route path="/customers" component={Customers} />
           <Route path="/rentals" component={Rentals} />
           <Route path="/movies/:id" component={MovieForm} />

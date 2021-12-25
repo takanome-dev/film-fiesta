@@ -4,3 +4,4 @@ export { default as Customers } from "./Customers";
 export { default as NavBar } from "./NavBar";
 export { default as Rentals } from "./Rentals";
 export { default as NotFound } from "./404";
+export { default as LoginForm } from "./LoginForm";
