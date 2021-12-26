@@ -1,8 +1,8 @@
-type AccountType = {
-  username: string;
-  password: string;
-};
+// type AccountType = {
+//   username: string;
+//   password: string;
+// };
 
 export type LoginFormType = {
-  account: AccountType;
+  account: Record<string, any>;
 };

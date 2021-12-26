@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { LoginFormType } from "../types/LoginFormType";
+import Input from "./common/Input";
 
 export default class LoginForm extends Component<{}, LoginFormType> {
   state: Readonly<LoginFormType> = {
@@ -18,7 +19,7 @@ export default class LoginForm extends Component<{}, LoginFormType> {
   handleChange = ({ currentTarget }: React.FormEvent<HTMLInputElement>) => {
     const account = { ...this.state.account };
 
-    account["username"] = currentTarget.value;
+    account[currentTarget.name] = currentTarget.value;
 
     this.setState({ account });
   };
@@ -28,32 +29,18 @@ export default class LoginForm extends Component<{}, LoginFormType> {
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="username" className="form-label">
-            Username
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="username"
-            name="username"
-            value={username}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            name="password"
-            value={password}
-            onChange={this.handleChange}
-          />
-        </div>
+        <Input
+          name="username"
+          label="Username"
+          value={username}
+          onChange={this.handleChange}
+        />
+        <Input
+          name="password"
+          label="Password"
+          value={password}
+          onChange={this.handleChange}
+        />
         <button className="btn btn-primary">Login</button>
       </form>
     );
