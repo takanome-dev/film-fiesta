@@ -1,26 +1,28 @@
 import React from "react";
 
 type Props = {
-  name: string;
   label: string;
+  name: string;
   value: string;
-  onChange: ({ currentTarget }: React.FormEvent<HTMLInputElement>) => void;
+  error: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
-const Input: React.FC<Props> = ({ name, label, value, onChange }) => {
+const Input: React.FC<Props> = ({ label, name, value, error, onChange }) => {
   return (
     <div className="mb-3">
       <label htmlFor={name} className="form-label">
         {label}
       </label>
       <input
-        type="text"
         className="form-control"
+        type="text"
         id={name}
         name={name}
         value={value}
         onChange={onChange}
       />
+      {error && <div className="alert alert-danger">{error}</div>}
     </div>
   );
 };

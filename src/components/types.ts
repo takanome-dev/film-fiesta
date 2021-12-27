@@ -78,3 +78,21 @@ export type LikeType = {
   liked: boolean;
   onLike: Function;
 };
+
+// type AccountType = {
+//   username: string;
+//   password: string;
+// };
+
+export type ErrorType = {
+  username?: string;
+  password?: string;
+};
+
+export type LoginFormType = {
+  /**
+   * @ref https://stackoverflow.com/questions/56568423/typescript-no-index-signature-with-a-parameter-of-type-string-was-found-on-ty
+   */
+  account: Record<string, any>;
+  errors: Record<string, any>;
+};
