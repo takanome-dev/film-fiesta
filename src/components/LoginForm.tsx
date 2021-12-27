@@ -24,6 +24,7 @@ export default class LoginForm extends Component<{}, LoginFormType> {
     });
 
     if (!error) return null;
+
     for (const err of error?.details!) errors[err.path[0]] = err.message;
 
     return errors;
@@ -43,8 +44,7 @@ export default class LoginForm extends Component<{}, LoginFormType> {
     const field = { [name]: value };
     const schema = { [name]: this.schema[name] };
     const { error } = Joi.object(schema).validate(field);
-    if (!error) return null;
-    return error.details[0].message;
+    return error ? error.details[0].message : null;
   };
 
   /**
@@ -70,6 +70,8 @@ export default class LoginForm extends Component<{}, LoginFormType> {
   render() {
     const { account, errors } = this.state;
 
+    const isDisabled = this.validate() === null ? false : true;
+
     return (
       <form onSubmit={this.handleSubmit}>
         <Input
@@ -86,7 +88,9 @@ export default class LoginForm extends Component<{}, LoginFormType> {
           error={errors.password!}
           onChange={this.handleChange}
         />
-        <button className="btn btn-primary">Login</button>
+        <button className="btn btn-primary" disabled={isDisabled}>
+          Login
+        </button>
       </form>
     );
   }
