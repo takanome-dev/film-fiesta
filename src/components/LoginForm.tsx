@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ErrorType, LoginFormType } from "./types";
+import { LoginFormType } from "./types";
 import Input from "./common/Input";
 import Joi from "joi";
 
@@ -12,20 +12,18 @@ export default class LoginForm extends Component<{}, LoginFormType> {
     errors: {},
   };
 
-  schema = {
-    username: Joi.string().required(),
-    password: Joi.string().required(),
+  schema: Record<string, any> = {
+    username: Joi.string().required().label("Username"),
+    password: Joi.string().required().label("Password"),
   };
 
   validate = () => {
     const errors: Record<string, any> = {};
-
     const { error } = Joi.object(this.schema).validate(this.state.account, {
       abortEarly: false,
     });
 
     if (!error) return null;
-
     for (const err of error?.details!) errors[err.path[0]] = err.message;
 
     return errors;
@@ -42,12 +40,11 @@ export default class LoginForm extends Component<{}, LoginFormType> {
   };
 
   validateProperty = ({ name, value }: EventTarget & HTMLInputElement) => {
-    if (name === "username") {
-      if (value.trim() === "") return "Username is required";
-    }
-    if (name === "password") {
-      if (value.trim() === "") return "Password is required";
-    }
+    const field = { [name]: value };
+    const schema = { [name]: this.schema[name] };
+    const { error } = Joi.object(schema).validate(field);
+    if (!error) return null;
+    return error.details[0].message;
   };
 
   /**
