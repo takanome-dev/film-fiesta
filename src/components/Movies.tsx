@@ -14,7 +14,7 @@ import Pagination from "./common/Pagination";
 import MoviesTable from "./MoviesTable";
 export default class Movies extends Component<{}, StateType> {
   //* Initial State
-  state: Readonly<StateType> = {
+  state: StateType = {
     movies: [],
     genres: [],
     pageSize: 4,
