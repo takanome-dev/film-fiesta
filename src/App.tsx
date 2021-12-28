@@ -8,6 +8,7 @@ import {
   NavBar,
   Rentals,
   LoginForm,
+  RegisterForm,
 } from "./components";
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
       <main className="container">
         <Switch>
           <Route path="/login" component={LoginForm} />
+          <Route path="/register" component={RegisterForm} />
           <Route path="/customers" component={Customers} />
           <Route path="/rentals" component={Rentals} />
           <Route path="/movies/:id" component={MovieForm} />

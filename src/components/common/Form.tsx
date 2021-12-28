@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Joi from "joi";
+//* Components
 import Input from "./Input";
+//* Types
 import { FormType } from "../types";
 
 export default class Form extends Component<{}, FormType> {
@@ -34,7 +36,6 @@ export default class Form extends Component<{}, FormType> {
     this.submitToServer();
   };
 
-  //* Submit Form
   submitToServer() {}
 
   validateProperty = ({ name, value }: EventTarget & HTMLInputElement) => {
