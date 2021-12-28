@@ -16,7 +16,7 @@ export default class RegisterForm extends Form {
       .email({ tlds: { allow: ["com"] } })
       .required()
       .label("Username"),
-    password: Joi.string().alphanum().min(5).required().label("Password"),
+    password: Joi.string().min(5).required().label("Password"),
     name: Joi.string().required().label("Name"),
   };
 
@@ -26,12 +26,15 @@ export default class RegisterForm extends Form {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        {this.renderInput("username", "Username")}
-        {this.renderInput("password", "Password", "password")}
-        {this.renderInput("name", "Name")}
-        {this.renderButton("Register")}
-      </form>
+      <div>
+        <h1>Register</h1>
+        <form onSubmit={this.handleSubmit}>
+          {this.renderInput("username", "Username")}
+          {this.renderInput("password", "Password", "password")}
+          {this.renderInput("name", "Name")}
+          {this.renderButton("Register")}
+        </form>
+      </div>
     );
   }
 }

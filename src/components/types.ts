@@ -9,11 +9,11 @@ type MatchType = {
   params: ParamsType;
 };
 
+type OrderType = boolean | "asc" | "desc";
+
 export type MovieFormType = {
   match: MatchType;
 };
-
-type OrderType = boolean | "asc" | "desc";
 
 export type SortColumnType = {
   path: string;
