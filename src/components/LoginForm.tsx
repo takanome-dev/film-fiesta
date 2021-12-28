@@ -41,9 +41,9 @@ export default class LoginForm extends Component<{}, LoginFormType> {
   };
 
   validateProperty = ({ name, value }: EventTarget & HTMLInputElement) => {
-    const field = { [name]: value };
+    const input = { [name]: value };
     const schema = { [name]: this.schema[name] };
-    const { error } = Joi.object(schema).validate(field);
+    const { error } = Joi.object(schema).validate(input);
     return error ? error.details[0].message : null;
   };
 
