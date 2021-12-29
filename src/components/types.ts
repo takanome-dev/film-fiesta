@@ -11,6 +11,11 @@ type MatchType = {
 
 type OrderType = boolean | "asc" | "desc";
 
+type HistoryType = {
+  push: Function;
+  replace: Function;
+};
+
 export type SortColumnType = {
   path: string;
   order: OrderType;
@@ -22,6 +27,7 @@ export type StateType = {
   pageSize: number;
   currentPage: number;
   selectedGenre: GenreType;
+  searchQuery: string;
   sortColumn: SortColumnType;
 };
 
@@ -81,14 +87,14 @@ export type FormType = {
   errors: Record<string, any>;
 };
 
-type HistoryType = {
-  push: Function;
-  replace: Function;
-};
-
 export type FormProps = {
   match: MatchType;
   history: HistoryType;
+};
+
+export type SearchProps = {
+  value: string;
+  onSearch: (query: string) => void;
 };
 
 // type AccountType = {
