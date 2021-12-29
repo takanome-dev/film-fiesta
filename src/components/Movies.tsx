@@ -12,6 +12,7 @@ import { SortColumnType, StateType } from "./types";
 import ListGroup from "./common/ListGroup";
 import Pagination from "./common/Pagination";
 import MoviesTable from "./MoviesTable";
+import { Link } from "react-router-dom";
 export default class Movies extends Component<{}, StateType> {
   //* Initial State
   state: StateType = {
@@ -90,6 +91,9 @@ export default class Movies extends Component<{}, StateType> {
           />
         </div>
         <div className="col">
+          <Link to="/movies/new" className="btn btn-primary mb-3">
+            New Movie
+          </Link>
           <p>Showing {totalCount} movies in the database</p>
           <MoviesTable
             movies={movies}

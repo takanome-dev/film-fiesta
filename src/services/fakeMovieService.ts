@@ -1,3 +1,4 @@
+import * as genresAPI from "./fakeGenreService";
 import { MovieType } from "../types/MovieType";
 
 const movies: MovieType[] = [
@@ -76,10 +77,31 @@ export function getMovie(id: string) {
   return movies.find((m) => m._id === id);
 }
 
-// export function saveMovie(movie) {
-//   let movieInDb = movies.find(m => m._id === movie._id) || {}
-//   movieInDb.name = movie.name
-//   movieInDb.genre = genresAPI.genres.find(g => g._id === movie.genreId)
-//   movieInDb.numberInStock = movie.numberInStock
-//   movieInDb.dailyRentalRate = movie.dailyRentalRate
-// }
+type SaveMovieType = {
+  _id?: string;
+  title: string;
+  genreId: string;
+  numberInStock: string;
+  dailyRentalRate: string;
+};
+
+export function saveMovie(movie: SaveMovieType) {
+  const movieInDb: any = movies.find((m) => m._id === movie._id) || {};
+  movieInDb.title = movie.title;
+  movieInDb.genre = genresAPI.genres.find((g) => g._id === movie.genreId);
+  movieInDb.numberInStock = movie.numberInStock;
+  movieInDb.dailyRentalRate = movie.dailyRentalRate;
+
+  if (movieInDb._id === "") {
+    movieInDb._id = Date.now().toString();
+    movies.push(movieInDb);
+  }
+
+  return movieInDb;
+}
+
+export function deleteMovie(id: string) {
+  const movieInDb = movies.find((m) => m._id === id);
+  movies.splice(movies.indexOf(movieInDb!), 1);
+  return movieInDb;
+}

@@ -11,10 +11,6 @@ type MatchType = {
 
 type OrderType = boolean | "asc" | "desc";
 
-export type MovieFormType = {
-  match: MatchType;
-};
-
 export type SortColumnType = {
   path: string;
   order: OrderType;
@@ -81,7 +77,18 @@ export type LikeType = {
 
 export type FormType = {
   data: Record<string, any>;
+  genres?: GenreType[];
   errors: Record<string, any>;
+};
+
+type HistoryType = {
+  push: Function;
+  replace: Function;
+};
+
+export type FormProps = {
+  match: MatchType;
+  history: HistoryType;
 };
 
 // type AccountType = {

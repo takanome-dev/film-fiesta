@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import Joi from "joi";
 //* Components
 import Input from "./Input";
+import Select from "./Select";
 //* Types
-import { FormType } from "../types";
+import { FormProps, FormType } from "../types";
+import { GenreType } from "../../types/GenreType";
 
-export default class Form extends Component<{}, FormType> {
+export default class Form extends Component<FormProps, FormType> {
   state: FormType = {
     data: {},
     errors: {},
@@ -38,7 +40,10 @@ export default class Form extends Component<{}, FormType> {
 
   submitToServer() {}
 
-  validateProperty = ({ name, value }: EventTarget & HTMLInputElement) => {
+  validateProperty = ({
+    name,
+    value,
+  }: EventTarget & (HTMLInputElement | HTMLSelectElement)) => {
     const input = { [name]: value };
     const schema = { [name]: this.schema[name] };
     const { error } = Joi.object(schema).validate(input);
@@ -49,21 +54,20 @@ export default class Form extends Component<{}, FormType> {
    * @ref https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forms_and_events/
    */
 
-  handleChange: React.ChangeEventHandler<HTMLInputElement> = ({
-    currentTarget,
-  }) => {
-    const data = { ...this.state.data };
-    const errors = { ...this.state.errors };
+  handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement> =
+    ({ currentTarget }) => {
+      const data = { ...this.state.data };
+      const errors = { ...this.state.errors };
 
-    const errorMessage = this.validateProperty(currentTarget);
-    errorMessage
-      ? (errors[currentTarget.name] = errorMessage)
-      : delete errors[currentTarget.name];
+      const errorMessage = this.validateProperty(currentTarget);
+      errorMessage
+        ? (errors[currentTarget.name] = errorMessage)
+        : delete errors[currentTarget.name];
 
-    data[currentTarget.name] = currentTarget.value;
+      data[currentTarget.name] = currentTarget.value;
 
-    this.setState({ data, errors });
-  };
+      this.setState({ data, errors });
+    };
 
   renderInput(name: string, label: string, type = "text") {
     const { data, errors } = this.state;
@@ -72,6 +76,20 @@ export default class Form extends Component<{}, FormType> {
         label={label}
         name={name}
         type={type}
+        value={data[name]}
+        error={errors[name]!}
+        onChange={this.handleChange}
+      />
+    );
+  }
+
+  renderSelect(name: string, label: string, options: GenreType[]) {
+    const { data, errors } = this.state;
+    return (
+      <Select
+        label={label}
+        name={name}
+        options={options}
         value={data[name]}
         error={errors[name]!}
         onChange={this.handleChange}

@@ -6,7 +6,7 @@ type Props = {
   type: string;
   value: string;
   error: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>;
 };
 
 const Input: React.FC<Props> = ({ label, name, error, ...rest }) => {
