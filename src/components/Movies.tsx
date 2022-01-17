@@ -14,6 +14,7 @@ import ListGroup from "./common/ListGroup";
 import Pagination from "./common/Pagination";
 import Search from "./common/Search";
 import MoviesTable from "./MoviesTable";
+
 export default class Movies extends Component<{}, StateType> {
   //* Initial State
   state: StateType = {

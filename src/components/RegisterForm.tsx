@@ -11,11 +11,9 @@ export default class RegisterForm extends Form {
     errors: {},
   };
 
-  schema: Record<string, any> = {
-    username: Joi.string()
-      .email({ tlds: { allow: ["com"] } })
-      .required()
-      .label("Username"),
+  // .email({ tlds: { allow: ["com"] } })
+  schema = {
+    username: Joi.string().email().required().label("Username"),
     password: Joi.string().min(5).required().label("Password"),
     name: Joi.string().required().label("Name"),
   };

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import Joi from "joi";
-//* Components
 import Input from "./Input";
 import Select from "./Select";
-//* Types
 import { FormProps, FormType } from "../types";
 import { GenreType } from "../../types/GenreType";
 

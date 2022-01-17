@@ -1,11 +1,9 @@
 import { Component } from "react";
-//* Types
-import { MovieType } from "../types/MovieType";
-import { MoviesTableType } from "./types";
-//* Components
+import { Link } from "react-router-dom";
 import Like from "./common/Like";
 import Table from "./common/Table";
-import { Link } from "react-router-dom";
+import { MovieType } from "../types/MovieType";
+import { MoviesTableType } from "./types";
 
 export default class MoviesTable extends Component<MoviesTableType> {
   columns = [
