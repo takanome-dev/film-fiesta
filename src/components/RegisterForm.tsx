@@ -13,9 +13,14 @@ export default class RegisterForm extends Form {
 
   // .email({ tlds: { allow: ["com"] } })
   schema = {
-    username: Joi.string().email().required().label("Username"),
-    password: Joi.string().min(5).required().label("Password"),
-    name: Joi.string().required().label("Name"),
+    username: Joi.string()
+      .email({ tlds: { allow: ["com"] } })
+      .min(8)
+      .max(50)
+      .required()
+      .label("Username"),
+    password: Joi.string().min(8).max(50).required().label("Password"),
+    name: Joi.string().trim().min(5).max(50).required().label("Name"),
   };
 
   submitToServer(): void {

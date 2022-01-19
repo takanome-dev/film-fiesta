@@ -1,8 +1,8 @@
 import Joi from "joi";
+import Form from "./common/Form";
+import { MovieType } from "../types/MovieType";
 import { getGenres } from "../services/fakeGenreService";
 import { getMovie, saveMovie } from "../services/fakeMovieService";
-import { MovieType } from "../types/MovieType";
-import Form from "./common/Form";
 
 export default class MovieForm extends Form {
   state = {

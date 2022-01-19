@@ -1,19 +1,20 @@
+import _ from "lodash";
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import _ from "lodash";
+//* Components
+import Search from "./common/Search";
+import MoviesTable from "./MoviesTable";
+import ListGroup from "./common/ListGroup";
+import Pagination from "./common/Pagination";
 //* Services
-import { getGenres } from "../services/fakeGenreService";
-import { getMovies } from "../services/fakeMovieService";
 import { paginate } from "../utils/paginate";
+// import { getGenres } from "../services/fakeGenreService";
+import { getMovies } from "../services/fakeMovieService";
+import { getGenres } from "../services/genreService";
 //* Types
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
 import { SortColumnType, StateType } from "./types";
-//* Components
-import ListGroup from "./common/ListGroup";
-import Pagination from "./common/Pagination";
-import Search from "./common/Search";
-import MoviesTable from "./MoviesTable";
 
 export default class Movies extends Component<{}, StateType> {
   //* Initial State
@@ -27,8 +28,9 @@ export default class Movies extends Component<{}, StateType> {
     sortColumn: { path: "title", order: "asc" },
   };
 
-  componentDidMount() {
-    const genres = [{ _id: "", name: "All Genres" }, ...getGenres()];
+  async componentDidMount() {
+    const data = await getGenres();
+    const genres = [{ _id: "", name: "All Genres" }, ...data];
     this.setState({ movies: getMovies(), genres });
   }
 
