@@ -9,12 +9,13 @@ import Pagination from "./common/Pagination";
 //* Services
 import { paginate } from "../utils/paginate";
 // import { getGenres } from "../services/fakeGenreService";
-import { getMovies } from "../services/fakeMovieService";
+// import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/genreService";
 //* Types
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
 import { SortColumnType, StateType } from "./types";
+import { getMovies } from "../services/movieService";
 
 export default class Movies extends Component<{}, StateType> {
   //* Initial State
@@ -30,8 +31,9 @@ export default class Movies extends Component<{}, StateType> {
 
   async componentDidMount() {
     const data = await getGenres();
+    const movies = await getMovies();
     const genres = [{ _id: "", name: "All Genres" }, ...data];
-    this.setState({ movies: getMovies(), genres });
+    this.setState({ movies, genres });
   }
 
   handleLikeMovie = (movie: MovieType) => {
