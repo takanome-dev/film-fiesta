@@ -9,3 +9,10 @@ export type MovieType = {
   publishDate?: string;
   liked?: boolean;
 };
+
+export type NewMovieType = {
+  title: string;
+  genreId: string;
+  numberInStock: number;
+  dailyRentalRate: number;
+};

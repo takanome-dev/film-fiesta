@@ -15,7 +15,10 @@ import { getGenres } from "../services/genreService";
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
 import { SortColumnType, StateType } from "./types";
-import { getMovies } from "../services/movieService";
+import { deleteMovie, getMovies } from "../services/movieService";
+import { toast } from "react-toastify";
+import HttpException from "../services/httpException";
+import { logger } from "../services/logger";
 
 export default class Movies extends Component<{}, StateType> {
   //* Initial State
@@ -32,7 +35,7 @@ export default class Movies extends Component<{}, StateType> {
   async componentDidMount() {
     const data = await getGenres();
     const movies = await getMovies();
-    const genres = [{ _id: "", name: "All Genres" }, ...data];
+    const genres = [{ _id: "", name: "All Genres" }, ...data!];
     this.setState({ movies, genres });
   }
 
@@ -44,10 +47,20 @@ export default class Movies extends Component<{}, StateType> {
     this.setState({ movies });
   };
 
-  handleDeleteMovie = (id: string) => {
-    const movies = this.state.movies.filter((m) => m._id !== id);
-    // deepcode ignore ReactNextState: <please specify a reason of ignoring this>
-    this.setState({ movies });
+  handleDeleteMovie = async (id: string) => {
+    const originalMovies = this.state.movies;
+    const updatedMovies = originalMovies.filter((m) => m._id !== id);
+    this.setState({ movies: updatedMovies });
+
+    try {
+      await deleteMovie(id);
+    } catch (err) {
+      if (err instanceof HttpException && err.status === 404) {
+        logger.log(err);
+        toast.error(err.data);
+        this.setState({ movies: originalMovies });
+      }
+    }
   };
 
   handlePageChange = (page: number) => {

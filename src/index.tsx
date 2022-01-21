@@ -2,12 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 // import reportWebVitals from "./reportWebVitals";
-//* Component
+import { logger } from "./services/logger";
+
 import App from "./App";
 //* Styles
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
 import "./index.css";
+
+// * Initialize Sentry
+logger.init();
 
 ReactDOM.render(
   <React.StrictMode>

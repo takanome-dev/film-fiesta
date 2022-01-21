@@ -1,16 +1,16 @@
 import Joi from "joi";
 import Form from "./common/Form";
 import { MovieType } from "../types/MovieType";
-import { getGenres } from "../services/fakeGenreService";
-import { getMovie, saveMovie } from "../services/fakeMovieService";
+import { getGenres } from "../services/genreService";
+import { getMovie, saveMovie } from "../services/movieService";
 
 export default class MovieForm extends Form {
   state = {
     data: {
       title: "",
       genreId: "",
-      numberInStock: "",
-      dailyRentalRate: "",
+      numberInStock: 0,
+      dailyRentalRate: 0,
     },
     genres: [],
     errors: {},
@@ -18,7 +18,7 @@ export default class MovieForm extends Form {
 
   schema: Record<string, any> = {
     _id: Joi.string(),
-    title: Joi.string().required().label("Title"),
+    title: Joi.string().trim().min(5).max(50).required().label("Title"),
     genreId: Joi.string().required().label("Genre"),
     numberInStock: Joi.number()
       .required()
@@ -28,14 +28,14 @@ export default class MovieForm extends Form {
     dailyRentalRate: Joi.number().required().min(0).max(10).label("Rate"),
   };
 
-  componentDidMount() {
-    const genres = getGenres();
+  async componentDidMount() {
+    const genres = await getGenres();
     this.setState({ genres });
 
     const movieId = this.props.match.params.id;
     if (movieId === "new") return;
 
-    const movie = getMovie(movieId);
+    const movie = await getMovie(movieId);
     if (!movie) return this.props.history.replace("/not-found");
 
     this.setState({ data: this.movieData(movie) });
@@ -51,8 +51,8 @@ export default class MovieForm extends Form {
     };
   }
 
-  submitToServer(): void {
-    saveMovie(this.state.data);
+  async submitToServer() {
+    await saveMovie(this.state.data);
     this.props.history.push("/movies");
   }
 
