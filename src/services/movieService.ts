@@ -1,10 +1,11 @@
-import axios from "axios";
+// import axios from "axios";
 // import { toast } from "react-toastify";
 // import { logger } from "./logger";
 import { MovieType, NewMovieType } from "../types/MovieType";
+import { http } from "./httpException";
 
 export const getMovies = async () => {
-  const { data } = await axios.get<MovieType[]>(
+  const { data } = await http.get<MovieType[]>(
     "http://localhost:5000/api/movies"
   );
 
@@ -12,7 +13,7 @@ export const getMovies = async () => {
 };
 
 export const getMovie = async (id: string) => {
-  const { data } = await axios.get<MovieType>(
+  const { data } = await http.get<MovieType>(
     `http://localhost:5000/api/movies/${id}`
   );
 
@@ -20,7 +21,7 @@ export const getMovie = async (id: string) => {
 };
 
 export const saveMovie = async (movie: NewMovieType) => {
-  const { data } = await axios.post<MovieType>(
+  const { data } = await http.post<MovieType>(
     "http://localhost:5000/api/movies",
     movie
   );
@@ -29,7 +30,7 @@ export const saveMovie = async (movie: NewMovieType) => {
 };
 
 export const deleteMovie = async (id: string) => {
-  const { data } = await axios.delete(`http://localhost:5000/api/movies/${id}`);
+  const { data } = await http.delete(`http://localhost:5000/api/movies/${id}`);
 
   return data;
 };

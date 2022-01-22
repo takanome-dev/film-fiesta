@@ -1,6 +1,8 @@
+import React from "react";
 import _ from "lodash";
 import { Component } from "react";
 import { Link } from "react-router-dom";
+// import { AxiosError } from "axios";
 //* Components
 import Search from "./common/Search";
 import MoviesTable from "./MoviesTable";
@@ -17,10 +19,11 @@ import { MovieType } from "../types/MovieType";
 import { SortColumnType, StateType } from "./types";
 import { deleteMovie, getMovies } from "../services/movieService";
 import { toast } from "react-toastify";
-import HttpException from "../services/httpException";
+// import HttpException from "../services/httpException";
 import { logger } from "../services/logger";
+import axios, { AxiosError } from "axios";
 
-export default class Movies extends Component<{}, StateType> {
+export default class Movies extends Component<unknown, StateType> {
   //* Initial State
   state: StateType = {
     movies: [],
@@ -54,10 +57,14 @@ export default class Movies extends Component<{}, StateType> {
 
     try {
       await deleteMovie(id);
-    } catch (err) {
-      if (err instanceof HttpException && err.status === 404) {
+    } catch (err: any | AxiosError) {
+      console.log({ err });
+      if (axios.isAxiosError(err) && err.response?.status === 404) {
         logger.log(err);
-        toast.error(err.data);
+        console.log("axioserror", err);
+        return toast.error(err.response.data);
+        // toast.error(err.data);
+      } else {
         this.setState({ movies: originalMovies });
       }
     }

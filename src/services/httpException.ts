@@ -2,33 +2,6 @@ import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { logger } from "./logger";
 
-export default class HttpException extends Error {
-  config: unknown;
-  headers: string[];
-  data: string;
-  request: unknown;
-  status: number;
-  statusText: string;
-
-  constructor(
-    status: number,
-    statusText: string,
-    headers: string[],
-    data: string,
-    config: unknown,
-    request: unknown
-  ) {
-    super(data);
-
-    this.status = status;
-    this.statusText = statusText;
-    this.headers = headers;
-    this.data = data;
-    this.config = config;
-    this.request = request;
-  }
-}
-
 axios.interceptors.response.use(
   (res) => res,
   ({ response }: { response: AxiosResponse<string> }) => {
