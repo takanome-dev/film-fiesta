@@ -12,8 +12,8 @@ type MatchType = {
 type OrderType = boolean | "asc" | "desc";
 
 type HistoryType = {
-  push: Function;
-  replace: Function;
+  push: (url: string) => void;
+  replace: (url: string) => void;
 };
 
 export type SortColumnType = {
@@ -33,7 +33,7 @@ export type StateType = {
 
 export type PaginationProps = {
   currentPage: number;
-  onPageChange: Function;
+  onPageChange: (pageNumber: number) => void;
   itemsCount: number;
   pageSize: number;
 };
@@ -41,32 +41,32 @@ export type PaginationProps = {
 export type ListGroupType = {
   items: GenreType[];
   selectedItem: GenreType;
-  onItemSelected: Function;
+  onItemSelected: (genre: GenreType) => void;
 };
 
 export type MoviesTableType = {
   movies: MovieType[];
   sortColumn: SortColumnType;
-  handleDelete: Function;
-  handleLike: Function;
-  handleSort: Function;
+  handleDelete: (id: string) => Promise<void | React.ReactText>;
+  handleLike: (movie: MovieType) => void;
+  handleSort: (sortColumn: SortColumnType) => void;
 };
 
 export type ColumnType = {
   path?: string;
   label?: string;
-  content?: Function;
+  content?: (movie: MovieType) => JSX.Element;
 };
 
 export type TableType = {
   columns: ColumnType[];
   sortColumn: SortColumnType;
-  handleSort: Function;
+  handleSort: (sortColumn: SortColumnType) => void;
   data: MovieType[];
 };
 
 export type TableHeaderType = {
-  handleSort: Function;
+  handleSort: (sortColumn: SortColumnType) => void;
   columns: ColumnType[];
   sortColumn: SortColumnType;
 };
@@ -78,13 +78,13 @@ export type TableBodyType = {
 
 export type LikeType = {
   liked: boolean;
-  onLike: Function;
+  onLike: () => void;
 };
 
 export type FormType = {
-  data: Record<string, any>;
+  data: Record<string, unknown>;
   genres?: GenreType[];
-  errors: Record<string, any>;
+  errors: Record<string, unknown>;
 };
 
 export type FormProps = {

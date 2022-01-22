@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 //* Types
 import { ColumnType, TableHeaderType } from "../types";
 

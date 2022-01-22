@@ -1,3 +1,4 @@
+import React from "react";
 import { LikeType } from "../types";
 
 const Like: React.FC<LikeType> = ({ liked, onLike }) => {

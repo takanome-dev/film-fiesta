@@ -65,7 +65,7 @@ export default class Movies extends Component<unknown, StateType> {
         return toast.error(err.response.data);
         // toast.error(err.data);
       } else {
-        this.setState({ movies: originalMovies });
+        return this.setState({ movies: originalMovies });
       }
     }
   };
@@ -86,9 +86,8 @@ export default class Movies extends Component<unknown, StateType> {
     });
   };
 
-  handleSortMovie = (sortColumn: SortColumnType) => {
+  handleSortMovie = (sortColumn: SortColumnType) =>
     this.setState({ sortColumn });
-  };
 
   handleGetData = () => {
     const {

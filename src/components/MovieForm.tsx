@@ -1,3 +1,4 @@
+import React from "react";
 import Joi from "joi";
 import Form from "./common/Form";
 import { MovieType } from "../types/MovieType";
