@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Joi from "joi";
+import Joi, { PartialSchemaMap } from "joi";
 import Input from "./Input";
 import Select from "./Select";
 import { FormProps, FormType } from "../types";
@@ -11,17 +11,17 @@ export default class Form extends Component<FormProps, FormType> {
     errors: {},
   };
 
-  schema: Record<string, any> = {};
+  schema: PartialSchemaMap = {};
 
   validate = () => {
-    const errors: Record<string, any> = {};
+    const errors: Record<string, string> = {};
     const { error } = Joi.object(this.schema).validate(this.state.data, {
       abortEarly: false,
     });
 
     if (!error) return null;
 
-    for (const err of error?.details!) errors[err.path[0]] = err.message;
+    for (const err of error.details) errors[err.path[0]] = err.message;
 
     return errors;
   };
@@ -36,7 +36,9 @@ export default class Form extends Component<FormProps, FormType> {
     this.submitToServer();
   };
 
-  submitToServer() {}
+  submitToServer() {
+    //
+  }
 
   validateProperty = ({
     name,
@@ -75,7 +77,7 @@ export default class Form extends Component<FormProps, FormType> {
         name={name}
         type={type}
         value={data[name]}
-        error={errors[name]!}
+        error={errors[name]}
         onChange={this.handleChange}
       />
     );
@@ -89,7 +91,7 @@ export default class Form extends Component<FormProps, FormType> {
         name={name}
         options={options}
         value={data[name]}
-        error={errors[name]!}
+        error={errors[name]}
         onChange={this.handleChange}
       />
     );

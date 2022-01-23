@@ -1,4 +1,3 @@
-import React from "react";
 import Joi from "joi";
 import Form from "./common/Form";
 import { MovieType } from "../types/MovieType";
@@ -17,7 +16,7 @@ export default class MovieForm extends Form {
     errors: {},
   };
 
-  schema: Record<string, any> = {
+  schema = {
     _id: Joi.string(),
     title: Joi.string().trim().min(5).max(50).required().label("Title"),
     genreId: Joi.string().required().label("Genre"),

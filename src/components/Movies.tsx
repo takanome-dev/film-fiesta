@@ -1,27 +1,22 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import _ from "lodash";
 import { Component } from "react";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-// import { AxiosError } from "axios";
 //* Components
 import Search from "./common/Search";
 import MoviesTable from "./MoviesTable";
 import ListGroup from "./common/ListGroup";
+import { logger } from "../services/logger";
 import Pagination from "./common/Pagination";
 //* Services
 import { paginate } from "../utils/paginate";
-// import { getGenres } from "../services/fakeGenreService";
-// import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/genreService";
+import { deleteMovie, getMovies } from "../services/movieService";
 //* Types
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
 import { SortColumnType, StateType } from "./types";
-import { deleteMovie, getMovies } from "../services/movieService";
-import { toast } from "react-toastify";
-// import HttpException from "../services/httpException";
-import { logger } from "../services/logger";
-import axios, { AxiosError } from "axios";
 
 export default class Movies extends Component<unknown, StateType> {
   //* Initial State
@@ -52,21 +47,20 @@ export default class Movies extends Component<unknown, StateType> {
 
   handleDeleteMovie = async (id: string) => {
     const originalMovies = this.state.movies;
-    const updatedMovies = originalMovies.filter((m) => m._id !== id);
-    this.setState({ movies: updatedMovies });
+    const movies = originalMovies.filter((m) => m._id !== id);
+    this.setState({ movies });
 
     try {
       await deleteMovie(id);
-    } catch (err: any | AxiosError) {
-      console.log({ err });
-      if (axios.isAxiosError(err) && err.response?.status === 404) {
+    } catch (err: any) {
+      if (err.request) {
         logger.log(err);
-        console.log("axioserror", err);
-        return toast.error(err.response.data);
-        // toast.error(err.data);
+        toast.error(err.data);
       } else {
-        return this.setState({ movies: originalMovies });
+        logger.log(err);
       }
+
+      return this.setState({ movies: originalMovies });
     }
   };
 

@@ -81,10 +81,29 @@ export type LikeType = {
   onLike: () => void;
 };
 
+type LoginType = {
+  username: string;
+  password: string;
+};
+
+type RegisterType = {
+  username: string;
+  password: string;
+  name: string;
+};
+
+type MovieFormType = {
+  title: string;
+  genreId: string | undefined;
+  numberInStock: number;
+  dailyRentalRate: number;
+};
+
 export type FormType = {
-  data: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: LoginType | RegisterType | MovieFormType | any;
   genres?: GenreType[];
-  errors: Record<string, unknown>;
+  errors: Record<string, string>;
 };
 
 export type FormProps = {

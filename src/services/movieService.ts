@@ -1,8 +1,5 @@
-// import axios from "axios";
-// import { toast } from "react-toastify";
-// import { logger } from "./logger";
+import { http } from "./http";
 import { MovieType, NewMovieType } from "../types/MovieType";
-import { http } from "./httpException";
 
 export const getMovies = async () => {
   const { data } = await http.get<MovieType[]>(

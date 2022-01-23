@@ -11,7 +11,6 @@ export default class RegisterForm extends Form {
     errors: {},
   };
 
-  // .email({ tlds: { allow: ["com"] } })
   schema = {
     username: Joi.string()
       .email({ tlds: { allow: ["com"] } })

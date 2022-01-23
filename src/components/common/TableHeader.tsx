@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-//* Types
+import { Component } from "react";
 import { ColumnType, TableHeaderType } from "../types";
 
 export default class TableHeader extends Component<TableHeaderType> {
