@@ -1,10 +1,12 @@
 import Joi from "joi";
+import { registerUser } from "../services/userService";
 import Form from "./common/Form";
+import { RegisterStateType } from "./types";
 
 export default class RegisterForm extends Form {
-  state = {
+  state: RegisterStateType = {
     data: {
-      username: "",
+      email: "",
       password: "",
       name: "",
     },
@@ -12,18 +14,28 @@ export default class RegisterForm extends Form {
   };
 
   schema = {
-    username: Joi.string()
+    email: Joi.string()
       .email({ tlds: { allow: ["com"] } })
       .min(8)
       .max(50)
       .required()
-      .label("Username"),
+      .label("Email"),
     password: Joi.string().min(8).max(50).required().label("Password"),
     name: Joi.string().trim().min(5).max(50).required().label("Name"),
   };
 
-  submitToServer(): void {
-    console.log("Registered");
+  async submitToServer() {
+    try {
+      const jwt = await registerUser(this.state.data);
+      localStorage.setItem("token", jwt);
+      this.props.history.push("/");
+    } catch (err: any) {
+      if (err.request?.status === 400) {
+        const errors = this.state.errors;
+        errors.email = err.data;
+        this.setState({ errors });
+      }
+    }
   }
 
   render() {
@@ -31,7 +43,7 @@ export default class RegisterForm extends Form {
       <div>
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("username", "Username")}
+          {this.renderInput("email", "Email")}
           {this.renderInput("password", "Password", "password")}
           {this.renderInput("name", "Name")}
           {this.renderButton("Register")}

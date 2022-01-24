@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import Joi, { PartialSchemaMap } from "joi";
 import Input from "./Input";
 import Select from "./Select";
-import { FormProps, FormType } from "../types";
+import { FormProps, FormStateType } from "../types";
 import { GenreType } from "../../types/GenreType";
 
-export default class Form extends Component<FormProps, FormType> {
-  state: FormType = {
+export default class Form extends Component<FormProps, FormStateType> {
+  state: FormStateType = {
     data: {},
     errors: {},
   };

@@ -4,9 +4,10 @@ import Form from "./common/Form";
 import { MovieType } from "../types/MovieType";
 import { getGenres } from "../services/genreService";
 import { getMovie, saveMovie } from "../services/movieService";
+import { MovieFormStateType } from "./types";
 
 export default class MovieForm extends Form {
-  state = {
+  state: MovieFormStateType = {
     data: {
       title: "",
       genreId: "",

@@ -4,7 +4,7 @@ import { MovieType, NewMovieType } from "../types/MovieType";
 const endpoint = `${process.env.REACT_APP_API_URL}/movies`;
 
 export const getMovies = async () => {
-  const { data } = await http.get<MovieType[]>(`${endpoint}`);
+  const { data } = await http.get<MovieType[]>(endpoint);
   return data;
 };
 
@@ -20,7 +20,7 @@ export const saveMovie = async (movie: NewMovieType) => {
     return await http.put<NewMovieType>(`${endpoint}/${movie._id}`, body);
   }
 
-  return await http.post<NewMovieType>(`${endpoint}`, movie);
+  return await http.post<NewMovieType>(endpoint, movie);
 };
 
 export const deleteMovie = async (id: string) =>

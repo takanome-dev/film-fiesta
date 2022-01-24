@@ -15,11 +15,11 @@ import { deleteMovie, getMovies } from "../services/movieService";
 //* Types
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
-import { SortColumnType, StateType } from "./types";
+import { SortColumnType, MoviesStateType } from "./types";
 
-export default class Movies extends Component<unknown, StateType> {
+export default class Movies extends Component<unknown, MoviesStateType> {
   //* Initial State
-  state: StateType = {
+  state: MoviesStateType = {
     movies: [],
     genres: [],
     pageSize: 4,

@@ -1,5 +1,5 @@
 import { GenreType } from "../types/GenreType";
-import { MovieType } from "../types/MovieType";
+import { MovieType, NewMovieType } from "../types/MovieType";
 
 type ParamsType = {
   id: string;
@@ -19,16 +19,6 @@ type HistoryType = {
 export type SortColumnType = {
   path: string;
   order: OrderType;
-};
-
-export type StateType = {
-  movies: MovieType[];
-  genres: GenreType[];
-  pageSize: number;
-  currentPage: number;
-  selectedGenre: GenreType;
-  searchQuery: string;
-  sortColumn: SortColumnType;
 };
 
 export type PaginationProps = {
@@ -81,30 +71,73 @@ export type LikeType = {
   onLike: () => void;
 };
 
-type LoginType = {
-  username: string;
+export type LoginUserType = {
+  email: string;
   password: string;
 };
 
-type RegisterType = {
-  username: string;
+export type RegisterUserType = {
+  email: string;
   password: string;
   name: string;
 };
 
-type MovieFormType = {
-  title: string;
-  genreId: string | undefined;
-  numberInStock: number;
-  dailyRentalRate: number;
+// ! Errors Types
+
+export type RegisterErrorType = {
+  email?: string;
+  name?: string;
+  password?: string;
 };
 
-export type FormType = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: LoginType | RegisterType | MovieFormType | any;
-  genres?: GenreType[];
-  errors: Record<string, string>;
+export type LoginErrorType = {
+  email?: string;
+  password?: string;
 };
+
+export type MovieErrorType = {
+  _id?: string;
+  title?: string;
+  genreId?: string;
+  numberInStock?: number;
+  dailyRentalRate?: number;
+};
+
+// ! States Types
+
+export type FormStateType = {
+  data: any;
+  errors: any;
+  genres?: GenreType[];
+};
+
+export type RegisterStateType = {
+  data: RegisterUserType;
+  errors: RegisterErrorType;
+};
+
+export type LoginStateType = {
+  data: LoginUserType;
+  errors: LoginErrorType;
+};
+
+export type MovieFormStateType = {
+  data: NewMovieType;
+  genres: GenreType[];
+  errors: MovieErrorType;
+};
+
+export type MoviesStateType = {
+  movies: MovieType[];
+  genres: GenreType[];
+  pageSize: number;
+  currentPage: number;
+  selectedGenre: GenreType;
+  searchQuery: string;
+  sortColumn: SortColumnType;
+};
+
+// ! Props Types
 
 export type FormProps = {
   match: MatchType;
@@ -115,11 +148,3 @@ export type SearchProps = {
   value: string;
   onSearch: (query: string) => void;
 };
-
-// export type LoginFormType = {
-//   /**
-//    * @ref https://stackoverflow.com/questions/56568423/typescript-no-index-signature-with-a-parameter-of-type-string-was-found-on-ty
-//    */
-//   data: Record<string, any>;
-//   errors: Record<string, any>;
-// };
