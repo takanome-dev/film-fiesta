@@ -82,6 +82,14 @@ export type RegisterUserType = {
   name: string;
 };
 
+export type JwtType = {
+  _id?: string;
+  email?: string;
+  name?: string;
+  iat?: number;
+  isAdmin?: boolean;
+};
+
 // ! Errors Types
 
 export type RegisterErrorType = {
@@ -104,6 +112,10 @@ export type MovieErrorType = {
 };
 
 // ! States Types
+
+export type AppStateType = {
+  user?: JwtType;
+};
 
 export type FormStateType = {
   data: any;

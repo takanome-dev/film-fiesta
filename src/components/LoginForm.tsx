@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { logUser } from "../services/authService";
 import Form from "./common/Form";
 import { LoginStateType } from "./types";
 
@@ -21,9 +22,19 @@ export default class LoginForm extends Form {
     password: Joi.string().min(8).max(50).required().label("Password"),
   };
 
-  submitToServer() {
-    //* Call the server
-    console.log("submitted");
+  async submitToServer() {
+    try {
+      const jwt = await logUser(this.state.data);
+      localStorage.setItem("token", jwt);
+      window.location.pathname = "/";
+    } catch (err: any) {
+      if (err.request?.status === 400) {
+        const errors = this.state.errors;
+        errors.email = err.data;
+        errors.password = err.data;
+        this.setState({ errors });
+      }
+    }
   }
 
   render() {
