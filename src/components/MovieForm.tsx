@@ -3,6 +3,8 @@ import Form from "./common/Form";
 import { MovieType } from "../types/MovieType";
 import { getGenres } from "../services/genreService";
 import { getMovie, saveMovie } from "../services/movieService";
+import { toast } from "react-toastify";
+import { logger } from "../services/logger";
 
 export default class MovieForm extends Form {
   state = {
@@ -35,10 +37,16 @@ export default class MovieForm extends Form {
     const movieId = this.props.match.params.id;
     if (movieId === "new") return;
 
-    const movie = await getMovie(movieId);
-    if (!movie) return this.props.history.replace("/not-found");
-
-    this.setState({ data: this.movieData(movie) });
+    try {
+      const movie = await getMovie(movieId);
+      this.setState({ data: this.movieData(movie) });
+    } catch (err: any) {
+      if (err.request?.status === 404) {
+        logger.log(err);
+        toast.error(err.data);
+        this.props.history.replace("/not-found");
+      }
+    }
   }
 
   movieData(movie: MovieType) {

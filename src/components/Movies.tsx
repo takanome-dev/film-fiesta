@@ -53,11 +53,12 @@ export default class Movies extends Component<unknown, StateType> {
     try {
       await deleteMovie(id);
     } catch (err: any) {
-      if (err.request) {
+      if (err.request?.status === 404) {
         logger.log(err);
         toast.error(err.data);
       } else {
         logger.log(err);
+        toast.error("Oops! Something went wrong");
       }
 
       return this.setState({ movies: originalMovies });
