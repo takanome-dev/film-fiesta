@@ -11,6 +11,7 @@ export type MovieType = {
 };
 
 export type NewMovieType = {
+  _id?: string;
   title: string;
   genreId: string;
   numberInStock: number;

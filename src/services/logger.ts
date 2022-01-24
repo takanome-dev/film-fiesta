@@ -1,7 +1,7 @@
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 
-const log = (error: string | unknown) => Sentry.captureException(error);
+// const log = (error: string | unknown) => Sentry.captureException(error);
 
 const init = () =>
   Sentry.init({
@@ -16,6 +16,6 @@ const init = () =>
   });
 
 export const logger = {
-  log,
+  // log,
   init,
 };

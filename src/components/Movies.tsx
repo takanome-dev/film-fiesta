@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import Search from "./common/Search";
 import MoviesTable from "./MoviesTable";
 import ListGroup from "./common/ListGroup";
-import { logger } from "../services/logger";
 import Pagination from "./common/Pagination";
 //* Services
 import { paginate } from "../utils/paginate";
@@ -54,10 +53,8 @@ export default class Movies extends Component<unknown, StateType> {
       await deleteMovie(id);
     } catch (err: any) {
       if (err.request?.status === 404) {
-        logger.log(err);
         toast.error(err.data);
       } else {
-        logger.log(err);
         toast.error("Oops! Something went wrong");
       }
 
