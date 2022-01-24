@@ -9,8 +9,8 @@ on:
     - cron: "0 8 * * 1"
 
 jobs:
-  CodeQL-Build:
-    name: Analyse
+  analyze:
+    name: Analyze
     # CodeQL runs on ubuntu-latest, windows-latest, and macos-latest
     runs-on: ubuntu-latest
 
