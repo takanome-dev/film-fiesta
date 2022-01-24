@@ -29,16 +29,17 @@ export default class MovieForm extends Form {
     dailyRentalRate: Joi.number().required().min(0).max(10).label("Rate"),
   };
 
-  async componentDidMount() {
+  async populateGenres() {
     const genres = await getGenres();
     this.setState({ genres });
+  }
 
-    const movieId = this.props.match.params.id;
-    if (movieId === "new") return;
-
+  async populateMovies() {
     try {
+      const movieId = this.props.match.params.id;
+      if (movieId === "new") return;
       const movie = await getMovie(movieId);
-      this.setState({ data: this.movieData(movie) });
+      this.setState({ data: this.updateMovieData(movie) });
     } catch (err: any) {
       if (err.request?.status === 404) {
         toast.error(err.data);
@@ -47,7 +48,12 @@ export default class MovieForm extends Form {
     }
   }
 
-  movieData(movie: MovieType) {
+  async componentDidMount() {
+    await this.populateGenres();
+    await this.populateMovies();
+  }
+
+  updateMovieData(movie: MovieType) {
     return {
       _id: movie._id,
       title: movie.title,
