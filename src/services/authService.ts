@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { http, setJwt } from "./http";
 import jwt_decode from "jwt-decode";
-import { LoginUserType } from "../components/types";
+import { JwtType, LoginUserType } from "../components/types";
 
 const endpoint = `${process.env.REACT_APP_API_URL}/auth`;
 
@@ -14,7 +14,7 @@ export const getToken = () => localStorage.getItem("token")!;
 
 export const removeToken = () => localStorage.removeItem("token");
 
-export const getCurrentUser = () => {
+export const getCurrentUser = (): JwtType | null => {
   try {
     const token = getToken();
     return jwt_decode(token!);

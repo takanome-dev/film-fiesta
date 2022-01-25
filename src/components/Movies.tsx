@@ -55,12 +55,9 @@ export default class Movies extends Component<
     try {
       await deleteMovie(id);
     } catch (err: any) {
-      if (err.request?.status === 404) {
+      if (err.request) {
         toast.error(err.data);
-      } else {
-        toast.error("Oops! Something went wrong");
       }
-
       return this.setState({ movies: originalMovies });
     }
   };

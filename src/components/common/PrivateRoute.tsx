@@ -19,6 +19,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
               to={{ pathname: "/login", state: { from: props.location } }}
             />
           );
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         return Component ? <Component {...props} /> : render!(props);
       }}
     />

@@ -4,6 +4,7 @@ import Like from "./common/Like";
 import Table from "./common/Table";
 import { MovieType } from "../types/MovieType";
 import { MoviesTableType } from "./types";
+import { getCurrentUser } from "../services/authService";
 
 export default class MoviesTable extends Component<MoviesTableType> {
   columns = [
@@ -25,17 +26,23 @@ export default class MoviesTable extends Component<MoviesTableType> {
         />
       ),
     },
-    {
-      content: (movie: MovieType) => (
-        <button
-          onClick={() => this.props.handleDelete(movie._id)}
-          className="btn btn-danger btn-sm"
-        >
-          Delete
-        </button>
-      ),
-    },
   ];
+
+  deleteColumn = {
+    content: (movie: MovieType) => (
+      <button
+        onClick={() => this.props.handleDelete(movie._id)}
+        className="btn btn-danger btn-sm"
+      >
+        Delete
+      </button>
+    ),
+  };
+  constructor(props: any) {
+    super(props);
+    const user = getCurrentUser();
+    if (user && user.isAdmin) this.columns.push(this.deleteColumn);
+  }
 
   render() {
     const { movies, handleSort, sortColumn } = this.props;
