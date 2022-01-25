@@ -15,9 +15,12 @@ import { deleteMovie, getMovies } from "../services/movieService";
 //* Types
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
-import { SortColumnType, MoviesStateType } from "./types";
+import { SortColumnType, MoviesStateType, MoviesPropsType } from "./types";
 
-export default class Movies extends Component<unknown, MoviesStateType> {
+export default class Movies extends Component<
+  MoviesPropsType,
+  MoviesStateType
+> {
   //* Initial State
   state: MoviesStateType = {
     movies: [],
@@ -62,21 +65,17 @@ export default class Movies extends Component<unknown, MoviesStateType> {
     }
   };
 
-  handlePageChange = (page: number) => {
-    this.setState({ currentPage: page });
-  };
+  handlePageChange = (page: number) => this.setState({ currentPage: page });
 
-  handleGenreSelect = (genre: GenreType) => {
+  handleGenreSelect = (genre: GenreType) =>
     this.setState({ selectedGenre: genre, searchQuery: "", currentPage: 1 });
-  };
 
-  handleSearch = (query: string) => {
+  handleSearch = (query: string) =>
     this.setState({
       searchQuery: query,
       selectedGenre: { _id: "", name: "" },
       currentPage: 1,
     });
-  };
 
   handleSortMovie = (sortColumn: SortColumnType) =>
     this.setState({ sortColumn });
@@ -106,8 +105,14 @@ export default class Movies extends Component<unknown, MoviesStateType> {
   };
 
   render() {
-    const { pageSize, currentPage, genres, selectedGenre, searchQuery } =
-      this.state;
+    const {
+      pageSize,
+      currentPage,
+      genres,
+      selectedGenre,
+      searchQuery,
+      sortColumn,
+    } = this.state;
     const { totalCount, movies } = this.handleGetData();
 
     if (this.state.movies.length === 0)
@@ -123,14 +128,16 @@ export default class Movies extends Component<unknown, MoviesStateType> {
           />
         </div>
         <div className="col">
-          <Link to="/movies/new" className="btn btn-primary mb-3">
-            New Movie
-          </Link>
+          {this.props.user && (
+            <Link to="/movies/new" className="btn btn-primary mb-3">
+              New Movie
+            </Link>
+          )}
           <Search value={searchQuery} onSearch={this.handleSearch} />
           <p>Showing {totalCount} movies in the database</p>
           <MoviesTable
             movies={movies}
-            sortColumn={this.state.sortColumn}
+            sortColumn={sortColumn}
             handleDelete={this.handleDeleteMovie}
             handleLike={this.handleLikeMovie}
             handleSort={this.handleSortMovie}

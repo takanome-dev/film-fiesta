@@ -6,7 +6,6 @@ type Props = {
 };
 
 const NavBar: React.FC<Props> = ({ user }) => {
-  console.log({ user });
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light mb-5">
       <Link className="navbar-brand mx-5" to="/">

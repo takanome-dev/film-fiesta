@@ -1,5 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { StaticContext } from "react-router";
+import { RouteComponentProps } from "react-router-dom";
 import { GenreType } from "../types/GenreType";
 import { MovieType, NewMovieType } from "../types/MovieType";
+
+// ! Type Definitions
 
 type ParamsType = {
   id: string;
@@ -14,6 +19,14 @@ type OrderType = boolean | "asc" | "desc";
 type HistoryType = {
   push: (url: string) => void;
   replace: (url: string) => void;
+};
+
+type LocationType = {
+  state: {
+    from: {
+      pathname: string;
+    };
+  };
 };
 
 export type SortColumnType = {
@@ -154,9 +167,24 @@ export type MoviesStateType = {
 export type FormProps = {
   match: MatchType;
   history: HistoryType;
+  location: LocationType;
 };
 
 export type SearchProps = {
   value: string;
   onSearch: (query: string) => void;
+};
+
+export type MoviesPropsType = {
+  user?: JwtType;
+};
+
+export type PrivateRouteProps = {
+  component?:
+    | React.ComponentType<any>
+    | React.ComponentType<RouteComponentProps<any, StaticContext, unknown>>;
+  render?: (
+    props: RouteComponentProps<any, StaticContext, unknown>
+  ) => React.ReactNode;
+  path: string;
 };

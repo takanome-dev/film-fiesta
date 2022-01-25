@@ -23,13 +23,15 @@ export default class LoginForm extends Form {
   };
 
   async submitToServer() {
+    const { state } = this.props.location;
+
     try {
-      const jwt = await logUser(this.state.data);
-      localStorage.setItem("token", jwt);
-      window.location.pathname = "/";
+      await logUser(this.state.data);
+      window.location.pathname = state ? state.from.pathname : "/";
     } catch (err: any) {
       if (err.request?.status === 400) {
         const errors = this.state.errors;
+        // ! TODO: Review Error Message
         errors.email = err.data;
         errors.password = err.data;
         this.setState({ errors });

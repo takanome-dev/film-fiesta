@@ -26,9 +26,8 @@ export default class RegisterForm extends Form {
 
   async submitToServer() {
     try {
-      const jwt = await registerUser(this.state.data);
-      localStorage.setItem("token", jwt);
-      this.props.history.push("/");
+      await registerUser(this.state.data);
+      window.location.pathname = "/";
     } catch (err: any) {
       if (err.request?.status === 400) {
         const errors = this.state.errors;

@@ -6,3 +6,5 @@ export { default as Rentals } from "./Rentals";
 export { default as NotFound } from "./404";
 export { default as LoginForm } from "./LoginForm";
 export { default as RegisterForm } from "./RegisterForm";
+export { default as Logout } from "./Logout";
+export { default as PrivateRoute } from "./common/PrivateRoute";
