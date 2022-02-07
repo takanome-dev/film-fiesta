@@ -1,9 +1,7 @@
 import React from "react";
-//* Types
-import { TableType } from "../types";
-//* Components
 import TableBody from "./TableBody";
 import TableHeader from "./TableHeader";
+import { TableType } from "../types";
 
 const Table: React.FC<TableType> = ({
   columns,

@@ -38,6 +38,7 @@ export default class MoviesTable extends Component<MoviesTableType> {
       </button>
     ),
   };
+
   constructor(props: any) {
     super(props);
     const user = getCurrentUser();
