@@ -128,6 +128,7 @@ export type MovieErrorType = {
 
 export type AppStateType = {
 	user?: JwtType;
+	searchQuery: string;
 };
 
 export type FormStateType = {
@@ -158,7 +159,7 @@ export type MoviesStateType = {
 	pageSize: number;
 	currentPage: number;
 	selectedGenre: GenreType;
-	searchQuery: string;
+	// searchQuery: string;
 	sortColumn: SortColumnType;
 };
 
@@ -196,5 +197,5 @@ export type CardListProps = {
 
 export type CardProps = {
 	movie: MovieType;
-	handleLike: (movie: MovieType) => void;
+	handleLike?: (movie: MovieType) => void;
 };

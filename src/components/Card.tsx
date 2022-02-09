@@ -3,7 +3,7 @@ import Heart from "./svg/Heart";
 import Star from "./svg/Star";
 import { CardProps } from "./types";
 
-const Card: React.FC<CardProps> = ({ movie, handleLike }) => {
+const Card: React.FC<CardProps> = ({ movie }) => {
 	return (
 		<div className="card">
 			<div className="rate flex">

@@ -37,9 +37,7 @@ const GlobalStyles = createGlobalStyle`
     font-size: 16px;
   }
 
-  * {
-    margin: 0;
-    padding: 0;
+  *, *::before, *::after {
     box-sizing: border-box;
   }
 
@@ -73,11 +71,14 @@ const GlobalStyles = createGlobalStyle`
     overflow-wrap: break-word;
   }
 
-  #root {
-    isolation: isolate;
+  * {
+    margin: 0;
+    padding: 0;
   }
 
   body {
+    /* margin: 0;
+    padding: 0; */
     font-family: 'Montserrat', sans-serif;
     background-color: var(--color-background);
   }
