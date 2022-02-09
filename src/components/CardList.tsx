@@ -1,12 +1,15 @@
+import { useContext } from "react";
+import { Context } from "../context/GlobalContext";
 import Card from "./Card";
 import Container from "./styles/CardList.styled";
-import { CardListProps } from "./types";
 
-const CardList: React.FC<CardListProps> = ({ movies, handleLike }) => {
+const CardList = () => {
+	const { movies } = useContext(Context);
+
 	return (
 		<Container>
 			{movies.map((m) => (
-				<Card key={m._id} movie={m} handleLike={handleLike} />
+				<Card key={m._id} movie={m} />
 			))}
 		</Container>
 	);

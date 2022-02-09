@@ -1,10 +1,13 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { logo } from "../assets";
+import { Context } from "../context/GlobalContext";
 import { Container } from "./styles/Header.styled";
 import Search from "./svg/Search";
 import User from "./svg/User";
 
 const Header = () => {
+	const { searchQuery, onSearch } = useContext(Context);
 	return (
 		<Container>
 			<div className="container">
@@ -14,7 +17,13 @@ const Header = () => {
 					{/* <img src={logo1} alt="Vidly logo" /> */}
 					<img src={logo} alt="Vidly logo" />
 				</Link>
-				<input type="search" placeholder="Search..." aria-label="Search" />
+				<input
+					type="search"
+					placeholder="Search..."
+					aria-label="Search"
+					value={searchQuery}
+					onChange={(e) => onSearch!(e.currentTarget.value)}
+				/>
 				<div className="search">
 					<Search />
 				</div>

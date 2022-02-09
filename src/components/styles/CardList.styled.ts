@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 const Container = styled.div`
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(12rem, 15rem));
+	/* grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); */
 	gap: 1rem;
 
 	.card {
@@ -16,9 +17,9 @@ const Container = styled.div`
 			position: absolute;
 			top: 0;
 			background-color: var(--color-secondary);
-			color: #ffcb21;
+			color: var(--color-yellow);
 			padding: 0.5rem;
-			border-radius: 0 0 0.7rem 0;
+			border-radius: 0 0 0.8rem 0;
 			p {
 				margin-left: 0.5rem;
 				font-weight: bold;
@@ -35,19 +36,25 @@ const Container = styled.div`
 			left: 0;
 			width: 100%;
 			background: linear-gradient(rgba(0, 0, 0, 0.2), rgb(0, 0, 0));
-			/* overflow: hidden; */
+			/* overflow: hidden;
+			text-overflow: ellipsis; */
 			opacity: 0;
 			transition: opacity 300ms ease-in-out;
 
 			h3 {
 				color: #fff;
-				margin-left: 1rem;
+				margin-left: 0.6rem;
+				/* overflow: hidden;
+				text-overflow: ellipsis; */
+				/* overflow-wrap: normal; */
+				/* max-width: 5rem;
+				display: flex; */
 			}
 
 			.icons {
 				.icon-container {
 					background-color: var(--color-gray-80);
-					margin-right: 1rem;
+					margin-right: 0.6rem;
 					padding: 0.6rem;
 					border-radius: 0.3rem;
 					border: none;
