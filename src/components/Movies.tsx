@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import _ from "lodash";
 import { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getGenres } from "../services/genreService";
 import { deleteMovie, getMovies } from "../services/movieService";
@@ -10,11 +10,11 @@ import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
 //* Services
 import { paginate } from "../utils/paginate";
-import ListGroup from "./common/ListGroup";
+import CardList from "./CardList";
 import Pagination from "./common/Pagination";
 //* Components
 import Search from "./common/Search";
-import MoviesTable from "./MoviesTable";
+// import MoviesTable from "./MoviesTable";
 import { MoviesPropsType, MoviesStateType, SortColumnType } from "./types";
 
 export default class Movies extends Component<
@@ -107,10 +107,10 @@ export default class Movies extends Component<
 		const {
 			pageSize,
 			currentPage,
-			genres,
-			selectedGenre,
+			// genres,
+			// selectedGenre,
 			searchQuery,
-			sortColumn,
+			// sortColumn,
 		} = this.state;
 		const { totalCount, movies } = this.handleGetData();
 
@@ -119,28 +119,29 @@ export default class Movies extends Component<
 
 		return (
 			<div className="row">
-				<div className="col-3">
+				{/* <div className="col-3">
 					<ListGroup
 						items={genres}
 						selectedItem={selectedGenre}
 						onItemSelected={this.handleGenreSelect}
 					/>
-				</div>
+				</div> */}
 				<div className="col">
-					{this.props.user && (
+					{/* {this.props.user && (
 						<Link to="/movies/new" className="btn btn-primary mb-3">
 							New Movie
 						</Link>
-					)}
+					)} */}
 					<Search value={searchQuery} onSearch={this.handleSearch} />
 					<p>Showing {totalCount} movies in the database</p>
-					<MoviesTable
+					{/* <MoviesTable
 						movies={movies}
 						sortColumn={sortColumn}
 						handleDelete={this.handleDeleteMovie}
 						handleLike={this.handleLikeMovie}
 						handleSort={this.handleSortMovie}
-					/>
+					/> */}
+					<CardList movies={movies} handleLike={this.handleLikeMovie} />
 					<Pagination
 						pageSize={pageSize}
 						itemsCount={totalCount}

@@ -4,6 +4,10 @@ export type MovieType = {
 	_id: string;
 	title: string;
 	genres: GenreType[];
+	dateRelease: string;
+	url: string;
+	overview: string;
+	voteAverage: number;
 	numberInStock: number;
 	dailyRentalRate: number;
 	publishDate?: string;
