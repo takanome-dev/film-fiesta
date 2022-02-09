@@ -28,7 +28,7 @@ export const Container = styled.header`
 			max-width: 40rem;
 			width: 100%;
 			padding: 0.5rem 1rem;
-			color: var(--color-text-dark-80);
+			color: var(--color-dark-80);
 			background-color: var(--color-background);
 			border: none;
 			border-radius: 0.6rem;
@@ -46,17 +46,19 @@ export const Container = styled.header`
 			padding: 0.5rem;
 			border-radius: 50%;
 			&:hover {
-				background-color: var(--color-text-gray-20);
+				background-color: var(--color-gray-20);
 			}
 		}
 
 		.btn {
 			background-color: var(--color-secondary-40);
-			color: var(--color-text-dark);
+			color: var(--color-dark);
 			box-shadow: 0px 0px 5px #b7dbf0;
 			display: flex;
 			align-items: center;
 			margin-left: 0.5rem;
+			text-decoration: none;
+			transition: all 200ms ease;
 			/* box-shadow: 0px 0px 5px #a8d8f3; */
 			&:hover {
 				background-color: var(--color-secondary-80);
