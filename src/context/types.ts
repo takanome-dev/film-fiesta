@@ -8,9 +8,9 @@ export type InitialStateType = {
 	currentPage: number;
 	searchQuery: string;
 	selectedGenre: { _id: string; name: string };
-	handleDeleteMovie?: (id: string) => Promise<void>;
-	handleSelectedGenre?: (genre: GenreType) => void;
-	handlePageChange?: (pageNumber: number) => void;
+	onDelete?: (id: string) => Promise<void>;
+	onGenreSelected?: (genre: GenreType) => void;
+	onPageChange?: (pageNumber: number) => void;
 	onSearch?: (query: string) => void;
 };
 

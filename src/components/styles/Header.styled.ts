@@ -3,11 +3,11 @@ import styled from "styled-components";
 export const Container = styled.header`
 	position: sticky;
 	top: 0;
-	z-index: 1;
+	z-index: 2;
 	width: 100%;
 	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 	background-color: white;
-	margin-bottom: 2rem;
+	margin-bottom: 1rem;
 
 	.container {
 		/* width: 100%; */
