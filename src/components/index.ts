@@ -1,6 +1,7 @@
 export { default as NotFound } from "./404";
 export { default as PrivateRoute } from "./common/PrivateRoute";
 export { default as Customers } from "./Customers";
+export { default as FilteredGenre } from "./FilteredGenre";
 export { default as Header } from "./Header";
 export { default as LoginForm } from "./LoginForm";
 export { default as Logout } from "./Logout";
