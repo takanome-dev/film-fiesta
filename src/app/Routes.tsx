@@ -18,13 +18,13 @@ const Routes = () => {
 		<ErrorBoundary>
 			<main className="container">
 				<Switch>
+					<Route path="/movies" component={Movies} />
+					<PrivateRoute path="/movies/:id" component={MovieForm} />
 					<Route path="/login" component={LoginForm} />
 					<Route path="/logout" component={Logout} />
 					<Route path="/register" component={RegisterForm} />
 					<Route path="/customers" component={Customers} />
 					<Route path="/rentals" component={Rentals} />
-					<PrivateRoute path="/movies/:id" component={MovieForm} />
-					<Route path="/movies" component={Movies} />
 					<Route path="/not-found" component={NotFound} />
 					<Redirect from="/" exact to="/movies" />
 					<Redirect to="not-found" />
