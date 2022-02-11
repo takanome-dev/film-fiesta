@@ -1,5 +1,5 @@
 import CardList from "./CardList";
-// import Pagination from "./common/Pagination";
+import Pagination from "./common/Pagination";
 // import MoviesTable from "./MoviesTable";
 // import { MoviesPropsType, MoviesStateType } from "./types";
 
@@ -7,6 +7,7 @@ const Movies = () => {
 	return (
 		<>
 			<CardList />
+			<Pagination />
 		</>
 	);
 };

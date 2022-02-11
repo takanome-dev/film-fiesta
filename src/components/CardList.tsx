@@ -4,11 +4,11 @@ import Card from "./Card";
 import Container from "./styles/CardList.styled";
 
 const CardList = () => {
-	const { movies } = useContext(Context);
+	const { filteredMovies } = useContext(Context);
 
 	return (
 		<Container>
-			{movies.map((m) => (
+			{filteredMovies?.map((m) => (
 				<Card key={m._id} movie={m} />
 			))}
 		</Container>

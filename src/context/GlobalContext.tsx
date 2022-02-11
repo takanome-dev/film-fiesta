@@ -19,7 +19,7 @@ const initialState: InitialStateType = {
 	searchQuery: "",
 	movies: [],
 	genres: [],
-	pageSize: 10,
+	pageSize: 9,
 	currentPage: 1,
 	selectedGenre: { _id: "", name: "" },
 };
@@ -125,11 +125,12 @@ const Provider: React.FC<Props> = ({ children }) => {
 				m.genres.find((g) => g._id === selectedGenre._id)
 			);
 
-		const movies = paginate(filtered, currentPage, pageSize);
-		return { movies };
+		const filteredMovies = paginate(filtered, currentPage, pageSize);
+		const totalMovies = filtered.length;
+		return { filteredMovies, totalMovies };
 	};
 
-	const { movies } = handleFilterMovies();
+	const { filteredMovies, totalMovies } = handleFilterMovies();
 
 	useEffect(() => {
 		handleGetMovies();
@@ -138,6 +139,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 
 	const value = {
 		searchQuery: state.searchQuery,
+		movies: state.movies,
 		genres: state.genres,
 		currentPage: state.currentPage,
 		pageSize: state.pageSize,
@@ -146,7 +148,8 @@ const Provider: React.FC<Props> = ({ children }) => {
 		onPageChange: handlePageChange,
 		onGenreSelected: handleSelectedGenre,
 		onDelete: handleDeleteMovie,
-		movies,
+		filteredMovies,
+		totalMovies,
 	};
 
 	return <Context.Provider value={value}>{children}</Context.Provider>;

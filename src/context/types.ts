@@ -12,6 +12,8 @@ export type InitialStateType = {
 	onGenreSelected?: (genre: GenreType) => void;
 	onPageChange?: (pageNumber: number) => void;
 	onSearch?: (query: string) => void;
+	filteredMovies?: MovieType[];
+	totalMovies?: number;
 };
 
 export type ActionType = {

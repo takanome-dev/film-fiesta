@@ -5,7 +5,7 @@ export const Container = styled.header`
 	top: 0;
 	z-index: 2;
 	width: 100%;
-	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08);
 	background-color: white;
 	margin-bottom: 1rem;
 
@@ -54,13 +54,12 @@ export const Container = styled.header`
 		.btn {
 			background-color: var(--color-secondary-40);
 			color: var(--color-dark);
-			box-shadow: 0px 0px 5px #b7dbf0;
+			box-shadow: 0 0.1rem 1rem var(--color-secondary-40);
 			display: flex;
 			align-items: center;
 			margin-left: 0.5rem;
 			text-decoration: none;
 			transition: all 200ms ease;
-			/* box-shadow: 0px 0px 5px #a8d8f3; */
 			&:hover {
 				background-color: var(--color-secondary-80);
 			}

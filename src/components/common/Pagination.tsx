@@ -1,39 +1,51 @@
-import React from "react";
 import _ from "lodash";
-import { PaginationProps } from "../types";
+import { useContext } from "react";
+import { Context } from "../../context/GlobalContext";
+import Nav from "../styles/Pagination.styled";
+// import { PaginationProps } from "../types";
 
-const Pagination: React.FC<PaginationProps> = ({
-  pageSize,
-  onPageChange,
-  itemsCount,
-  currentPage,
-}) => {
-  const pagesCount = Math.ceil(itemsCount / pageSize);
+const Pagination = () => {
+	const { totalMovies, pageSize, currentPage, onPageChange } =
+		useContext(Context);
 
-  if (pagesCount === 1) return null;
+	const pagesCount = Math.ceil(totalMovies! / pageSize);
+	if (pagesCount === 1) return null;
+	const pages = _.range(1, pagesCount + 1);
 
-  const pages = _.range(1, pagesCount + 1);
-
-  return (
-    <nav>
-      <ul className="pagination">
-        {pages.map((page) => (
-          <li
-            key={page}
-            className={currentPage === page ? "page-item active" : "page-item"}
-          >
-            <span
-              onClick={() => onPageChange(page)}
-              className="page-link"
-              style={{ cursor: "pointer" }}
-            >
-              {page}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
+	return (
+		<Nav className="flex">
+			<ul className="pagination flex">
+				{pages.map((p) => (
+					<li
+						key={p}
+						className={currentPage === p ? "active" : ""}
+						onClick={() => onPageChange!(p)}
+					>
+						{p}
+					</li>
+				))}
+			</ul>
+		</Nav>
+	);
 };
 
 export default Pagination;
+
+{
+	/* <Nav className="flex">
+<ul className="pagination flex">
+  {pages.map((p) => (
+    <li
+      key={p}
+      className={currentPage === p ? "active" : ""}
+    >
+      <span
+        onClick={() => onPageChange!(p)}
+      >
+        {p}
+      </span>
+    </li>
+  ))}
+</ul>
+</Nav> */
+}
