@@ -34,7 +34,7 @@ const Container = styled.div`
 			}
 
 			span.active {
-				background: var(--color-gray-80);
+				background: var(--color-secondary-40);
 			}
 		}
 

@@ -37,6 +37,24 @@ const GlobalStyles = createGlobalStyle`
     font-size: 16px;
   }
 
+  ::-webkit-scrollbar {
+    width: 1rem;
+  }
+
+  /* ::-webkit-scrollbar-track {
+    border-radius: 0.7rem;
+    box-shadow: inset 0 0 5px var(--color-gray); 
+  } */
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-gray-60);
+    border-radius: 0.7rem;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-gray-80);
+  }
+
   *, *::before, *::after {
     box-sizing: border-box;
   }
