@@ -1,7 +1,7 @@
 // import { Component } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { FilteredGenre, GlobalStyles, Header } from "../components";
+import { GlobalStyles, Header } from "../components";
 // import { AppStateType } from "../components/types";
 import Provider from "../context/GlobalContext";
 // import { getCurrentUser } from "../services/authService";
@@ -13,7 +13,6 @@ const App = () => (
 		<ToastContainer />
 		{/* <NavBar user={user} /> */}
 		<Header />
-		<FilteredGenre />
 		<Routes />
 	</Provider>
 );

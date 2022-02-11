@@ -7,7 +7,7 @@ export const Container = styled.header`
 	width: 100%;
 	box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08);
 	background-color: white;
-	margin-bottom: 1rem;
+	/* margin-bottom: 1rem; */
 
 	.container {
 		/* width: 100%; */

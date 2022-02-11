@@ -105,6 +105,10 @@ const GlobalStyles = createGlobalStyle`
     margin: 0 auto;
   }
 
+  .main {
+    margin: 1rem 0;
+  }
+
   .flex {
     display: flex;
     justify-content: center;
