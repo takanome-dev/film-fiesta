@@ -10,4 +10,5 @@ export { default as Movies } from "./Movies";
 export { default as NavBar } from "./NavBar";
 export { default as RegisterForm } from "./RegisterForm";
 export { default as Rentals } from "./Rentals";
+export { default as Sidebar } from "./Sidebar";
 export { default as GlobalStyles } from "./styles/Global.styled";

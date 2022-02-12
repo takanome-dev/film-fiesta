@@ -1,13 +1,12 @@
-import AddBookmark from "./svg/AddBookmark";
-import Heart from "./svg/Heart";
-import Star from "./svg/Star";
+import { HeartIcon, StarIcon } from "./svg";
+import AddBookmark from "./svg/Icon.AddBookmark";
 import { CardProps } from "./types";
 
 const Card: React.FC<CardProps> = ({ movie }) => {
 	return (
 		<div className="card">
 			<div className="rate flex">
-				<Star /> <p>{movie.voteAverage}</p>
+				<StarIcon /> <p>{movie.voteAverage}</p>
 			</div>
 			<img src={movie.url} alt={movie.title} />
 			<div className="card-hover">
@@ -17,7 +16,7 @@ const Card: React.FC<CardProps> = ({ movie }) => {
 						<AddBookmark />
 					</button>
 					<button className="icon-container flex">
-						<Heart />
+						<HeartIcon color="var(--color-dark)" />
 					</button>
 				</div>
 			</div>

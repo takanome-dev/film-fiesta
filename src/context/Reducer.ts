@@ -1,5 +1,6 @@
 import {
 	CURRENTPAGE,
+	CURRENTROUTE,
 	FETCHGENRES,
 	FETCHMOVIES,
 	SEARCHQUERY,
@@ -30,6 +31,11 @@ const reducer = (state: InitialStateType, action: ActionType) => {
 			return {
 				...state,
 				currentPage: action.payload,
+			};
+		case CURRENTROUTE:
+			return {
+				...state,
+				currentRoute: action.payload,
 			};
 		case SELECTEDGENRE:
 			return {

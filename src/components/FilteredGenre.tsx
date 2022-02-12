@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useContext, useEffect } from "react";
 import { Context } from "../context/GlobalContext";
 import Container from "./styles/FilteredGenre.styled";
-import LeftArrow from "./svg/LeftArrow";
-import RightArrow from "./svg/RightArrow";
+import { LeftArrowIcon, RightArrowIcon } from "./svg";
 
 const FilteredGenre = () => {
 	const { genres, onGenreSelected, selectedGenre } = useContext(Context);
@@ -13,12 +11,14 @@ const FilteredGenre = () => {
 		 * @ref https://www.youtube.com/watch?v=LFVFxDXQxxE
 		 */
 
-		const scrollContainer: HTMLDivElement =
-			document.querySelector(".scroll-container")!;
-		const scrollButtons: HTMLDivElement =
-			document.querySelector(".scroll-buttons")!;
-		const leftArrow: HTMLDivElement = document.querySelector(".left-arrow")!;
-		const rightArrow: HTMLDivElement = document.querySelector(".right-arrow")!;
+		const scrollContainer = document.querySelector(
+			".scroll-container"
+		) as HTMLDivElement;
+		const scrollButtons = document.querySelector(
+			".scroll-buttons"
+		) as HTMLDivElement;
+		const leftArrow = document.querySelector(".left-arrow") as HTMLDivElement;
+		const rightArrow = document.querySelector(".right-arrow") as HTMLDivElement;
 
 		const maxScroll =
 			scrollContainer.offsetWidth - scrollButtons.offsetWidth - 100;
@@ -58,13 +58,13 @@ const FilteredGenre = () => {
 		<Container className="flex">
 			<div className="scroll-container">
 				<div className="left-arrow flex">
-					<LeftArrow />
+					<LeftArrowIcon />
 				</div>
 				<div className="scroll-buttons flex">
 					{genres.map((g) => (
 						<span
 							key={g._id}
-							onClick={() => onGenreSelected!(g)}
+							onClick={() => onGenreSelected?.(g)}
 							className={selectedGenre._id === g._id ? "active" : ""}
 						>
 							{g.name}
@@ -72,7 +72,7 @@ const FilteredGenre = () => {
 					))}
 				</div>
 				<div className="right-arrow flex">
-					<RightArrow />
+					<RightArrowIcon />
 				</div>
 			</div>
 		</Container>

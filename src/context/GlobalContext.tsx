@@ -7,6 +7,7 @@ import { MovieType } from "../types/MovieType";
 import { paginate } from "../utils/paginate";
 import {
 	CURRENTPAGE,
+	CURRENTROUTE,
 	FETCHGENRES,
 	FETCHMOVIES,
 	SEARCHQUERY,
@@ -21,6 +22,7 @@ const initialState: InitialStateType = {
 	genres: [],
 	pageSize: 9,
 	currentPage: 1,
+	currentRoute: "/movies",
 	selectedGenre: { _id: "", name: "" },
 };
 
@@ -62,6 +64,13 @@ const Provider: React.FC<Props> = ({ children }) => {
 		dispatch({
 			type: CURRENTPAGE,
 			payload: pageNumber,
+		});
+	};
+
+	const handleRouteChange = (route: string) => {
+		dispatch({
+			type: CURRENTROUTE,
+			payload: route,
 		});
 	};
 
@@ -142,10 +151,12 @@ const Provider: React.FC<Props> = ({ children }) => {
 		movies: state.movies,
 		genres: state.genres,
 		currentPage: state.currentPage,
+		currentRoute: state.currentRoute,
 		pageSize: state.pageSize,
 		selectedGenre: state.selectedGenre,
 		onSearch: handleSearch,
 		onPageChange: handlePageChange,
+		onRouteChange: handleRouteChange,
 		onGenreSelected: handleSelectedGenre,
 		onDelete: handleDeleteMovie,
 		filteredMovies,
