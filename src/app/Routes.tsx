@@ -8,7 +8,6 @@ import {
 	NotFound,
 	PrivateRoute,
 	RegisterForm,
-	// NavBar,
 	Rentals,
 } from "../components";
 import ErrorBoundary from "../components/ErrorBoundary";
