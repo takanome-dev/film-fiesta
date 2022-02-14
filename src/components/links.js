@@ -4,8 +4,10 @@ import {
   FireIcon,
   HeartIcon,
   HomeIcon,
+  RentalIcon,
   SettingsIcon,
   SignInIcon,
+  SignOutIcon,
   TrendingIcon,
 } from "./svg";
 
@@ -35,6 +37,11 @@ export const topLinks = [
     icon: (color) => <HeartIcon color={color} />,
     path: "/favorites",
   },
+  {
+    name: "Rentals",
+    icon: (color) => <RentalIcon color={color} />,
+    path: "/rentals",
+  },
 ];
 
 export const bottomLinks = [
@@ -51,6 +58,11 @@ export const bottomLinks = [
   {
     name: "Sign in",
     icon: (color) => <SignInIcon color={color} />,
-    path: "/register",
+    path: "/login",
+  },
+  {
+    name: "Sign out",
+    icon: (color) => <SignOutIcon color={color} />,
+    path: "/logout",
   },
 ];
