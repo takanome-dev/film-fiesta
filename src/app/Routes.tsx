@@ -16,7 +16,7 @@ import ErrorBoundary from "../components/ErrorBoundary";
 const Routes = () => {
 	return (
 		<ErrorBoundary>
-			<main className="container main">
+			<main className="main">
 				<Switch>
 					<Route path="/movies" component={Movies} />
 					<PrivateRoute path="/movies/:id" component={MovieForm} />

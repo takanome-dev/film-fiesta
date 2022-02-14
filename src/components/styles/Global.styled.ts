@@ -100,13 +100,25 @@ const GlobalStyles = createGlobalStyle`
     color: var(--color-dark);
   }
 
+  body.open {
+    overflow: hidden;
+  }
+
   .container {
     max-width: 1440px;
     margin: 0 auto;
   }
 
   .main {
-    margin: 1rem 0;
+    margin: 1rem 1rem 1rem 16rem;
+    transition: margin 300ms ease-in-out;
+    
+    @media (max-width: 1110px) {
+      margin: 1rem 1rem 1rem 6rem;
+    }
+    @media (max-width: 650px) {
+      margin: 1rem;
+    }
   }
 
   .flex {
@@ -120,6 +132,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0.6rem;
     border-radius: 0.3rem;
   }
+
 `;
 
 export default GlobalStyles;

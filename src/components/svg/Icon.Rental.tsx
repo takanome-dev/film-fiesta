@@ -1,4 +1,8 @@
-const Rental = () => {
+type Props = {
+	color: string;
+};
+
+const Rental: React.FC<Props> = ({ color }) => {
 	return (
 		<svg
 			width="24"
@@ -9,21 +13,21 @@ const Rental = () => {
 		>
 			<path
 				d="M12 2L2 7L12 12L22 7L12 2Z"
-				stroke="#2B2D42"
+				stroke={color}
 				strokeWidth="2"
 				strokeLinecap="round"
 				strokeLinejoin="round"
 			/>
 			<path
 				d="M2 17L12 22L22 17"
-				stroke="#2B2D42"
+				stroke={color}
 				strokeWidth="2"
 				strokeLinecap="round"
 				strokeLinejoin="round"
 			/>
 			<path
 				d="M2 12L12 17L22 12"
-				stroke="#2B2D42"
+				stroke={color}
 				strokeWidth="2"
 				strokeLinecap="round"
 				strokeLinejoin="round"

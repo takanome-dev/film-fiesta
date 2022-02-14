@@ -22,6 +22,9 @@ export const Container = styled.header`
 			img {
 				max-width: 100%;
 				width: 8rem;
+				@media (max-width: 570px) {
+					max-width: 6rem;
+				}
 			}
 		}
 
@@ -33,21 +36,9 @@ export const Container = styled.header`
 			background-color: var(--color-background);
 			border: none;
 			border-radius: 0.6rem;
+			transition: outline 100ms ease;
 			&:focus {
-				outline: 3px solid var(--color-secondary-20);
-			}
-		}
-
-		.search {
-			display: none;
-			position: absolute;
-			right: 33%;
-			margin-right: 1rem;
-			cursor: pointer;
-			padding: 0.5rem;
-			border-radius: 50%;
-			&:hover {
-				background-color: var(--color-gray-20);
+				outline: 0.35rem solid var(--color-secondary-20);
 			}
 		}
 
@@ -65,29 +56,29 @@ export const Container = styled.header`
 			}
 		}
 
+		.bars {
+			display: none;
+			cursor: pointer;
+			margin-left: 1rem;
+		}
+
 		@media screen and (max-width: 948px) {
 			input {
 				max-width: 20rem;
 			}
 		}
-		@media screen and (max-width: 610px) {
+		@media screen and (max-width: 650px) {
 			input {
-				max-width: 10rem;
+				max-width: 22rem;
 			}
-		}
-		@media screen and (max-width: 480px) {
-			input {
+
+			.btn {
 				display: none;
 			}
 
-			.search {
+			.bars {
 				display: initial;
-				/* justify-self: flex-end; */
 			}
-
-			/* .btn {
-				justify-self: flex-start;
-			} */
 		}
 	}
 `;

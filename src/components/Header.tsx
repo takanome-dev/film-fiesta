@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import { logo } from "../assets";
 import { Context } from "../context/GlobalContext";
 import { Container } from "./styles/Header.styled";
-import { SearchIcon, UserIcon } from "./svg";
+import { BarsIcon, UserIcon } from "./svg";
 
-const Header = () => {
+type Props = {
+	handleOpen: () => void;
+};
+const Header: React.FC<Props> = ({ handleOpen }) => {
 	const { searchQuery, onSearch } = useContext(Context);
 	return (
 		<Container>
@@ -23,12 +26,12 @@ const Header = () => {
 					value={searchQuery}
 					onChange={(e) => onSearch?.(e.currentTarget.value)}
 				/>
-				<div className="search">
-					<SearchIcon />
-				</div>
 				<Link to="/login" className="btn">
 					<UserIcon /> &nbsp; Sign in
 				</Link>
+				<div className="bars" onClick={handleOpen}>
+					<BarsIcon />
+				</div>
 			</div>
 		</Container>
 	);
