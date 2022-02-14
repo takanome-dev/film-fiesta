@@ -35,10 +35,11 @@ export type SortColumnType = {
 };
 
 export type PaginationProps = {
-	currentPage: number;
-	onPageChange: (pageNumber: number) => void;
-	itemsCount: number;
-	pageSize: number;
+	// currentPage: number;
+	// onPageChange: (pageNumber: number) => void;
+	// itemsCount: number;
+	// pageSize: number;
+	totalMovies: number;
 };
 
 export type ListGroupType = {
@@ -192,7 +193,7 @@ export type PrivateRouteProps = {
 
 export type CardListProps = {
 	movies: MovieType[];
-	handleLike: (movie: MovieType) => void;
+	// handleLike: (movie: MovieType) => void;
 };
 
 export type CardProps = {

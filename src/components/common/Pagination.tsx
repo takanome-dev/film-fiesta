@@ -2,13 +2,12 @@ import _ from "lodash";
 import { useContext } from "react";
 import { Context } from "../../context/GlobalContext";
 import Nav from "../styles/Pagination.styled";
-// import { PaginationProps } from "../types";
+import { PaginationProps } from "../types";
 
-const Pagination = () => {
-	const { totalMovies, pageSize, currentPage, onPageChange } =
-		useContext(Context);
+const Pagination: React.FC<PaginationProps> = ({ totalMovies }) => {
+	const { pageSize, currentPage, onPageChange } = useContext(Context);
 
-	const pagesCount = Math.ceil(totalMovies! / pageSize);
+	const pagesCount = Math.ceil(totalMovies / pageSize);
 	if (pagesCount === 1) return null;
 	const pages = _.range(1, pagesCount + 1);
 
@@ -19,7 +18,7 @@ const Pagination = () => {
 					<li
 						key={p}
 						className={currentPage === p ? "active" : ""}
-						onClick={() => onPageChange!(p)}
+						onClick={() => onPageChange?.(p)}
 					>
 						{p}
 					</li>
