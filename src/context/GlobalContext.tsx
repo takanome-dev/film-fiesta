@@ -1,4 +1,5 @@
 import { createContext, useEffect, useReducer } from "react";
+import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { getGenres } from "../services/genreService";
 import { deleteMovie, getMovies } from "../services/movieService";
@@ -31,25 +32,49 @@ type Props = {
 };
 
 const Provider: React.FC<Props> = ({ children }) => {
+	const { refetch: handleGetMovies } = useQuery<MovieType[], Error>(
+		"getMovies",
+		async () => await getMovies(),
+		{
+			enabled: false,
+			onSuccess: (data) =>
+				dispatch({
+					type: FETCHMOVIES,
+					payload: data,
+				}),
+		}
+	);
+	const { refetch: handleGetGenres } = useQuery<GenreType[], Error>(
+		"getGenres",
+		async () => await getGenres(),
+		{
+			enabled: false,
+			onSuccess: (data) => {
+				const genres = [{ _id: "", name: "All" }, ...data];
+				dispatch({
+					type: FETCHGENRES,
+					payload: genres,
+				});
+			},
+		}
+	);
+
 	const [state, dispatch] = useReducer(reducer, initialState);
 
-	const handleGetMovies = async () => {
-		const movies = await getMovies();
-		dispatch({
-			type: FETCHMOVIES,
-			payload: movies,
-		});
-	};
+	// const handleGetGenres = async () => {
+	// 	const data = await getGenres();
+	// 	const genres = [{ _id: "", name: "All" }, ...data];
 
-	const handleGetGenres = async () => {
-		const data = await getGenres();
-		const genres = [{ _id: "", name: "All" }, ...data];
+	// 	dispatch({
+	// 		type: FETCHGENRES,
+	// 		payload: genres,
+	// 	});
+	// };
 
-		dispatch({
-			type: FETCHGENRES,
-			payload: genres,
-		});
-	};
+	useEffect(() => {
+		handleGetMovies();
+		handleGetGenres();
+	}, []);
 
 	const handleSearch = (query: string) => {
 		dispatch({
@@ -114,6 +139,8 @@ const Provider: React.FC<Props> = ({ children }) => {
 			searchQuery,
 		} = state;
 
+		console.log({ allMovies });
+
 		let filtered: MovieType[] = allMovies;
 
 		if (searchQuery)
@@ -130,11 +157,6 @@ const Provider: React.FC<Props> = ({ children }) => {
 	};
 
 	const { movies } = handleFilterMovies();
-
-	useEffect(() => {
-		handleGetMovies();
-		handleGetGenres();
-	}, []);
 
 	const value = {
 		searchQuery: state.searchQuery,

@@ -1,20 +1,32 @@
-//* Styles
-// import "bootstrap/dist/css/bootstrap.css";
-import "font-awesome/css/font-awesome.css";
 import React from "react";
 import ReactDOM from "react-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter } from "react-router-dom";
 import App from "./app/App";
 // import reportWebVitals from "./reportWebVitals";
 import { logger } from "./services/logger";
 
-// * Initialize Sentry
 logger.init();
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			refetchOnMount: false,
+			refetchOnWindowFocus: false,
+			refetchOnReconnect: false,
+			retry: false,
+			staleTime: 5 * 60 * 1000,
+		},
+	},
+});
 
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<App />
+			<QueryClientProvider client={queryClient}>
+				<App />
+				<ReactQueryDevtools initialIsOpen={false} />
+			</QueryClientProvider>
 		</BrowserRouter>
 	</React.StrictMode>,
 	document.getElementById("root")
