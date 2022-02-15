@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GlobalStyles, Header, Sidebar } from "../components";
+import ErrorBoundary from "../components/ErrorBoundary";
 import Provider from "../context/GlobalContext";
 import Routes from "./Routes";
 
@@ -20,13 +21,15 @@ const App = () => {
 		: document.body.classList.remove("open");
 
 	return (
-		<Provider>
-			<GlobalStyles />
-			<ToastContainer />
-			<Header handleOpen={() => setIsOpen(true)} />
-			<Sidebar open={isOpen} setIsOpen={setIsOpen} />
-			<Routes />
-		</Provider>
+		<ErrorBoundary>
+			<Provider>
+				<GlobalStyles />
+				<ToastContainer />
+				<Header handleOpen={() => setIsOpen(true)} />
+				<Sidebar open={isOpen} setIsOpen={setIsOpen} />
+				<Routes />
+			</Provider>
+		</ErrorBoundary>
 	);
 };
 

@@ -1,7 +1,8 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useReducer } from "react";
+import { useQuery } from "react-query";
 import { toast } from "react-toastify";
-import { getGenres } from "../services/genreService";
-import { deleteMovie, getMovies } from "../services/movieService";
+import { getGenres } from "../services/genre";
+import { deleteMovie, getMovies } from "../services/movie";
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
 import { paginate } from "../utils/paginate";
@@ -37,23 +38,23 @@ type Props = {
 const Provider: React.FC<Props> = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
-	const handleGetMovies = async () => {
-		const movies = await getMovies();
-		dispatch({
-			type: FETCHMOVIES,
-			payload: movies,
-		});
-	};
+	useQuery<MovieType[], Error>("getMovies", async () => await getMovies(), {
+		onSuccess: (data) =>
+			dispatch({
+				type: FETCHMOVIES,
+				payload: data,
+			}),
+	});
 
-	const handleGetGenres = async () => {
-		const data = await getGenres();
-		const genres = [{ _id: "", name: "All" }, ...data];
-
-		dispatch({
-			type: FETCHGENRES,
-			payload: genres,
-		});
-	};
+	useQuery<GenreType[], Error>("getGenres", async () => await getGenres(), {
+		onSuccess: (data) => {
+			const genres = [{ _id: "", name: "All" }, ...data];
+			dispatch({
+				type: FETCHGENRES,
+				payload: genres,
+			});
+		},
+	});
 
 	const handleSearch = (query: string) => {
 		dispatch({
@@ -168,11 +169,6 @@ const Provider: React.FC<Props> = ({ children }) => {
 	const { filteredMovies, totalMoviesFiltered } = handleFilterMovies();
 	const { filteredMoviesByCategory, totalMoviesFilteredByCategory } =
 		handleFilterMoviesByCategory();
-
-	useEffect(() => {
-		handleGetMovies();
-		handleGetGenres();
-	}, []);
 
 	const value = {
 		searchQuery: state.searchQuery,

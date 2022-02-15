@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import { getCurrentUser } from "../services/authService";
+import { getCurrentUser } from "../services/auth";
 import { MovieType } from "../types/MovieType";
 import Like from "./common/Like";
 import Table from "./common/Table";

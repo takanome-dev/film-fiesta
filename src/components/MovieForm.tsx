@@ -1,7 +1,7 @@
 import Joi from "joi";
 import { toast } from "react-toastify";
-import { getGenres } from "../services/genreService";
-import { getMovie, saveMovie } from "../services/movieService";
+import { getGenres } from "../services/genre";
+import { getMovie, saveMovie } from "../services/movie";
 import { MovieType } from "../types/MovieType";
 import Form from "./common/Form";
 import { MovieFormStateType } from "./types";
