@@ -5,9 +5,7 @@ export type InitialStateType = {
 	movies: MovieType[];
 	genres: GenreType[];
 	filteredMovies?: MovieType[];
-	filteredMoviesByCategory?: MovieType[];
-	totalMoviesFiltered?: number;
-	totalMoviesFilteredByCategory?: number;
+	totalMovies?: number;
 	pageSize: number;
 	currentPage: number;
 	currentRoute: string;
@@ -16,7 +14,6 @@ export type InitialStateType = {
 	selectedCategory: string;
 	onDelete?: (id: string) => Promise<void>;
 	onGenreSelected?: (genre: GenreType) => void;
-	onCategorySelected?: (category: string) => void;
 	onPageChange?: (pageNumber: number) => void;
 	onRouteChange?: (route: string) => void;
 	onSearch?: (query: string) => void;

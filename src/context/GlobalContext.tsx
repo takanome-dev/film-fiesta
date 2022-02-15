@@ -1,5 +1,6 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { useQuery } from "react-query";
+import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getGenres } from "../services/genre";
 import { deleteMovie, getMovies } from "../services/movie";
@@ -37,6 +38,7 @@ type Props = {
 
 const Provider: React.FC<Props> = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
+	const location = useLocation();
 
 	useQuery<MovieType[], Error>("getMovies", async () => await getMovies(), {
 		onSuccess: (data) =>
@@ -84,13 +86,23 @@ const Provider: React.FC<Props> = ({ children }) => {
 		});
 	};
 
-	const handleSelectedCategory = (category: string) => {
-		console.log({ category });
-		dispatch({
-			type: SELECTEDCATEGORY,
-			payload: category,
-		});
-	};
+	useEffect(() => {
+		if (location.pathname === "/popular")
+			dispatch({
+				type: SELECTEDCATEGORY,
+				payload: "popular",
+			});
+		else if (location.pathname === "/trending")
+			dispatch({
+				type: SELECTEDCATEGORY,
+				payload: "trending",
+			});
+		else
+			dispatch({
+				type: SELECTEDCATEGORY,
+				payload: "",
+			});
+	}, [location.pathname]);
 
 	// handleLikeMovie = (movie: MovieType) => {
 	// 	const movies = [...this.state.movies];
@@ -125,22 +137,6 @@ const Provider: React.FC<Props> = ({ children }) => {
 		}
 	};
 
-	const handleFilterMoviesByCategory = () => {
-		const {
-			movies: allMovies,
-			pageSize,
-			currentPage,
-			selectedCategory,
-		} = state;
-
-		const filter = allMovies.filter(
-			(m: MovieType) => m.category === selectedCategory
-		);
-		const filteredMoviesByCategory = paginate(filter, currentPage, pageSize);
-		const totalMoviesFilteredByCategory = filter.length;
-		return { filteredMoviesByCategory, totalMoviesFilteredByCategory };
-	};
-
 	const handleFilterMovies = () => {
 		const {
 			movies: allMovies,
@@ -148,6 +144,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 			currentPage,
 			selectedGenre,
 			searchQuery,
+			selectedCategory,
 		} = state;
 
 		let filtered: MovieType[] = allMovies;
@@ -160,15 +157,17 @@ const Provider: React.FC<Props> = ({ children }) => {
 			filtered = allMovies.filter((m: MovieType) =>
 				m.genres.find((g) => g._id === selectedGenre._id)
 			);
+		else if (selectedCategory)
+			filtered = allMovies.filter(
+				(m: MovieType) => m.category === selectedCategory
+			);
 
 		const filteredMovies = paginate(filtered, currentPage, pageSize);
-		const totalMoviesFiltered = filtered.length;
-		return { filteredMovies, totalMoviesFiltered };
+		const totalMovies = filtered.length;
+		return { filteredMovies, totalMovies };
 	};
 
-	const { filteredMovies, totalMoviesFiltered } = handleFilterMovies();
-	const { filteredMoviesByCategory, totalMoviesFilteredByCategory } =
-		handleFilterMoviesByCategory();
+	const { filteredMovies, totalMovies } = handleFilterMovies();
 
 	const value = {
 		searchQuery: state.searchQuery,
@@ -183,12 +182,9 @@ const Provider: React.FC<Props> = ({ children }) => {
 		onPageChange: handlePageChange,
 		onRouteChange: handleRouteChange,
 		onGenreSelected: handleSelectedGenre,
-		onCategorySelected: handleSelectedCategory,
 		onDelete: handleDeleteMovie,
 		filteredMovies,
-		totalMoviesFiltered,
-		filteredMoviesByCategory,
-		totalMoviesFilteredByCategory,
+		totalMovies,
 	};
 
 	return <Context.Provider value={value}>{children}</Context.Provider>;
