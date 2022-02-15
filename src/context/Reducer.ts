@@ -51,7 +51,7 @@ const reducer = (state: InitialStateType, action: ActionType) => {
 				selectedCategory: action.payload,
 				searchQuery: "",
 				currentPage: 1,
-				// selectedGenre: { _id: "", name: "" },
+				selectedGenre: { _id: "", name: "" },
 			};
 		default:
 			return state;
