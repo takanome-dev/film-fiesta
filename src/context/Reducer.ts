@@ -4,6 +4,7 @@ import {
 	FETCHGENRES,
 	FETCHMOVIES,
 	SEARCHQUERY,
+	SELECTEDCATEGORY,
 	SELECTEDGENRE,
 } from "./Constant";
 import { ActionType, InitialStateType } from "./types";
@@ -43,6 +44,14 @@ const reducer = (state: InitialStateType, action: ActionType) => {
 				selectedGenre: action.payload,
 				searchQuery: "",
 				currentPage: 1,
+			};
+		case SELECTEDCATEGORY:
+			return {
+				...state,
+				selectedCategory: action.payload,
+				searchQuery: "",
+				currentPage: 1,
+				// selectedGenre: { _id: "", name: "" },
 			};
 		default:
 			return state;

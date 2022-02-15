@@ -11,6 +11,7 @@ import {
 	FETCHGENRES,
 	FETCHMOVIES,
 	SEARCHQUERY,
+	SELECTEDCATEGORY,
 	SELECTEDGENRE,
 } from "./Constant";
 import reducer from "./Reducer";
@@ -24,6 +25,7 @@ const initialState: InitialStateType = {
 	currentPage: 1,
 	currentRoute: "/movies",
 	selectedGenre: { _id: "", name: "" },
+	selectedCategory: "",
 };
 
 export const Context = createContext(initialState);
@@ -81,6 +83,14 @@ const Provider: React.FC<Props> = ({ children }) => {
 		});
 	};
 
+	const handleSelectedCategory = (category: string) => {
+		console.log({ category });
+		dispatch({
+			type: SELECTEDCATEGORY,
+			payload: category,
+		});
+	};
+
 	// handleLikeMovie = (movie: MovieType) => {
 	// 	const movies = [...this.state.movies];
 	// 	const index = movies.indexOf(movie);
@@ -114,6 +124,22 @@ const Provider: React.FC<Props> = ({ children }) => {
 		}
 	};
 
+	const handleFilterMoviesByCategory = () => {
+		const {
+			movies: allMovies,
+			pageSize,
+			currentPage,
+			selectedCategory,
+		} = state;
+
+		const filter = allMovies.filter(
+			(m: MovieType) => m.category === selectedCategory
+		);
+		const filteredMoviesByCategory = paginate(filter, currentPage, pageSize);
+		const totalMoviesFilteredByCategory = filter.length;
+		return { filteredMoviesByCategory, totalMoviesFilteredByCategory };
+	};
+
 	const handleFilterMovies = () => {
 		const {
 			movies: allMovies,
@@ -135,11 +161,13 @@ const Provider: React.FC<Props> = ({ children }) => {
 			);
 
 		const filteredMovies = paginate(filtered, currentPage, pageSize);
-		const totalMovies = filtered.length;
-		return { filteredMovies, totalMovies };
+		const totalMoviesFiltered = filtered.length;
+		return { filteredMovies, totalMoviesFiltered };
 	};
 
-	const { filteredMovies, totalMovies } = handleFilterMovies();
+	const { filteredMovies, totalMoviesFiltered } = handleFilterMovies();
+	const { filteredMoviesByCategory, totalMoviesFilteredByCategory } =
+		handleFilterMoviesByCategory();
 
 	useEffect(() => {
 		handleGetMovies();
@@ -154,13 +182,17 @@ const Provider: React.FC<Props> = ({ children }) => {
 		currentRoute: state.currentRoute,
 		pageSize: state.pageSize,
 		selectedGenre: state.selectedGenre,
+		selectedCategory: state.selectedCategory,
 		onSearch: handleSearch,
 		onPageChange: handlePageChange,
 		onRouteChange: handleRouteChange,
 		onGenreSelected: handleSelectedGenre,
+		onCategorySelected: handleSelectedCategory,
 		onDelete: handleDeleteMovie,
 		filteredMovies,
-		totalMovies,
+		totalMoviesFiltered,
+		filteredMoviesByCategory,
+		totalMoviesFilteredByCategory,
 	};
 
 	return <Context.Provider value={value}>{children}</Context.Provider>;

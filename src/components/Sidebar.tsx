@@ -11,7 +11,9 @@ type Props = {
 };
 
 const Sidebar: React.FC<Props> = ({ open, setIsOpen }) => {
-	const { currentRoute, onRouteChange } = useContext(Context);
+	const { currentRoute, onRouteChange, onCategorySelected, selectedCategory } =
+		useContext(Context);
+	console.log({ selectedCategory });
 	const condition = open && window.innerWidth <= 650;
 
 	return (
@@ -40,7 +42,7 @@ const Sidebar: React.FC<Props> = ({ open, setIsOpen }) => {
 										? "var(--color-primary)"
 										: "var(--color-dark-80)"
 								)}
-								<p>{l.name}</p>
+								<p onClick={() => onCategorySelected?.(l.category)}>{l.name}</p>
 							</Link>
 						))}
 					</div>
