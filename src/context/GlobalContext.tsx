@@ -1,16 +1,18 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useReducer } from "react";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
-import { getGenres } from "../services/genreService";
-import { deleteMovie, getMovies } from "../services/movieService";
+import { getGenres } from "../services/genre";
+import { deleteMovie, getMovies } from "../services/movie";
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
 import { paginate } from "../utils/paginate";
 import {
 	CURRENTPAGE,
+	CURRENTROUTE,
 	FETCHGENRES,
 	FETCHMOVIES,
 	SEARCHQUERY,
+	SELECTEDCATEGORY,
 	SELECTEDGENRE,
 } from "./Constant";
 import reducer from "./Reducer";
@@ -20,9 +22,11 @@ const initialState: InitialStateType = {
 	searchQuery: "",
 	movies: [],
 	genres: [],
-	pageSize: 10,
+	pageSize: 9,
 	currentPage: 1,
+	currentRoute: "/movies",
 	selectedGenre: { _id: "", name: "" },
+	selectedCategory: "",
 };
 
 export const Context = createContext(initialState);
@@ -32,49 +36,25 @@ type Props = {
 };
 
 const Provider: React.FC<Props> = ({ children }) => {
-	const { refetch: handleGetMovies } = useQuery<MovieType[], Error>(
-		"getMovies",
-		async () => await getMovies(),
-		{
-			enabled: false,
-			onSuccess: (data) =>
-				dispatch({
-					type: FETCHMOVIES,
-					payload: data,
-				}),
-		}
-	);
-	const { refetch: handleGetGenres } = useQuery<GenreType[], Error>(
-		"getGenres",
-		async () => await getGenres(),
-		{
-			enabled: false,
-			onSuccess: (data) => {
-				const genres = [{ _id: "", name: "All" }, ...data];
-				dispatch({
-					type: FETCHGENRES,
-					payload: genres,
-				});
-			},
-		}
-	);
-
 	const [state, dispatch] = useReducer(reducer, initialState);
 
-	// const handleGetGenres = async () => {
-	// 	const data = await getGenres();
-	// 	const genres = [{ _id: "", name: "All" }, ...data];
+	useQuery<MovieType[], Error>("getMovies", async () => await getMovies(), {
+		onSuccess: (data) =>
+			dispatch({
+				type: FETCHMOVIES,
+				payload: data,
+			}),
+	});
 
-	// 	dispatch({
-	// 		type: FETCHGENRES,
-	// 		payload: genres,
-	// 	});
-	// };
-
-	useEffect(() => {
-		handleGetMovies();
-		handleGetGenres();
-	}, []);
+	useQuery<GenreType[], Error>("getGenres", async () => await getGenres(), {
+		onSuccess: (data) => {
+			const genres = [{ _id: "", name: "All" }, ...data];
+			dispatch({
+				type: FETCHGENRES,
+				payload: genres,
+			});
+		},
+	});
 
 	const handleSearch = (query: string) => {
 		dispatch({
@@ -90,10 +70,25 @@ const Provider: React.FC<Props> = ({ children }) => {
 		});
 	};
 
+	const handleRouteChange = (route: string) => {
+		dispatch({
+			type: CURRENTROUTE,
+			payload: route,
+		});
+	};
+
 	const handleSelectedGenre = (genre: GenreType) => {
 		dispatch({
 			type: SELECTEDGENRE,
 			payload: genre,
+		});
+	};
+
+	const handleSelectedCategory = (category: string) => {
+		console.log({ category });
+		dispatch({
+			type: SELECTEDCATEGORY,
+			payload: category,
 		});
 	};
 
@@ -130,6 +125,22 @@ const Provider: React.FC<Props> = ({ children }) => {
 		}
 	};
 
+	const handleFilterMoviesByCategory = () => {
+		const {
+			movies: allMovies,
+			pageSize,
+			currentPage,
+			selectedCategory,
+		} = state;
+
+		const filter = allMovies.filter(
+			(m: MovieType) => m.category === selectedCategory
+		);
+		const filteredMoviesByCategory = paginate(filter, currentPage, pageSize);
+		const totalMoviesFilteredByCategory = filter.length;
+		return { filteredMoviesByCategory, totalMoviesFilteredByCategory };
+	};
+
 	const handleFilterMovies = () => {
 		const {
 			movies: allMovies,
@@ -138,8 +149,6 @@ const Provider: React.FC<Props> = ({ children }) => {
 			selectedGenre,
 			searchQuery,
 		} = state;
-
-		console.log({ allMovies });
 
 		let filtered: MovieType[] = allMovies;
 
@@ -152,23 +161,34 @@ const Provider: React.FC<Props> = ({ children }) => {
 				m.genres.find((g) => g._id === selectedGenre._id)
 			);
 
-		const movies = paginate(filtered, currentPage, pageSize);
-		return { movies };
+		const filteredMovies = paginate(filtered, currentPage, pageSize);
+		const totalMoviesFiltered = filtered.length;
+		return { filteredMovies, totalMoviesFiltered };
 	};
 
-	const { movies } = handleFilterMovies();
+	const { filteredMovies, totalMoviesFiltered } = handleFilterMovies();
+	const { filteredMoviesByCategory, totalMoviesFilteredByCategory } =
+		handleFilterMoviesByCategory();
 
 	const value = {
 		searchQuery: state.searchQuery,
+		movies: state.movies,
 		genres: state.genres,
 		currentPage: state.currentPage,
+		currentRoute: state.currentRoute,
 		pageSize: state.pageSize,
 		selectedGenre: state.selectedGenre,
+		selectedCategory: state.selectedCategory,
 		onSearch: handleSearch,
 		onPageChange: handlePageChange,
+		onRouteChange: handleRouteChange,
 		onGenreSelected: handleSelectedGenre,
+		onCategorySelected: handleSelectedCategory,
 		onDelete: handleDeleteMovie,
-		movies,
+		filteredMovies,
+		totalMoviesFiltered,
+		filteredMoviesByCategory,
+		totalMoviesFilteredByCategory,
 	};
 
 	return <Context.Provider value={value}>{children}</Context.Provider>;

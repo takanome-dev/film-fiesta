@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
+// import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter } from "react-router-dom";
 import App from "./app/App";
 // import reportWebVitals from "./reportWebVitals";
@@ -15,7 +15,7 @@ const queryClient = new QueryClient({
 			refetchOnWindowFocus: false,
 			refetchOnReconnect: false,
 			retry: false,
-			staleTime: 5 * 60 * 1000,
+			staleTime: 30 * 60 * 1000,
 		},
 	},
 });
@@ -25,7 +25,7 @@ ReactDOM.render(
 		<BrowserRouter>
 			<QueryClientProvider client={queryClient}>
 				<App />
-				<ReactQueryDevtools initialIsOpen={false} />
+				{/* <ReactQueryDevtools initialIsOpen={false} /> */}
 			</QueryClientProvider>
 		</BrowserRouter>
 	</React.StrictMode>,

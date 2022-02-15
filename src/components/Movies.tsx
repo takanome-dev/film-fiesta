@@ -1,47 +1,21 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { useContext } from "react";
+import { FilteredGenre } from ".";
+import { Context } from "../context/GlobalContext";
 import CardList from "./CardList";
-// import Pagination from "./common/Pagination";
-// import MoviesTable from "./MoviesTable";
-// import { MoviesPropsType, MoviesStateType } from "./types";
+import Pagination from "./common/Pagination";
+import Container from "./styles/Movies.styled";
 
 const Movies = () => {
+	const { filteredMovies, totalMoviesFiltered } = useContext(Context);
+
 	return (
-		<>
-			<CardList />
-		</>
+		<Container>
+			<FilteredGenre />
+			<CardList movies={filteredMovies!} />
+			<Pagination totalMovies={totalMoviesFiltered!} />
+		</Container>
 	);
 };
 
 export default Movies;
-
-{
-	/* <div className="row">
-			<div className="col-3">
-					<ListGroup
-						items={genres}
-						selectedItem={selectedGenre}
-						onItemSelected={this.handleGenreSelect}
-					/>
-				</div>
-			<div className="col">
-				{this.props.user && (
-						<Link to="/movies/new" className="btn btn-primary mb-3">
-							New Movie
-						</Link>
-					)}
-				<Search value={searchQuery} onSearch={this.handleSearch} />
-				<MoviesTable
-						movies={movies}
-						sortColumn={sortColumn}
-						handleDelete={this.handleDeleteMovie}
-						handleLike={this.handleLikeMovie}
-						handleSort={this.handleSortMovie}
-					/>
-				<Pagination
-						pageSize={pageSize}
-						itemsCount={totalCount}
-						currentPage={currentPage}
-						onPageChange={this.handlePageChange}
-					/>
-			</div>
-		</div> */
-}

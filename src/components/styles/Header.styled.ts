@@ -3,11 +3,11 @@ import styled from "styled-components";
 export const Container = styled.header`
 	position: sticky;
 	top: 0;
-	z-index: 1;
+	z-index: 2;
 	width: 100%;
-	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08);
 	background-color: white;
-	margin-bottom: 2rem;
+	/* margin-bottom: 1rem; */
 
 	.container {
 		/* width: 100%; */
@@ -22,6 +22,9 @@ export const Container = styled.header`
 			img {
 				max-width: 100%;
 				width: 8rem;
+				@media (max-width: 570px) {
+					max-width: 6rem;
+				}
 			}
 		}
 
@@ -33,37 +36,30 @@ export const Container = styled.header`
 			background-color: var(--color-background);
 			border: none;
 			border-radius: 0.6rem;
+			transition: outline 100ms ease;
 			&:focus {
-				outline: 3px solid var(--color-secondary-20);
-			}
-		}
-
-		.search {
-			display: none;
-			position: absolute;
-			right: 33%;
-			margin-right: 1rem;
-			cursor: pointer;
-			padding: 0.5rem;
-			border-radius: 50%;
-			&:hover {
-				background-color: var(--color-gray-20);
+				outline: 0.35rem solid var(--color-secondary-20);
 			}
 		}
 
 		.btn {
 			background-color: var(--color-secondary-40);
 			color: var(--color-dark);
-			box-shadow: 0px 0px 5px #b7dbf0;
+			box-shadow: 0 0.1rem 1rem var(--color-secondary-40);
 			display: flex;
 			align-items: center;
 			margin-left: 0.5rem;
 			text-decoration: none;
 			transition: all 200ms ease;
-			/* box-shadow: 0px 0px 5px #a8d8f3; */
 			&:hover {
 				background-color: var(--color-secondary-80);
 			}
+		}
+
+		.bars {
+			display: none;
+			cursor: pointer;
+			margin-left: 1rem;
 		}
 
 		@media screen and (max-width: 948px) {
@@ -71,24 +67,18 @@ export const Container = styled.header`
 				max-width: 20rem;
 			}
 		}
-		@media screen and (max-width: 610px) {
+		@media screen and (max-width: 650px) {
 			input {
-				max-width: 10rem;
+				max-width: 22rem;
 			}
-		}
-		@media screen and (max-width: 480px) {
-			input {
+
+			.btn {
 				display: none;
 			}
 
-			.search {
+			.bars {
 				display: initial;
-				/* justify-self: flex-end; */
 			}
-
-			/* .btn {
-				justify-self: flex-start;
-			} */
 		}
 	}
 `;

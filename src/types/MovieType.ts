@@ -7,6 +7,7 @@ export type MovieType = {
 	dateRelease: string;
 	url: string;
 	overview: string;
+	category: "popular" | "trending";
 	voteAverage: number;
 	numberInStock: number;
 	dailyRentalRate: number;

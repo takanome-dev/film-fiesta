@@ -1,12 +1,16 @@
 export { default as NotFound } from "./404";
 export { default as PrivateRoute } from "./common/PrivateRoute";
 export { default as Customers } from "./Customers";
+export { default as FilteredGenre } from "./FilteredGenre";
 export { default as Header } from "./Header";
 export { default as LoginForm } from "./LoginForm";
 export { default as Logout } from "./Logout";
 export { default as MovieForm } from "./MovieForm";
 export { default as Movies } from "./Movies";
 export { default as NavBar } from "./NavBar";
+export { default as Popular } from "./Popular";
 export { default as RegisterForm } from "./RegisterForm";
 export { default as Rentals } from "./Rentals";
+export { default as Sidebar } from "./Sidebar";
 export { default as GlobalStyles } from "./styles/Global.styled";
+export { default as Trending } from "./Trending";
