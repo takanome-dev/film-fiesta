@@ -8,8 +8,10 @@ import { BarsIcon, UserIcon } from "./svg";
 type Props = {
 	handleOpen: () => void;
 };
+
 const Header: React.FC<Props> = ({ handleOpen }) => {
 	const { searchQuery, onSearch } = useContext(Context);
+
 	return (
 		<Container>
 			<div className="container">
@@ -21,6 +23,7 @@ const Header: React.FC<Props> = ({ handleOpen }) => {
 				</Link>
 				<input
 					type="search"
+					id="search"
 					placeholder="Search..."
 					aria-label="Search"
 					value={searchQuery}

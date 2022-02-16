@@ -172,6 +172,12 @@ export type FormProps = {
 	location: LocationType;
 };
 
+export type MovieDetailsProps = {
+	match: MatchType;
+	history: HistoryType;
+	location: LocationType;
+};
+
 export type SearchProps = {
 	value: string;
 	onSearch: (query: string) => void;

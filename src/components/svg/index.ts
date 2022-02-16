@@ -12,6 +12,7 @@ export { default as RentalIcon } from "./Icon.Rental";
 export { default as RightArrowIcon } from "./Icon.RightArrow";
 export { default as SearchIcon } from "./Icon.Search";
 export { default as SettingsIcon } from "./Icon.Settings";
+export { default as ShoppingIcon } from "./Icon.ShoppingCart";
 export { default as SignInIcon } from "./Icon.SignIn";
 export { default as SignOutIcon } from "./Icon.SignOut";
 export { default as StarIcon } from "./Icon.Star";
