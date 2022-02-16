@@ -1,9 +1,8 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { logo } from "../assets";
 import { Context } from "../context/GlobalContext";
 import { Container } from "./styles/Header.styled";
-import { BarsIcon, UserIcon } from "./svg";
+import { BarsIcon, LogoIcon, UserIcon } from "./svg";
 
 type Props = {
 	handleOpen: () => void;
@@ -15,11 +14,9 @@ const Header: React.FC<Props> = ({ handleOpen }) => {
 	return (
 		<Container>
 			<div className="container">
-				<Link to="/" className="logo">
-					{/* <img src={logo3} alt="Vidly logo" /> */}
-					{/* <img src={logo2} alt="Vidly logo" /> */}
-					{/* <img src={logo1} alt="Vidly logo" /> */}
-					<img src={logo} alt="Vidly logo" />
+				<Link to="/" className="logo flex">
+					<LogoIcon />
+					<h1>Vidly</h1>
 				</Link>
 				<input
 					type="search"
