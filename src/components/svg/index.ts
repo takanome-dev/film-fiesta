@@ -2,6 +2,7 @@ export { default as AddBookmarkIcon } from "./Icon.AddBookmark";
 export { default as BarsIcon } from "./Icon.Bars";
 export { default as BookmarkIcon } from "./Icon.Bookmark";
 export { default as CloseIcon } from "./Icon.Close";
+export { default as EmptyBookmark } from "./Icon.EmptyBookmark";
 export { default as FeedBackIcon } from "./Icon.FeedBack";
 export { default as FireIcon } from "./Icon.Fire";
 export { default as HeartIcon } from "./Icon.Heart";
