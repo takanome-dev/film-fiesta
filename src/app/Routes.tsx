@@ -1,6 +1,8 @@
 import { Redirect, Route, Switch } from "react-router-dom";
 import {
+	Bookmark,
 	Customers,
+	Favorites,
 	LoginForm,
 	Logout,
 	MovieDetails,
@@ -11,6 +13,7 @@ import {
 	PrivateRoute,
 	RegisterForm,
 	Rentals,
+	Settings,
 	Trending,
 } from "../components";
 import ErrorBoundary from "../components/ErrorBoundary";
@@ -24,6 +27,9 @@ const Routes = () => {
 					<Route path="/movies" component={Movies} />
 					<Route path="/popular" component={Popular} />
 					<Route path="/trending" component={Trending} />
+					<Route path="/bookmarks" component={Bookmark} />
+					<Route path="/favorites" component={Favorites} />
+					<Route path="/settings" component={Settings} />
 					{/* <PrivateRoute path="/movies/:id" component={MovieForm} /> */}
 					<Route path="/login" component={LoginForm} />
 					<Route path="/logout" component={Logout} />
