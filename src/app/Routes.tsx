@@ -3,7 +3,8 @@ import {
 	Customers,
 	LoginForm,
 	Logout,
-	MovieForm,
+	MovieDetails,
+	// MovieForm,
 	Movies,
 	NotFound,
 	Popular,
@@ -19,10 +20,11 @@ const Routes = () => {
 		<ErrorBoundary>
 			<main className="main">
 				<Switch>
+					<PrivateRoute path="/movies/:id" component={MovieDetails} />
 					<Route path="/movies" component={Movies} />
 					<Route path="/popular" component={Popular} />
 					<Route path="/trending" component={Trending} />
-					<PrivateRoute path="/movies/:id" component={MovieForm} />
+					{/* <PrivateRoute path="/movies/:id" component={MovieForm} /> */}
 					<Route path="/login" component={LoginForm} />
 					<Route path="/logout" component={Logout} />
 					<Route path="/register" component={RegisterForm} />

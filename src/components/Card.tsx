@@ -13,7 +13,7 @@ const Card: React.FC<CardProps> = ({ movie }) => {
 				<h3>{movie.title}</h3>
 				<div className="icons flex">
 					<button className="icon-container flex">
-						<AddBookmark />
+						<AddBookmark color="var(--color-dark)" />
 					</button>
 					<button className="icon-container flex">
 						<HeartIcon color="var(--color-dark)" />

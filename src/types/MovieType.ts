@@ -11,7 +11,7 @@ export type MovieType = {
 	voteAverage: number;
 	numberInStock: number;
 	dailyRentalRate: number;
-	publishDate?: string;
+	// publishDate?: string;
 	liked?: boolean;
 };
 

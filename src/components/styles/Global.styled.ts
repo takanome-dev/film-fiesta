@@ -98,6 +98,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Montserrat', sans-serif;
     background-color: var(--color-background);
     color: var(--color-dark);
+    overflow-x: hidden;
   }
 
   body.open {
@@ -131,6 +132,7 @@ const GlobalStyles = createGlobalStyle`
     /* width: 100%; */
     padding: 0.6rem;
     border-radius: 0.3rem;
+    border: none;
   }
 
 `;

@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { Context } from "../context/GlobalContext";
 import Card from "./Card";
 import Container from "./styles/CardList.styled";
@@ -9,7 +10,9 @@ const CardList = () => {
 	return (
 		<Container>
 			{filteredMovies?.map((m) => (
-				<Card key={m._id} movie={m} />
+				<Link to={`/movies/${m._id}`} key={m._id}>
+					<Card movie={m} />
+				</Link>
 			))}
 		</Container>
 	);
