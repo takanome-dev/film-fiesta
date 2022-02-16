@@ -19,11 +19,12 @@ export const Container = styled.header`
 
 		.logo {
 			margin-right: 1rem;
-			img {
-				max-width: 100%;
-				width: 8rem;
-				@media (max-width: 570px) {
-					max-width: 6rem;
+			text-decoration: none;
+			h1 {
+				padding-left: 0.2rem;
+				color: var(--color-gray);
+				@media (max-width: 400px) {
+					font-size: 1.5rem;
 				}
 			}
 		}

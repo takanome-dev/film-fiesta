@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { logo } from "../assets";
 import { Context } from "../context/GlobalContext";
 import { bottomLinks, topLinks } from "./links";
 import Navigation from "./styles/Sidebar.styled";
+import { LogoIcon } from "./svg";
 
 type Props = {
 	open: boolean;
@@ -21,10 +21,11 @@ const Sidebar: React.FC<Props> = ({ open, setIsOpen }) => {
 				onClick={() => setIsOpen(false)}
 			></div>
 			<div className={condition ? "menu open" : "menu"}>
+				<Link to="/" className={condition ? "logo open" : "logo"}>
+					<LogoIcon />
+					<h1>Vidly</h1>
+				</Link>
 				<div className="sidebar flex">
-					<Link to="/" className={condition ? "logo open" : "logo"}>
-						<img src={logo} alt="Vidly logo" />
-					</Link>
 					<div className="top-links">
 						{topLinks.map((l, i) => (
 							<Link

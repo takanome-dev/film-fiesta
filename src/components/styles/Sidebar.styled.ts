@@ -19,7 +19,7 @@ const Navigation = styled.nav`
 		max-width: 15rem;
 		transition: all 200ms ease-in-out;
 		width: 100%;
-		height: calc(100vh - 60px);
+		height: calc(100vh - 55px);
 		position: fixed;
 		left: 0;
 		bottom: 0;
@@ -27,25 +27,28 @@ const Navigation = styled.nav`
 		background-color: #ffffff;
 		border-right: 0.09rem solid var(--color-gray-40);
 		/* border-top: 0.1rem solid var(--color-gray); */
+		/* &:hover { */
 		overflow-y: auto;
 		overflow-x: hidden;
 
 		::-webkit-scrollbar {
 			width: 0.5rem;
 		}
+		/* } */
 
 		.logo {
 			display: none;
-			img {
-				max-width: 8rem;
-				width: 100%;
-				margin-top: -0.3rem;
-				margin-left: 1.7rem;
+			margin: 1rem 0 0 2rem;
+			text-decoration: none;
+			h1 {
+				padding-left: 0.2rem;
+				color: var(--color-gray);
 			}
 		}
 
 		.logo.open {
-			display: initial;
+			display: flex;
+			align-items: center;
 		}
 
 		.sidebar {
