@@ -9,13 +9,21 @@ const Container = styled.div`
 	}
 
 	p {
-		font-size: 3rem;
+		font-size: 4rem;
+		font-weight: bold;
 		margin-top: 3rem;
-		color: linear-gradient(
+		background: linear-gradient(
 			120deg,
 			var(--color-primary),
 			var(--color-secondary)
 		);
+		-webkit-text-fill-color: transparent;
+		-webkit-background-clip: text;
+		background-clip: text;
+		text-align: center;
+		@media (max-width: 360px) {
+			font-size: 3rem;
+		}
 	}
 `;
 
