@@ -3,6 +3,7 @@ export { default as Bookmark } from "./Bookmark";
 export { default as PrivateRoute } from "./common/PrivateRoute";
 export { default as Customers } from "./Customers";
 export { default as Favorites } from "./Favorites";
+export { default as FeedBack } from "./FeedBack";
 export { default as FilteredGenre } from "./FilteredGenre";
 export { default as Header } from "./Header";
 export { default as LoginForm } from "./LoginForm";
