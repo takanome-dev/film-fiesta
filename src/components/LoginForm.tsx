@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { Link } from "react-router-dom";
 import { logUser } from "../services/auth";
 import Form from "./common/Form";
 import { LoginStateType } from "./types";
@@ -33,7 +34,7 @@ export default class LoginForm extends Form {
 				const errors = this.state.errors;
 				// ! TODO: Review Error Message
 				errors.email = err.data;
-				errors.password = err.data;
+				// errors.password = err.data;
 				this.setState({ errors });
 			}
 		}
@@ -41,11 +42,15 @@ export default class LoginForm extends Form {
 
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit}>
+			<form onSubmit={this.handleSubmit} className="form">
 				<h1>Login</h1>
-				{this.renderInput("email", "Email")}
-				{this.renderInput("password", "Password", "password")}
+				{this.renderInput("email", "Email", "johndoe@gmail.com")}
+				{this.renderInput("password", "Password", "secret", "password")}
 				{this.renderButton("Login")}
+				<div className="more">
+					<p>Don't have an account ?</p>
+					<Link to="/register">Sign up</Link>
+				</div>
 			</form>
 		);
 	}
