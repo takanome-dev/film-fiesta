@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { Link } from "react-router-dom";
 import { registerUser } from "../services/user";
 import Form from "./common/Form";
 import { RegisterStateType } from "./types";
@@ -39,15 +40,17 @@ export default class RegisterForm extends Form {
 
 	render() {
 		return (
-			<div>
+			<form onSubmit={this.handleSubmit} className="form">
 				<h1>Register</h1>
-				<form onSubmit={this.handleSubmit}>
-					{this.renderInput("email", "Email")}
-					{this.renderInput("password", "Password", "password")}
-					{this.renderInput("name", "Name")}
-					{this.renderButton("Register")}
-				</form>
-			</div>
+				{this.renderInput("email", "Email", "johndoe@gmail.com")}
+				{this.renderInput("password", "Password", "secret", "password")}
+				{this.renderInput("name", "Name", "John Doe")}
+				{this.renderButton("Register")}
+				<div className="more">
+					<p>Already have an account ?</p>
+					<Link to="/login">Sign in</Link>
+				</div>
+			</form>
 		);
 	}
 }

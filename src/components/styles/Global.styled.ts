@@ -68,12 +68,6 @@ const GlobalStyles = createGlobalStyle`
     height: 100%;
   }
 
-  /* img,
-  svg {
-    display: block;
-    max-width: 100%;
-  } */
-
   input,
   button {
     font: inherit;
@@ -135,6 +129,48 @@ const GlobalStyles = createGlobalStyle`
     border: none;
   }
 
+  .form {
+    flex-direction: column;
+    background-color: #fff;
+    max-width: 25rem;
+    margin: 2rem auto 0;
+    padding: 2rem;
+    border-radius: .8rem;
+    box-shadow: 0 0 .1rem .3rem rgba(0,0,0,0.04);
+
+    h1 {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    @media (max-width: 400px) {
+      padding: 2rem 1rem;
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  }
+
+  .more {
+    display: flex;
+    margin-top: 1.5rem;
+    font-size: 1.15rem;
+    a {
+      margin-left: .5rem;
+      text-decoration: none;
+      color: var(--color-secondary);
+      font-weight: 500;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    @media (max-width: 430px) {
+      font-size: 1rem;
+      /* flex-direction: column; */
+      flex-wrap: wrap;
+    }
+  }
 `;
 
 export default GlobalStyles;
