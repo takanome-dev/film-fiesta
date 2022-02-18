@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../context/GlobalContext";
 import { Container } from "./styles/Header.styled";
-import { BarsIcon, LogoIcon, UserIcon } from "./svg";
+import { BarsIcon, LogoIcon } from "./svg";
+import UserModal from "./UserModal";
 
 type Props = {
 	handleOpen: () => void;
@@ -13,6 +14,7 @@ const Header: React.FC<Props> = ({ handleOpen }) => {
 
 	return (
 		<Container>
+			<UserModal />
 			<div className="container">
 				<Link to="/" className="logo flex">
 					<LogoIcon />
@@ -26,9 +28,12 @@ const Header: React.FC<Props> = ({ handleOpen }) => {
 					value={searchQuery}
 					onChange={(e) => onSearch?.(e.currentTarget.value)}
 				/>
-				<Link to="/login" className="btn">
+				{/* <Link to="/login" className="btn">
 					<UserIcon /> &nbsp; Sign in
-				</Link>
+				</Link> */}
+				<div className="avatar flex">
+					<p>T</p>
+				</div>
 				<div className="bars" onClick={handleOpen}>
 					<BarsIcon />
 				</div>

@@ -136,7 +136,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 2rem auto 0;
     padding: 2rem;
     border-radius: .8rem;
-    box-shadow: 0 0 .1rem .3rem rgba(0,0,0,0.04);
+    box-shadow: 0 0 .9rem rgba(0,0,0,0.1);
 
     h1 {
       margin-bottom: 2rem;

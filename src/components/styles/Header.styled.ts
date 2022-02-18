@@ -57,6 +57,14 @@ export const Container = styled.header`
 			}
 		}
 
+		.avatar {
+			background-color: var(--color-primary-40);
+			width: 2.5rem;
+			height: 2.5rem;
+			border-radius: 50%;
+			cursor: pointer;
+		}
+
 		.bars {
 			display: none;
 			cursor: pointer;
@@ -74,6 +82,10 @@ export const Container = styled.header`
 			}
 
 			.btn {
+				display: none;
+			}
+
+			.avatar {
 				display: none;
 			}
 

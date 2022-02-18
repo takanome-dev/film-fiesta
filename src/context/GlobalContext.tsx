@@ -2,6 +2,7 @@ import { createContext, useEffect, useReducer } from "react";
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { getCurrentUser } from "../services/auth";
 import { getGenres } from "../services/genre";
 import { deleteMovie, getMovies } from "../services/movie";
 import { GenreType } from "../types/GenreType";
@@ -12,6 +13,7 @@ import {
 	CURRENTROUTE,
 	FETCHGENRES,
 	FETCHMOVIES,
+	GETCURRENTUSER,
 	SEARCHQUERY,
 	SELECTEDCATEGORY,
 	SELECTEDGENRE,
@@ -28,6 +30,7 @@ const initialState: InitialStateType = {
 	currentRoute: "/movies",
 	selectedGenre: { _id: "", name: "" },
 	selectedCategory: "",
+	user: { _id: "", name: "", email: "", iat: 0 },
 };
 
 export const Context = createContext(initialState);
@@ -57,6 +60,15 @@ const Provider: React.FC<Props> = ({ children }) => {
 			});
 		},
 	});
+
+	useEffect(() => {
+		const user = getCurrentUser();
+		console.log(user);
+		dispatch({
+			type: GETCURRENTUSER,
+			payload: user,
+		});
+	}, []);
 
 	const handleSearch = (query: string) => {
 		dispatch({
@@ -170,21 +182,22 @@ const Provider: React.FC<Props> = ({ children }) => {
 	const { filteredMovies, totalMovies } = handleFilterMovies();
 
 	const value = {
-		searchQuery: state.searchQuery,
 		movies: state.movies,
 		genres: state.genres,
+		user: state.user,
+		pageSize: state.pageSize,
+		searchQuery: state.searchQuery,
 		currentPage: state.currentPage,
 		currentRoute: state.currentRoute,
-		pageSize: state.pageSize,
 		selectedGenre: state.selectedGenre,
 		selectedCategory: state.selectedCategory,
+		filteredMovies,
+		totalMovies,
 		onSearch: handleSearch,
+		onDelete: handleDeleteMovie,
 		onPageChange: handlePageChange,
 		onRouteChange: handleRouteChange,
 		onGenreSelected: handleSelectedGenre,
-		onDelete: handleDeleteMovie,
-		filteredMovies,
-		totalMovies,
 	};
 
 	return <Context.Provider value={value}>{children}</Context.Provider>;

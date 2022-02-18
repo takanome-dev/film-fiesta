@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 const Container = styled.form`
-	max-width: 40rem;
+	max-width: 30rem;
+	/* max-width: 40rem; */
 
 	fieldset {
 		border: none;
 		display: flex;
 		flex-direction: column;
+		/* max-width: 28rem; */
 		width: 100%;
 
 		label {
@@ -36,9 +38,11 @@ const Container = styled.form`
 		}
 
 		textarea {
-			max-width: 36rem;
-			max-height: 10rem;
+			/* max-width: 26rem; */
+			/* max-width: 36rem; */
+			/* max-height: 10rem; */
 			font-size: 1.1rem;
+			resize: none;
 		}
 	}
 

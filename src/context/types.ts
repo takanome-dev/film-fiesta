@@ -10,8 +10,9 @@ export type InitialStateType = {
 	currentPage: number;
 	currentRoute: string;
 	searchQuery: string;
-	selectedGenre: { _id: string; name: string };
 	selectedCategory: string;
+	selectedGenre: { _id: string; name: string };
+	user: { _id: string; name: string; email: string; iat: number };
 	onDelete?: (id: string) => Promise<void>;
 	onGenreSelected?: (genre: GenreType) => void;
 	onPageChange?: (pageNumber: number) => void;

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../context/GlobalContext";
 import { bottomLinks, topLinks } from "./links";
 import Navigation from "./styles/Sidebar.styled";
-import { LogoIcon } from "./svg";
+import { LogoIcon, SignInIcon, SignOutIcon } from "./svg";
 
 type Props = {
 	open: boolean;
@@ -11,8 +11,13 @@ type Props = {
 };
 
 const Sidebar: React.FC<Props> = ({ open, setIsOpen }) => {
-	const { currentRoute, onRouteChange } = useContext(Context);
+	const { currentRoute, onRouteChange, user } = useContext(Context);
 	const condition = open && window.innerWidth <= 650;
+
+	const handleClick = (path: string) => {
+		onRouteChange?.(path);
+		setIsOpen(false);
+	};
 
 	return (
 		<Navigation>
@@ -34,7 +39,7 @@ const Sidebar: React.FC<Props> = ({ open, setIsOpen }) => {
 									currentRoute === l.path ? "flex link active" : "flex link"
 								}
 								to={l.path}
-								onClick={() => onRouteChange?.(l.path)}
+								onClick={() => handleClick(l.path)}
 							>
 								{l.icon(
 									currentRoute === l.path
@@ -53,7 +58,7 @@ const Sidebar: React.FC<Props> = ({ open, setIsOpen }) => {
 									currentRoute === l.path ? "flex link active" : "flex link"
 								}
 								to={l.path}
-								onClick={() => onRouteChange?.(l.path)}
+								onClick={() => handleClick(l.path)}
 							>
 								{l.icon(
 									currentRoute === l.path
@@ -63,6 +68,43 @@ const Sidebar: React.FC<Props> = ({ open, setIsOpen }) => {
 								<p>{l.name}</p>
 							</Link>
 						))}
+						{user && user._id ? (
+							<Link
+								className={
+									currentRoute === "/register"
+										? "flex link active"
+										: "flex link"
+								}
+								to="/login"
+								onClick={() => onRouteChange?.("/register")}
+							>
+								<SignOutIcon
+									color={
+										currentRoute === "/register"
+											? "var(--color-primary)"
+											: "var(--color-dark-80)"
+									}
+								/>
+								<p>Sign out</p>
+							</Link>
+						) : (
+							<Link
+								className={
+									currentRoute === "/login" ? "flex link active" : "flex link"
+								}
+								to="/login"
+								onClick={() => onRouteChange?.("/login")}
+							>
+								<SignInIcon
+									color={
+										currentRoute === "/login"
+											? "var(--color-primary)"
+											: "var(--color-dark-80)"
+									}
+								/>
+								<p>Sign in</p>
+							</Link>
+						)}
 					</div>
 				</div>
 			</div>

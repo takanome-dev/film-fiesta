@@ -6,8 +6,8 @@ import {
   HomeIcon,
   RentalIcon,
   SettingsIcon,
-  SignInIcon,
-  SignOutIcon,
+  // SignInIcon,
+  // SignOutIcon,
   TrendingIcon,
 } from "./svg";
 
@@ -63,16 +63,16 @@ export const bottomLinks = [
     path: "/feedback",
     category: "",
   },
-  {
-    name: "Sign in",
-    icon: (color) => <SignInIcon color={color} />,
-    path: "/login",
-    category: "",
-  },
-  {
-    name: "Sign out",
-    icon: (color) => <SignOutIcon color={color} />,
-    path: "/logout",
-    category: "",
-  },
+  // {
+  //   name: "Sign in",
+  //   icon: (color) => <SignInIcon color={color} />,
+  //   path: "/login",
+  //   category: "",
+  // },
+  // {
+  //   name: "Sign out",
+  //   icon: (color) => <SignOutIcon color={color} />,
+  //   path: "/logout",
+  //   category: "",
+  // },
 ];

@@ -3,6 +3,7 @@ import {
 	CURRENTROUTE,
 	FETCHGENRES,
 	FETCHMOVIES,
+	GETCURRENTUSER,
 	SEARCHQUERY,
 	SELECTEDCATEGORY,
 	SELECTEDGENRE,
@@ -17,6 +18,11 @@ const reducer = (state: InitialStateType, action: ActionType) => {
 				searchQuery: action.payload,
 				currentPage: 1,
 				selectedGenre: { _id: "", name: "" },
+			};
+		case GETCURRENTUSER:
+			return {
+				...state,
+				user: action.payload,
 			};
 		case FETCHMOVIES:
 			return {
