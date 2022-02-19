@@ -78,26 +78,13 @@ const Sidebar: React.FC<Props> = ({
 								<p>{l.name}</p>
 							</Link>
 						))}
-						{user && user._id ? (
-							<Link
-								className={
-									currentRoute === "/register"
-										? "flex link active"
-										: "flex link"
-								}
-								to="/login"
-								onClick={() => onRouteChange?.("/register")}
-							>
-								<SignOutIcon
-									color={
-										currentRoute === "/register"
-											? "var(--color-primary)"
-											: "var(--color-dark-80)"
-									}
-								/>
+						{user && user._id && !condition && (
+							<Link className="flex link" to="/logout">
+								<SignOutIcon color="var(--color-dark-80)" />
 								<p>Sign out</p>
 							</Link>
-						) : (
+						)}
+						{!user && (
 							<Link
 								className={
 									currentRoute === "/login" ? "flex link active" : "flex link"
@@ -118,7 +105,7 @@ const Sidebar: React.FC<Props> = ({
 						{condition && user && user._id && (
 							<div className="user" onClick={() => setOpenModal(true)}>
 								<Avatar handleOpenModal={() => setOpenModal(true)} />
-								<p>takanome_dev</p>
+								<p>{user.name}</p>
 							</div>
 						)}
 					</div>

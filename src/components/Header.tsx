@@ -39,13 +39,14 @@ const Header: React.FC<Props> = ({ handleOpen }) => {
 					value={searchQuery}
 					onChange={(e) => onSearch?.(e.currentTarget.value)}
 				/>
-				<Link to="/login" className="btn">
-					<UserIcon /> &nbsp; Sign in
-				</Link>
-				{user && user._id && (
+				{user && user._id ? (
 					<div className="avatar">
 						<Avatar handleOpenModal={() => setOpenModal(true)} />
 					</div>
+				) : (
+					<Link to="/login" className="btn">
+						<UserIcon /> &nbsp; Sign in
+					</Link>
 				)}
 				<div className="bars" onClick={handleOpen}>
 					<BarsIcon />

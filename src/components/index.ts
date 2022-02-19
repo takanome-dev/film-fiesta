@@ -13,6 +13,7 @@ export { default as MovieForm } from "./MovieForm";
 export { default as Movies } from "./Movies";
 export { default as NavBar } from "./NavBar";
 export { default as Popular } from "./Popular";
+export { default as Profile } from "./Profile";
 export { default as RegisterForm } from "./RegisterForm";
 export { default as Rentals } from "./Rentals";
 export { default as Settings } from "./Settings";

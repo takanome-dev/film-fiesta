@@ -12,6 +12,7 @@ import {
 	NotFound,
 	Popular,
 	PrivateRoute,
+	Profile,
 	RegisterForm,
 	Rentals,
 	Settings,
@@ -32,6 +33,7 @@ const Routes = () => {
 					<Route path="/favorites" component={Favorites} />
 					<Route path="/settings" component={Settings} />
 					<Route path="/feedback" component={FeedBack} />
+					<Route path="/profile" component={Profile} />
 					{/* <PrivateRoute path="/movies/:id" component={MovieForm} /> */}
 					<Route path="/login" component={LoginForm} />
 					<Route path="/logout" component={Logout} />
