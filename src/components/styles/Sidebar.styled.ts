@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Navigation = styled.nav`
-	.overlay {
+	/* .overlay {
 		display: none;
 		position: fixed;
 		z-index: 2;
@@ -9,11 +9,11 @@ const Navigation = styled.nav`
 		width: 100%;
 		height: 100%;
 		background-color: rgba(0, 0, 0, 0.5);
-	}
+	} */
 
-	.overlay.open {
+	/* .overlay.open {
 		display: initial;
-	}
+	} */
 
 	.menu {
 		max-width: 15rem;

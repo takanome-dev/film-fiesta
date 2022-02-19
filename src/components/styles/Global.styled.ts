@@ -122,6 +122,24 @@ const GlobalStyles = createGlobalStyle`
     align-items: center;
   }
 
+  .overlay {
+		/* display: none; */
+		position: fixed;
+		z-index: 2;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.2);
+	}
+
+  .modalOverlay {
+    position: fixed;
+		z-index: 2;
+		top: 0;
+		width: 100%;
+		height: 100%;
+  }
+
   .btn {
     /* width: 100%; */
     padding: 0.6rem;

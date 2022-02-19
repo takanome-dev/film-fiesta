@@ -15,6 +15,7 @@ export { default as RemoveBookmarkIcon } from "./Icon.RemoveBookmark";
 export { default as RentalIcon } from "./Icon.Rental";
 export { default as RightArrowIcon } from "./Icon.RightArrow";
 export { default as SearchIcon } from "./Icon.Search";
+export { default as SecurityIcon } from "./Icon.Security";
 export { default as SettingsIcon } from "./Icon.Settings";
 export { default as ShoppingIcon } from "./Icon.ShoppingCart";
 export { default as SignInIcon } from "./Icon.SignIn";

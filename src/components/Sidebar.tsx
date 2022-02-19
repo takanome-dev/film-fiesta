@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../context/GlobalContext";
+import Overlay from "./common/Overlay";
 import { bottomLinks, topLinks } from "./links";
 import Navigation from "./styles/Sidebar.styled";
 import { LogoIcon, SignInIcon, SignOutIcon } from "./svg";
@@ -19,12 +20,15 @@ const Sidebar: React.FC<Props> = ({ open, setIsOpen }) => {
 		setIsOpen(false);
 	};
 
+	// const handleClose = () => setIsOpen(false)
+
 	return (
 		<Navigation>
-			<div
+			{/* <div
 				className={condition ? "overlay open" : "overlay"}
 				onClick={() => setIsOpen(false)}
-			></div>
+			></div> */}
+			{open && <Overlay handleClose={() => setIsOpen(false)} />}
 			<div className={condition ? "menu open" : "menu"}>
 				<Link to="/" className={condition ? "logo open" : "logo"}>
 					<LogoIcon />
