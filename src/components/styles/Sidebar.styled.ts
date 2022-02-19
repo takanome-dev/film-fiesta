@@ -42,7 +42,11 @@ const Navigation = styled.nav`
 			text-decoration: none;
 			h1 {
 				padding-left: 0.2rem;
+				font-size: 2rem;
 				color: var(--color-gray);
+				@media (max-width: 400px) {
+					font-size: 1.5rem;
+				}
 			}
 		}
 
@@ -86,6 +90,25 @@ const Navigation = styled.nav`
 					p {
 						color: var(--color-primary);
 					}
+				}
+			}
+
+			.bottom-links {
+				.user {
+					display: flex;
+					align-items: center;
+					/* justify-content: flex-start; */
+					margin-top: 1rem;
+					color: var(--color-dark-80);
+					cursor: pointer;
+					padding: 0.7rem 2rem;
+					&:hover {
+						background-color: var(--color-gray-20);
+						color: var(--color-dark);
+					}
+					/* p {
+						margin-left: 1rem;
+					} */
 				}
 			}
 		}
@@ -142,8 +165,8 @@ const Navigation = styled.nav`
 			}
 		}
 
-		@media (max-width: 360px) {
-			max-width: 70%;
+		@media (max-width: 470px) {
+			max-width: 80%;
 		}
 	}
 

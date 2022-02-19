@@ -1,8 +1,9 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../context/GlobalContext";
+import Avatar from "./common/Avatar";
 import { Container } from "./styles/Header.styled";
-import { BarsIcon, LogoIcon } from "./svg";
+import { BarsIcon, LogoIcon, UserIcon } from "./svg";
 import UserModal from "./UserModal";
 
 type Props = {
@@ -10,12 +11,15 @@ type Props = {
 };
 
 const Header: React.FC<Props> = ({ handleOpen }) => {
-	const { searchQuery, onSearch } = useContext(Context);
+	const { searchQuery, onSearch, user } = useContext(Context);
 	const [openModal, setOpenModal] = useState(false);
 
-	// useEffect((e: EventTarget) => {
-	// 	if(e)
-	// },[])
+	useEffect(() => {
+		const handleResize = () => window.innerWidth < 650 && setOpenModal(false);
+
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	});
 
 	return (
 		<Container>
@@ -35,12 +39,14 @@ const Header: React.FC<Props> = ({ handleOpen }) => {
 					value={searchQuery}
 					onChange={(e) => onSearch?.(e.currentTarget.value)}
 				/>
-				{/* <Link to="/login" className="btn">
+				<Link to="/login" className="btn">
 					<UserIcon /> &nbsp; Sign in
-				</Link> */}
-				<div className="avatar flex" onClick={() => setOpenModal(true)}>
-					<p>T</p>
-				</div>
+				</Link>
+				{user && user._id && (
+					<div className="avatar">
+						<Avatar handleOpenModal={() => setOpenModal(true)} />
+					</div>
+				)}
 				<div className="bars" onClick={handleOpen}>
 					<BarsIcon />
 				</div>
