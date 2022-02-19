@@ -8,9 +8,15 @@ import Routes from "./Routes";
 
 const App = () => {
 	const [isOpen, setIsOpen] = useState(false);
+	const [openModal, setOpenModal] = useState(false);
 
 	useEffect(() => {
-		const handleResize = () => window.innerWidth > 650 && setIsOpen(false);
+		const handleResize = () => {
+			if (window.innerWidth > 650) {
+				setIsOpen(false);
+				setOpenModal(false);
+			}
+		};
 
 		window.addEventListener("resize", handleResize);
 		return () => window.removeEventListener("resize", handleResize);
@@ -26,7 +32,12 @@ const App = () => {
 				<GlobalStyles />
 				<ToastContainer />
 				<Header handleOpen={() => setIsOpen(true)} />
-				<Sidebar open={isOpen} setIsOpen={setIsOpen} />
+				<Sidebar
+					open={isOpen}
+					setIsOpen={setIsOpen}
+					openModal={openModal}
+					setOpenModal={setOpenModal}
+				/>
 				<Routes />
 			</Provider>
 		</ErrorBoundary>

@@ -1,17 +1,26 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../context/GlobalContext";
+import Avatar from "./common/Avatar";
 import Overlay from "./common/Overlay";
 import { bottomLinks, topLinks } from "./links";
 import Navigation from "./styles/Sidebar.styled";
 import { LogoIcon, SignInIcon, SignOutIcon } from "./svg";
+import UserModal from "./UserModal";
 
 type Props = {
 	open: boolean;
+	openModal: boolean;
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Sidebar: React.FC<Props> = ({ open, setIsOpen }) => {
+const Sidebar: React.FC<Props> = ({
+	open,
+	setIsOpen,
+	openModal,
+	setOpenModal,
+}) => {
 	const { currentRoute, onRouteChange, user } = useContext(Context);
 	const condition = open && window.innerWidth <= 650;
 
@@ -20,15 +29,12 @@ const Sidebar: React.FC<Props> = ({ open, setIsOpen }) => {
 		setIsOpen(false);
 	};
 
-	// const handleClose = () => setIsOpen(false)
-
 	return (
 		<Navigation>
-			{/* <div
-				className={condition ? "overlay open" : "overlay"}
-				onClick={() => setIsOpen(false)}
-			></div> */}
 			{open && <Overlay handleClose={() => setIsOpen(false)} />}
+			{openModal && (
+				<UserModal openModal={openModal} setOpenModal={setOpenModal} />
+			)}
 			<div className={condition ? "menu open" : "menu"}>
 				<Link to="/" className={condition ? "logo open" : "logo"}>
 					<LogoIcon />
@@ -108,6 +114,12 @@ const Sidebar: React.FC<Props> = ({ open, setIsOpen }) => {
 								/>
 								<p>Sign in</p>
 							</Link>
+						)}
+						{condition && user && user._id && (
+							<div className="user" onClick={() => setOpenModal(true)}>
+								<Avatar handleOpenModal={() => setOpenModal(true)} />
+								<p>takanome_dev</p>
+							</div>
 						)}
 					</div>
 				</div>
