@@ -1,5 +1,7 @@
 import Joi from "joi";
+import { toast } from "react-toastify";
 import { getCurrentUser } from "../services/auth";
+import { updateUser } from "../services/user";
 import Form from "./common/Form";
 import Container from "./styles/Profile.styled";
 
@@ -31,7 +33,10 @@ export default class Profile extends Form {
 	}
 
 	submitToServer(): void {
-		console.log(this.state.data);
+		// console.log(this.state.data);
+		const user = getCurrentUser();
+		updateUser(this.state.data, user!._id!);
+		toast.success("user successfully updated");
 	}
 
 	render() {
