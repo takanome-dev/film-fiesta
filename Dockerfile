@@ -6,7 +6,7 @@ USER app
 
 WORKDIR /app
 
-RUN mkdir data
+# RUN mkdir data
 
 COPY package.json ./
 

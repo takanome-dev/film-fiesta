@@ -63,7 +63,6 @@ const Provider: React.FC<Props> = ({ children }) => {
 
 	useEffect(() => {
 		const user = getCurrentUser();
-		console.log(user);
 		dispatch({
 			type: GETCURRENTUSER,
 			payload: user,
@@ -166,8 +165,8 @@ const Provider: React.FC<Props> = ({ children }) => {
 				m.title.toLowerCase().includes(searchQuery.toLowerCase())
 			);
 		else if (selectedGenre && selectedGenre._id)
-			filtered = allMovies.filter((m: MovieType) =>
-				m.genres.find((g) => g._id === selectedGenre._id)
+			filtered = allMovies.filter(
+				(m: MovieType) => m.genre._id === selectedGenre._id
 			);
 		else if (selectedCategory)
 			filtered = allMovies.filter(

@@ -25,10 +25,7 @@ const movieDetails: React.FC<MovieDetailsProps> = ({ match }) => {
 			<div className="desc">
 				<h1>{data?.title}</h1>
 				<div className="info">
-					<p>{data?.dateRelease}</p>&nbsp; -
-					{data?.genres.map((g, i) => (
-						<span key={i}>{g.name},</span>
-					))}
+					<p>{data?.dateRelease}</p>&nbsp; -<span>{data?.genre.name}</span>
 				</div>
 				<div className="buttons">
 					<div className="rental-rate btn">
