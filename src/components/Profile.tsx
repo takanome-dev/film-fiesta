@@ -1,64 +1,53 @@
-import Joi from "joi";
-import { toast } from "react-toastify";
-import { getCurrentUser } from "../services/auth";
-import { updateUser } from "../services/user";
-import Form from "./common/Form";
+import { useContext } from "react";
+import { Context } from "../context/GlobalContext";
 import Container from "./styles/Profile.styled";
 
-export default class Profile extends Form {
-	state = {
-		data: {
-			name: "",
-			email: "",
-		},
-		errors: {},
-	};
+const Profile = () => {
+	const { user } = useContext(Context);
 
-	schema = {
-		email: Joi.string()
-			.email({ tlds: { allow: ["com"] } })
-			.min(8)
-			.max(50)
-			.required()
-			.label("Email"),
-		name: Joi.string().trim().min(5).max(50).required().label("Name"),
-	};
-
-	componentDidMount() {
-		const user = getCurrentUser();
-		if (user && user._id) {
-			const data = { name: user?.name, email: user?.email };
-			this.setState({ data });
-		}
-	}
-
-	submitToServer(): void {
-		// console.log(this.state.data);
-		const user = getCurrentUser();
-		updateUser(this.state.data, user!._id!);
-		toast.success("user successfully updated");
-	}
-
-	render() {
-		return (
-			<Container>
-				<div className="wrapper">
+	return (
+		<Container>
+			<div className="profile-wrapper">
+				<div className="avatar-container">
 					<div className="avatar">
 						<div className="user-avatar flex">
 							<p className="img">T</p>
 						</div>
 						<div className="user-info">
-							<p className="name">takanome_dev</p>
-							<p className="email">takanomedev221@gmail.com</p>
+							<p className="name">{user.name}</p>
+							<p className="email">{user.email}</p>
 						</div>
 					</div>
-					<form onSubmit={this.handleSubmit}>
-						{this.renderInput("name", "Name", "")}
-						{this.renderInput("email", "Email", "")}
-						{this.renderButton("Save changes")}
-					</form>
+					<button className="btn secondary btn-1">Edit profile</button>
 				</div>
-			</Container>
-		);
-	}
-}
+				<fieldset disabled>
+					<div className="input-container">
+						<label htmlFor="name">Name</label>
+						<input readOnly id="name" type="text" value={user.name} />
+					</div>
+					<div className="input-container">
+						<label htmlFor="email">Email</label>
+						<input readOnly id="email" type="email" value={user.email} />
+					</div>
+				</fieldset>
+				<button className="btn secondary btn-2">Edit profile</button>
+			</div>
+			<div className="password-wrapper">
+				<div className="password-label">
+					<p>Password</p>
+					<button className="btn secondary btn-1">Update password</button>
+				</div>
+				<input
+					id="name"
+					type="text"
+					value="********************"
+					readOnly
+					disabled
+				/>
+				<button className="btn secondary btn-2">Update password</button>
+			</div>
+		</Container>
+	);
+};
+
+export default Profile;
