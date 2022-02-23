@@ -6,7 +6,6 @@ import {
   HeartIcon,
   HomeIcon,
   RentalIcon,
-  SecurityIcon,
   SettingsIcon,
   SignOutIcon,
   TrendingIcon,
@@ -65,11 +64,11 @@ export const profileLinks = [
     icon: <UserIcon color="var(--color-dark-80)" />,
     path: "/profile",
   },
-  {
-    name: "Security",
-    icon: <SecurityIcon color="var(--color-dark-80)" />,
-    path: "/security",
-  },
+  // {
+  //   name: "Security",
+  //   icon: <SecurityIcon color="var(--color-dark-80)" />,
+  //   path: "/security",
+  // },
   {
     name: "Settings",
     icon: <SettingsIcon color="var(--color-dark-80)" />,
