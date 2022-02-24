@@ -122,16 +122,6 @@ const GlobalStyles = createGlobalStyle`
     align-items: center;
   }
 
-  .overlay {
-		/* display: none; */
-		position: fixed;
-		z-index: 2;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.2);
-	}
-
   .btn {
     /* width: 100%; */
     padding: 0.6rem;
@@ -140,21 +130,12 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .form {
-    flex-direction: column;
-    background-color: #fff;
-    max-width: 25rem;
-    margin: 2rem auto 0;
-    padding: 2rem;
-    border-radius: .8rem;
-    box-shadow: 0 0 .9rem rgba(0,0,0,0.1);
-
     h1 {
       margin-bottom: 2rem;
       text-align: center;
     }
 
     @media (max-width: 400px) {
-      padding: 2rem 1rem;
       h1 {
         font-size: 1.6rem;
       }

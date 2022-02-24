@@ -1,20 +1,9 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Overlay from "./common/Overlay";
 import { profileLinks } from "./links";
 
 const Container = styled.div`
-	.modalOverlay {
-		position: fixed;
-		z-index: 2;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		@media (max-width: 650px) {
-			z-index: 4;
-			/* background-color: rgba(0, 0, 0, 0.1); */
-		}
-	}
-
 	.wrapper {
 		background-color: #fff;
 		max-width: 12rem;
@@ -69,9 +58,12 @@ const UserModal: React.FC<Props> = ({ setOpenModal, openModal }) => {
 	return (
 		<Container>
 			{openModal && (
-				<div className="modalOverlay" onClick={() => setOpenModal(false)} />
+				<Overlay
+					zIndex={window.innerWidth > 650 ? 2 : 4}
+					bgColor="transparent"
+					handleClose={() => setOpenModal(false)}
+				/>
 			)}
-			{/* {openModal && <Overlay handleClose={() => setOpenModal(false)} />} */}
 			<div className="wrapper">
 				{profileLinks.map((l, i) => (
 					<Link

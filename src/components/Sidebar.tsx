@@ -31,7 +31,13 @@ const Sidebar: React.FC<Props> = ({
 
 	return (
 		<Navigation>
-			{open && <Overlay handleClose={() => setIsOpen(false)} />}
+			{open && (
+				<Overlay
+					bgColor="rgba(0, 0, 0, 0.2)"
+					zIndex={3}
+					handleClose={() => setIsOpen(false)}
+				/>
+			)}
 			{openModal && (
 				<UserModal openModal={openModal} setOpenModal={setOpenModal} />
 			)}
