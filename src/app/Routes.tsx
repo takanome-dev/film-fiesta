@@ -3,7 +3,6 @@ import {
 	Bookmark,
 	Customers,
 	Favorites,
-	FeedBack,
 	LoginForm,
 	Logout,
 	MovieDetails,
@@ -32,7 +31,6 @@ const Routes = () => {
 					<Route path="/bookmarks" component={Bookmark} />
 					<Route path="/favorites" component={Favorites} />
 					<Route path="/settings" component={Settings} />
-					<Route path="/feedback" component={FeedBack} />
 					<Route path="/profile" component={Profile} />
 					{/* <PrivateRoute path="/movies/:id" component={MovieForm} /> */}
 					<Route path="/login" component={LoginForm} />
