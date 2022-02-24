@@ -51,11 +51,11 @@ export const bottomLinks = [
     icon: (color) => <SettingsIcon color={color} />,
     path: "/settings",
   },
-  {
-    name: "Feedback",
-    icon: (color) => <FeedBackIcon color={color} />,
-    path: "/feedback",
-  },
+  // {
+  // 	name: "Feedback",
+  // 	icon: (color) => <FeedBackIcon color={color} />,
+  // 	path: "/feedback",
+  // },
 ];
 
 export const profileLinks = [
