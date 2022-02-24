@@ -1,41 +1,54 @@
+import Joi from "joi";
+import { toast } from "react-toastify";
+import { sendFeedback } from "../services/feedback";
+import Form from "./common/Form";
 import Overlay from "./common/Overlay";
 import Wrapper from "./common/Wrapper";
 import Container from "./styles/Feedback.styled";
 
-type Props = {
-	openFeedback: boolean;
-	setOpenFeedback: React.Dispatch<React.SetStateAction<boolean>>;
-};
+export default class FeedBack extends Form {
+	state = {
+		data: {
+			subject: "",
+			message: "",
+		},
+		errors: {},
+	};
 
-const FeedBack: React.FC<Props> = ({ openFeedback, setOpenFeedback }) => {
-	if (openFeedback) {
-		document.body.style.overflow = "hidden";
-		// document.getElementById("wrapper")?.classList.add("open");
+	schema = {
+		subject: Joi.string().trim().max(300).required(),
+		message: Joi.string().trim().max(500).required(),
+	};
+
+	async submitToServer(): Promise<void> {
+		const res = await sendFeedback(this.state.data);
+		this.props.setOpenFeedback?.(false);
+		toast.success(res);
 	}
 
-	return (
-		<Container>
-			<Overlay
-				zIndex={4}
-				bgColor="rgba(0,0,0,0.2)"
-				handleClose={() => setOpenFeedback(false)}
-			/>
-			<div className="wrapper" id="wrapper">
-				<Wrapper width="30rem">
-					<h1>Give Us Feedback</h1>
-					<fieldset>
-						<label htmlFor="subject">Subject</label>
-						<input className="input" id="subject" type="text" required />
-						<label htmlFor="textarea">Comments</label>
-						<textarea id="textarea" className="input" required />
-					</fieldset>
-					<button className="btn" type="submit">
-						Send my feedback
-					</button>
-				</Wrapper>
-			</div>
-		</Container>
-	);
-};
+	render() {
+		if (this.props.openFeedback) {
+			document.body.style.overflow = "hidden";
+		}
 
-export default FeedBack;
+		return (
+			<Container>
+				<Overlay
+					zIndex={4}
+					bgColor="rgba(0,0,0,0.2)"
+					handleClose={() => this.props.setOpenFeedback?.(false)}
+				/>
+				<div className="wrapper">
+					<Wrapper width="30rem">
+						<h1>Give Us Feedback</h1>
+						<form onSubmit={this.handleSubmit}>
+							{this.renderInput("subject", "Subject", "UI component")}
+							{this.renderTextArea("message", "Comments", "Your comments...")}
+							{this.renderButton("Send my feedback")}
+						</form>
+					</Wrapper>
+				</div>
+			</Container>
+		);
+	}
+}

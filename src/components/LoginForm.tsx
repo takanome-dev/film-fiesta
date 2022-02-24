@@ -25,7 +25,7 @@ export default class LoginForm extends Form {
 	};
 
 	async submitToServer() {
-		const { state } = this.props.location;
+		const { state } = this.props.location!;
 
 		try {
 			await logUser(this.state.data);

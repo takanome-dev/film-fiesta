@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-const Container = styled.form`
-	/* transition: all 5s ease-in-out; */
-
+const Container = styled.div`
 	.wrapper {
 		position: absolute;
 		z-index: 5;
@@ -23,14 +21,14 @@ const Container = styled.form`
 			}
 		}
 
-		fieldset {
-			border: none;
+		form {
+			/* border: none; */
 			display: flex;
 			flex-direction: column;
 			/* max-width: 28rem; */
 			width: 100%;
 
-			label {
+			/* label {
 				margin-bottom: 0.5rem;
 				font-weight: 500;
 				&::after {
@@ -38,9 +36,9 @@ const Container = styled.form`
 					color: var(--color-primary);
 					margin-left: 0.1rem;
 				}
-			}
+			} */
 
-			.input {
+			/* .input {
 				padding: 0.8rem 1rem;
 				color: var(--color-dark-80);
 				background-color: var(--color-background);
@@ -50,32 +48,30 @@ const Container = styled.form`
 				&:focus {
 					outline: 0.35rem solid var(--color-secondary-20);
 				}
-			}
+			} */
 
-			input {
+			/* input {
 				margin-bottom: 1rem;
-			}
+			} */
 
-			textarea {
-				/* max-width: 26rem; */
-				/* max-width: 36rem; */
-				/* max-height: 10rem; */
+			/* textarea {
 				font-size: 1.1rem;
 				resize: none;
-			}
-		}
+			} */
 
-		button {
-			background-color: var(--color-secondary-40);
-			margin-top: 1.5rem;
-			padding: 1rem;
-			font-weight: 500;
-			cursor: pointer;
-			&:hover {
-				background-color: var(--color-secondary-60);
-			}
-			@media (max-width: 500px) {
+			button {
+				padding: 1rem;
+				/* background-color: var(--color-secondary-40);
+				margin-top: 1.5rem;
+				font-weight: 500;
+				cursor: pointer;
+				&:hover {
+					background-color: var(--color-secondary-60);
+				} */
 				width: 100%;
+				/* @media (max-width: 500px) {
+					width: 100%;
+				} */
 			}
 		}
 	}

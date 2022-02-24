@@ -104,6 +104,8 @@ export type JwtType = {
 	isAdmin?: boolean;
 };
 
+export type FeedbackType = { subject: string; message: string };
+
 // ! Errors Types
 
 export type RegisterErrorType = {
@@ -124,6 +126,8 @@ export type MovieErrorType = {
 	numberInStock?: number;
 	dailyRentalRate?: number;
 };
+
+// export type FeedbackErrorType = { subject?: string; message?: string };
 
 // ! States Types
 
@@ -164,12 +168,19 @@ export type MoviesStateType = {
 	sortColumn: SortColumnType;
 };
 
+// export type FeedbackStateType = {
+// 	data: FeedbackType;
+// 	errors: FeedbackErrorType;
+// };
+
 // ! Props Types
 
 export type FormProps = {
-	match: MatchType;
-	history: HistoryType;
-	location: LocationType;
+	match?: MatchType;
+	history?: HistoryType;
+	location?: LocationType;
+	openFeedback?: boolean;
+	setOpenFeedback?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type MovieDetailsProps = {

@@ -6,6 +6,7 @@ export const StyledButton = styled.button`
 	color: ${({ disabled }) =>
 		disabled ? "var(--color-dark-40)" : "var(--color-dark)"};
 	width: 50%;
+	/* width: 100%; */
 	font-size: 1.2rem;
 	font-weight: 500;
 	margin-top: 1rem;

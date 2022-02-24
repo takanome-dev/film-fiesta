@@ -5,6 +5,7 @@ import { FormProps, FormStateType } from "../types";
 import Button from "./Button";
 import Input from "./Input";
 import Select from "./Select";
+import TextArea from "./TextArea";
 
 export default class Form extends Component<FormProps, FormStateType> {
 	state: FormStateType = {
@@ -44,7 +45,8 @@ export default class Form extends Component<FormProps, FormStateType> {
 	validateProperty = ({
 		name,
 		value,
-	}: EventTarget & (HTMLInputElement | HTMLSelectElement)) => {
+	}: EventTarget &
+		(HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement)) => {
 		const input = { [name]: value };
 		const schema = { [name]: this.schema[name] };
 		const { error } = Joi.object(schema).validate(input);
@@ -55,20 +57,21 @@ export default class Form extends Component<FormProps, FormStateType> {
 	 * @ref https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forms_and_events/
 	 */
 
-	handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement> =
-		({ currentTarget }) => {
-			const data = { ...this.state.data };
-			const errors = { ...this.state.errors };
+	handleChange: React.ChangeEventHandler<
+		HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+	> = ({ currentTarget }) => {
+		const data = { ...this.state.data };
+		const errors = { ...this.state.errors };
 
-			const errorMessage = this.validateProperty(currentTarget);
-			errorMessage
-				? (errors[currentTarget.name] = errorMessage)
-				: delete errors[currentTarget.name];
+		const errorMessage = this.validateProperty(currentTarget);
+		errorMessage
+			? (errors[currentTarget.name] = errorMessage)
+			: delete errors[currentTarget.name];
 
-			data[currentTarget.name] = currentTarget.value;
+		data[currentTarget.name] = currentTarget.value;
 
-			this.setState({ data, errors });
-		};
+		this.setState({ data, errors });
+	};
 
 	renderInput(name: string, label: string, placeholder: string, type = "text") {
 		const { data, errors } = this.state;
@@ -78,6 +81,24 @@ export default class Form extends Component<FormProps, FormStateType> {
 				name={name}
 				placeholder={placeholder}
 				type={type}
+				value={data[name]}
+				error={errors[name]}
+				onChange={this.handleChange}
+			/>
+		);
+	}
+
+	renderTextArea(
+		name: string,
+		label: string,
+		placeholder: string,
+	) {
+		const { data, errors } = this.state;
+		return (
+			<TextArea
+				label={label}
+				name={name}
+				placeholder={placeholder}
 				value={data[name]}
 				error={errors[name]}
 				onChange={this.handleChange}
