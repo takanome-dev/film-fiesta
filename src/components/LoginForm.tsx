@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { logUser } from "../services/auth";
 import Form from "./common/Form";
 import { LoginStateType } from "./types";
+import Wrapper from "./Wrapper";
 
 export default class LoginForm extends Form {
 	state: LoginStateType = {
@@ -42,16 +43,18 @@ export default class LoginForm extends Form {
 
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit} className="form">
-				<h1>Login</h1>
-				{this.renderInput("email", "Email", "johndoe@gmail.com")}
-				{this.renderInput("password", "Password", "secret", "password")}
-				{this.renderButton("Login")}
-				<div className="more">
-					<p>Don't have an account ?</p>
-					<Link to="/register">Sign up</Link>
-				</div>
-			</form>
+			<Wrapper width="25rem">
+				<form onSubmit={this.handleSubmit} className="form">
+					<h1>Login</h1>
+					{this.renderInput("email", "Email", "johndoe@gmail.com")}
+					{this.renderInput("password", "Password", "secret", "password")}
+					{this.renderButton("Login")}
+					<div className="more">
+						<p>Don't have an account ?</p>
+						<Link to="/register">Sign up</Link>
+					</div>
+				</form>
+			</Wrapper>
 		);
 	}
 }

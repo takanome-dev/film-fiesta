@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { registerUser } from "../services/user";
 import Form from "./common/Form";
 import { RegisterStateType } from "./types";
+import Wrapper from "./Wrapper";
 
 export default class RegisterForm extends Form {
 	state: RegisterStateType = {
@@ -40,17 +41,19 @@ export default class RegisterForm extends Form {
 
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit} className="form">
-				<h1>Register</h1>
-				{this.renderInput("email", "Email", "johndoe@gmail.com")}
-				{this.renderInput("password", "Password", "secret", "password")}
-				{this.renderInput("name", "Name", "John Doe")}
-				{this.renderButton("Register")}
-				<div className="more">
-					<p>Already have an account ?</p>
-					<Link to="/login">Sign in</Link>
-				</div>
-			</form>
+			<Wrapper width="25rem">
+				<form onSubmit={this.handleSubmit} className="form">
+					<h1>Register</h1>
+					{this.renderInput("email", "Email", "johndoe@gmail.com")}
+					{this.renderInput("password", "Password", "secret", "password")}
+					{this.renderInput("name", "Name", "John Doe")}
+					{this.renderButton("Register")}
+					<div className="more">
+						<p>Already have an account ?</p>
+						<Link to="/login">Sign in</Link>
+					</div>
+				</form>
+			</Wrapper>
 		);
 	}
 }

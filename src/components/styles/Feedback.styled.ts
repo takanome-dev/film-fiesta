@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Container = styled.form`
-	max-width: 30rem;
+	/* max-width: 30rem; */
 	/* max-width: 40rem; */
 
 	fieldset {

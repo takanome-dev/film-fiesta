@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-	display: flex;
+	/* display: flex;
 	flex-direction: column;
 	background-color: #fff;
 	border-radius: 0.8rem;
 	box-shadow: 0 0 0.9rem rgba(0, 0, 0, 0.1);
 	margin: 2rem;
-	padding: 2rem;
+	padding: 2rem; */
 
 	.btn-2 {
 		display: none;
@@ -70,7 +70,7 @@ const Container = styled.div`
 	.password-wrapper {
 		display: flex;
 		flex-direction: column;
-		margin-top: 1rem;
+		margin-top: 2rem;
 		border: 1px solid var(--color-gray-20);
 		border-radius: 0.8rem;
 		padding: 1rem 2rem;
@@ -117,8 +117,8 @@ const Container = styled.div`
 	}
 
 	@media (max-width: 580px) {
-		margin: 2rem auto;
-		padding: 1rem;
+		/* margin: 2rem auto; */
+		/* padding: 1rem; */
 		.profile-wrapper,
 		.password-wrapper {
 			padding: 1rem;
