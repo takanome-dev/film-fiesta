@@ -2,8 +2,8 @@ import Joi from "joi";
 import { Link } from "react-router-dom";
 import { registerUser } from "../services/user";
 import Form from "./common/Form";
+import Wrapper from "./common/Wrapper";
 import { RegisterStateType } from "./types";
-import Wrapper from "./Wrapper";
 
 export default class RegisterForm extends Form {
 	state: RegisterStateType = {

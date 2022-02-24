@@ -1,5 +1,5 @@
+import Wrapper from "./common/Wrapper";
 import Container from "./styles/Feedback.styled";
-import Wrapper from "./Wrapper";
 
 const FeedBack = () => {
 	return (

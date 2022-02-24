@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Context } from "../context/GlobalContext";
+import Wrapper from "./common/Wrapper";
 import Container from "./styles/Profile.styled";
-import Wrapper from "./Wrapper";
 
 const Profile = () => {
 	const { user } = useContext(Context);
