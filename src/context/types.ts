@@ -12,7 +12,13 @@ export type InitialStateType = {
 	searchQuery: string;
 	selectedCategory: string;
 	selectedGenre: { _id: string; name: string };
-	user: { _id: string; name: string; email: string; iat: number };
+	user: {
+		_id: string;
+		name: string;
+		email: string;
+		iat: number;
+		imageUrl: string;
+	};
 	onDelete?: (id: string) => Promise<void>;
 	onGenreSelected?: (genre: GenreType) => void;
 	onPageChange?: (pageNumber: number) => void;

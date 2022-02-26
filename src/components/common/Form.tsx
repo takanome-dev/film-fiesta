@@ -57,7 +57,7 @@ export default class Form extends Component<FormProps, FormStateType> {
 	 * @ref https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forms_and_events/
 	 */
 
-	handleChange: React.ChangeEventHandler<
+	handleChange: React.FormEventHandler<
 		HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
 	> = ({ currentTarget }) => {
 		const data = { ...this.state.data };
@@ -88,11 +88,7 @@ export default class Form extends Component<FormProps, FormStateType> {
 		);
 	}
 
-	renderTextArea(
-		name: string,
-		label: string,
-		placeholder: string,
-	) {
+	renderTextArea(name: string, label: string, placeholder: string) {
 		const { data, errors } = this.state;
 		return (
 			<TextArea

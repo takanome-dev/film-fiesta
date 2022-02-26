@@ -30,7 +30,7 @@ const initialState: InitialStateType = {
 	currentRoute: "/movies",
 	selectedGenre: { _id: "", name: "" },
 	selectedCategory: "",
-	user: { _id: "", name: "", email: "", iat: 0 },
+	user: { _id: "", name: "", email: "", iat: 0, imageUrl: "" },
 };
 
 export const Context = createContext(initialState);

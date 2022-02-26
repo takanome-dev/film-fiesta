@@ -1,14 +1,6 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-	/* display: flex;
-	flex-direction: column;
-	background-color: #fff;
-	border-radius: 0.8rem;
-	box-shadow: 0 0 0.9rem rgba(0, 0, 0, 0.1);
-	margin: 2rem;
-	padding: 2rem; */
-
 	.btn-2 {
 		display: none;
 	}
@@ -33,10 +25,16 @@ const Container = styled.div`
 				flex-wrap: wrap;
 
 				.user-avatar {
-					min-width: 5rem;
-					min-height: 5rem;
+					width: 5rem;
+					height: 5rem;
+					border: 0.1rem solid var(--color-gray-40);
 					border-radius: 50%;
-					background-color: var(--color-primary-40);
+					overflow: hidden;
+					img {
+						/* border-radius: 50%; */
+						max-width: 100%;
+						object-fit: cover;
+					}
 				}
 
 				.user-info {
