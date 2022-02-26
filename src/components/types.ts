@@ -102,6 +102,7 @@ export type JwtType = {
 	name?: string;
 	iat?: number;
 	isAdmin?: boolean;
+	imageUrl?: string;
 };
 
 export type FeedbackType = { subject: string; message: string };
@@ -168,10 +169,11 @@ export type MoviesStateType = {
 	sortColumn: SortColumnType;
 };
 
-// export type FeedbackStateType = {
-// 	data: FeedbackType;
-// 	errors: FeedbackErrorType;
-// };
+export type EditProfileState = {
+	data: any;
+	// data: { url?: string; name: string; email: string };
+	// errors: { name?: string; email?: string };
+};
 
 // ! Props Types
 
@@ -216,4 +218,9 @@ export type CardListProps = {
 export type CardProps = {
 	movie: MovieType;
 	handleLike?: (movie: MovieType) => void;
+};
+
+export type EditProfileProps = {
+	editProfile: boolean;
+	setEditProfile: React.Dispatch<React.SetStateAction<boolean>>;
 };
