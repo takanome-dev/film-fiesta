@@ -15,6 +15,7 @@ const Container = styled.div`
 	box-shadow: 0 0 0.9rem rgba(0, 0, 0, 0.1);
 	margin: 2rem auto;
 	padding: 2rem;
+	overflow-y: auto;
 	@media (max-width: 580px) {
 		padding: 1rem;
 	}

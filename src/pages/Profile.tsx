@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
+import Wrapper from "../components/common/Wrapper";
+import EditProfile from "../components/EditProfile";
+import Container from "../components/styles/Profile.styled";
 import { Context } from "../context/GlobalContext";
-import Wrapper from "./common/Wrapper";
-import EditProfile from "./EditProfile";
-import Container from "./styles/Profile.styled";
 
 const Profile = () => {
 	const [editProfile, setEditProfile] = useState(false);

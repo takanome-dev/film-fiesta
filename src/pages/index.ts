@@ -1,0 +1,14 @@
+export { default as NotFound } from "./404";
+export { default as Bookmark } from "./Bookmark";
+export { default as Customers } from "./Customers";
+export { default as Favorites } from "./Favorites";
+export { default as Login } from "./Login";
+export { default as Logout } from "./Logout";
+export { default as MovieDetails } from "./MovieDetails";
+export { default as Movies } from "./Movies";
+export { default as Popular } from "./Popular";
+export { default as Profile } from "./Profile";
+export { default as Register } from "./Register";
+export { default as Rentals } from "./Rentals";
+export { default as Settings } from "./Settings";
+export { default as Trending } from "./Trending";
