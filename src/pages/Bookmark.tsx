@@ -1,5 +1,5 @@
-import { Container } from "./styles/Empty.styled";
-import { EmptyBookmark } from "./svg";
+import { Container } from "../components/styles/Empty.styled";
+import { EmptyBookmark } from "../components/svg";
 
 const Bookmark = () => {
 	return (

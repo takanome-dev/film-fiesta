@@ -1,5 +1,5 @@
-import { Container } from "./styles/Empty.styled";
-import { EmptyFav } from "./svg";
+import { Container } from "../components/styles/Empty.styled";
+import { EmptyFav } from "../components/svg";
 
 const Favorites = () => {
 	return (

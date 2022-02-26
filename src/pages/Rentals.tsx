@@ -1,5 +1,5 @@
-import { Container } from "./styles/Empty.styled";
-import { EmptyRental } from "./svg";
+import { Container } from "../components/styles/Empty.styled";
+import { EmptyRental } from "../components/svg";
 
 const Rentals = () => {
 	return (

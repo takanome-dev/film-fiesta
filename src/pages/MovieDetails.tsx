@@ -1,10 +1,15 @@
 import { useEffect } from "react";
 import { useQuery } from "react-query";
+import { Container } from "../components/styles/MovieDetails.styled";
+import {
+	AddBookmarkIcon,
+	HeartIcon,
+	ShoppingIcon,
+	StarIcon,
+} from "../components/svg";
+import { MovieDetailsProps } from "../components/types";
 import { getMovie } from "../services/movie";
 import { MovieType } from "../types/MovieType";
-import { Container } from "./styles/MovieDetails.styled";
-import { AddBookmarkIcon, HeartIcon, ShoppingIcon, StarIcon } from "./svg";
-import { MovieDetailsProps } from "./types";
 
 const movieDetails: React.FC<MovieDetailsProps> = ({ match }) => {
 	const { data, refetch } = useQuery<MovieType, Error>(

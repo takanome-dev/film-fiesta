@@ -1,9 +1,9 @@
 import Joi from "joi";
 import { Link } from "react-router-dom";
+import Form from "../components/common/Form";
+import Wrapper from "../components/common/Wrapper";
+import { LoginStateType } from "../components/types";
 import { logUser } from "../services/auth";
-import Form from "./common/Form";
-import Wrapper from "./common/Wrapper";
-import { LoginStateType } from "./types";
 
 export default class LoginForm extends Form {
 	state: LoginStateType = {
