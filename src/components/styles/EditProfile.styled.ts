@@ -31,14 +31,10 @@ const Container = styled.div`
 				margin-bottom: 2rem;
 				overflow: hidden;
 				.profile-img {
-					/* overflow: hidden; */
-					/* max-width: 100%; */
 					img {
 						width: 100%;
 						height: 100%;
-						/* border-radius: 50%; */
 						object-fit: cover;
-						/* object-position: center; */
 					}
 				}
 
@@ -48,7 +44,7 @@ const Container = styled.div`
 				.tooltip {
 					visibility: hidden;
 					position: absolute;
-					top: 23%;
+					top: 28%;
 					left: 51%;
 					transform: translate(-50%, -50%);
 					background-color: var(--color-dark);

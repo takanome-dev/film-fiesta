@@ -1,20 +1,15 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const slideIn = keyframes`
+	from {
+    transform: translateX(-10rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+`;
 
 const Navigation = styled.nav`
-	/* .overlay {
-		display: none;
-		position: fixed;
-		z-index: 2;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.5);
-	} */
-
-	/* .overlay.open {
-		display: initial;
-	} */
-
 	.menu {
 		max-width: 15rem;
 		transition: all 200ms ease-in-out;
@@ -27,14 +22,14 @@ const Navigation = styled.nav`
 		background-color: #ffffff;
 		border-right: 0.09rem solid var(--color-gray-40);
 		/* border-top: 0.1rem solid var(--color-gray); */
-		/* &:hover { */
-		overflow-y: auto;
-		overflow-x: hidden;
+		&:hover {
+			overflow-y: auto;
+			overflow-x: hidden;
 
-		::-webkit-scrollbar {
-			width: 0.5rem;
+			::-webkit-scrollbar {
+				width: 0.5rem;
+			}
 		}
-		/* } */
 
 		.logo {
 			display: none;
@@ -97,7 +92,6 @@ const Navigation = styled.nav`
 				.user {
 					display: flex;
 					align-items: center;
-					/* justify-content: flex-start; */
 					margin-top: 1rem;
 					color: var(--color-dark-80);
 					cursor: pointer;
@@ -106,9 +100,6 @@ const Navigation = styled.nav`
 						background-color: var(--color-gray-20);
 						color: var(--color-dark);
 					}
-					/* p {
-						margin-left: 1rem;
-					} */
 				}
 			}
 		}
@@ -136,7 +127,7 @@ const Navigation = styled.nav`
 		}
 
 		@media (max-width: 650px) {
-			transform: translateX(-100%);
+			display: none;
 			max-width: 50%;
 			height: 100%;
 
@@ -171,7 +162,8 @@ const Navigation = styled.nav`
 	}
 
 	.menu.open {
-		transform: translateX(0%);
+		display: initial;
+		animation: ${slideIn} 500ms;
 	}
 `;
 

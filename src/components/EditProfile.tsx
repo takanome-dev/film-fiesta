@@ -9,6 +9,7 @@ import Input from "./common/Input";
 import Overlay from "./common/Overlay";
 import Wrapper from "./common/Wrapper";
 import Container from "./styles/EditProfile.styled";
+import { Loader } from "./svg";
 import { EditProfileProps, EditProfileState } from "./types";
 
 export default class EditProfile extends Component<
@@ -21,6 +22,7 @@ export default class EditProfile extends Component<
 			name: "",
 			email: "",
 		},
+		isLoading: false,
 	};
 
 	keydownHandler = (e: KeyboardEvent) => {
@@ -53,19 +55,19 @@ export default class EditProfile extends Component<
 		currentTarget,
 	}) => {
 		const data: any = { ...this.state.data };
-
 		data[currentTarget.name] = currentTarget.value;
-
 		this.setState({ data });
 	};
 
 	handleInputFile = async (e: React.FormEvent<HTMLInputElement>) => {
 		const file = e.currentTarget.files?.[0];
+		if (file) this.setState({ isLoading: true });
 		const data = new FormData();
 		data.append("image", file!);
 		const user = getCurrentUser();
 		try {
 			const url = await updateProfile(data, user!._id!);
+			if (url) this.setState({ isLoading: false });
 			this.setState({ data: { url } });
 		} catch (err: any) {
 			if (err.request?.status === 400) {
@@ -82,7 +84,7 @@ export default class EditProfile extends Component<
 		try {
 			await updateUser({ name, email }, user!._id!);
 			window.location.pathname = "/profile";
-			toast.success("Profile successfully updated");
+			// toast.success("Profile successfully updated")
 		} catch (err: any) {
 			toast(err.data);
 		}
@@ -104,7 +106,11 @@ export default class EditProfile extends Component<
 							<form onSubmit={this.handleSubmit}>
 								<label htmlFor="image" className="profile-label flex">
 									<div className="profile-img">
-										<img src={url} alt="User avatar" />
+										{this.state.isLoading ? (
+											<Loader size={40} />
+										) : (
+											<img src={url} alt="User avatar" />
+										)}
 									</div>
 									<input
 										type="file"

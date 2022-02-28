@@ -171,6 +171,7 @@ export type MoviesStateType = {
 
 export type EditProfileState = {
 	data: any;
+	isLoading: boolean;
 	// data: { url?: string; name: string; email: string };
 	// errors: { name?: string; email?: string };
 };

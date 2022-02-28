@@ -23,3 +23,4 @@ export { default as SignOutIcon } from "./Icon.SignOut";
 export { default as StarIcon } from "./Icon.Star";
 export { default as TrendingIcon } from "./Icon.Trending";
 export { default as UserIcon } from "./Icon.User";
+export { default as Loader } from "./Loader";
