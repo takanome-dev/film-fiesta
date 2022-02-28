@@ -1,32 +1,12 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Joi from "joi";
 import { toast } from "react-toastify";
-import styled from "styled-components";
 import { getCurrentUser } from "../services/auth";
 import { updatePassword } from "../services/user";
 import Form from "./common/Form";
 import Overlay from "./common/Overlay";
 import Wrapper from "./common/Wrapper";
-import { slideIn } from "./styles/Global.styled";
-
-const Container = styled.div`
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	animation-name: ${slideIn};
-	animation-duration: 300ms;
-
-	.wrapper {
-		z-index: 4;
-		width: 30rem;
-		animation-name: ${slideIn};
-		animation-duration: 500ms;
-	}
-`;
+import Container from "./styles/EditPassword.styled";
 
 export default class EditPassword extends Form {
 	state = {
@@ -78,7 +58,6 @@ export default class EditPassword extends Form {
 	}
 
 	render() {
-		if (this.props.editPassword) document.body.style.overflow = "hidden";
 		return (
 			<Container>
 				<Overlay

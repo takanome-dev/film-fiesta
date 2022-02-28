@@ -19,6 +19,7 @@ const Container = styled.div`
 		z-index: 4;
 		animation-name: ${slideIn};
 		animation-duration: 500ms;
+		margin: 0 1rem;
 
 		form {
 			.profile-label {

@@ -54,7 +54,7 @@ export default class Form extends Component<FormProps, FormStateType> {
 	};
 
 	/**
-	 * @ref https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forms_and_events/
+	 * @see {@link https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forms_and_events/}
 	 */
 
 	handleChange: React.FormEventHandler<

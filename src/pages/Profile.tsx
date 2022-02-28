@@ -49,7 +49,12 @@ const Profile = () => {
 								<input readOnly id="email" type="email" value={user.email} />
 							</div>
 						</fieldset>
-						<button className="btn secondary btn-2">Edit profile</button>
+						<button
+							className="btn secondary btn-2"
+							onClick={() => setEditProfile(true)}
+						>
+							Edit profile
+						</button>
 					</div>
 					<div className="password-wrapper">
 						<div className="password-label">
@@ -68,7 +73,12 @@ const Profile = () => {
 							readOnly
 							disabled
 						/>
-						<button className="btn secondary btn-2">Update password</button>
+						<button
+							className="btn secondary btn-2"
+							onClick={() => setEditPassword(true)}
+						>
+							Update password
+						</button>
 					</div>
 				</Container>
 			</Wrapper>

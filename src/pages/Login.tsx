@@ -25,6 +25,7 @@ export default class LoginForm extends Form {
 	};
 
 	async submitToServer() {
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const { state } = this.props.location!;
 
 		try {

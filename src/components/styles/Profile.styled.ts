@@ -3,6 +3,7 @@ import styled from "styled-components";
 const Container = styled.div`
 	.btn-2 {
 		display: none;
+		padding: 0.8rem;
 	}
 
 	.profile-wrapper {
@@ -115,8 +116,6 @@ const Container = styled.div`
 	}
 
 	@media (max-width: 580px) {
-		/* margin: 2rem auto; */
-		/* padding: 1rem; */
 		.profile-wrapper,
 		.password-wrapper {
 			padding: 1rem;

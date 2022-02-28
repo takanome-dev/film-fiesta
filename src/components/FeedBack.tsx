@@ -27,10 +27,6 @@ export default class FeedBack extends Form {
 	}
 
 	render() {
-		if (this.props.openFeedback) {
-			document.body.style.overflow = "hidden";
-		}
-
 		return (
 			<Container>
 				<Overlay
@@ -39,7 +35,7 @@ export default class FeedBack extends Form {
 					handleClose={() => this.props.setOpenFeedback?.(false)}
 				/>
 				<div className="wrapper">
-					<Wrapper width="30rem">
+					<Wrapper width="100%">
 						<h1>Give Us Feedback</h1>
 						<form onSubmit={this.handleSubmit}>
 							{this.renderInput("subject", "Subject", "UI component")}

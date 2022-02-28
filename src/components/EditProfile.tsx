@@ -23,12 +23,30 @@ export default class EditProfile extends Component<
 		},
 	};
 
+	keydownHandler = (e: KeyboardEvent) => {
+		switch (e.code) {
+			case "Escape":
+				this.props.setEditProfile(false);
+				break;
+			case "Enter":
+				this.handleSubmit;
+				break;
+			default:
+		}
+	};
+
 	componentDidMount() {
+		document.addEventListener("keydown", this.keydownHandler);
+
 		const user = getCurrentUser();
 		if (user?._id) {
 			const data = { url: user.imageUrl, name: user.name!, email: user.email! };
 			this.setState({ data });
 		}
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener("keydown", this.keydownHandler);
 	}
 
 	handleChange: React.ChangeEventHandler<HTMLInputElement> = ({
@@ -71,7 +89,6 @@ export default class EditProfile extends Component<
 	};
 
 	render() {
-		if (this.props.editProfile) document.body.style.overflow = "hidden";
 		const { url, name, email } = this.state.data;
 
 		return (
