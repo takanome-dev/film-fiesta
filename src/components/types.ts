@@ -182,7 +182,9 @@ export type FormProps = {
 	history?: HistoryType;
 	location?: LocationType;
 	openFeedback?: boolean;
+	editPassword?: boolean;
 	setOpenFeedback?: React.Dispatch<React.SetStateAction<boolean>>;
+	setEditPassword?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type MovieDetailsProps = {

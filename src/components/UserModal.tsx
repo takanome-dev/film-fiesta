@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Overlay from "./common/Overlay";
 import { profileLinks } from "./links";
+import { appear } from "./styles/Global.styled";
 
 const Container = styled.div`
+	animation: ${appear} 300ms;
 	.wrapper {
 		background-color: #fff;
 		max-width: 12rem;

@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { EditPassword } from "../components";
 import Wrapper from "../components/common/Wrapper";
 import EditProfile from "../components/EditProfile";
 import Container from "../components/styles/Profile.styled";
@@ -6,11 +7,18 @@ import { Context } from "../context/GlobalContext";
 
 const Profile = () => {
 	const [editProfile, setEditProfile] = useState(false);
+	const [editPassword, setEditPassword] = useState(false);
 	const { user } = useContext(Context);
 
 	return (
 		<>
 			<EditProfile editProfile={editProfile} setEditProfile={setEditProfile} />
+			{editPassword && (
+				<EditPassword
+					editPassword={editPassword}
+					setEditPassword={setEditPassword}
+				/>
+			)}
 			<Wrapper width="100%">
 				<Container>
 					<div className="profile-wrapper">
@@ -46,7 +54,12 @@ const Profile = () => {
 					<div className="password-wrapper">
 						<div className="password-label">
 							<p>Password</p>
-							<button className="btn secondary btn-1">Update password</button>
+							<button
+								className="btn secondary btn-1"
+								onClick={() => setEditPassword(true)}
+							>
+								Update password
+							</button>
 						</div>
 						<input
 							id="name"

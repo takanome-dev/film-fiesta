@@ -17,3 +17,16 @@ export const updateUser = async (
 	removeToken();
 	setToken(data);
 };
+
+type UpdatePasswordType = {
+	currentPassword: string;
+	newPassword: string;
+};
+
+export const updatePassword = async (
+	password: UpdatePasswordType,
+	id: string
+) => {
+	const { data } = await http.put(`${endpoint}/reset/${id}`, password);
+	return data;
+};

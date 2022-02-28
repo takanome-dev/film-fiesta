@@ -1,20 +1,24 @@
 import styled from "styled-components";
+import { slideIn } from "./Global.styled";
 
 const Container = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
+	animation-name: ${slideIn};
+	animation-duration: 300ms;
 	/* z-index: 3; */
 
 	.wrapper {
-		position: absolute;
-		z-index: 4;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
 		width: 30rem;
+		z-index: 4;
+		animation-name: ${slideIn};
+		animation-duration: 500ms;
 
 		form {
 			.profile-label {
