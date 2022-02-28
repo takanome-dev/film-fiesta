@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, keyframes } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 
@@ -161,6 +161,24 @@ const GlobalStyles = createGlobalStyle`
       /* flex-direction: column; */
       flex-wrap: wrap;
     }
+  }
+`;
+
+export const slideIn = keyframes`
+	from {
+    transform: translateY(-10rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+`;
+
+export const appear = keyframes`
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1;
   }
 `;
 
