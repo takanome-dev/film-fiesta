@@ -101,26 +101,34 @@ export default class EditProfile extends Component<
 						bgColor="rgba(0,0,0,0.2)"
 						handleClose={() => this.props.setEditProfile?.(false)}
 					/>
-					<div className="wrapper">
+					<div className="modal-wrapper">
 						<Wrapper width="100%">
+							<div className="modal-header">
+								<p>Edit profile</p>
+								<span onClick={() => this.props.setEditProfile?.(false)}>
+									&times;
+								</span>
+							</div>
 							<form onSubmit={this.handleSubmit}>
-								<label htmlFor="image" className="profile-label flex">
-									<div className="profile-img">
-										{this.state.isLoading ? (
-											<Loader size={40} />
-										) : (
-											<img src={url} alt="User avatar" />
-										)}
-									</div>
-									<input
-										type="file"
-										id="image"
-										name="image"
-										className="profile-input"
-										onChange={this.handleInputFile}
-									/>
-									<p className="tooltip">Click to upload an image</p>
-								</label>
+								<div className="modal-profile">
+									<label htmlFor="image" className="profile-label flex">
+										<div className="profile-img">
+											{this.state.isLoading ? (
+												<Loader size={40} />
+											) : (
+												<img src={url} alt="User avatar" />
+											)}
+										</div>
+										<input
+											type="file"
+											id="image"
+											name="image"
+											className="profile-input"
+											onChange={this.handleInputFile}
+										/>
+										<p className="tooltip">Click to upload an image</p>
+									</label>
+								</div>
 								<Input
 									name="name"
 									type="text"

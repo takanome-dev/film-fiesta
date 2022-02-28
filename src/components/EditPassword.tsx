@@ -65,8 +65,14 @@ export default class EditPassword extends Form {
 					bgColor="rgba(0,0,0,0.2)"
 					handleClose={() => this.props.setEditPassword?.(false)}
 				/>
-				<div className="wrapper">
+				<div className="modal-wrapper">
 					<Wrapper width="100%">
+					<div className="modal-header">
+								<p>Edit password</p>
+								<span onClick={() => this.props.setEditPassword?.(false)}>
+									&times;
+								</span>
+							</div>
 						<form onSubmit={this.handleSubmit}>
 							{this.renderInput("currentPassword", "Current Password", "")}
 							{this.renderInput("newPassword", "New Password", "")}
