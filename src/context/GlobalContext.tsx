@@ -9,16 +9,14 @@ import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
 import { paginate } from "../utils/paginate";
 import {
-	BOOKMARKMOVIE,
-	CURRENTPAGE,
-	CURRENTROUTE,
-	FETCHGENRES,
-	FETCHMOVIES,
-	GETCURRENTUSER,
-	LIKEMOVIE,
-	SEARCHQUERY,
-	SELECTEDCATEGORY,
-	SELECTEDGENRE,
+	CURRENT_PAGE,
+	CURRENT_ROUTE,
+	FETCH_GENRES,
+	FETCH_MOVIES,
+	GET_CURRENT_USER,
+	SEARCH_QUERY,
+	SELECTED_CATEGORY,
+	SELECTED_GENRE
 } from "./Constant";
 import reducer from "./Reducer";
 import { InitialStateType } from "./types";
@@ -53,7 +51,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 		{
 			onSuccess: (data) =>
 				dispatch({
-					type: FETCHMOVIES,
+					type: FETCH_MOVIES,
 					payload: data,
 				}),
 		}
@@ -63,7 +61,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 		onSuccess: (data) => {
 			const genres = [{ _id: "", name: "All" }, ...data];
 			dispatch({
-				type: FETCHGENRES,
+				type: FETCH_GENRES,
 				payload: genres,
 			});
 		},
@@ -72,35 +70,35 @@ const Provider: React.FC<Props> = ({ children }) => {
 	useEffect(() => {
 		const user = getCurrentUser();
 		dispatch({
-			type: GETCURRENTUSER,
+			type: GET_CURRENT_USER,
 			payload: user,
 		});
 	}, []);
 
 	const handleSearch = (query: string) => {
 		dispatch({
-			type: SEARCHQUERY,
+			type: SEARCH_QUERY,
 			payload: query,
 		});
 	};
 
 	const handlePageChange = (pageNumber: number) => {
 		dispatch({
-			type: CURRENTPAGE,
+			type: CURRENT_PAGE,
 			payload: pageNumber,
 		});
 	};
 
 	const handleRouteChange = (route: string) => {
 		dispatch({
-			type: CURRENTROUTE,
+			type: CURRENT_ROUTE,
 			payload: route,
 		});
 	};
 
 	const handleSelectedGenre = (genre: GenreType) => {
 		dispatch({
-			type: SELECTEDGENRE,
+			type: SELECTED_GENRE,
 			payload: genre,
 		});
 	};
@@ -108,42 +106,42 @@ const Provider: React.FC<Props> = ({ children }) => {
 	useEffect(() => {
 		if (location.pathname === "/popular")
 			dispatch({
-				type: SELECTEDCATEGORY,
+				type: SELECTED_CATEGORY,
 				payload: "popular",
 			});
 		else if (location.pathname === "/trending")
 			dispatch({
-				type: SELECTEDCATEGORY,
+				type: SELECTED_CATEGORY,
 				payload: "trending",
 			});
 		else
 			dispatch({
-				type: SELECTEDCATEGORY,
+				type: SELECTED_CATEGORY,
 				payload: "",
 			});
 	}, [location.pathname]);
 
-	const handleLikeMovie = (isLike: boolean) => {
-		// if(isLike) {}
-		dispatch({
-			type: LIKEMOVIE,
-			payload: isLike,
-		});
-	};
+	// const handleLikeMovie = (isLike: boolean) => {
+	// 	// if(isLike) {}
+	// 	dispatch({
+	// 		type: LIKEMOVIE,
+	// 		payload: isLike,
+	// 	});
+	// };
 
-	const handleBookmarkMovie = (isBookmark: boolean) => {
-		dispatch({
-			type: BOOKMARKMOVIE,
-			payload: isBookmark,
-		});
-	};
+	// const handleBookmarkMovie = (isBookmark: boolean) => {
+	// 	dispatch({
+	// 		type: BOOKMARKMOVIE,
+	// 		payload: isBookmark,
+	// 	});
+	// };
 
 	const handleDeleteMovie = async (id: string) => {
 		const originalMovies: MovieType[] = state.movies;
 		const movies = originalMovies.filter((m) => m._id !== id);
 
 		dispatch({
-			type: FETCHMOVIES,
+			type: FETCH_MOVIES,
 			payload: movies,
 		});
 
@@ -154,7 +152,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 				toast.error(err.data);
 			}
 			dispatch({
-				type: FETCHMOVIES,
+				type: FETCH_MOVIES,
 				payload: originalMovies,
 			});
 		}
@@ -207,10 +205,10 @@ const Provider: React.FC<Props> = ({ children }) => {
 		filteredMovies,
 		totalMovies,
 		onSearch: handleSearch,
-		onLike: handleLikeMovie,
+		// onLike: handleLikeMovie,
 		onDelete: handleDeleteMovie,
 		onPageChange: handlePageChange,
-		onBookmark: handleBookmarkMovie,
+		// onBookmark: handleBookmarkMovie,
 		onRouteChange: handleRouteChange,
 		onGenreSelected: handleSelectedGenre,
 		onRefetchMovie: refetchMovies,

@@ -1,75 +1,63 @@
 import {
-	BOOKMARKMOVIE,
-	CURRENTPAGE,
-	CURRENTROUTE,
-	FETCHGENRES,
-	FETCHMOVIES,
-	GETCURRENTUSER,
-	LIKEMOVIE,
-	SEARCHQUERY,
-	SELECTEDCATEGORY,
-	SELECTEDGENRE,
+	CURRENT_PAGE,
+	CURRENT_ROUTE,
+	FETCH_GENRES,
+	FETCH_MOVIES,
+	GET_CURRENT_USER,
+	SEARCH_QUERY,
+	SELECTED_CATEGORY,
+	SELECTED_GENRE,
 } from "./Constant";
 import { ActionType, InitialStateType } from "./types";
 
 const reducer = (state: InitialStateType, action: ActionType) => {
 	switch (action.type) {
-		case SEARCHQUERY:
+		case SEARCH_QUERY:
 			return {
 				...state,
 				searchQuery: action.payload,
-				currentPage: 1,
+				currenPage: 1,
 				selectedGenre: { _id: "", name: "" },
 			};
-		case GETCURRENTUSER:
+		case GET_CURRENT_USER:
 			return {
 				...state,
 				user: action.payload,
 			};
-		case FETCHMOVIES:
+		case FETCH_MOVIES:
 			return {
 				...state,
 				movies: action.payload,
 			};
-		case FETCHGENRES:
+		case FETCH_GENRES:
 			return {
 				...state,
 				genres: action.payload,
 			};
-		case CURRENTPAGE:
+		case CURRENT_PAGE:
 			return {
 				...state,
 				currentPage: action.payload,
 			};
-		case CURRENTROUTE:
+		case CURRENT_ROUTE:
 			return {
 				...state,
 				currentRoute: action.payload,
 			};
-		case SELECTEDGENRE:
+		case SELECTED_GENRE:
 			return {
 				...state,
 				selectedGenre: action.payload,
 				searchQuery: "",
 				currentPage: 1,
 			};
-		case SELECTEDCATEGORY:
+		case SELECTED_CATEGORY:
 			return {
 				...state,
 				selectedCategory: action.payload,
 				searchQuery: "",
 				currentPage: 1,
 				selectedGenre: { _id: "", name: "" },
-			};
-		case LIKEMOVIE:
-			return {
-				...state,
-				like: action.payload,
-			};
-		case BOOKMARKMOVIE:
-			return {
-				...state,
-				bookmark: action.payload,
 			};
 		default:
 			return state;
