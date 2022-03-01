@@ -1,14 +1,15 @@
 type Props = {
 	color: string;
+	fillColor: string;
 };
 
-const Heart: React.FC<Props> = ({ color }) => {
+const Heart: React.FC<Props> = ({ color, fillColor }) => {
 	return (
 		<svg
 			width="24"
 			height="22"
 			viewBox="0 0 24 22"
-			fill="none"
+			fill={fillColor}
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<path

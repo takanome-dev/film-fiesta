@@ -67,12 +67,12 @@ export default class EditPassword extends Form {
 				/>
 				<div className="modal-wrapper">
 					<Wrapper width="100%">
-					<div className="modal-header">
-								<p>Edit password</p>
-								<span onClick={() => this.props.setEditPassword?.(false)}>
-									&times;
-								</span>
-							</div>
+						<div className="modal-header">
+							<p>Edit password</p>
+							<span onClick={() => this.props.setEditPassword?.(false)}>
+								&times;
+							</span>
+						</div>
 						<form onSubmit={this.handleSubmit}>
 							{this.renderInput("currentPassword", "Current Password", "")}
 							{this.renderInput("newPassword", "New Password", "")}

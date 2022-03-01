@@ -1,9 +1,11 @@
 import {
+	BOOKMARKMOVIE,
 	CURRENTPAGE,
 	CURRENTROUTE,
 	FETCHGENRES,
 	FETCHMOVIES,
 	GETCURRENTUSER,
+	LIKEMOVIE,
 	SEARCHQUERY,
 	SELECTEDCATEGORY,
 	SELECTEDGENRE,
@@ -58,6 +60,16 @@ const reducer = (state: InitialStateType, action: ActionType) => {
 				searchQuery: "",
 				currentPage: 1,
 				selectedGenre: { _id: "", name: "" },
+			};
+		case LIKEMOVIE:
+			return {
+				...state,
+				like: action.payload,
+			};
+		case BOOKMARKMOVIE:
+			return {
+				...state,
+				bookmark: action.payload,
 			};
 		default:
 			return state;

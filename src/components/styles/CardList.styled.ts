@@ -35,7 +35,7 @@ const Container = styled.div`
 			bottom: 0;
 			left: 0;
 			width: 100%;
-			background: linear-gradient(rgba(0, 0, 0, 0.2), rgb(0, 0, 0));
+			background: linear-gradient(rgba(0, 0, 0, 0.5), rgb(0, 0, 0));
 			/* overflow: hidden;
 			text-overflow: ellipsis; */
 			opacity: 0;
@@ -66,6 +66,10 @@ const Container = styled.div`
 					&:active {
 						transform: scale(0.95);
 					}
+				}
+
+				.icon-container.liked {
+					background-color: var(--color-primary-60);
 				}
 			}
 		}

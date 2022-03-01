@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import { getCurrentUser } from "../services/auth";
+// import { getCurrentUser } from "../services/auth";
 import { MovieType } from "../types/MovieType";
-import Like from "./common/Like";
+// import Like from "./common/Like";
 import Table from "./common/Table";
 import { MoviesTableType } from "./types";
 
@@ -21,14 +21,14 @@ export default class MoviesTable extends Component<MoviesTableType> {
 		},
 		{ path: "numberInStock", label: "Stock" },
 		{ path: "dailyRentalRate", label: "Rate" },
-		{
-			content: (movie: MovieType) => (
-				<Like
-					liked={movie.liked!}
-					onLike={() => this.props.handleLike(movie)}
-				/>
-			),
-		},
+		// {
+		// 	content: (movie: MovieType) => (
+		// 		<Like
+		// 			liked={movie.liked!}
+		// 			onLike={() => this.props.handleLike(movie)}
+		// 		/>
+		// 	),
+		// },
 	];
 
 	deleteColumn = {
@@ -42,11 +42,11 @@ export default class MoviesTable extends Component<MoviesTableType> {
 		),
 	};
 
-	constructor(props: any) {
-		super(props);
-		const user = getCurrentUser();
-		if (user && user.isAdmin) this.columns.push(this.deleteColumn);
-	}
+	// constructor(props: any) {
+	// 	super(props);
+	// 	const user = getCurrentUser();
+	// 	if (user && user.isAdmin) this.columns.push(this.deleteColumn);
+	// }
 
 	render() {
 		const { movies, handleSort, sortColumn } = this.props;

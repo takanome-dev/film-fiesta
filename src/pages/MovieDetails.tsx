@@ -1,17 +1,20 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
 import { Container } from "../components/styles/MovieDetails.styled";
 import {
 	AddBookmarkIcon,
 	HeartIcon,
+	RemoveBookmarkIcon,
 	ShoppingIcon,
 	StarIcon,
 } from "../components/svg";
 import { MovieDetailsProps } from "../components/types";
+import { Context } from "../context/GlobalContext";
 import { getMovie } from "../services/movie";
 import { MovieType } from "../types/MovieType";
 
 const movieDetails: React.FC<MovieDetailsProps> = ({ match }) => {
+	const { like, bookmark } = useContext(Context);
 	const { data, refetch } = useQuery<MovieType, Error>(
 		"getMovie",
 		async () => await getMovie(match.params.id),
@@ -40,10 +43,17 @@ const movieDetails: React.FC<MovieDetailsProps> = ({ match }) => {
 						<StarIcon /> <h3>{data?.voteAverage}</h3>
 					</div>
 					<div className="icon btn">
-						<AddBookmarkIcon color="var(--color-dark-60)" />
+						{bookmark ? (
+							<RemoveBookmarkIcon />
+						) : (
+							<AddBookmarkIcon color="var(--color-dark-60)" />
+						)}
 					</div>
 					<div className="icon btn">
-						<HeartIcon color="var(--color-dark-60)" />
+						<HeartIcon
+							color={like ? "var(--color-primary)" : "var(--color-dark-60)"}
+							fillColor={like ? "var(--color-primary)" : "none"}
+						/>
 					</div>
 				</div>
 				<p className="overview">Overview</p>
