@@ -9,11 +9,13 @@ import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
 import { paginate } from "../utils/paginate";
 import {
+	BOOKMARKMOVIE,
 	CURRENTPAGE,
 	CURRENTROUTE,
 	FETCHGENRES,
 	FETCHMOVIES,
 	GETCURRENTUSER,
+	LIKEMOVIE,
 	SEARCHQUERY,
 	SELECTEDCATEGORY,
 	SELECTEDGENRE,
@@ -31,6 +33,8 @@ const initialState: InitialStateType = {
 	selectedGenre: { _id: "", name: "" },
 	selectedCategory: "",
 	user: { _id: "", name: "", email: "", iat: 0, imageUrl: "" },
+	like: false,
+	bookmark: false,
 };
 
 export const Context = createContext(initialState);
@@ -43,13 +47,17 @@ const Provider: React.FC<Props> = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 	const location = useLocation();
 
-	useQuery<MovieType[], Error>("getMovies", async () => await getMovies(), {
-		onSuccess: (data) =>
-			dispatch({
-				type: FETCHMOVIES,
-				payload: data,
-			}),
-	});
+	const { refetch: refetchMovies } = useQuery<MovieType[], Error>(
+		"getMovies",
+		async () => await getMovies(),
+		{
+			onSuccess: (data) =>
+				dispatch({
+					type: FETCHMOVIES,
+					payload: data,
+				}),
+		}
+	);
 
 	useQuery<GenreType[], Error>("getGenres", async () => await getGenres(), {
 		onSuccess: (data) => {
@@ -115,16 +123,20 @@ const Provider: React.FC<Props> = ({ children }) => {
 			});
 	}, [location.pathname]);
 
-	// handleLikeMovie = (movie: MovieType) => {
-	// 	const movies = [...this.state.movies];
-	// 	const index = movies.indexOf(movie);
-	// 	movies[index] = { ...movies[index] };
-	// 	movies[index].liked = !movies[index].liked;
-	// 	this.setState({ movies });
-	// };
+	const handleLikeMovie = (isLike: boolean) => {
+		// if(isLike) {}
+		dispatch({
+			type: LIKEMOVIE,
+			payload: isLike,
+		});
+	};
 
-	// handleSortMovie = (sortColumn: SortColumnType) =>
-	// this.setState({ sortColumn });
+	const handleBookmarkMovie = (isBookmark: boolean) => {
+		dispatch({
+			type: BOOKMARKMOVIE,
+			payload: isBookmark,
+		});
+	};
 
 	const handleDeleteMovie = async (id: string) => {
 		const originalMovies: MovieType[] = state.movies;
@@ -185,6 +197,8 @@ const Provider: React.FC<Props> = ({ children }) => {
 		genres: state.genres,
 		user: state.user,
 		pageSize: state.pageSize,
+		like: state.like,
+		bookmark: state.bookmark,
 		searchQuery: state.searchQuery,
 		currentPage: state.currentPage,
 		currentRoute: state.currentRoute,
@@ -193,10 +207,13 @@ const Provider: React.FC<Props> = ({ children }) => {
 		filteredMovies,
 		totalMovies,
 		onSearch: handleSearch,
+		onLike: handleLikeMovie,
 		onDelete: handleDeleteMovie,
 		onPageChange: handlePageChange,
+		onBookmark: handleBookmarkMovie,
 		onRouteChange: handleRouteChange,
 		onGenreSelected: handleSelectedGenre,
+		onRefetchMovie: refetchMovies,
 	};
 
 	return <Context.Provider value={value}>{children}</Context.Provider>;

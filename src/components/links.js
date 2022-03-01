@@ -35,7 +35,7 @@ export const topLinks = [
   },
   {
     name: "Favorites",
-    icon: (color) => <HeartIcon color={color} />,
+    icon: (color) => <HeartIcon color={color} fillColor="none" />,
     path: "/favorites",
   },
   {

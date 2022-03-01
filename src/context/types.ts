@@ -1,3 +1,8 @@
+import {
+	QueryObserverResult,
+	RefetchOptions,
+	RefetchQueryFilters,
+} from "react-query";
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
 
@@ -8,6 +13,8 @@ export type InitialStateType = {
 	totalMovies?: number;
 	pageSize: number;
 	currentPage: number;
+	like: boolean;
+	bookmark: boolean;
 	currentRoute: string;
 	searchQuery: string;
 	selectedCategory: string;
@@ -20,10 +27,15 @@ export type InitialStateType = {
 		imageUrl: string;
 	};
 	onDelete?: (id: string) => Promise<void>;
+	onLike?: (isLike: boolean) => void;
+	onBookmark?: (isBookmark: boolean) => void;
 	onGenreSelected?: (genre: GenreType) => void;
 	onPageChange?: (pageNumber: number) => void;
 	onRouteChange?: (route: string) => void;
 	onSearch?: (query: string) => void;
+	onRefetchMovie?: <TPageData>(
+		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+	) => Promise<QueryObserverResult<MovieType[], Error>>;
 };
 
 export type ActionType = {
