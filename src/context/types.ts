@@ -3,6 +3,7 @@ import {
 	RefetchOptions,
 	RefetchQueryFilters,
 } from "react-query";
+import { BookmarkType } from "../types/BookmarkType";
 import { FavoriteType } from "../types/FavoriteType";
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
@@ -11,12 +12,11 @@ export type InitialStateType = {
 	movies: MovieType[];
 	genres: GenreType[];
 	favorites: FavoriteType[];
+	bookmarks: BookmarkType[];
 	filteredMovies?: MovieType[];
 	totalMovies?: number;
 	pageSize: number;
 	currentPage: number;
-	like: boolean;
-	bookmark: boolean;
 	currentRoute: string;
 	searchQuery: string;
 	selectedCategory: string;
@@ -41,6 +41,9 @@ export type InitialStateType = {
 	onRefetchFavorites?: <TPageData>(
 		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
 	) => Promise<QueryObserverResult<FavoriteType[], Error>>;
+	onRefetchBookmarks?: <TPageData>(
+		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+	) => Promise<QueryObserverResult<BookmarkType[], Error>>;
 };
 
 export type ActionType = {

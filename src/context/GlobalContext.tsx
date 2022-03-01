@@ -3,9 +3,11 @@ import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getCurrentUser } from "../services/auth";
+import { getBookmarks } from "../services/bookmark";
 import { getFavorites } from "../services/favorite";
 import { getGenres } from "../services/genre";
 import { deleteMovie, getMovies } from "../services/movie";
+import { BookmarkType } from "../types/BookmarkType";
 import { FavoriteType } from "../types/FavoriteType";
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
@@ -13,6 +15,7 @@ import { paginate } from "../utils/paginate";
 import {
 	CURRENT_PAGE,
 	CURRENT_ROUTE,
+	FETCH_BOOKMARKS,
 	FETCH_FAVORITES,
 	FETCH_GENRES,
 	FETCH_MOVIES,
@@ -29,14 +32,13 @@ const initialState: InitialStateType = {
 	movies: [],
 	genres: [],
 	favorites: [],
+	bookmarks: [],
 	pageSize: 9,
 	currentPage: 1,
 	currentRoute: "/movies",
 	selectedGenre: { _id: "", name: "" },
 	selectedCategory: "",
 	user: { _id: "", name: "", email: "", iat: 0, imageUrl: "" },
-	like: false,
-	bookmark: false,
 };
 
 export const Context = createContext(initialState);
@@ -75,6 +77,12 @@ const Provider: React.FC<Props> = ({ children }) => {
 		"getFavorites",
 		async () => await getFavorites(),
 		{ onSuccess: (data) => dispatch({ type: FETCH_FAVORITES, payload: data }) }
+	);
+
+	const { refetch: refetchBookmarks } = useQuery<BookmarkType[], Error>(
+		"getBookmarks",
+		async () => await getBookmarks(),
+		{ onSuccess: (data) => dispatch({ type: FETCH_BOOKMARKS, payload: data }) }
 	);
 
 	useEffect(() => {
@@ -189,10 +197,9 @@ const Provider: React.FC<Props> = ({ children }) => {
 		movies: state.movies,
 		genres: state.genres,
 		favorites: state.favorites,
+		bookmarks: state.bookmarks,
 		user: state.user,
 		pageSize: state.pageSize,
-		like: state.like,
-		bookmark: state.bookmark,
 		searchQuery: state.searchQuery,
 		currentPage: state.currentPage,
 		currentRoute: state.currentRoute,
@@ -201,14 +208,13 @@ const Provider: React.FC<Props> = ({ children }) => {
 		filteredMovies,
 		totalMovies,
 		onSearch: handleSearch,
-		// onLike: handleLikeMovie,
 		onDelete: handleDeleteMovie,
 		onPageChange: handlePageChange,
-		// onBookmark: handleBookmarkMovie,
 		onRouteChange: handleRouteChange,
 		onGenreSelected: handleSelectedGenre,
 		onRefetchMovie: refetchMovies,
 		onRefetchFavorites: refetchFavorites,
+		onRefetchBookmarks: refetchBookmarks,
 	};
 
 	return <Context.Provider value={value}>{children}</Context.Provider>;
