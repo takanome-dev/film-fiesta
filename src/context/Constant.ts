@@ -1,6 +1,7 @@
 export const SEARCH_QUERY = "SEARCH_QUERY";
 export const FETCH_MOVIES = "FETCH_MOVIES";
 export const FETCH_GENRES = "FETCH_GENRES";
+export const FETCH_FAVORITES = "FETCH_FAVORITES";
 export const CURRENT_PAGE = "CURRENT_PAGE";
 export const CURRENT_ROUTE = "CURRENT_ROUTE";
 export const SELECTED_GENRE = "SELECTED_GENRE";

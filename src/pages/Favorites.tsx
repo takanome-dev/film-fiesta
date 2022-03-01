@@ -1,15 +1,30 @@
-import { Container } from "../components/styles/Empty.styled";
+import { useContext } from "react";
+import { Card } from "../components";
+import Container from "../components/styles/CardList.styled";
+import { Container as Empty } from "../components/styles/Empty.styled";
 import { EmptyFav } from "../components/svg";
+import { Context } from "../context/GlobalContext";
 
 const Favorites = () => {
+	const { favorites } = useContext(Context);
 	return (
-		<Container className="flex">
-			<EmptyFav />
-			<div>
-				<p>You have no favorites yet.</p>
-				<p>This is where you’ll see movies you like.</p>
-			</div>
-		</Container>
+		<>
+			{favorites.length > 0 ? (
+				<Container>
+					{favorites.map((f) => (
+						<Card movie={f.movie} key={f._id} />
+					))}
+				</Container>
+			) : (
+				<Empty className="flex">
+					<EmptyFav />
+					<div>
+						<p>You have no favorites yet.</p>
+						<p>This is where you’ll see movies you like.</p>
+					</div>
+				</Empty>
+			)}
+		</>
 	);
 };
 

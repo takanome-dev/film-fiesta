@@ -1,3 +1,4 @@
+import { getCurrentUser } from "./auth";
 import { http } from "./http";
 
 const endpoint = `${process.env.REACT_APP_API_URL}/favorites`;
@@ -5,6 +6,14 @@ const endpoint = `${process.env.REACT_APP_API_URL}/favorites`;
 type FavoriteRequestType = {
 	userId: string;
 	movieId: string;
+};
+
+export const getFavorites = async () => {
+	const user = getCurrentUser();
+	const { data } = await http.get(`${endpoint}`, {
+		headers: { "X-User-Id": user!._id! },
+	});
+	return data;
 };
 
 export const saveFavorite = async (fav: FavoriteRequestType) => {

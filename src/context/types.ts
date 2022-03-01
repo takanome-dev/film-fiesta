@@ -3,12 +3,14 @@ import {
 	RefetchOptions,
 	RefetchQueryFilters,
 } from "react-query";
+import { FavoriteType } from "../types/FavoriteType";
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
 
 export type InitialStateType = {
 	movies: MovieType[];
 	genres: GenreType[];
+	favorites: FavoriteType[];
 	filteredMovies?: MovieType[];
 	totalMovies?: number;
 	pageSize: number;
@@ -36,6 +38,9 @@ export type InitialStateType = {
 	onRefetchMovie?: <TPageData>(
 		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
 	) => Promise<QueryObserverResult<MovieType[], Error>>;
+	onRefetchFavorites?: <TPageData>(
+		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+	) => Promise<QueryObserverResult<FavoriteType[], Error>>;
 };
 
 export type ActionType = {

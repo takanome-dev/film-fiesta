@@ -2,20 +2,24 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Context } from "../context/GlobalContext";
-import { deleteFavorite, saveFavorite } from "../services/like_bookmark";
+import { deleteFavorite, saveFavorite } from "../services/favorite";
 import { HeartIcon, RemoveBookmarkIcon, StarIcon } from "./svg";
 import AddBookmark from "./svg/Icon.AddBookmark";
 import { CardProps } from "./types";
 
 const Card: React.FC<CardProps> = ({ movie }) => {
-	const { bookmark, onBookmark, user, onRefetchMovie } = useContext(Context);
-	const isLike = movie.likes?.find((l) => user._id === l.userId);
+	const { bookmark, onBookmark, user, onRefetchMovie, onRefetchFavorites } =
+		useContext(Context);
+	const isLike = movie.likes?.find(
+		(l: { userId: string }) => user._id === l.userId
+	);
 
 	const handleLike = async () => {
 		try {
 			if (isLike) {
 				const data = await deleteFavorite(movie._id, user._id);
 				onRefetchMovie?.();
+				onRefetchFavorites?.();
 				return toast.success(data);
 			}
 
@@ -24,6 +28,7 @@ const Card: React.FC<CardProps> = ({ movie }) => {
 				movieId: movie._id,
 			});
 			onRefetchMovie?.();
+			onRefetchFavorites?.();
 			return toast.success(data);
 		} catch (err: any) {
 			return toast.error(err.data);

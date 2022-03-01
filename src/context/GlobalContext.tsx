@@ -3,20 +3,23 @@ import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getCurrentUser } from "../services/auth";
+import { getFavorites } from "../services/favorite";
 import { getGenres } from "../services/genre";
 import { deleteMovie, getMovies } from "../services/movie";
+import { FavoriteType } from "../types/FavoriteType";
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
 import { paginate } from "../utils/paginate";
 import {
 	CURRENT_PAGE,
 	CURRENT_ROUTE,
+	FETCH_FAVORITES,
 	FETCH_GENRES,
 	FETCH_MOVIES,
 	GET_CURRENT_USER,
 	SEARCH_QUERY,
 	SELECTED_CATEGORY,
-	SELECTED_GENRE
+	SELECTED_GENRE,
 } from "./Constant";
 import reducer from "./Reducer";
 import { InitialStateType } from "./types";
@@ -25,6 +28,7 @@ const initialState: InitialStateType = {
 	searchQuery: "",
 	movies: [],
 	genres: [],
+	favorites: [],
 	pageSize: 9,
 	currentPage: 1,
 	currentRoute: "/movies",
@@ -66,6 +70,12 @@ const Provider: React.FC<Props> = ({ children }) => {
 			});
 		},
 	});
+
+	const { refetch: refetchFavorites } = useQuery<FavoriteType[], Error>(
+		"getFavorites",
+		async () => await getFavorites(),
+		{ onSuccess: (data) => dispatch({ type: FETCH_FAVORITES, payload: data }) }
+	);
 
 	useEffect(() => {
 		const user = getCurrentUser();
@@ -120,21 +130,6 @@ const Provider: React.FC<Props> = ({ children }) => {
 				payload: "",
 			});
 	}, [location.pathname]);
-
-	// const handleLikeMovie = (isLike: boolean) => {
-	// 	// if(isLike) {}
-	// 	dispatch({
-	// 		type: LIKEMOVIE,
-	// 		payload: isLike,
-	// 	});
-	// };
-
-	// const handleBookmarkMovie = (isBookmark: boolean) => {
-	// 	dispatch({
-	// 		type: BOOKMARKMOVIE,
-	// 		payload: isBookmark,
-	// 	});
-	// };
 
 	const handleDeleteMovie = async (id: string) => {
 		const originalMovies: MovieType[] = state.movies;
@@ -193,6 +188,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 	const value = {
 		movies: state.movies,
 		genres: state.genres,
+		favorites: state.favorites,
 		user: state.user,
 		pageSize: state.pageSize,
 		like: state.like,
@@ -212,6 +208,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 		onRouteChange: handleRouteChange,
 		onGenreSelected: handleSelectedGenre,
 		onRefetchMovie: refetchMovies,
+		onRefetchFavorites: refetchFavorites,
 	};
 
 	return <Context.Provider value={value}>{children}</Context.Provider>;

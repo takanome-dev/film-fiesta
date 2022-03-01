@@ -1,3 +1,4 @@
+export { default as Card } from "./Card";
 export { default as CardList } from "./CardList";
 export { default as PrivateRoute } from "./common/PrivateRoute";
 export { default as EditPassword } from "./EditPassword";

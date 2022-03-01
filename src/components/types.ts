@@ -219,7 +219,8 @@ export type CardListProps = {
 };
 
 export type CardProps = {
-	movie: MovieType;
+	// movie: MovieType & FavoriteType;
+	movie: any;
 	handleLike?: (movie: MovieType) => void;
 };
 
