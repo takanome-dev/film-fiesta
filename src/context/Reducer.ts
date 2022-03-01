@@ -1,6 +1,7 @@
 import {
 	CURRENT_PAGE,
 	CURRENT_ROUTE,
+	FETCH_BOOKMARKS,
 	FETCH_FAVORITES,
 	FETCH_GENRES,
 	FETCH_MOVIES,
@@ -39,6 +40,11 @@ const reducer = (state: InitialStateType, action: ActionType) => {
 			return {
 				...state,
 				favorites: action.payload,
+			};
+		case FETCH_BOOKMARKS:
+			return {
+				...state,
+				bookmarks: action.payload,
 			};
 		case CURRENT_PAGE:
 			return {

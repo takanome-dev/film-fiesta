@@ -2,21 +2,27 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Context } from "../context/GlobalContext";
+import { deleteBookmark, saveBookmark } from "../services/bookmark";
 import { deleteFavorite, saveFavorite } from "../services/favorite";
 import { HeartIcon, RemoveBookmarkIcon, StarIcon } from "./svg";
 import AddBookmark from "./svg/Icon.AddBookmark";
 import { CardProps } from "./types";
 
 const Card: React.FC<CardProps> = ({ movie }) => {
-	const { bookmark, onBookmark, user, onRefetchMovie, onRefetchFavorites } =
+	const { user, onRefetchMovie, onRefetchFavorites, onRefetchBookmarks } =
 		useContext(Context);
-	const isLike = movie.likes?.find(
+
+	const isLiked = movie.likes?.find(
+		(l: { userId: string }) => user._id === l.userId
+	);
+
+	const isBookmarked = movie.bookmarks?.find(
 		(l: { userId: string }) => user._id === l.userId
 	);
 
 	const handleLike = async () => {
 		try {
-			if (isLike) {
+			if (isLiked) {
 				const data = await deleteFavorite(movie._id, user._id);
 				onRefetchMovie?.();
 				onRefetchFavorites?.();
@@ -35,8 +41,25 @@ const Card: React.FC<CardProps> = ({ movie }) => {
 		}
 	};
 
-	const handleBookmark = () => {
-		onBookmark?.(!bookmark);
+	const handleBookmark = async () => {
+		try {
+			if (isBookmarked) {
+				const data = await deleteBookmark(movie._id, user._id);
+				onRefetchMovie?.();
+				onRefetchBookmarks?.();
+				return toast.success(data);
+			}
+
+			const data = await saveBookmark({
+				userId: user._id,
+				movieId: movie._id,
+			});
+			onRefetchMovie?.();
+			onRefetchBookmarks?.();
+			return toast.success(data);
+		} catch (err: any) {
+			return toast.error(err.data);
+		}
 	};
 
 	return (
@@ -51,7 +74,7 @@ const Card: React.FC<CardProps> = ({ movie }) => {
 				<h3>{movie.title}</h3>
 				<div className="icons flex">
 					<button className="icon-container flex" onClick={handleBookmark}>
-						{bookmark ? (
+						{isBookmarked ? (
 							<RemoveBookmarkIcon />
 						) : (
 							<AddBookmark color="var(--color-dark)" />
@@ -59,13 +82,13 @@ const Card: React.FC<CardProps> = ({ movie }) => {
 					</button>
 					<button
 						className={
-							isLike ? "icon-container liked flex" : "icon-container flex"
+							isLiked ? "icon-container liked flex" : "icon-container flex"
 						}
 						onClick={handleLike}
 					>
 						<HeartIcon
-							color={isLike ? "var(--color-primary)" : "var(--color-dark)"}
-							fillColor={isLike ? "var(--color-primary)" : "none"}
+							color={isLiked ? "var(--color-primary)" : "var(--color-dark)"}
+							fillColor={isLiked ? "var(--color-primary)" : "none"}
 						/>
 					</button>
 				</div>
