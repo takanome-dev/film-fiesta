@@ -1,17 +1,10 @@
 import { useContext } from "react";
-import styled from "styled-components";
 import { Card } from "../components";
+import Title from "../components/common/Title";
 import Container from "../components/styles/CardList.styled";
 import { Container as Empty } from "../components/styles/Empty.styled";
-import { EmptyBookmark, MoreHorizontalIcon } from "../components/svg";
+import { EmptyBookmark } from "../components/svg";
 import { Context } from "../context/GlobalContext";
-
-const Title = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 1rem;
-`;
 
 const Bookmark = () => {
 	const { bookmarks } = useContext(Context);
@@ -20,10 +13,7 @@ const Bookmark = () => {
 		<>
 			{bookmarks.length > 0 ? (
 				<>
-					<Title>
-						<h2>Bookmarks</h2>
-						<MoreHorizontalIcon />
-					</Title>
+					<Title name="Bookmarks" />
 					<Container>
 						{bookmarks.map((b) => (
 							<Card movie={b.movie} key={b._id} />

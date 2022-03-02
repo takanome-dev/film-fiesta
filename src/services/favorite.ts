@@ -25,3 +25,8 @@ export const deleteFavorite = async (movieId: string, userId: string) => {
 	const { data } = await http.delete(`${endpoint}/${movieId}/${userId}`);
 	return data;
 };
+
+export const clearFavorites = async (userId: string) => {
+	const { data } = await http.delete(`${endpoint}/${userId}`);
+	return data;
+};

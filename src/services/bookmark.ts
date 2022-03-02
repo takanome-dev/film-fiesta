@@ -25,3 +25,8 @@ export const deleteBookmark = async (movieId: string, userId: string) => {
 	const { data } = await http.delete(`${endpoint}/${movieId}/${userId}`);
 	return data;
 };
+
+export const clearBookmarks = async (userId: string) => {
+	const { data } = await http.delete(`${endpoint}/${userId}`);
+	return data;
+};

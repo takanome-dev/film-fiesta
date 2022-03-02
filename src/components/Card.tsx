@@ -12,12 +12,10 @@ const Card: React.FC<CardProps> = ({ movie }) => {
 	const { user, onRefetchMovie, onRefetchFavorites, onRefetchBookmarks } =
 		useContext(Context);
 
-	const isLiked = movie.likes?.find(
-		(l: { userId: string }) => user._id === l.userId
-	);
+	const isLiked = movie.likes?.find((l: { _id: string }) => user._id === l._id);
 
 	const isBookmarked = movie.bookmarks?.find(
-		(l: { userId: string }) => user._id === l.userId
+		(l: { _id: string }) => user._id === l._id
 	);
 
 	const handleLike = async () => {

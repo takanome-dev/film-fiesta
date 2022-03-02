@@ -35,20 +35,14 @@ const Container = styled.div`
 			bottom: 0;
 			left: 0;
 			width: 100%;
+			overflow: hidden;
 			background: linear-gradient(rgba(0, 0, 0, 0.5), rgb(0, 0, 0));
-			/* overflow: hidden;
-			text-overflow: ellipsis; */
 			opacity: 0;
 			transition: opacity 300ms ease-in-out;
 
 			h3 {
 				color: #fff;
 				margin-left: 0.6rem;
-				/* overflow: hidden;
-				text-overflow: ellipsis; */
-				/* overflow-wrap: normal; */
-				/* max-width: 5rem;
-				display: flex; */
 			}
 
 			.icons {

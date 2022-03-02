@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Card } from "../components";
+import Title from "../components/common/Title";
 import Container from "../components/styles/CardList.styled";
 import { Container as Empty } from "../components/styles/Empty.styled";
 import { EmptyFav } from "../components/svg";
@@ -10,11 +11,14 @@ const Favorites = () => {
 	return (
 		<>
 			{favorites.length > 0 ? (
-				<Container>
-					{favorites.map((f) => (
-						<Card movie={f.movie} key={f._id} />
-					))}
-				</Container>
+				<>
+					<Title name="Favorites" />
+					<Container>
+						{favorites.map((f) => (
+							<Card movie={f.movie} key={f._id} />
+						))}
+					</Container>
+				</>
 			) : (
 				<Empty className="flex">
 					<EmptyFav />

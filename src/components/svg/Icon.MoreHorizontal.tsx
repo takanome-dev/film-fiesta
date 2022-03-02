@@ -1,5 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { toast } from "react-toastify";
 import styled from "styled-components";
+import { Context } from "../../context/GlobalContext";
+import { clearBookmarks } from "../../services/bookmark";
+import { clearFavorites } from "../../services/favorite";
 import Overlay from "../common/Overlay";
 import { appear } from "../styles/Global.styled";
 
@@ -40,8 +44,29 @@ const Container = styled.div`
 	}
 `;
 
-const MoreHorizontal = () => {
+type Props = {
+	name: string;
+};
+
+const MoreHorizontal: React.FC<Props> = ({ name }) => {
 	const [open, setOpen] = useState(false);
+	const { user, onRefetchBookmarks, onRefetchFavorites } = useContext(Context);
+
+	const handleDeleteAll = async () => {
+		try {
+			if (name === "Bookmarks") {
+				const data = await clearBookmarks(user._id);
+				onRefetchBookmarks?.();
+				return toast.success(data);
+			} else if (name === "Favorites") {
+				const data = await clearFavorites(user._id);
+				onRefetchFavorites?.();
+				return toast.success(data);
+			}
+		} catch (err: any) {
+			toast.error(err.data);
+		}
+	};
 	return (
 		<>
 			{open && (
@@ -52,7 +77,7 @@ const MoreHorizontal = () => {
 						handleClose={() => setOpen(false)}
 					/>
 					<div className="modal">
-						<p>Clear all Bookmarks</p>
+						<p onClick={handleDeleteAll}>Clear all {name}</p>
 					</div>
 				</Modal>
 			)}
