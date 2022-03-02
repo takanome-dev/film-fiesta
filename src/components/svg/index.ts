@@ -11,6 +11,7 @@ export { default as HeartIcon } from "./Icon.Heart";
 export { default as HomeIcon } from "./Icon.Home";
 export { default as LeftArrowIcon } from "./Icon.LeftArrow";
 export { default as LogoIcon } from "./Icon.Logo";
+export { default as MoreHorizontalIcon } from "./Icon.MoreHorizontal";
 export { default as RemoveBookmarkIcon } from "./Icon.RemoveBookmark";
 export { default as RentalIcon } from "./Icon.Rental";
 export { default as RightArrowIcon } from "./Icon.RightArrow";
