@@ -9,13 +9,12 @@ export const Container = styled.div`
 	.image {
 		padding: 0 1rem;
 		img {
-			/* max-width: 20rem; */
 			width: 100%;
-			max-height: 30rem;
 			height: 100%;
-			/* height: 28rem; */
 			object-fit: cover;
-			object-position: center;
+			/* object-position: center; */
+			border-radius: 0.8rem;
+			box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
 		}
 	}
 
