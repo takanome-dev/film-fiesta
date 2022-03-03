@@ -1,5 +1,6 @@
 export { default as NotFound } from "./404";
 export { default as Bookmark } from "./Bookmark";
+export { default as Checkout } from "./Checkout";
 export { default as Customers } from "./Customers";
 export { default as Favorites } from "./Favorites";
 export { default as Login } from "./Login";

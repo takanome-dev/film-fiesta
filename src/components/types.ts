@@ -141,6 +141,7 @@ export type FormStateType = {
 	data: any;
 	errors: any;
 	genres?: GenreType[];
+	complete?: boolean;
 };
 
 export type RegisterStateType = {
@@ -186,12 +187,15 @@ export type FormProps = {
 	editPassword?: boolean;
 	setOpenFeedback?: React.Dispatch<React.SetStateAction<boolean>>;
 	setEditPassword?: React.Dispatch<React.SetStateAction<boolean>>;
+	movieId?: string;
 };
 
 export type MovieDetailsProps = {
 	match: MatchType;
-	history: HistoryType;
-	location: LocationType;
+	setMovieId: React.Dispatch<React.SetStateAction<string>>;
+	// history: HistoryType;
+	// location: LocationType;
+	// props: RouteComponentProps<any, StaticContext, unknown>;
 };
 
 export type SearchProps = {

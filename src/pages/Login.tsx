@@ -17,6 +17,7 @@ export default class LoginForm extends Form {
 	schema = {
 		email: Joi.string()
 			.email({ tlds: { allow: ["com"] } })
+			.lowercase()
 			.min(8)
 			.max(50)
 			.required()

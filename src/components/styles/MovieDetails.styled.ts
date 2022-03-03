@@ -73,27 +73,30 @@ export const Container = styled.div`
 		}
 
 		.rent-btn {
-			width: 50%;
-			background-color: var(--color-secondary-80);
-			margin-top: 3rem;
-			padding: 1rem;
-			cursor: pointer;
-			transition: transform 200ms ease;
-			span {
-				color: var(--color-dark);
-				font-size: 1.3rem;
-				font-weight: 500;
-				margin-left: 1rem;
-			}
-
-			&:hover {
-				transform: translateY(-0.1rem);
-			}
-
-			@media (max-width: 890px) {
-				padding: 1rem 0.5rem;
+			text-decoration: none;
+			.btn {
+				width: 50%;
+				background-color: var(--color-secondary-80);
+				margin-top: 3rem;
+				padding: 1rem;
+				cursor: pointer;
+				transition: transform 200ms ease;
 				span {
-					margin-left: 0.5rem;
+					color: var(--color-dark);
+					font-size: 1.3rem;
+					font-weight: 500;
+					margin-left: 1rem;
+				}
+
+				&:hover {
+					transform: translateY(-0.1rem);
+				}
+
+				@media (max-width: 890px) {
+					padding: 1rem 0.5rem;
+					span {
+						margin-left: 0.5rem;
+					}
 				}
 			}
 		}

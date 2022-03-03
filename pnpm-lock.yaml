@@ -7,6 +7,8 @@ specifiers:
   '@popperjs/core': ^2.10.2
   '@sentry/react': ^6.16.1
   '@sentry/tracing': ^6.16.1
+  '@stripe/react-stripe-js': ^1.7.0
+  '@stripe/stripe-js': ^1.24.0
   '@testing-library/dom': 8.11.1
   '@testing-library/jest-dom': ^5.16.1
   '@testing-library/react': ^12.1.2
@@ -46,6 +48,8 @@ specifiers:
 dependencies:
   '@sentry/react': 6.16.1_react@17.0.2
   '@sentry/tracing': 6.16.1
+  '@stripe/react-stripe-js': 1.7.0_2272d46cfb55a1a89dee55cd5776c81d
+  '@stripe/stripe-js': 1.24.0
   '@testing-library/jest-dom': 5.16.1
   '@testing-library/react': 12.1.2_react-dom@17.0.2+react@17.0.2
   '@testing-library/user-event': 13.5.0_@testing-library+dom@8.11.1
@@ -1932,6 +1936,23 @@ packages:
     resolution: {integrity: sha512-OAPJUAtgeINhh/TAlUID4QTs53Njm7xzddaVlEs/SXwgtiD1tW22zAB/W1wdqfrpmikgaWQ9Fw6Ws+hsiRm5Vg==}
     dependencies:
       '@sinonjs/commons': 1.8.3
+    dev: false
+
+  /@stripe/react-stripe-js/1.7.0_2272d46cfb55a1a89dee55cd5776c81d:
+    resolution: {integrity: sha512-L20v8Jq0TDZFL2+y+uXD751t6q9SalSFkSYZpmZ2VWrGZGK7HAGfRQ804dzYSSr5fGenW6iz6y7U0YKfC/TK3g==}
+    peerDependencies:
+      '@stripe/stripe-js': ^1.20.3
+      react: ^16.8.0 || ^17.0.0
+      react-dom: ^16.8.0 || ^17.0.0
+    dependencies:
+      '@stripe/stripe-js': 1.24.0
+      prop-types: 15.8.1
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    dev: false
+
+  /@stripe/stripe-js/1.24.0:
+    resolution: {integrity: sha512-8CEILOpzoRhGwvgcf6y+BlPyEq1ZqxAv3gsX7LvokFYvbcyH72GRcHQMGXuZS3s7HqfYQuTSFrvZNL/qdkgA9Q==}
     dev: false
 
   /@surma/rollup-plugin-off-main-thread/2.2.3:
