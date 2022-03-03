@@ -4,6 +4,7 @@ import { GenreType } from "../../types/GenreType";
 import { FormProps, FormStateType } from "../types";
 import Button from "./Button";
 import Input from "./Input";
+import InputDate from "./InputDate";
 import Select from "./Select";
 import TextArea from "./TextArea";
 
@@ -14,6 +15,11 @@ export default class Form extends Component<FormProps, FormStateType> {
 	};
 
 	schema: PartialSchemaMap = {};
+
+	date = {
+		today: new Date().toISOString().substring(0, 10),
+		nextDay: new Date().setDate(new Date().getDate() + 1),
+	};
 
 	validate = () => {
 		const errors: Record<string, string> = {};
@@ -83,6 +89,24 @@ export default class Form extends Component<FormProps, FormStateType> {
 				type={type}
 				value={data[name]}
 				error={errors[name]}
+				onChange={this.handleChange}
+			/>
+		);
+	}
+
+	renderInputDate(name: string, label: string, disabled: boolean) {
+		const { data, errors } = this.state;
+		let value: string;
+		if (name === "rentDate") value = this.date.today;
+		else value = data[name];
+
+		return (
+			<InputDate
+				label={label}
+				name={name}
+				value={value}
+				error={errors[name]}
+				disabled={disabled}
 				onChange={this.handleChange}
 			/>
 		);

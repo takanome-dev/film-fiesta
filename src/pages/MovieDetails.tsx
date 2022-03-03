@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import { Container } from "../components/styles/MovieDetails.styled";
 import {
 	AddBookmarkIcon,
@@ -11,7 +12,7 @@ import { MovieDetailsProps } from "../components/types";
 import { getMovie } from "../services/movie";
 import { MovieType } from "../types/MovieType";
 
-const movieDetails: React.FC<MovieDetailsProps> = ({ match }) => {
+const movieDetails: React.FC<MovieDetailsProps> = ({ match, setMovieId }) => {
 	const { data, refetch } = useQuery<MovieType, Error>(
 		"getMovie",
 		async () => await getMovie(match.params.id),
@@ -20,6 +21,7 @@ const movieDetails: React.FC<MovieDetailsProps> = ({ match }) => {
 
 	useEffect(() => {
 		refetch();
+		setMovieId(match.params.id);
 	}, [match.params.id]);
 
 	return (
@@ -48,10 +50,12 @@ const movieDetails: React.FC<MovieDetailsProps> = ({ match }) => {
 				</div>
 				<p className="overview">Overview</p>
 				<p className="description">{data?.overview}</p>
-				<button className="rent-btn btn flex">
-					<ShoppingIcon color="var(--color-dark)" />
-					<span>Rent now</span>
-				</button>
+				<Link to="/checkout" className="rent-btn">
+					<button className="btn flex">
+						<ShoppingIcon color="var(--color-dark)" />
+						<span>Rent now</span>
+					</button>
+				</Link>
 			</div>
 		</Container>
 	);

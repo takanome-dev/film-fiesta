@@ -74,8 +74,13 @@ export default class EditPassword extends Form {
 							</span>
 						</div>
 						<form onSubmit={this.handleSubmit}>
-							{this.renderInput("currentPassword", "Current Password", "")}
-							{this.renderInput("newPassword", "New Password", "")}
+							{this.renderInput(
+								"currentPassword",
+								"Current Password",
+								"",
+								"password"
+							)}
+							{this.renderInput("newPassword", "New Password", "", "password")}
 							{this.renderButton("Update password")}
 						</form>
 					</Wrapper>

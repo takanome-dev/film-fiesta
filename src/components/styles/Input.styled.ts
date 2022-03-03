@@ -29,7 +29,7 @@ const Container = styled.div`
 		font-size: 1rem;
 		color: var(--color-primary);
 		&::before {
-			content: "!";
+			content: "⚠️";
 			color: var(--color-primary);
 			margin-right: 0.2rem;
 		}
