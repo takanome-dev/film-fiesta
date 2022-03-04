@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { CardElement } from "@stripe/react-stripe-js";
 import { StripeCardElementChangeEvent } from "@stripe/stripe-js";
 import Joi from "joi";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 import Button from "../components/common/Button";
 import Form from "../components/common/Form";
 import Wrapper from "../components/common/Wrapper";
+import { getCurrentUser } from "../services/auth";
 import { getMovie } from "../services/movie";
 import { getPaymentIntent } from "../services/payment";
 
@@ -110,6 +113,7 @@ export default class Checkout extends Form {
 			returnedDate: "",
 			cardError: "",
 		},
+		movie: { url: "", title: "", dailyRentalRate: 0 },
 		complete: false,
 	};
 
@@ -128,22 +132,10 @@ export default class Checkout extends Form {
 			.label("Returned date"),
 	};
 
-	movie = {
-		_id: "",
-		title: "",
-		genre: { name: "" },
-		dateRelease: "",
-		url: "",
-		overview: "",
-		category: "",
-		voteAverage: 0,
-		numberInStock: 0,
-		dailyRentalRate: 0,
-	};
-
 	async componentDidMount() {
+		const user = getCurrentUser();
 		const movie = await getMovie(this.props.movieId!);
-		this.movie = movie;
+		this.setState({ movie, data: { name: user?.name, email: user?.email } });
 	}
 
 	handleCardDetailsChange = (e: StripeCardElementChangeEvent) => {
@@ -156,13 +148,40 @@ export default class Checkout extends Form {
 		e.complete
 			? this.setState({ complete: true })
 			: this.setState({ complete: false });
-
-		console.log("value", e.value);
 	};
 
 	async submitToServer() {
-		const clientSecret = await getPaymentIntent();
-		console.log(clientSecret);
+		try {
+			const user = getCurrentUser();
+			const paymentIntent = {
+				userId: user!._id!,
+				movieId: this.props.movieId!,
+				returnedDate: this.state.data.returnedDate,
+			};
+			const clientSecret = await getPaymentIntent(paymentIntent);
+
+			const cardElement = this.props.elements?.getElement(CardElement);
+			const stripe = this.props.stripe;
+
+			const paymentMethod = await stripe?.createPaymentMethod({
+				type: "card",
+				card: cardElement!,
+				billing_details: {
+					name: this.state.data.name,
+					email: this.state.data.email,
+				},
+			});
+
+			const confirmedPayment = await stripe?.confirmCardPayment(clientSecret, {
+				payment_method: paymentMethod?.paymentMethod?.id,
+			});
+
+			if (confirmedPayment?.paymentIntent?.status === "succeeded") {
+				return toast.success("Movie successfully rented");
+			}
+		} catch (err: any) {
+			toast.error(err.message);
+		}
 	}
 
 	render() {
@@ -184,9 +203,10 @@ export default class Checkout extends Form {
 			hidePostalCode: true,
 		};
 
-		const { complete, errors } = this.state;
+		const { complete, errors, movie } = this.state;
 		const isDisabled = this.validate() === null && complete ? false : true;
-
+		// const diff = numberOfDays(new Date(this.date.nextDay), new Date());
+		// console.log({ diff });
 		return (
 			<Wrapper width="100%">
 				<Container>
@@ -195,17 +215,17 @@ export default class Checkout extends Form {
 							<p className="title">Order :</p>
 							<div className="order-img">
 								<img
-									src={this.movie?.url}
-									alt={this.movie?.title}
+									src={movie?.url}
+									alt={movie?.title}
 									style={{ aspectRatio: "4/3" }}
 								/>
 							</div>
 							<div className="order-details">
 								<p className="movie-title">
-									Movie: <span>{this.movie?.title}</span>
+									Movie: <span>{movie?.title}</span>
 								</p>
 								<p className="movie-price">
-									Price : <span>${this.movie?.dailyRentalRate} / day</span>
+									Price : <span>${movie?.dailyRentalRate} / day</span>
 								</p>
 								{this.renderInputDate("rentDate", "Rent Day", true)}
 								{this.renderInputDate("returnedDate", "Rent Day", false)}
@@ -218,8 +238,8 @@ export default class Checkout extends Form {
 						<div className="payment">
 							<p className="title">Payment :</p>
 							<div className="wrapper">
-								{this.renderInput("name", "Name", "Your name here")}
-								{this.renderInput("email", "Email", "Your email here")}
+								{this.renderInput("name", "Name", "")}
+								{this.renderInput("email", "Email", "")}
 								<label htmlFor="credit-card">Credit Card</label>
 								<div className="input-card" tabIndex={0}>
 									<CardElement

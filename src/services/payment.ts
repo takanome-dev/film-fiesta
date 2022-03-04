@@ -1,7 +1,13 @@
 import { http } from "./http";
 const endpoint = `${process.env.REACT_APP_API_URL}/payment`;
 
-export const getPaymentIntent = async () => {
-	const { data } = await http.post(endpoint);
+type PaymentRequest = {
+	userId: string;
+	movieId: string;
+	returnedDate: string;
+};
+
+export const getPaymentIntent = async (paymentIntent: PaymentRequest) => {
+	const { data } = await http.post(endpoint, paymentIntent);
 	return data;
 };

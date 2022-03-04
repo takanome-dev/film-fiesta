@@ -1,5 +1,4 @@
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+import { useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { PrivateRoute } from "../components";
@@ -22,10 +21,11 @@ import {
 	Trending,
 } from "../pages";
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY as string);
-
 const Routes = () => {
 	const [movieId, setMovieId] = useState("");
+	const elements = useElements();
+	const stripe = useStripe();
+
 	return (
 		<ErrorBoundary>
 			<main className="main">
@@ -48,12 +48,14 @@ const Routes = () => {
 					<Route path="/register" component={Register} />
 					<PrivateRoute path="/customers" component={Customers} />
 					<PrivateRoute path="/rentals" component={Rentals} />
-					<Elements stripe={stripePromise}>
-						<PrivateRoute
-							path="/checkout"
-							render={() => <Checkout movieId={movieId} />}
-						/>
-					</Elements>
+
+					<PrivateRoute
+						path="/checkout"
+						render={() => (
+							<Checkout movieId={movieId} elements={elements} stripe={stripe} />
+						)}
+					/>
+
 					<Route path="/not-found" component={NotFound} />
 					<Redirect from="/" exact to="/movies" />
 					<Redirect to="not-found" />

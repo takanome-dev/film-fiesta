@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Stripe, StripeElements } from "@stripe/stripe-js";
 import { StaticContext } from "react-router";
 import { RouteComponentProps } from "react-router-dom";
 import { GenreType } from "../types/GenreType";
@@ -142,6 +143,7 @@ export type FormStateType = {
 	errors: any;
 	genres?: GenreType[];
 	complete?: boolean;
+	movie?: any;
 };
 
 export type RegisterStateType = {
@@ -188,6 +190,8 @@ export type FormProps = {
 	setOpenFeedback?: React.Dispatch<React.SetStateAction<boolean>>;
 	setEditPassword?: React.Dispatch<React.SetStateAction<boolean>>;
 	movieId?: string;
+	elements?: StripeElements | null;
+	stripe?: Stripe | null;
 };
 
 export type MovieDetailsProps = {

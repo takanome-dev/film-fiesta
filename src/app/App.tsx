@@ -1,4 +1,5 @@
-
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,7 +8,7 @@ import ErrorBoundary from "../components/ErrorBoundary";
 import Provider from "../context/GlobalContext";
 import Routes from "./Routes";
 
-
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY as string);
 
 const App = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +42,9 @@ const App = () => {
 					openModal={openModal}
 					setOpenModal={setOpenModal}
 				/>
+				<Elements stripe={stripePromise}>
 					<Routes />
+				</Elements>
 			</Provider>
 		</ErrorBoundary>
 	);
