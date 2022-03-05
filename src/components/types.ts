@@ -1,9 +1,16 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Stripe, StripeElements } from "@stripe/stripe-js";
+import {
+	QueryObserverResult,
+	RefetchOptions,
+	RefetchQueryFilters,
+} from "react-query";
 import { StaticContext } from "react-router";
 import { RouteComponentProps } from "react-router-dom";
 import { GenreType } from "../types/GenreType";
 import { MovieType, NewMovieType } from "../types/MovieType";
+import { RentalType } from "../types/RentalType";
 
 // ! Type Definitions
 
@@ -143,6 +150,7 @@ export type FormStateType = {
 	errors: any;
 	genres?: GenreType[];
 	complete?: boolean;
+	isProcessing?: boolean;
 	movie?: any;
 };
 
@@ -182,9 +190,10 @@ export type EditProfileState = {
 // ! Props Types
 
 export type FormProps = {
-	match?: MatchType;
-	history?: HistoryType;
-	location?: LocationType;
+	// match?: MatchType;
+	// history?: HistoryType;
+	// location?: LocationType;
+	props?: { match?: MatchType; history?: HistoryType; location?: LocationType };
 	openFeedback?: boolean;
 	editPassword?: boolean;
 	setOpenFeedback?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -192,6 +201,11 @@ export type FormProps = {
 	movieId?: string;
 	elements?: StripeElements | null;
 	stripe?: Stripe | null;
+	onRefetchRentals?:
+		| (<TPageData>(
+				options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+		  ) => Promise<QueryObserverResult<RentalType[], Error>>)
+		| undefined;
 };
 
 export type MovieDetailsProps = {

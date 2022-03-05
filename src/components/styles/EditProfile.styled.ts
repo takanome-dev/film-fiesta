@@ -15,6 +15,7 @@ const Container = styled.div`
 	/* z-index: 3; */
 
 	.modal-wrapper {
+		position: fixed;
 		width: 30rem;
 		z-index: 4;
 		animation-name: ${slideIn};

@@ -67,8 +67,9 @@ const Navigation = styled.nav`
 					justify-content: flex-start;
 					text-decoration: none;
 					padding: 0.7rem 2rem;
+					cursor: pointer;
 					transition: all 300ms ease-in-out;
-					color: var(--color-dark-80);
+					color: var(--color-dark-60);
 
 					p {
 						margin-left: 1.2rem;

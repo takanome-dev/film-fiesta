@@ -28,6 +28,7 @@ const Container = styled.div`
 			margin-top: 0.5rem;
 			padding: 0.8rem 1rem;
 			color: var(--color-dark-80);
+			cursor: pointer;
 			&:hover {
 				background-color: var(--color-gray-20);
 				color: var(--color-dark);

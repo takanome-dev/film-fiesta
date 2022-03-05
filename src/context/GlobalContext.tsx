@@ -7,10 +7,12 @@ import { getBookmarks } from "../services/bookmark";
 import { getFavorites } from "../services/favorite";
 import { getGenres } from "../services/genre";
 import { deleteMovie, getMovies } from "../services/movie";
+import { getRentals } from "../services/rental";
 import { BookmarkType } from "../types/BookmarkType";
 import { FavoriteType } from "../types/FavoriteType";
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
+import { RentalType } from "../types/RentalType";
 import { paginate } from "../utils/paginate";
 import {
 	CURRENT_PAGE,
@@ -19,6 +21,7 @@ import {
 	FETCH_FAVORITES,
 	FETCH_GENRES,
 	FETCH_MOVIES,
+	FETCH_RENTALS,
 	GET_CURRENT_USER,
 	SEARCH_QUERY,
 	SELECTED_CATEGORY,
@@ -33,6 +36,7 @@ const initialState: InitialStateType = {
 	genres: [],
 	favorites: [],
 	bookmarks: [],
+	rentals: [],
 	pageSize: 9,
 	currentPage: 1,
 	currentRoute: "/movies",
@@ -76,20 +80,35 @@ const Provider: React.FC<Props> = ({ children }) => {
 	const { refetch: refetchFavorites } = useQuery<FavoriteType[], Error>(
 		"getFavorites",
 		async () => await getFavorites(),
-		{ onSuccess: (data) => dispatch({ type: FETCH_FAVORITES, payload: data }) }
+		{
+			enabled: false,
+			onSuccess: (data) => dispatch({ type: FETCH_FAVORITES, payload: data }),
+		}
 	);
 
 	const { refetch: refetchBookmarks } = useQuery<BookmarkType[], Error>(
 		"getBookmarks",
 		async () => await getBookmarks(),
-		{ onSuccess: (data) => dispatch({ type: FETCH_BOOKMARKS, payload: data }) }
+		{
+			enabled: false,
+			onSuccess: (data) => dispatch({ type: FETCH_BOOKMARKS, payload: data }),
+		}
+	);
+
+	const { refetch: refetchRentals } = useQuery<RentalType[], Error>(
+		"getRentals",
+		async () => await getRentals(),
+		{
+			enabled: false,
+			onSuccess: (data) => dispatch({ type: FETCH_RENTALS, payload: data }),
+		}
 	);
 
 	useEffect(() => {
 		const user = getCurrentUser();
 		dispatch({
 			type: GET_CURRENT_USER,
-			payload: user,
+			payload: user ?? {},
 		});
 	}, []);
 
@@ -198,6 +217,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 		genres: state.genres,
 		favorites: state.favorites,
 		bookmarks: state.bookmarks,
+		rentals: state.rentals,
 		user: state.user,
 		pageSize: state.pageSize,
 		searchQuery: state.searchQuery,
@@ -215,6 +235,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 		onRefetchMovie: refetchMovies,
 		onRefetchFavorites: refetchFavorites,
 		onRefetchBookmarks: refetchBookmarks,
+		onRefetchRentals: refetchRentals,
 	};
 
 	return <Context.Provider value={value}>{children}</Context.Provider>;

@@ -26,19 +26,20 @@ export default class LoginForm extends Form {
 	};
 
 	async submitToServer() {
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		const { state } = this.props.location!;
+		const { props } = this.props;
 
 		try {
 			await logUser(this.state.data);
-			window.location.pathname = state ? state.from.pathname : "/";
+			window.location.pathname = props?.location?.state
+				? props?.location?.state?.from.pathname
+				: "/";
 		} catch (err: any) {
 			if (err.request?.status === 400) {
-				const errors = this.state.errors;
+				const { errors } = this.state;
 				// ! TODO: Review Error Message
 				errors.email = err.data;
 				// errors.password = err.data;
-				this.setState({ errors });
+				this.setState({ errors, isProcessing: false });
 			}
 		}
 	}

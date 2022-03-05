@@ -1,6 +1,7 @@
 import Joi, { PartialSchemaMap } from "joi";
 import React, { Component } from "react";
 import { GenreType } from "../../types/GenreType";
+import { Loader } from "../svg";
 import { FormProps, FormStateType } from "../types";
 import Button from "./Button";
 import Input from "./Input";
@@ -12,6 +13,7 @@ export default class Form extends Component<FormProps, FormStateType> {
 	state: FormStateType = {
 		data: {},
 		errors: {},
+		isProcessing: false,
 	};
 
 	schema: PartialSchemaMap = {};
@@ -41,11 +43,13 @@ export default class Form extends Component<FormProps, FormStateType> {
 		this.setState({ errors: errors || {} });
 		if (errors) return;
 
+		this.setState({ isProcessing: true });
+
 		this.submitToServer();
 	};
 
 	submitToServer() {
-		//
+		// Do something
 	}
 
 	validateProperty = ({
@@ -141,10 +145,11 @@ export default class Form extends Component<FormProps, FormStateType> {
 	}
 
 	renderButton(label: string) {
-		const isDisabled = this.validate() === null ? false : true;
+		const isDisabled =
+			this.validate() === null || this.state.isProcessing ? false : true;
 		return (
 			<Button classes="btn" isDisabled={isDisabled}>
-				{label}
+				{this.state.isProcessing ? <Loader size={24} /> : label}
 			</Button>
 		);
 	}

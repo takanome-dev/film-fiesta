@@ -5,6 +5,7 @@ import {
 	FETCH_FAVORITES,
 	FETCH_GENRES,
 	FETCH_MOVIES,
+	FETCH_RENTALS,
 	GET_CURRENT_USER,
 	SEARCH_QUERY,
 	SELECTED_CATEGORY,
@@ -45,6 +46,11 @@ const reducer = (state: InitialStateType, action: ActionType) => {
 			return {
 				...state,
 				bookmarks: action.payload,
+			};
+		case FETCH_RENTALS:
+			return {
+				...state,
+				rentals: action.payload,
 			};
 		case CURRENT_PAGE:
 			return {

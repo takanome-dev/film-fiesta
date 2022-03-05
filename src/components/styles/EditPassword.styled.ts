@@ -14,6 +14,7 @@ const Container = styled.div`
 	animation-duration: 300ms;
 
 	.modal-wrapper {
+		position: fixed;
 		z-index: 4;
 		width: 30rem;
 		animation-name: ${slideIn};

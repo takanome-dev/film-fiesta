@@ -7,12 +7,14 @@ import { BookmarkType } from "../types/BookmarkType";
 import { FavoriteType } from "../types/FavoriteType";
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
+import { RentalType } from "../types/RentalType";
 
 export type InitialStateType = {
 	movies: MovieType[];
 	genres: GenreType[];
 	favorites: FavoriteType[];
 	bookmarks: BookmarkType[];
+	rentals: RentalType[];
 	filteredMovies?: MovieType[];
 	totalMovies?: number;
 	pageSize: number;
@@ -44,6 +46,9 @@ export type InitialStateType = {
 	onRefetchBookmarks?: <TPageData>(
 		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
 	) => Promise<QueryObserverResult<BookmarkType[], Error>>;
+	onRefetchRentals?: <TPageData>(
+		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+	) => Promise<QueryObserverResult<RentalType[], Error>>;
 };
 
 export type ActionType = {

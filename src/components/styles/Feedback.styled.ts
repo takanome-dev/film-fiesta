@@ -8,12 +8,15 @@ const Container = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
+	/* right: 0;
+	bottom: 0; */
 	width: 100%;
 	height: 100%;
 	animation: ${appear} 300ms;
 
 	.wrapper {
 		z-index: 4;
+		position: fixed;
 		max-width: 30rem;
 		animation: ${slideIn} 500ms;
 		margin: 0 1rem;

@@ -7,7 +7,7 @@ type PaymentRequest = {
 	returnedDate: string;
 };
 
-export const getPaymentIntent = async (paymentIntent: PaymentRequest) => {
-	const { data } = await http.post(endpoint, paymentIntent);
+export const getClientSecret = async (userInfo: PaymentRequest) => {
+	const { data } = await http.post(endpoint, userInfo);
 	return data;
 };

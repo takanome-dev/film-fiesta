@@ -1,8 +1,9 @@
 import { useElements, useStripe } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { PrivateRoute } from "../components";
 import ErrorBoundary from "../components/ErrorBoundary";
+import { Context } from "../context/GlobalContext";
 import {
 	Bookmark,
 	Checkout,
@@ -25,6 +26,7 @@ const Routes = () => {
 	const [movieId, setMovieId] = useState("");
 	const elements = useElements();
 	const stripe = useStripe();
+	const { onRefetchRentals } = useContext(Context);
 
 	return (
 		<ErrorBoundary>
@@ -51,8 +53,14 @@ const Routes = () => {
 
 					<PrivateRoute
 						path="/checkout"
-						render={() => (
-							<Checkout movieId={movieId} elements={elements} stripe={stripe} />
+						render={(props) => (
+							<Checkout
+								movieId={movieId}
+								elements={elements}
+								stripe={stripe}
+								onRefetchRentals={onRefetchRentals}
+								{...props}
+							/>
 						)}
 					/>
 

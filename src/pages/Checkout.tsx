@@ -3,104 +3,15 @@ import { CardElement } from "@stripe/react-stripe-js";
 import { StripeCardElementChangeEvent } from "@stripe/stripe-js";
 import Joi from "joi";
 import { toast } from "react-toastify";
-import styled from "styled-components";
 import Button from "../components/common/Button";
 import Form from "../components/common/Form";
 import Wrapper from "../components/common/Wrapper";
+import Container from "../components/styles/Checkout.styled";
+import { Loader } from "../components/svg";
 import { getCurrentUser } from "../services/auth";
 import { getMovie } from "../services/movie";
-import { getPaymentIntent } from "../services/payment";
-
-const Container = styled.div`
-	form {
-		display: grid;
-		grid-template-columns: 0.7fr 1fr;
-		column-gap: 5rem;
-
-		.title {
-			font-size: 1.5rem;
-			font-weight: 500;
-			margin: -1rem 0 1rem;
-			text-align: center;
-			text-decoration: underline;
-			text-decoration-style: double;
-		}
-
-		.order {
-			.order-img {
-				margin-bottom: 1rem;
-
-				img {
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
-					border-radius: 0.8rem;
-					box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
-				}
-			}
-
-			.order-details {
-				/* display: flex;
-			justify-content: center;
-			flex-direction: column; */
-
-				/* .movie-title {
-				font-size: 1.5rem;
-				font-weight: 500;
-			}
-
-			.movie-price {
-				font-size: 1.2rem;
-				font-weight: 500;
-			} */
-				p {
-					font-size: 1.1rem;
-					/* font-weight: 500; */
-					margin-top: 0.5rem;
-					span {
-						margin-left: 1rem;
-						/* font-size: 1.5rem; */
-					}
-				}
-
-				.total {
-					display: flex;
-					justify-content: space-between;
-					align-items: center;
-					border-top: 0.1rem solid var(--color-gray-40);
-					margin-top: 1rem;
-				}
-			}
-		}
-
-		.payment {
-			.wrapper {
-				margin-top: 2rem;
-				.label {
-					font-size: 1.1rem;
-				}
-
-				.input-card {
-					margin: 0.5rem 0 1rem;
-					padding: 0.8rem 1rem;
-					background-color: var(--color-background);
-					border: none;
-					border-radius: 0.6rem;
-					transition: outline 100ms ease;
-					&:focus {
-						outline: 0.35rem solid var(--color-secondary-20);
-					}
-				}
-
-				.error {
-					margin-top: 0.5rem;
-					font-size: 1rem;
-					color: var(--color-primary);
-				}
-			}
-		}
-	}
-`;
+import { getClientSecret } from "../services/payment";
+import { createRental } from "../services/rental";
 
 export default class Checkout extends Form {
 	state = {
@@ -112,9 +23,12 @@ export default class Checkout extends Form {
 		errors: {
 			returnedDate: "",
 			cardError: "",
+			name: "",
+			email: "",
 		},
 		movie: { url: "", title: "", dailyRentalRate: 0 },
 		complete: false,
+		isProcessing: false,
 	};
 
 	schema = {
@@ -151,17 +65,32 @@ export default class Checkout extends Form {
 	};
 
 	async submitToServer() {
+		const { movieId, props } = this.props;
+		const { name, email } = this.state.data;
+		const { errors } = this.state;
+		const user = getCurrentUser();
+		if (name !== user?.name) {
+			errors.name = "Name is invalid";
+		}
+		if (email !== user?.email) {
+			errors.email = "Email is invalid";
+		}
+
+		this.setState({ errors });
+		if (errors.name || errors.email) return;
+		this.setState({ isProcessing: true });
+
 		try {
-			const user = getCurrentUser();
-			const paymentIntent = {
+			const userInfo = {
 				userId: user!._id!,
-				movieId: this.props.movieId!,
+				movieId: movieId!,
 				returnedDate: this.state.data.returnedDate,
 			};
-			const clientSecret = await getPaymentIntent(paymentIntent);
+
+			const clientSecret = await getClientSecret(userInfo);
 
 			const cardElement = this.props.elements?.getElement(CardElement);
-			const stripe = this.props.stripe;
+			const { stripe } = this.props;
 
 			const paymentMethod = await stripe?.createPaymentMethod({
 				type: "card",
@@ -176,9 +105,15 @@ export default class Checkout extends Form {
 				payment_method: paymentMethod?.paymentMethod?.id,
 			});
 
-			if (confirmedPayment?.paymentIntent?.status === "succeeded") {
-				return toast.success("Movie successfully rented");
-			}
+			const data = await createRental({
+				userId: user!._id!,
+				movieId: movieId!,
+				returnedDate: this.state.data.returnedDate,
+				paymentIntentId: confirmedPayment?.paymentIntent?.id,
+			});
+			toast.success(data);
+			this.props.onRefetchRentals?.();
+			return props?.history?.replace("/rentals");
 		} catch (err: any) {
 			toast.error(err.message);
 		}
@@ -203,10 +138,10 @@ export default class Checkout extends Form {
 			hidePostalCode: true,
 		};
 
-		const { complete, errors, movie } = this.state;
-		const isDisabled = this.validate() === null && complete ? false : true;
-		// const diff = numberOfDays(new Date(this.date.nextDay), new Date());
-		// console.log({ diff });
+		const { complete, errors, movie, isProcessing } = this.state;
+		const isDisabled =
+			this.validate() === null && complete && !isProcessing ? false : true;
+
 		return (
 			<Wrapper width="100%">
 				<Container>
@@ -217,7 +152,7 @@ export default class Checkout extends Form {
 								<img
 									src={movie?.url}
 									alt={movie?.title}
-									style={{ aspectRatio: "4/3" }}
+									style={{ aspectRatio: "3/2" }}
 								/>
 							</div>
 							<div className="order-details">
@@ -251,9 +186,8 @@ export default class Checkout extends Form {
 								{errors.cardError && (
 									<p className="error">{errors.cardError}</p>
 								)}
-								{/* {this.renderButton("Checkout")} */}
 								<Button classes="btn" isDisabled={isDisabled}>
-									Checkout
+									{isProcessing ? <Loader size={24} /> : "Pay now"}
 								</Button>
 							</div>
 						</div>

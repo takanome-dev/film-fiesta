@@ -10,28 +10,30 @@ type Props = {
 
 const UserModal: React.FC<Props> = ({ setOpenModal, openModal }) => {
 	return (
-		<Container>
-			{openModal && (
-				<Overlay
-					zIndex={window.innerWidth > 650 ? 2 : 4}
-					bgColor="transparent"
-					handleClose={() => setOpenModal(false)}
-				/>
-			)}
-			<div className="wrapper">
-				{profileLinks.map((l, i) => (
-					<Link
-						to={l.path}
-						className="flex"
-						onClick={() => setOpenModal(false)}
-						key={i}
-					>
-						{l.icon}
-						<p>{l.name}</p>
-					</Link>
-				))}
-			</div>
-		</Container>
+		<>
+			<Container>
+				{openModal && (
+					<Overlay
+						zIndex={window.innerWidth > 650 ? 2 : 4}
+						bgColor="transparent"
+						handleClose={() => setOpenModal(false)}
+					/>
+				)}
+				<div className="wrapper">
+					{profileLinks.map((l, i) => (
+						<Link
+							to={l.path}
+							className="flex"
+							onClick={() => setOpenModal(false)}
+							key={i}
+						>
+							{l.icon}
+							<p>{l.name}</p>
+						</Link>
+					))}
+				</div>
+			</Container>
+		</>
 	);
 };
 

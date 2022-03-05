@@ -37,14 +37,14 @@ export default class MovieForm extends Form {
 
 	async populateMovies() {
 		try {
-			const movieId = this.props.match?.params.id;
+			const movieId = this.props.props?.match?.params.id;
 			if (movieId === "new") return;
 			const movie = await getMovie(movieId!);
 			this.setState({ data: this.updateMovieData(movie) });
 		} catch (err: any) {
 			if (err.request?.status === 404) {
 				toast.error(err.data);
-				this.props.history?.replace("/not-found");
+				this.props.props?.history?.replace("/not-found");
 			}
 		}
 	}
@@ -66,7 +66,7 @@ export default class MovieForm extends Form {
 
 	async submitToServer() {
 		await saveMovie(this.state.data);
-		this.props.history?.push("/movies");
+		this.props.props?.history?.push("/movies");
 	}
 
 	render() {

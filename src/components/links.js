@@ -1,7 +1,7 @@
 // import { useEffect } from "react";
 import {
   BookmarkIcon,
-  FeedBackIcon,
+  // FeedBackIcon,
   FireIcon,
   HeartIcon,
   HomeIcon,
@@ -61,24 +61,19 @@ export const bottomLinks = [
 export const profileLinks = [
   {
     name: "Profile",
-    icon: <UserIcon color="var(--color-dark-80)" />,
+    icon: <UserIcon color="var(--color-dark-60)" />,
     path: "/profile",
   },
-  // {
-  //   name: "Security",
-  //   icon: <SecurityIcon color="var(--color-dark-80)" />,
-  //   path: "/security",
-  // },
   {
     name: "Settings",
-    icon: <SettingsIcon color="var(--color-dark-80)" />,
+    icon: <SettingsIcon color="var(--color-dark-60)" />,
     path: "/settings",
   },
-  {
-    name: "Feedback",
-    icon: <FeedBackIcon color="var(--color-dark-80)" />,
-    path: "/feedback",
-  },
+  // {
+  //   name: "Feedback",
+  //   icon: <FeedBackIcon color="var(--color-dark-80)" />,
+  //   path: "/feedback",
+  // },
   {
     name: "Sign out",
     icon: <SignOutIcon color="var(--color-dark-80)" />,

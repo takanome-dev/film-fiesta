@@ -17,7 +17,8 @@ export default class RegisterForm extends Form {
 
 	schema = {
 		email: Joi.string()
-			.email({ tlds: { allow: ["com"] } }).lowercase()
+			.email({ tlds: { allow: ["com"] } })
+			.lowercase()
 			.min(8)
 			.max(50)
 			.required()
@@ -32,9 +33,9 @@ export default class RegisterForm extends Form {
 			window.location.pathname = "/";
 		} catch (err: any) {
 			if (err.request?.status === 400) {
-				const errors = this.state.errors;
+				const { errors } = this.state;
 				errors.email = err.data;
-				this.setState({ errors });
+				this.setState({ errors, isProcessing: false });
 			}
 		}
 	}

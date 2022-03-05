@@ -69,7 +69,7 @@ const Sidebar: React.FC<Props> = ({
 									{l.icon(
 										currentRoute === l.path
 											? "var(--color-primary)"
-											: "var(--color-dark-80)"
+											: "var(--color-dark-60)"
 									)}
 									<p>{l.name}</p>
 								</Link>
@@ -88,18 +88,18 @@ const Sidebar: React.FC<Props> = ({
 									{l.icon(
 										currentRoute === l.path
 											? "var(--color-primary)"
-											: "var(--color-dark-80)"
+											: "var(--color-dark-60)"
 									)}
 									<p>{l.name}</p>
 								</Link>
 							))}
 							<span className="flex link" onClick={() => setOpenFeedback(true)}>
-								<FeedBackIcon color="var(--color-dark-80)" />
+								<FeedBackIcon color="var(--color-dark-60)" />
 								<p>Feedback</p>
 							</span>
 							{user && user._id && !condition && (
 								<Link className="flex link" to="/logout">
-									<SignOutIcon color="var(--color-dark-80)" />
+									<SignOutIcon color="var(--color-dark-60)" />
 									<p>Sign out</p>
 								</Link>
 							)}
