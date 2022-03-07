@@ -12,7 +12,6 @@ export const Container = styled.div`
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
-			/* object-position: center; */
 			border-radius: 0.8rem;
 			box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
 		}
@@ -31,7 +30,6 @@ export const Container = styled.div`
 
 		.buttons {
 			display: flex;
-			/* margin-bottom: 1rem; */
 
 			div + div {
 				margin-left: 1rem;
@@ -39,12 +37,10 @@ export const Container = styled.div`
 
 			.rental-rate {
 				background-color: var(--color-primary-60);
-				/* text-align: center; */
 			}
 
 			.rate {
 				background-color: var(--color-secondary);
-				/* margin-left: 1rem; */
 				h3 {
 					color: var(--color-yellow);
 					margin-left: 0.5rem;
@@ -58,6 +54,10 @@ export const Container = styled.div`
 				&:hover {
 					background-color: var(--color-gray-60);
 				}
+			}
+
+			.icon.liked {
+				background-color: var(--color-primary-20);
 			}
 		}
 
@@ -98,6 +98,13 @@ export const Container = styled.div`
 						margin-left: 0.5rem;
 					}
 				}
+
+				@media (max-width: 590px) {
+					width: 100%;
+					span {
+						margin-left: 1rem;
+					}
+				}
 			}
 		}
 	}
@@ -129,13 +136,6 @@ export const Container = styled.div`
 				flex-wrap: wrap;
 				div {
 					margin-top: 1rem;
-				}
-			}
-
-			.rent-btn {
-				width: 100%;
-				span {
-					margin-left: 1rem;
 				}
 			}
 		}

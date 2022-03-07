@@ -1,18 +1,22 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { Container } from "../components/styles/MovieDetails.styled";
 import {
 	AddBookmarkIcon,
 	HeartIcon,
+	RemoveBookmarkIcon,
 	ShoppingIcon,
 	StarIcon,
 } from "../components/svg";
 import { MovieDetailsProps } from "../components/types";
+import { Context } from "../context/GlobalContext";
 import { getMovie } from "../services/movie";
 import { MovieType } from "../types/MovieType";
 
 const movieDetails: React.FC<MovieDetailsProps> = ({ match, setMovieId }) => {
+	const { user } = useContext(Context);
+
 	const { data, refetch } = useQuery<MovieType, Error>(
 		"getMovie",
 		async () => await getMovie(match.params.id),
@@ -23,6 +27,12 @@ const movieDetails: React.FC<MovieDetailsProps> = ({ match, setMovieId }) => {
 		refetch();
 		setMovieId(match.params.id);
 	}, [match.params.id]);
+
+	const isLiked = data?.likes?.find((l: { _id: string }) => user._id === l._id);
+
+	const isBookmarked = data?.bookmarks?.find(
+		(l: { _id: string }) => user._id === l._id
+	);
 
 	return (
 		<Container>
@@ -46,10 +56,29 @@ const movieDetails: React.FC<MovieDetailsProps> = ({ match, setMovieId }) => {
 						<StarIcon /> <h3>{data?.voteAverage}</h3>
 					</div>
 					<div className="icon btn">
-						<AddBookmarkIcon color="var(--color-dark-60)" />
+						{isBookmarked ? (
+							<RemoveBookmarkIcon
+								isBookmarked={isBookmarked}
+								movie={data}
+								refetch={refetch}
+							/>
+						) : (
+							<AddBookmarkIcon
+								color="var(--color-dark-60)"
+								isBookmarked={isBookmarked}
+								movie={data}
+								refetch={refetch}
+							/>
+						)}
 					</div>
-					<div className="icon btn">
-						<HeartIcon color="var(--color-dark-60)" fillColor="none" />
+					<div className={isLiked ? "icon btn liked" : "icon btn"}>
+						<HeartIcon
+							color={isLiked ? "var(--color-primary)" : "var(--color-dark-60)"}
+							fillColor={isLiked ? "var(--color-primary)" : "none"}
+							isLiked={isLiked}
+							movie={data}
+							refetch={refetch}
+						/>
 					</div>
 				</div>
 				<p className="overview">Overview</p>

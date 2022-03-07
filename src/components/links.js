@@ -1,9 +1,9 @@
 // import { useEffect } from "react";
 import {
   BookmarkIcon,
+  FavoriteIcon,
   // FeedBackIcon,
   FireIcon,
-  HeartIcon,
   HomeIcon,
   RentalIcon,
   SignOutIcon,
@@ -34,7 +34,7 @@ export const topLinks = [
   },
   {
     name: "Favorites",
-    icon: (color) => <HeartIcon color={color} fillColor="none" />,
+    icon: (color) => <FavoriteIcon color={color} fillColor="none" />,
     path: "/favorites",
   },
   {

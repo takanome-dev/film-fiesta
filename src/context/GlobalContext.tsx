@@ -232,7 +232,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 		onPageChange: handlePageChange,
 		onRouteChange: handleRouteChange,
 		onGenreSelected: handleSelectedGenre,
-		onRefetchMovie: refetchMovies,
+		onRefetchMovies: refetchMovies,
 		onRefetchFavorites: refetchFavorites,
 		onRefetchBookmarks: refetchBookmarks,
 		onRefetchRentals: refetchRentals,
