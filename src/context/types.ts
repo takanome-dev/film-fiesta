@@ -1,7 +1,7 @@
 import {
 	QueryObserverResult,
 	RefetchOptions,
-	RefetchQueryFilters,
+	RefetchQueryFilters
 } from "react-query";
 import { BookmarkType } from "../types/BookmarkType";
 import { FavoriteType } from "../types/FavoriteType";
@@ -37,7 +37,7 @@ export type InitialStateType = {
 	onPageChange?: (pageNumber: number) => void;
 	onRouteChange?: (route: string) => void;
 	onSearch?: (query: string) => void;
-	onRefetchMovie?: <TPageData>(
+	onRefetchMovies?: <TPageData>(
 		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
 	) => Promise<QueryObserverResult<MovieType[], Error>>;
 	onRefetchFavorites?: <TPageData>(

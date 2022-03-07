@@ -5,6 +5,7 @@ export { default as CloseIcon } from "./Icon.Close";
 export { default as EmptyBookmark } from "./Icon.EmptyBookmark";
 export { default as EmptyFav } from "./Icon.EmptyFav";
 export { default as EmptyRental } from "./Icon.EmptyRental";
+export { default as FavoriteIcon } from "./Icon.Favorite";
 export { default as FeedBackIcon } from "./Icon.FeedBack";
 export { default as FireIcon } from "./Icon.Fire";
 export { default as HeartIcon } from "./Icon.Heart";

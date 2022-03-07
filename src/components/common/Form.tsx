@@ -146,7 +146,7 @@ export default class Form extends Component<FormProps, FormStateType> {
 
 	renderButton(label: string) {
 		const isDisabled =
-			this.validate() === null || this.state.isProcessing ? false : true;
+			this.validate() === null || !this.state.isProcessing ? false : true;
 		return (
 			<Button classes="btn" isDisabled={isDisabled}>
 				{this.state.isProcessing ? <Loader size={24} /> : label}
