@@ -148,7 +148,6 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .error {
-		/* margin-top: 1rem; */
 		font-size: 1rem;
 		color: var(--color-primary);
 		position: absolute;
@@ -156,7 +155,8 @@ const GlobalStyles = createGlobalStyle`
 		box-shadow: 0 0.1rem 2rem rgba(0, 0, 0, 0.2);
 		padding: 0.3rem 0.8rem;
 		border-radius: 0.5rem;
-		bottom: -50%;
+		top: 100%;
+		/* bottom: -50%; */
 		z-index: 2;
 		animation: ${appear} 700ms;
 

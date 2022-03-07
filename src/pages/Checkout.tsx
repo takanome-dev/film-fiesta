@@ -20,7 +20,7 @@ export default class Checkout extends Form {
 		data: {
 			name: "",
 			email: "",
-			returnedDate: new Date(this.date.nextDay),
+			returnedDate: "",
 		},
 		errors: {
 			returnedDate: "",
@@ -94,31 +94,45 @@ export default class Checkout extends Form {
 			const cardElement = this.props.elements?.getElement(CardElement);
 			const { stripe } = this.props;
 
-			const paymentMethod = await stripe?.createPaymentMethod({
-				type: "card",
-				card: cardElement!,
-				billing_details: {
-					name: this.state.data.name,
-					email: this.state.data.email,
-				},
-			});
+			const { error: paymentMethodError, paymentMethod } =
+				await stripe!.createPaymentMethod({
+					type: "card",
+					card: cardElement!,
+					billing_details: {
+						name: this.state.data.name,
+						email: this.state.data.email,
+					},
+				});
 
-			const confirmedPayment = await stripe?.confirmCardPayment(clientSecret, {
-				payment_method: paymentMethod?.paymentMethod?.id,
-			});
+			if (paymentMethodError)
+				return (
+					toast.error(paymentMethodError.message) &&
+					this.setState({ isProcessing: false })
+				);
+
+			const { error: confirmationError, paymentIntent } =
+				await stripe!.confirmCardPayment(clientSecret, {
+					payment_method: paymentMethod?.id,
+				});
+
+			if (confirmationError)
+				return (
+					toast.error(confirmationError.message) &&
+					this.setState({ isProcessing: false })
+				);
 
 			const data = await createRental({
 				userId: user!._id!,
 				movieId: movieId!,
 				returnedDate: this.state.data.returnedDate,
-				paymentIntentId: confirmedPayment?.paymentIntent?.id,
+				paymentIntentId: paymentIntent?.id,
 			});
 			toast.success(data);
 			this.props.onRefetchRentals?.();
 			return history?.replace("/rentals");
 		} catch (err: any) {
 			console.log({ err });
-			toast.error(err.message);
+			toast.error(err.data);
 		}
 	}
 
@@ -195,6 +209,9 @@ export default class Checkout extends Form {
 										<p className="error">{errors.cardError}</p>
 									)}
 								</div>
+								<p className="info">
+									! Use 4242-4242-4242-4242 as test credit card number 💳
+								</p>
 								<Button classes="btn" isDisabled={isDisabled}>
 									{isProcessing ? (
 										<Loader size={24} />

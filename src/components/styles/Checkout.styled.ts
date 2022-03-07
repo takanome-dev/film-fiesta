@@ -23,6 +23,7 @@ const Container = styled.div`
 					width: 100%;
 					height: 100%;
 					object-fit: cover;
+					/* object-position: top; */
 					border-radius: 0.8rem;
 					box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
 				}
@@ -65,6 +66,12 @@ const Container = styled.div`
 					&:focus {
 						outline: 0.35rem solid var(--color-secondary-20);
 					}
+				}
+
+				.info {
+					color: var(--color-secondary);
+					font-size: 1.1rem;
+					font-weight: 500;
 				}
 			}
 		}

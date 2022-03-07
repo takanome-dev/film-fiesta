@@ -6,7 +6,7 @@ const endpoint = `${process.env.REACT_APP_API_URL}/rentals`;
 type RentalRequestType = {
 	userId: string;
 	movieId: string;
-	returnedDate: Date;
+	returnedDate: string;
 	paymentIntentId: string | undefined;
 };
 

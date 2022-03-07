@@ -22,8 +22,8 @@ export default class EditPassword extends Form {
 			.min(8)
 			.max(50)
 			.required()
-			.label("Current Password"),
-		newPassword: Joi.string().min(8).max(50).required().label("New Password"),
+			.label("Your Password"),
+		newPassword: Joi.string().min(8).max(50).required().label("Your Password"),
 	};
 
 	keydownHandler = (e: KeyboardEvent) => {

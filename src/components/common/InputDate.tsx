@@ -7,11 +7,11 @@ type Props = {
 	value: string;
 	error: string;
 	disabled: boolean;
-	onChange?: React.ChangeEventHandler<HTMLInputElement>;
-	// onChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>;
+	onChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 const Container = styled.div`
+	position: relative;
 	margin-top: 0.5rem;
 	label {
 		font-size: 1.1rem;
@@ -32,11 +32,11 @@ const Container = styled.div`
 		}
 	}
 
-	.error {
-		margin-top: 0.5rem;
-		font-size: 1rem;
-		color: var(--color-primary);
-	}
+	/* .error {
+		position: absolute;
+		top: 100%;
+		z-index: 5;
+	} */
 `;
 
 const InputDate: React.FC<Props> = ({
@@ -49,15 +49,8 @@ const InputDate: React.FC<Props> = ({
 	return (
 		<Container>
 			<label htmlFor={name}>{label} :</label>
-			<input
-				id={name}
-				name={name}
-				{...rest}
-				type="date"
-				disabled={disabled}
-				readOnly={name === "rentDate" ? true : false}
-			/>
-			{error && <div className="error">{error}</div>}
+			<input id={name} name={name} {...rest} type="date" disabled={disabled} />
+			{error && <p className="error">{error}</p>}
 		</Container>
 	);
 };
