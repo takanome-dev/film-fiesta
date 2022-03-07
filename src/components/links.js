@@ -6,7 +6,6 @@ import {
   HeartIcon,
   HomeIcon,
   RentalIcon,
-  SettingsIcon,
   SignOutIcon,
   TrendingIcon,
   UserIcon,
@@ -46,11 +45,11 @@ export const topLinks = [
 ];
 
 export const bottomLinks = [
-  {
-    name: "Settings",
-    icon: (color) => <SettingsIcon color={color} />,
-    path: "/settings",
-  },
+  // {
+  //   name: "Settings",
+  //   icon: (color) => <SettingsIcon color={color} />,
+  //   path: "/settings",
+  // },
   // {
   // 	name: "Feedback",
   // 	icon: (color) => <FeedBackIcon color={color} />,
@@ -64,11 +63,11 @@ export const profileLinks = [
     icon: <UserIcon color="var(--color-dark-60)" />,
     path: "/profile",
   },
-  {
-    name: "Settings",
-    icon: <SettingsIcon color="var(--color-dark-60)" />,
-    path: "/settings",
-  },
+  // {
+  //   name: "Settings",
+  //   icon: <SettingsIcon color="var(--color-dark-60)" />,
+  //   path: "/settings",
+  // },
   // {
   //   name: "Feedback",
   //   icon: <FeedBackIcon color="var(--color-dark-80)" />,

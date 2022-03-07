@@ -4,7 +4,7 @@ const endpoint = `${process.env.REACT_APP_API_URL}/payment`;
 type PaymentRequest = {
 	userId: string;
 	movieId: string;
-	returnedDate: string;
+	returnedDate: Date;
 };
 
 export const getClientSecret = async (userInfo: PaymentRequest) => {

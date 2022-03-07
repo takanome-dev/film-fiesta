@@ -1,5 +1,23 @@
 import { createGlobalStyle, keyframes } from "styled-components";
 
+export const slideIn = keyframes`
+	from {
+    transform: translateY(-10rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+`;
+
+export const appear = keyframes`
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
 const GlobalStyles = createGlobalStyle`
 
   :root {
@@ -60,7 +78,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   /**
-    @reference: https://www.joshwcomeau.com/css/custom-css-reset/
+  * @reference: https://www.joshwcomeau.com/css/custom-css-reset/ 
   */
 
   html,
@@ -129,6 +147,37 @@ const GlobalStyles = createGlobalStyle`
     border: none;
   }
 
+  .error {
+		/* margin-top: 1rem; */
+		font-size: 1rem;
+		color: var(--color-primary);
+		position: absolute;
+		background-color: #fff;
+		box-shadow: 0 0.1rem 2rem rgba(0, 0, 0, 0.2);
+		padding: 0.3rem 0.8rem;
+		border-radius: 0.5rem;
+		bottom: -50%;
+		z-index: 2;
+		animation: ${appear} 700ms;
+
+		&::before {
+			content: "❌";
+			color: var(--color-primary);
+			margin-right: 0.2rem;
+		}
+
+		&::after {
+			content: " ";
+			position: absolute;
+			bottom: 100%;
+			left: 50%;
+			border-width: 0.5rem;
+			margin-left: -0.5rem;
+			border-style: solid;
+			border-color: transparent transparent #fff transparent;
+		}
+	}
+
   .form {
     h1 {
       margin-bottom: 2rem;
@@ -161,24 +210,6 @@ const GlobalStyles = createGlobalStyle`
       /* flex-direction: column; */
       flex-wrap: wrap;
     }
-  }
-`;
-
-export const slideIn = keyframes`
-	from {
-    transform: translateY(-10rem);
-  }
-  to {
-    transform: translateY(0);
-  }
-`;
-
-export const appear = keyframes`
-  from {
-    opacity: 0
-  }
-  to {
-    opacity: 1;
   }
 `;
 

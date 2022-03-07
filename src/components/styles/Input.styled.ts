@@ -26,8 +26,7 @@ const Container = styled.div`
 		}
 	}
 
-	.error {
-		/* margin-top: 1rem; */
+	/* .error {
 		font-size: 1rem;
 		color: var(--color-primary);
 		position: absolute;
@@ -43,7 +42,7 @@ const Container = styled.div`
 			content: "⚠️";
 			color: var(--color-primary);
 			margin-right: 0.2rem;
-			font-size: 1.5rem;
+			font-size: 1.2rem;
 		}
 
 		&::after {
@@ -56,7 +55,7 @@ const Container = styled.div`
 			border-style: solid;
 			border-color: transparent transparent #fff transparent;
 		}
-	}
+	} */
 `;
 
 export default Container;

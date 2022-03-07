@@ -27,7 +27,11 @@ const movieDetails: React.FC<MovieDetailsProps> = ({ match, setMovieId }) => {
 	return (
 		<Container>
 			<div className="image">
-				<img style={{ aspectRatio: "4/3" }} src={data?.url} alt={data?.title} />
+				<img
+					style={{ aspectRatio: "16/9" }}
+					src={data?.url}
+					alt={data?.title}
+				/>
 			</div>
 			<div className="desc">
 				<h1>{data?.title}</h1>

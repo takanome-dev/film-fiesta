@@ -55,6 +55,7 @@ const Container = styled.div`
 				}
 
 				.input-card {
+					position: relative;
 					margin: 0.5rem 0 1rem;
 					padding: 0.8rem 1rem;
 					background-color: var(--color-background);
@@ -65,18 +66,17 @@ const Container = styled.div`
 						outline: 0.35rem solid var(--color-secondary-20);
 					}
 				}
-
-				.error {
-					margin-top: 0.5rem;
-					font-size: 1rem;
-					color: var(--color-primary);
-				}
 			}
 		}
 
-		@media (max-width: 880px) {
+		@media (max-width: 995px) {
 			grid-template-columns: 1fr 1fr;
 			column-gap: 3rem;
+		}
+
+		@media (max-width: 850px) {
+			grid-template-columns: 1fr 1fr;
+			column-gap: 1rem;
 		}
 
 		@media (max-width: 748px) {

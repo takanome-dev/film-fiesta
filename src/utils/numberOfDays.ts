@@ -8,5 +8,5 @@
 export const numberOfDays = (dateReturned: Date, rentDate: Date) => {
 	const day = 24 * 60 * 60 * 1000;
 	const daysDiff = +dateReturned - +rentDate;
-	return Promise.resolve(Math.round(daysDiff / day));
+	return Math.ceil(daysDiff / day);
 };

@@ -19,6 +19,9 @@ const Card: React.FC<CardProps> = ({ movie }) => {
 	);
 
 	const handleLike = async () => {
+		if (!user._id)
+			return toast.info("You need to login before performing any action");
+
 		try {
 			if (isLiked) {
 				const data = await deleteFavorite(movie._id, user._id);
@@ -40,6 +43,9 @@ const Card: React.FC<CardProps> = ({ movie }) => {
 	};
 
 	const handleBookmark = async () => {
+		if (!user._id)
+			return toast.info("You need to login before performing any action");
+
 		try {
 			if (isBookmarked) {
 				const data = await deleteBookmark(movie._id, user._id);

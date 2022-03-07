@@ -4,7 +4,7 @@ import { Stripe, StripeElements } from "@stripe/stripe-js";
 import {
 	QueryObserverResult,
 	RefetchOptions,
-	RefetchQueryFilters,
+	RefetchQueryFilters
 } from "react-query";
 import { StaticContext } from "react-router";
 import { RouteComponentProps } from "react-router-dom";
@@ -190,10 +190,10 @@ export type EditProfileState = {
 // ! Props Types
 
 export type FormProps = {
-	// match?: MatchType;
-	// history?: HistoryType;
-	// location?: LocationType;
-	props?: { match?: MatchType; history?: HistoryType; location?: LocationType };
+	match?: MatchType;
+	history?: HistoryType;
+	location?: LocationType;
+	// props?: { match?: MatchType; history?: HistoryType; location?: LocationType };
 	openFeedback?: boolean;
 	editPassword?: boolean;
 	setOpenFeedback?: React.Dispatch<React.SetStateAction<boolean>>;

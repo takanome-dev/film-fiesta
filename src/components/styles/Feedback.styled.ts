@@ -42,6 +42,10 @@ const Container = styled.div`
 				width: 100%;
 			}
 		}
+
+		@media (max-width: 340px) {
+			position: relative;
+		}
 	}
 `;
 

@@ -53,13 +53,13 @@ const Routes = () => {
 
 					<PrivateRoute
 						path="/checkout"
-						render={(props) => (
+						render={({ history }) => (
 							<Checkout
 								movieId={movieId}
 								elements={elements}
 								stripe={stripe}
 								onRefetchRentals={onRefetchRentals}
-								{...props}
+								history={history}
 							/>
 						)}
 					/>

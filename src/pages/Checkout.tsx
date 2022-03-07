@@ -12,13 +12,15 @@ import { getCurrentUser } from "../services/auth";
 import { getMovie } from "../services/movie";
 import { getClientSecret } from "../services/payment";
 import { createRental } from "../services/rental";
+import { formatMoney } from "../utils/formatMoney";
+import { numberOfDays } from "../utils/numberOfDays";
 
 export default class Checkout extends Form {
 	state = {
 		data: {
 			name: "",
 			email: "",
-			returnedDate: "",
+			returnedDate: new Date(this.date.nextDay),
 		},
 		errors: {
 			returnedDate: "",
@@ -65,7 +67,7 @@ export default class Checkout extends Form {
 	};
 
 	async submitToServer() {
-		const { movieId, props } = this.props;
+		const { movieId, history } = this.props;
 		const { name, email } = this.state.data;
 		const { errors } = this.state;
 		const user = getCurrentUser();
@@ -113,8 +115,9 @@ export default class Checkout extends Form {
 			});
 			toast.success(data);
 			this.props.onRefetchRentals?.();
-			return props?.history?.replace("/rentals");
+			return history?.replace("/rentals");
 		} catch (err: any) {
+			console.log({ err });
 			toast.error(err.message);
 		}
 	}
@@ -138,9 +141,15 @@ export default class Checkout extends Form {
 			hidePostalCode: true,
 		};
 
-		const { complete, errors, movie, isProcessing } = this.state;
+		const { complete, errors, movie, isProcessing, data } = this.state;
 		const isDisabled =
 			this.validate() === null && complete && !isProcessing ? false : true;
+
+		let totalPrice: number;
+		const days = numberOfDays(new Date(data.returnedDate), new Date());
+		data.returnedDate
+			? (totalPrice = days * movie.dailyRentalRate)
+			: (totalPrice = movie.dailyRentalRate);
 
 		return (
 			<Wrapper width="100%">
@@ -152,7 +161,7 @@ export default class Checkout extends Form {
 								<img
 									src={movie?.url}
 									alt={movie?.title}
-									style={{ aspectRatio: "3/2" }}
+									style={{ aspectRatio: "16/9" }}
 								/>
 							</div>
 							<div className="order-details">
@@ -162,11 +171,11 @@ export default class Checkout extends Form {
 								<p className="movie-price">
 									Price : <span>${movie?.dailyRentalRate} / day</span>
 								</p>
-								{this.renderInputDate("rentDate", "Rent Day", true)}
-								{this.renderInputDate("returnedDate", "Rent Day", false)}
+								{this.renderInputDate("rentDate", "Rent Date", true)}
+								{this.renderInputDate("returnedDate", "Returned Date", false)}
 								<div className="total">
 									<p>Total</p>
-									<p>$2</p>
+									<p>{formatMoney(totalPrice)}</p>
 								</div>
 							</div>
 						</div>
@@ -182,12 +191,16 @@ export default class Checkout extends Form {
 										options={cardElementsOptions}
 										onChange={this.handleCardDetailsChange}
 									/>
+									{errors.cardError && (
+										<p className="error">{errors.cardError}</p>
+									)}
 								</div>
-								{errors.cardError && (
-									<p className="error">{errors.cardError}</p>
-								)}
 								<Button classes="btn" isDisabled={isDisabled}>
-									{isProcessing ? <Loader size={24} /> : "Pay now"}
+									{isProcessing ? (
+										<Loader size={24} />
+									) : (
+										`Pay ${formatMoney(totalPrice)}`
+									)}
 								</Button>
 							</div>
 						</div>

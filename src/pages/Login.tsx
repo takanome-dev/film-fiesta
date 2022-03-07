@@ -26,17 +26,16 @@ export default class LoginForm extends Form {
 	};
 
 	async submitToServer() {
-		const { props } = this.props;
+		const { location } = this.props;
 
 		try {
 			await logUser(this.state.data);
-			window.location.pathname = props?.location?.state
-				? props?.location?.state?.from.pathname
+			window.location.pathname = location?.state
+				? location?.state?.from.pathname
 				: "/";
 		} catch (err: any) {
 			if (err.request?.status === 400) {
 				const { errors } = this.state;
-				// ! TODO: Review Error Message
 				errors.email = err.data;
 				// errors.password = err.data;
 				this.setState({ errors, isProcessing: false });

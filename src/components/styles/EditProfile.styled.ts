@@ -107,6 +107,10 @@ const Container = styled.div`
 				}
 			}
 		}
+
+		@media (max-width: 510px) {
+			position: relative;
+		}
 	}
 `;
 

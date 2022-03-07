@@ -4,7 +4,7 @@ import { Context } from "../context/GlobalContext";
 import Avatar from "./common/Avatar";
 import Overlay from "./common/Overlay";
 import FeedBack from "./FeedBack";
-import { bottomLinks, topLinks } from "./links";
+import { topLinks } from "./links";
 import Navigation from "./styles/Sidebar.styled";
 import { FeedBackIcon, LogoIcon, SignInIcon, SignOutIcon } from "./svg";
 import UserModal from "./UserModal";
@@ -76,7 +76,7 @@ const Sidebar: React.FC<Props> = ({
 							))}
 						</div>
 						<div className="bottom-links">
-							{bottomLinks.map((l, i) => (
+							{/* {bottomLinks.map((l, i) => (
 								<Link
 									key={i}
 									className={
@@ -92,7 +92,7 @@ const Sidebar: React.FC<Props> = ({
 									)}
 									<p>{l.name}</p>
 								</Link>
-							))}
+							))} */}
 							<span className="flex link" onClick={() => setOpenFeedback(true)}>
 								<FeedBackIcon color="var(--color-dark-60)" />
 								<p>Feedback</p>
@@ -103,7 +103,7 @@ const Sidebar: React.FC<Props> = ({
 									<p>Sign out</p>
 								</Link>
 							)}
-							{!user && (
+							{!user._id && (
 								<Link
 									className={
 										currentRoute === "/login" ? "flex link active" : "flex link"

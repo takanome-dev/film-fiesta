@@ -49,7 +49,14 @@ const InputDate: React.FC<Props> = ({
 	return (
 		<Container>
 			<label htmlFor={name}>{label} :</label>
-			<input id={name} name={name} {...rest} type="date" disabled={disabled} />
+			<input
+				id={name}
+				name={name}
+				{...rest}
+				type="date"
+				disabled={disabled}
+				readOnly={name === "rentDate" ? true : false}
+			/>
 			{error && <div className="error">{error}</div>}
 		</Container>
 	);
