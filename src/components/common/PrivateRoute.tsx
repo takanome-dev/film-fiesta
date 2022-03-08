@@ -13,14 +13,13 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
 		<Route
 			{...rest}
 			render={(props) => {
-				if (!user)
+				if (!user?._id)
 					return (
 						<Redirect
 							to={{ pathname: "/login", state: { from: props.location } }}
 						/>
 					);
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				return Component ? <Component {...props} /> : render!(props);
+				return Component ? <Component {...props} /> : render?.(props);
 			}}
 		/>
 	);

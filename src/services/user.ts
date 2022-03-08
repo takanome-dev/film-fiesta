@@ -5,8 +5,8 @@ import { http } from "./http";
 const endpoint = `${process.env.REACT_APP_API_URL}/users`;
 
 export const registerUser = async (user: RegisterUserType) => {
-	const { headers } = await http.post(endpoint, user);
-	localStorage.setItem("token", headers["x-auth-token"]);
+	const { data } = await http.post(endpoint, user);
+	setToken(data);
 };
 
 export const updateUser = async (

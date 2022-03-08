@@ -76,23 +76,6 @@ const Sidebar: React.FC<Props> = ({
 							))}
 						</div>
 						<div className="bottom-links">
-							{/* {bottomLinks.map((l, i) => (
-								<Link
-									key={i}
-									className={
-										currentRoute === l.path ? "flex link active" : "flex link"
-									}
-									to={l.path}
-									onClick={() => handleClick(l.path)}
-								>
-									{l.icon(
-										currentRoute === l.path
-											? "var(--color-primary)"
-											: "var(--color-dark-60)"
-									)}
-									<p>{l.name}</p>
-								</Link>
-							))} */}
 							<span className="flex link" onClick={() => setOpenFeedback(true)}>
 								<FeedBackIcon color="var(--color-dark-60)" />
 								<p>Feedback</p>

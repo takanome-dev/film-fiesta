@@ -41,16 +41,15 @@ const Routes = () => {
 					<Route path="/movies" component={Movies} />
 					<Route path="/popular" component={Popular} />
 					<Route path="/trending" component={Trending} />
-					<PrivateRoute path="/bookmarks" component={Bookmark} />
-					<PrivateRoute path="/favorites" component={Favorites} />
 					<Route path="/settings" component={Settings} />
-					<PrivateRoute path="/profile" component={Profile} />
 					<Route path="/login" component={Login} />
 					<Route path="/logout" component={Logout} />
 					<Route path="/register" component={Register} />
+					<PrivateRoute path="/bookmarks" component={Bookmark} />
+					<PrivateRoute path="/favorites" component={Favorites} />
+					<PrivateRoute path="/profile" component={Profile} />
 					<PrivateRoute path="/customers" component={Customers} />
 					<PrivateRoute path="/rentals" component={Rentals} />
-
 					<PrivateRoute
 						path="/checkout"
 						render={({ history }) => (

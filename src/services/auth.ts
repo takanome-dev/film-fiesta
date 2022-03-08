@@ -19,7 +19,7 @@ export const getCurrentUser = (): JwtType | null => {
 		const token = getToken();
 		return jwt_decode(token!);
 	} catch (err) {
-		return null;
+		return {};
 	}
 };
 

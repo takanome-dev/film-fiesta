@@ -37,11 +37,7 @@ const movieDetails: React.FC<MovieDetailsProps> = ({ match, setMovieId }) => {
 	return (
 		<Container>
 			<div className="image">
-				<img
-					style={{ aspectRatio: "16/9" }}
-					src={data?.url}
-					alt={data?.title}
-				/>
+				<img src={data?.url} alt={data?.title} />
 			</div>
 			<div className="desc">
 				<h1>{data?.title}</h1>
@@ -55,31 +51,27 @@ const movieDetails: React.FC<MovieDetailsProps> = ({ match, setMovieId }) => {
 					<div className="rate btn flex">
 						<StarIcon /> <h3>{data?.voteAverage}</h3>
 					</div>
-					<div className="icon btn">
-						{isBookmarked ? (
-							<RemoveBookmarkIcon
-								isBookmarked={isBookmarked}
-								movie={data}
-								refetch={refetch}
-							/>
-						) : (
-							<AddBookmarkIcon
-								color="var(--color-dark-60)"
-								isBookmarked={isBookmarked}
-								movie={data}
-								refetch={refetch}
-							/>
-						)}
-					</div>
-					<div className={isLiked ? "icon btn liked" : "icon btn"}>
-						<HeartIcon
-							color={isLiked ? "var(--color-primary)" : "var(--color-dark-60)"}
-							fillColor={isLiked ? "var(--color-primary)" : "none"}
-							isLiked={isLiked}
+					{isBookmarked ? (
+						<RemoveBookmarkIcon
+							isBookmarked={isBookmarked}
 							movie={data}
 							refetch={refetch}
 						/>
-					</div>
+					) : (
+						<AddBookmarkIcon
+							color="var(--color-dark-60)"
+							isBookmarked={isBookmarked}
+							movie={data}
+							refetch={refetch}
+						/>
+					)}
+					<HeartIcon
+						color={isLiked ? "var(--color-primary)" : "var(--color-dark-60)"}
+						fillColor={isLiked ? "var(--color-primary)" : "none"}
+						isLiked={isLiked}
+						movie={data}
+						refetch={refetch}
+					/>
 				</div>
 				<p className="overview">Overview</p>
 				<p className="description">{data?.overview}</p>

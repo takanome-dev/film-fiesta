@@ -108,8 +108,13 @@ const Provider: React.FC<Props> = ({ children }) => {
 		const user = getCurrentUser();
 		dispatch({
 			type: GET_CURRENT_USER,
-			payload: user ?? {},
+			payload: user,
 		});
+		if (user?._id) {
+			refetchBookmarks();
+			refetchFavorites();
+			refetchRentals();
+		}
 	}, []);
 
 	const handleSearch = (query: string) => {

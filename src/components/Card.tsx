@@ -23,29 +23,21 @@ const Card: React.FC<CardProps> = ({ movie }) => {
 			<div className="card-hover">
 				<h3>{movie.title}</h3>
 				<div className="icons flex">
-					<button className="icon-container flex">
-						{isBookmarked ? (
-							<RemoveBookmarkIcon isBookmarked={isBookmarked} movie={movie} />
-						) : (
-							<AddBookmark
-								color="var(--color-dark-60)"
-								isBookmarked={isBookmarked}
-								movie={movie}
-							/>
-						)}
-					</button>
-					<button
-						className={
-							isLiked ? "icon-container liked flex" : "icon-container flex"
-						}
-					>
-						<HeartIcon
-							color={isLiked ? "var(--color-primary)" : "var(--color-dark)"}
-							fillColor={isLiked ? "var(--color-primary)" : "none"}
-							isLiked={isLiked}
+					{isBookmarked ? (
+						<RemoveBookmarkIcon isBookmarked={isBookmarked} movie={movie} />
+					) : (
+						<AddBookmark
+							color="var(--color-dark-60)"
+							isBookmarked={isBookmarked}
 							movie={movie}
 						/>
-					</button>
+					)}
+					<HeartIcon
+						color={isLiked ? "var(--color-primary)" : "var(--color-dark)"}
+						fillColor={isLiked ? "var(--color-primary)" : "none"}
+						isLiked={isLiked}
+						movie={movie}
+					/>
 				</div>
 			</div>
 		</div>

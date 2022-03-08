@@ -46,7 +46,7 @@ const Container = styled.div`
 			}
 
 			.icons {
-				.icon-container {
+				.icon {
 					background-color: var(--color-gray-80);
 					margin-right: 0.6rem;
 					padding: 0.6rem;
@@ -62,7 +62,7 @@ const Container = styled.div`
 					}
 				}
 
-				.icon-container.liked {
+				.icon.liked {
 					background-color: var(--color-primary-60);
 				}
 			}

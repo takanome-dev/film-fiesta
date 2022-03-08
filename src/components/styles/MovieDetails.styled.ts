@@ -14,6 +14,7 @@ export const Container = styled.div`
 			object-fit: cover;
 			border-radius: 0.8rem;
 			box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+			aspect-ratio: 1/1;
 		}
 	}
 
@@ -30,6 +31,7 @@ export const Container = styled.div`
 
 		.buttons {
 			display: flex;
+			align-items: center;
 
 			div + div {
 				margin-left: 1rem;
@@ -49,10 +51,21 @@ export const Container = styled.div`
 
 			.icon {
 				background-color: var(--color-gray-20);
+				margin-left: 1rem;
+				padding: 0.6rem;
+				border-radius: 0.3rem;
+				border: none;
 				cursor: pointer;
-				transition: background-color 300ms ease-in-out;
+				transition: all 300ms ease-in-out;
 				&:hover {
-					background-color: var(--color-gray-60);
+					background-color: var(--color-gray-40);
+				}
+				&:active {
+					transform: scale(0.95);
+				}
+
+				@media (max-width: 340px) {
+					margin-top: 0.5rem;
 				}
 			}
 
@@ -114,8 +127,15 @@ export const Container = styled.div`
 
 		.image {
 			img {
-				max-height: 100%;
-				/* max-width: 100%; */
+				aspect-ratio: 16/9;
+			}
+		}
+	}
+
+	@media (max-width: 650px) {
+		.image {
+			img {
+				aspect-ratio: 1/1;
 			}
 		}
 	}
@@ -134,9 +154,6 @@ export const Container = styled.div`
 			padding: 0;
 			.buttons {
 				flex-wrap: wrap;
-				div {
-					margin-top: 1rem;
-				}
 			}
 		}
 	}
