@@ -211,6 +211,13 @@ const GlobalStyles = createGlobalStyle`
       flex-wrap: wrap;
     }
   }
+
+  .loading {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translateY(-50%);
+  }
 `;
 
 export default GlobalStyles;

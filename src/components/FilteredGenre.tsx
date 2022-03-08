@@ -4,16 +4,18 @@ import Container from "./styles/FilteredGenre.styled";
 import { LeftArrowIcon, RightArrowIcon } from "./svg";
 
 const FilteredGenre = () => {
-	const { genres, onGenreSelected, selectedGenre } = useContext(Context);
+	const { genres, onGenreSelected, selectedGenre, loadingMovies } =
+		useContext(Context);
+
+	/**
+	 * @see {@link https://www.youtube.com/watch?v=LFVFxDXQxxE}
+	 */
 
 	useEffect(() => {
-		/**
-		 * @ref https://www.youtube.com/watch?v=LFVFxDXQxxE
-		 */
-
 		const scrollContainer = document.querySelector(
 			".scroll-container"
 		) as HTMLDivElement;
+		if (!scrollContainer) return;
 		const scrollButtons = document.querySelector(
 			".scroll-buttons"
 		) as HTMLDivElement;
@@ -56,25 +58,29 @@ const FilteredGenre = () => {
 
 	return (
 		<Container className="flex">
-			<div className="scroll-container">
-				<div className="left-arrow flex">
-					<LeftArrowIcon />
+			{loadingMovies ? (
+				<div></div>
+			) : (
+				<div className="scroll-container">
+					<div className="left-arrow flex">
+						<LeftArrowIcon />
+					</div>
+					<div className="scroll-buttons flex">
+						{genres.map((g) => (
+							<span
+								key={g._id}
+								onClick={() => onGenreSelected?.(g)}
+								className={selectedGenre._id === g._id ? "active" : ""}
+							>
+								{g.name}
+							</span>
+						))}
+					</div>
+					<div className="right-arrow flex">
+						<RightArrowIcon />
+					</div>
 				</div>
-				<div className="scroll-buttons flex">
-					{genres.map((g) => (
-						<span
-							key={g._id}
-							onClick={() => onGenreSelected?.(g)}
-							className={selectedGenre._id === g._id ? "active" : ""}
-						>
-							{g.name}
-						</span>
-					))}
-				</div>
-				<div className="right-arrow flex">
-					<RightArrowIcon />
-				</div>
-			</div>
+			)}
 		</Container>
 	);
 };

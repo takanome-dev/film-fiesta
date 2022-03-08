@@ -2,18 +2,25 @@ import { useContext } from "react";
 import { Context } from "../context/GlobalContext";
 import Card from "./Card";
 import Container from "./styles/CardList.styled";
+import { Loader } from "./svg";
 
 const CardList = () => {
-	const { filteredMovies } = useContext(Context);
+	const { filteredMovies, loadingMovies } = useContext(Context);
 
 	return (
-		<Container>
-			{filteredMovies?.map((m) => (
-				// <Link to={`/movies/${m._id}`} key={m._id}>
-				<Card movie={m} key={m._id} />
-				// </Link>
-			))}
-		</Container>
+		<>
+			{loadingMovies ? (
+				<div className="loading">
+					<Loader size={32} />
+				</div>
+			) : (
+				<Container>
+					{filteredMovies?.map((m) => (
+						<Card movie={m} key={m._id} />
+					))}
+				</Container>
+			)}
+		</>
 	);
 };
 

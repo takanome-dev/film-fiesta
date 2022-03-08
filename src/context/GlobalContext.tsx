@@ -55,17 +55,16 @@ const Provider: React.FC<Props> = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 	const location = useLocation();
 
-	const { refetch: refetchMovies } = useQuery<MovieType[], Error>(
-		"getMovies",
-		async () => await getMovies(),
-		{
-			onSuccess: (data) =>
-				dispatch({
-					type: FETCH_MOVIES,
-					payload: data,
-				}),
-		}
-	);
+	const { refetch: refetchMovies, isLoading: loadingMovies } = useQuery<
+		MovieType[],
+		Error
+	>("getMovies", async () => await getMovies(), {
+		onSuccess: (data) =>
+			dispatch({
+				type: FETCH_MOVIES,
+				payload: data,
+			}),
+	});
 
 	useQuery<GenreType[], Error>("getGenres", async () => await getGenres(), {
 		onSuccess: (data) => {
@@ -232,6 +231,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 		selectedCategory: state.selectedCategory,
 		filteredMovies,
 		totalMovies,
+		loadingMovies,
 		onSearch: handleSearch,
 		onDelete: handleDeleteMovie,
 		onPageChange: handlePageChange,

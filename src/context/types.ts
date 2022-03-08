@@ -1,7 +1,7 @@
 import {
 	QueryObserverResult,
 	RefetchOptions,
-	RefetchQueryFilters
+	RefetchQueryFilters,
 } from "react-query";
 import { BookmarkType } from "../types/BookmarkType";
 import { FavoriteType } from "../types/FavoriteType";
@@ -30,6 +30,7 @@ export type InitialStateType = {
 		iat: number;
 		imageUrl: string;
 	};
+	loadingMovies?: boolean;
 	onDelete?: (id: string) => Promise<void>;
 	onLike?: (isLike: boolean) => void;
 	onBookmark?: (isBookmark: boolean) => void;
