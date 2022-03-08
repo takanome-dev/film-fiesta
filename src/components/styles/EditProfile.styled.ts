@@ -10,16 +10,13 @@ const Container = styled.div`
 	left: 0;
 	width: 100%;
 	height: 100%;
-	animation-name: ${slideIn};
-	animation-duration: 300ms;
-	/* z-index: 3; */
+	animation: ${slideIn} 300ms;
 
 	.modal-wrapper {
 		position: fixed;
 		width: 30rem;
 		z-index: 4;
-		animation-name: ${slideIn};
-		animation-duration: 500ms;
+		animation: ${slideIn} 500ms;
 		margin: 0 1rem;
 
 		.modal-header {
@@ -51,6 +48,7 @@ const Container = styled.div`
 
 		form {
 			.modal-profile {
+				position: relative;
 				.profile-label {
 					width: 6rem;
 					height: 6rem;
@@ -73,8 +71,10 @@ const Container = styled.div`
 					.tooltip {
 						visibility: hidden;
 						position: absolute;
-						top: 33%;
-						left: 51%;
+						top: 50%;
+						left: 50%;
+						/* top: 33%; */
+						/* left: 51%; */
 						transform: translate(-50%, -50%);
 						background-color: var(--color-dark);
 						color: #fff;

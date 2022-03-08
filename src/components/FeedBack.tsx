@@ -20,6 +20,26 @@ export default class FeedBack extends Form {
 		message: Joi.string().trim().max(500).required(),
 	};
 
+	keydownHandler = (e: KeyboardEvent) => {
+		switch (e.code) {
+			case "Escape":
+				this.props.setEditProfile?.(false);
+				break;
+			case "Enter":
+				this.handleSubmit;
+				break;
+			default:
+		}
+	};
+
+	componentDidMount() {
+		document.addEventListener("keydown", this.keydownHandler);
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener("keydown", this.keydownHandler);
+	}
+
 	async submitToServer(): Promise<void> {
 		const res = await sendFeedback(this.state.data);
 		this.props.setOpenFeedback?.(false);

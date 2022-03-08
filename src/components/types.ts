@@ -4,7 +4,7 @@ import { Stripe, StripeElements } from "@stripe/stripe-js";
 import {
 	QueryObserverResult,
 	RefetchOptions,
-	RefetchQueryFilters
+	RefetchQueryFilters,
 } from "react-query";
 import { StaticContext } from "react-router";
 import { RouteComponentProps } from "react-router-dom";
@@ -151,7 +151,9 @@ export type FormStateType = {
 	genres?: GenreType[];
 	complete?: boolean;
 	isProcessing?: boolean;
+	isLoading?: boolean;
 	movie?: any;
+	url?: string;
 };
 
 export type RegisterStateType = {
@@ -196,8 +198,10 @@ export type FormProps = {
 	// props?: { match?: MatchType; history?: HistoryType; location?: LocationType };
 	openFeedback?: boolean;
 	editPassword?: boolean;
+	editProfile?: boolean;
 	setOpenFeedback?: React.Dispatch<React.SetStateAction<boolean>>;
 	setEditPassword?: React.Dispatch<React.SetStateAction<boolean>>;
+	setEditProfile?: React.Dispatch<React.SetStateAction<boolean>>;
 	movieId?: string;
 	elements?: StripeElements | null;
 	stripe?: Stripe | null;
