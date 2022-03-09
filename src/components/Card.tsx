@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { placeholder } from "../assets";
 import { Context } from "../context/GlobalContext";
 import { HeartIcon, RemoveBookmarkIcon, StarIcon } from "./svg";
 import AddBookmark from "./svg/Icon.AddBookmark";
@@ -18,7 +19,7 @@ const Card: React.FC<CardProps> = ({ movie }) => {
 				<div className="rate flex">
 					<StarIcon /> <p>{movie.voteAverage}</p>
 				</div>
-				<img src={movie.url} alt={movie.title} />
+				<img src={movie.url || placeholder} alt={movie.title} />
 			</Link>
 			<div className="card-hover">
 				<p>{movie.title}</p>

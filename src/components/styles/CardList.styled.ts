@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { appear } from "./Global.styled";
 
 const Container = styled.div`
 	display: grid;
@@ -85,6 +86,7 @@ const Container = styled.div`
 			height: 100%;
 			object-fit: cover;
 			object-position: center;
+			animation: ${appear} 300ms;
 		}
 	}
 `;
