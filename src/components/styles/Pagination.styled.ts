@@ -29,10 +29,14 @@ const Nav = styled.nav`
 			font-weight: 500;
 			border-radius: 0.2rem;
 			cursor: pointer;
-			transition: all 200ms ease-in-out;
+			transition: background-color 200ms ease-in-out;
 
 			&:hover {
 				background-color: var(--color-gray-80);
+			}
+
+			&:focus {
+				outline: 0.35rem solid var(--color-secondary-60);
 			}
 		}
 

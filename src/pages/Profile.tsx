@@ -39,7 +39,7 @@ const Profile = () => {
 								Edit profile
 							</button>
 						</div>
-						<fieldset disabled>
+						<fieldset disabled aria-label="User information">
 							<div className="input-container">
 								<label htmlFor="name">Name</label>
 								<input readOnly id="name" type="text" value={user.name} />
@@ -70,6 +70,7 @@ const Profile = () => {
 							id="name"
 							type="text"
 							value="********************"
+							aria-label="Password input"
 							readOnly
 							disabled
 						/>

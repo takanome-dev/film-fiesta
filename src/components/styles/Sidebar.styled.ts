@@ -80,6 +80,10 @@ const Navigation = styled.nav`
 						background-color: var(--color-gray-20);
 						color: var(--color-dark);
 					}
+
+					&:focus {
+						outline: 0.2rem solid var(--color-primary-60);
+					}
 				}
 
 				.link.active {

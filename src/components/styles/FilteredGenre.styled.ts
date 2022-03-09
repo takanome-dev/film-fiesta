@@ -18,24 +18,30 @@ const Container = styled.div`
 			margin: 0 3rem;
 			transition: all 0.5s ease-in-out;
 
-			span {
-				box-shadow: 0px 2px 3px var(--color-gray-40);
-				background: var(--color-gray-20);
-				padding: 0.3rem 0.5rem;
-				overflow-wrap: normal;
-				margin-right: 1rem;
-				border: none;
-				border-radius: 0.8rem;
-				cursor: pointer;
-				font-weight: 500;
-				transition: all 200ms ease;
-				&:hover {
-					background: var(--color-gray-40);
+			ul {
+				list-style: none;
+				li {
+					box-shadow: 0px 2px 3px var(--color-gray-40);
+					background: var(--color-gray-20);
+					padding: 0.3rem 0.5rem;
+					overflow-wrap: normal;
+					margin-right: 1rem;
+					border: none;
+					border-radius: 0.8rem;
+					cursor: pointer;
+					font-weight: 500;
+					transition: background 200ms ease;
+					&:hover {
+						background: var(--color-gray-40);
+					}
+					&:focus {
+						outline: 0.3rem solid var(--color-secondary-40);
+					}
 				}
-			}
 
-			span.active {
-				background: var(--color-secondary-40);
+				li.active {
+					background: var(--color-secondary-40);
+				}
 			}
 		}
 
@@ -44,6 +50,7 @@ const Container = styled.div`
 			z-index: 1;
 			cursor: pointer;
 			padding: 0.8rem;
+			border: none;
 		}
 
 		.left-arrow {

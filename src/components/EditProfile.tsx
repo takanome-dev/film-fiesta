@@ -84,7 +84,7 @@ export default class EditProfile extends Form {
 			await updateUser({ name, email }, user!._id!);
 			window.location.pathname = "/profile";
 		} catch (err: any) {
-			toast(err.data);
+			toast.error(err.data);
 		}
 	};
 

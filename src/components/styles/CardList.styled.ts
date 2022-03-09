@@ -12,6 +12,9 @@ const Container = styled.div`
 		cursor: pointer;
 		position: relative;
 		transition: box-shadow 300ms ease-in-out;
+		&:focus {
+			outline: 0.35rem solid var(--color-secondary-60);
+		}
 
 		.rate {
 			position: absolute;

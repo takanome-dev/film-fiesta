@@ -13,7 +13,7 @@ const Card: React.FC<CardProps> = ({ movie }) => {
 	);
 
 	return (
-		<div className="card">
+		<div className="card" aria-label="Movie Card" tabIndex={0}>
 			<Link to={`/movies/${movie._id}`}>
 				<div className="rate flex">
 					<StarIcon /> <p>{movie.voteAverage}</p>
