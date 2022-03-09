@@ -22,7 +22,7 @@ export const Container = styled.header`
 			text-decoration: none;
 			h1 {
 				padding-left: 0.2rem;
-				color: var(--color-gray);
+				color: var(--color-dark-60);
 				@media (max-width: 400px) {
 					font-size: 1.5rem;
 				}

@@ -40,9 +40,11 @@ const Container = styled.div`
 			opacity: 0;
 			transition: opacity 300ms ease-in-out;
 
-			h3 {
+			p {
 				color: #fff;
 				margin-left: 0.6rem;
+				font-size: 1.2rem;
+				font-weight: 500;
 			}
 
 			.icons {

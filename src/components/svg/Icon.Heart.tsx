@@ -53,6 +53,7 @@ const Heart: React.FC<Props> = ({
 		<button
 			className={isLiked ? "icon liked flex" : "icon flex"}
 			onClick={handleLike}
+			aria-label="Like button"
 		>
 			<svg
 				width="24"

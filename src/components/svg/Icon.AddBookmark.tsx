@@ -48,7 +48,11 @@ const AddBookmark: React.FC<Props> = ({
 	};
 
 	return (
-		<button className="icon flex" onClick={handleBookmark}>
+		<button
+			className="icon flex"
+			onClick={handleBookmark}
+			aria-label="Add to bookmark button"
+		>
 			<svg
 				width="17"
 				height="22"

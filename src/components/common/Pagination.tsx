@@ -12,7 +12,7 @@ const Pagination = () => {
 	const pages = _.range(1, pagesCount + 1);
 
 	return (
-		<Nav className="flex">
+		<Nav className="flex" aria-label="Pagination">
 			<ul className="pagination flex">
 				{pages.map((p) => (
 					<li

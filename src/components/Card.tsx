@@ -21,7 +21,7 @@ const Card: React.FC<CardProps> = ({ movie }) => {
 				<img src={movie.url} alt={movie.title} />
 			</Link>
 			<div className="card-hover">
-				<h3>{movie.title}</h3>
+				<p>{movie.title}</p>
 				<div className="icons flex">
 					{isBookmarked ? (
 						<RemoveBookmarkIcon isBookmarked={isBookmarked} movie={movie} />

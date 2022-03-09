@@ -42,7 +42,11 @@ const RemoveBookmark: React.FC<Props> = ({ movie, isBookmarked, refetch }) => {
 	};
 
 	return (
-		<button className="icon flex" onClick={handleBookmark}>
+		<button
+			className="icon flex"
+			onClick={handleBookmark}
+			aria-label="Remove from bookmark button"
+		>
 			<svg
 				width="17"
 				height="22"

@@ -27,6 +27,7 @@ const Container = styled.div`
 				border: none;
 				border-radius: 0.8rem;
 				cursor: pointer;
+				font-weight: 500;
 				transition: all 200ms ease;
 				&:hover {
 					background: var(--color-gray-40);
