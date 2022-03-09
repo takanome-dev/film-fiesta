@@ -35,7 +35,7 @@ const Header: React.FC<Props> = ({ handleOpen }) => {
 					type="search"
 					id="search"
 					placeholder="Search..."
-					aria-label="Search"
+					aria-label="Search movies by title"
 					value={searchQuery}
 					onChange={(e) => onSearch?.(e.currentTarget.value)}
 				/>

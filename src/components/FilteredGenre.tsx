@@ -61,24 +61,32 @@ const FilteredGenre = () => {
 			{loadingMovies ? (
 				<div></div>
 			) : (
-				<div className="scroll-container">
-					<div className="left-arrow flex">
+				<div className="scroll-container" aria-label="Filter movies by genre">
+					<button
+						className="left-arrow flex"
+						aria-label="Click to scroll horizontally on the left"
+					>
 						<LeftArrowIcon />
+					</button>
+					<div className="scroll-buttons">
+						<ul className="flex">
+							{genres.map((g) => (
+								<li
+									key={g._id}
+									onClick={() => onGenreSelected?.(g)}
+									className={selectedGenre._id === g._id ? "active" : ""}
+								>
+									{g.name}
+								</li>
+							))}
+						</ul>
 					</div>
-					<div className="scroll-buttons flex">
-						{genres.map((g) => (
-							<span
-								key={g._id}
-								onClick={() => onGenreSelected?.(g)}
-								className={selectedGenre._id === g._id ? "active" : ""}
-							>
-								{g.name}
-							</span>
-						))}
-					</div>
-					<div className="right-arrow flex">
+					<button
+						className="right-arrow flex"
+						aria-label="Click to scroll horizontally on the right"
+					>
 						<RightArrowIcon />
-					</div>
+					</button>
 				</div>
 			)}
 		</Container>

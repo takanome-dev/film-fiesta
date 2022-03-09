@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useLayoutEffect, useReducer } from "react";
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -103,15 +103,18 @@ const Provider: React.FC<Props> = ({ children }) => {
 		}
 	);
 
-	useEffect(() => {
-		refetchBookmarks();
-		refetchFavorites();
-		refetchRentals();
+	useLayoutEffect(() => {
 		const user = getCurrentUser();
 		dispatch({
 			type: GET_CURRENT_USER,
 			payload: user,
 		});
+	}, []);
+
+	useEffect(() => {
+		refetchBookmarks();
+		refetchFavorites();
+		refetchRentals();
 	}, []);
 
 	const handleSearch = (query: string) => {

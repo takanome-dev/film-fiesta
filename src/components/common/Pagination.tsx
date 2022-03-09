@@ -19,6 +19,8 @@ const Pagination = () => {
 						key={p}
 						className={currentPage === p ? "active" : ""}
 						onClick={() => onPageChange?.(p)}
+						tabIndex={0}
+						aria-label={`Page number ${p}`}
 					>
 						{p}
 					</li>

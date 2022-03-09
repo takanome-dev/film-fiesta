@@ -76,7 +76,11 @@ const Sidebar: React.FC<Props> = ({
 							))}
 						</div>
 						<div className="bottom-links">
-							<span className="flex link" onClick={() => setOpenFeedback(true)}>
+							<span
+								className="flex link"
+								onClick={() => setOpenFeedback(true)}
+								tabIndex={0}
+							>
 								<FeedBackIcon color="var(--color-dark-60)" />
 								<p>Feedback</p>
 							</span>

@@ -42,6 +42,9 @@ const Container = styled.div`
 	&:hover {
 		background-color: var(--color-gray-20);
 	}
+	&:focus {
+		outline: 0.2rem solid var(--color-secondary-60);
+	}
 `;
 
 type Props = {
@@ -81,14 +84,13 @@ const MoreHorizontal: React.FC<Props> = ({ name }) => {
 					</div>
 				</Modal>
 			)}
-			<Container className="flex">
+			<Container className="flex" tabIndex={0} onClick={() => setOpen(true)}>
 				<svg
 					width="24"
 					height="24"
 					viewBox="0 0 24 24"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
-					onClick={() => setOpen(true)}
 				>
 					<path
 						d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"

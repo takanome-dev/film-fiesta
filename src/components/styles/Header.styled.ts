@@ -27,6 +27,10 @@ export const Container = styled.header`
 					font-size: 1.5rem;
 				}
 			}
+
+			&:focus {
+				outline: 0.35rem solid var(--color-secondary-40);
+			}
 		}
 
 		input {
