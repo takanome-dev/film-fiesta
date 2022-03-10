@@ -63,9 +63,8 @@ export default class EditProfile extends Form {
 		if (file) this.setState({ isLoading: true });
 		const data = new FormData();
 		data.append("image", file!);
-		const user = getCurrentUser();
 		try {
-			const url = await updateProfile(data, user!._id!);
+			const url = await updateProfile(data);
 			if (url) this.setState({ isLoading: false });
 			this.setState({ url });
 		} catch (err: any) {

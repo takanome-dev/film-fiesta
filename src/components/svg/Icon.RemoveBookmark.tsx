@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Context } from "../../context/GlobalContext";
-import { deleteBookmark, saveBookmark } from "../../services/bookmark";
+import { deleteBookmark } from "../../services/bookmark";
 
 type Props = {
 	isBookmarked: any;
@@ -10,28 +10,17 @@ type Props = {
 	refetch?: any;
 };
 
-const RemoveBookmark: React.FC<Props> = ({ movie, isBookmarked, refetch }) => {
+const RemoveBookmark: React.FC<Props> = ({ movie, refetch }) => {
 	const { user, onRefetchMovies, onRefetchBookmarks } = useContext(Context);
 	const location = useLocation();
 	const match = location.pathname.match(/\/movies\/([0-9a-fA-F]){24}$/);
 
-	const handleBookmark = async () => {
+	const handleRemoveFromBookmark = async () => {
 		if (!user._id)
 			return toast.info("You need to login before performing any action");
 
 		try {
-			if (isBookmarked) {
-				const data = await deleteBookmark(movie._id, user._id);
-				onRefetchMovies?.();
-				onRefetchBookmarks?.();
-				if (match?.[0]) refetch();
-				return toast.success(data);
-			}
-
-			const data = await saveBookmark({
-				userId: user._id,
-				movieId: movie._id,
-			});
+			const data = await deleteBookmark(movie._id);
 			onRefetchMovies?.();
 			onRefetchBookmarks?.();
 			if (match?.[0]) refetch();
@@ -44,7 +33,7 @@ const RemoveBookmark: React.FC<Props> = ({ movie, isBookmarked, refetch }) => {
 	return (
 		<button
 			className="icon flex"
-			onClick={handleBookmark}
+			onClick={handleRemoveFromBookmark}
 			aria-label="Remove from bookmark button"
 		>
 			<svg

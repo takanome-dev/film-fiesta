@@ -1,4 +1,3 @@
-import { getCurrentUser } from "./auth";
 import { http } from "./http";
 
 const endpoint = `${process.env.REACT_APP_API_URL}/rentals`;
@@ -11,10 +10,7 @@ type RentalRequestType = {
 };
 
 export const getRentals = async () => {
-	const user = getCurrentUser();
-	const { data } = await http.get(`${endpoint}`, {
-		headers: { "X-User-Id": user!._id! },
-	});
+	const { data } = await http.get(endpoint);
 	return data;
 };
 

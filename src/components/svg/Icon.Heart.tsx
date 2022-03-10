@@ -29,7 +29,7 @@ const Heart: React.FC<Props> = ({
 
 		try {
 			if (isLiked) {
-				const data = await deleteFavorite(movie._id, user._id);
+				const data = await deleteFavorite(movie._id);
 				onRefetchMovies?.();
 				onRefetchFavorites?.();
 				if (match?.[0]) refetch();

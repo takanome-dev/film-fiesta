@@ -1,4 +1,3 @@
-import { getCurrentUser } from "./auth";
 import { http } from "./http";
 
 const endpoint = `${process.env.REACT_APP_API_URL}/favorites`;
@@ -9,10 +8,7 @@ type FavoriteRequestType = {
 };
 
 export const getFavorites = async () => {
-	const user = getCurrentUser();
-	const { data } = await http.get(`${endpoint}`, {
-		headers: { "X-User-Id": user!._id! },
-	});
+	const { data } = await http.get(endpoint);
 	return data;
 };
 
@@ -21,12 +17,12 @@ export const saveFavorite = async (fav: FavoriteRequestType) => {
 	return data;
 };
 
-export const deleteFavorite = async (movieId: string, userId: string) => {
-	const { data } = await http.delete(`${endpoint}/${movieId}/${userId}`);
+export const deleteFavorite = async (movieId: string) => {
+	const { data } = await http.delete(`${endpoint}/${movieId}`);
 	return data;
 };
 
-export const clearFavorites = async (userId: string) => {
-	const { data } = await http.delete(`${endpoint}/${userId}`);
+export const clearFavorites = async () => {
+	const { data } = await http.delete(`${endpoint}/clear`);
 	return data;
 };

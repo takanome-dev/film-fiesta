@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Context } from "../../context/GlobalContext";
-import { deleteBookmark, saveBookmark } from "../../services/bookmark";
+import { saveBookmark } from "../../services/bookmark";
 
 type Props = {
 	color: string;
@@ -11,29 +11,16 @@ type Props = {
 	refetch?: any;
 };
 
-const AddBookmark: React.FC<Props> = ({
-	color,
-	isBookmarked,
-	movie,
-	refetch,
-}) => {
+const AddBookmark: React.FC<Props> = ({ color, movie, refetch }) => {
 	const { user, onRefetchMovies, onRefetchBookmarks } = useContext(Context);
 	const location = useLocation();
 	const match = location.pathname.match(/\/movies\/([0-9a-fA-F]){24}$/);
 
-	const handleBookmark = async () => {
+	const handleAddToBookmark = async () => {
 		if (!user._id)
 			return toast.info("You need to login before performing any action");
 
 		try {
-			if (isBookmarked) {
-				const data = await deleteBookmark(movie._id, user._id);
-				onRefetchMovies?.();
-				onRefetchBookmarks?.();
-				if (match?.[0]) refetch();
-				return toast.success(data);
-			}
-
 			const data = await saveBookmark({
 				userId: user._id,
 				movieId: movie._id,
@@ -50,7 +37,7 @@ const AddBookmark: React.FC<Props> = ({
 	return (
 		<button
 			className="icon flex"
-			onClick={handleBookmark}
+			onClick={handleAddToBookmark}
 			aria-label="Add to bookmark button"
 		>
 			<svg

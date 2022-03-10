@@ -1,4 +1,3 @@
-import { getCurrentUser } from "./auth";
 import { http } from "./http";
 
 const endpoint = `${process.env.REACT_APP_API_URL}/bookmarks`;
@@ -9,10 +8,7 @@ type BookmarkRequestType = {
 };
 
 export const getBookmarks = async () => {
-	const user = getCurrentUser();
-	const { data } = await http.get(`${endpoint}`, {
-		headers: { "X-User-Id": user!._id! },
-	});
+	const { data } = await http.get(endpoint);
 	return data;
 };
 
@@ -21,12 +17,12 @@ export const saveBookmark = async (bookmark: BookmarkRequestType) => {
 	return data;
 };
 
-export const deleteBookmark = async (movieId: string, userId: string) => {
-	const { data } = await http.delete(`${endpoint}/${movieId}/${userId}`);
+export const deleteBookmark = async (movieId: string) => {
+	const { data } = await http.delete(`${endpoint}/${movieId}`);
 	return data;
 };
 
-export const clearBookmarks = async (userId: string) => {
-	const { data } = await http.delete(`${endpoint}/${userId}`);
+export const clearBookmarks = async () => {
+	const { data } = await http.delete(`${endpoint}/clear`);
 	return data;
 };

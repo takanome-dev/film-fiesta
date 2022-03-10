@@ -53,16 +53,16 @@ type Props = {
 
 const MoreHorizontal: React.FC<Props> = ({ name }) => {
 	const [open, setOpen] = useState(false);
-	const { user, onRefetchBookmarks, onRefetchFavorites } = useContext(Context);
+	const { onRefetchBookmarks, onRefetchFavorites } = useContext(Context);
 
 	const handleDeleteAll = async () => {
 		try {
 			if (name === "Bookmarks") {
-				const data = await clearBookmarks(user._id);
+				const data = await clearBookmarks();
 				onRefetchBookmarks?.();
 				return toast.success(data);
 			} else if (name === "Favorites") {
-				const data = await clearFavorites(user._id);
+				const data = await clearFavorites();
 				onRefetchFavorites?.();
 				return toast.success(data);
 			}
