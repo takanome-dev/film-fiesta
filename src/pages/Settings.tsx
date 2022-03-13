@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { comming } from "../assets";
+import { comingSoon } from "../assets";
 
 const Container = styled.div`
 	flex-direction: column;
@@ -30,8 +30,8 @@ const Container = styled.div`
 const Settings = () => {
 	return (
 		<Container className="flex">
-			<img src={comming} alt="Comming Soon Image" />
-			<p>Comming Soon</p>
+			<img src={comingSoon} alt="Coming Soon Image" />
+			<p>Coming Soon</p>
 		</Container>
 	);
 };
