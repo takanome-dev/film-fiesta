@@ -112,9 +112,12 @@ const Provider: React.FC<Props> = ({ children }) => {
 	}, []);
 
 	useEffect(() => {
-		refetchBookmarks();
-		refetchFavorites();
-		refetchRentals();
+		// const user = getCurrentUser();
+		if (state.user._id) {
+			refetchBookmarks();
+			refetchFavorites();
+			refetchRentals();
+		}
 	}, []);
 
 	const handleSearch = (query: string) => {

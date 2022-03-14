@@ -131,8 +131,8 @@ export default class Checkout extends Form {
 			this.props.onRefetchRentals?.();
 			return history?.replace("/rentals");
 		} catch (err: any) {
-			console.log({ err });
 			toast.error(err.data);
+			this.setState({ isProcessing: false });
 		}
 	}
 

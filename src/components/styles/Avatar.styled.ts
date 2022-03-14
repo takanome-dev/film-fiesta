@@ -8,9 +8,9 @@ const Container = styled.div`
 	border: 0.1rem solid var(--color-gray-40);
 	border-radius: 50%;
 
-	&:focus {
+	/* &:focus {
 		outline: 0.2rem solid var(--color-secondary-40);
-	}
+	} */
 
 	img {
 		max-width: 100%;
