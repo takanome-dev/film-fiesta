@@ -35,9 +35,9 @@ const Nav = styled.nav`
 				background-color: var(--color-gray-80);
 			}
 
-			&:focus {
+			/* &:focus {
 				outline: 0.35rem solid var(--color-secondary-60);
-			}
+			} */
 		}
 
 		li.active {
