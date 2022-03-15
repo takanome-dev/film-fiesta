@@ -2,9 +2,11 @@ import { createContext, useEffect, useLayoutEffect, useReducer } from "react";
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FeedbackType } from "../components/types";
 import { getCurrentUser } from "../services/auth";
 import { getBookmarks } from "../services/bookmark";
 import { getFavorites } from "../services/favorite";
+import { getFeedbacks } from "../services/feedback";
 import { getGenres } from "../services/genre";
 import { deleteMovie, getMovies } from "../services/movie";
 import { getRentals } from "../services/rental";
@@ -19,6 +21,7 @@ import {
 	CURRENT_ROUTE,
 	FETCH_BOOKMARKS,
 	FETCH_FAVORITES,
+	FETCH_FEEDBACKS,
 	FETCH_GENRES,
 	FETCH_MOVIES,
 	FETCH_RENTALS,
@@ -34,15 +37,16 @@ const initialState: InitialStateType = {
 	searchQuery: "",
 	movies: [],
 	genres: [],
+	rentals: [],
 	favorites: [],
 	bookmarks: [],
-	rentals: [],
+	feedbacks: [],
 	pageSize: 9,
 	currentPage: 1,
 	currentRoute: "/movies",
 	selectedGenre: { _id: "", name: "" },
 	selectedCategory: "",
-	user: { _id: "", name: "", email: "", iat: 0, imageUrl: "" },
+	user: { _id: "", name: "", email: "", iat: 0, imageUrl: "", isAdmin: false },
 };
 
 export const Context = createContext(initialState);
@@ -103,6 +107,15 @@ const Provider: React.FC<Props> = ({ children }) => {
 		}
 	);
 
+	const { refetch: refetchFeedbacks } = useQuery<FeedbackType[], Error>(
+		"getFeedbacks",
+		async () => await getFeedbacks(),
+		{
+			enabled: false,
+			onSuccess: (data) => dispatch({ type: FETCH_FEEDBACKS, payload: data }),
+		}
+	);
+
 	useLayoutEffect(() => {
 		const user = getCurrentUser();
 		dispatch({
@@ -115,6 +128,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 		if (state.user._id) {
 			refetchBookmarks();
 			refetchFavorites();
+			refetchFeedbacks();
 			refetchRentals();
 		}
 	}, []);
@@ -220,13 +234,14 @@ const Provider: React.FC<Props> = ({ children }) => {
 	const { filteredMovies, totalMovies } = handleFilterMovies();
 
 	const value = {
+		user: state.user,
 		movies: state.movies,
 		genres: state.genres,
+		rentals: state.rentals,
+		pageSize: state.pageSize,
 		favorites: state.favorites,
 		bookmarks: state.bookmarks,
-		rentals: state.rentals,
-		user: state.user,
-		pageSize: state.pageSize,
+		feedbacks: state.feedbacks,
 		searchQuery: state.searchQuery,
 		currentPage: state.currentPage,
 		currentRoute: state.currentRoute,
@@ -244,6 +259,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 		onRefetchFavorites: refetchFavorites,
 		onRefetchBookmarks: refetchBookmarks,
 		onRefetchRentals: refetchRentals,
+		onRefetchFeedbacks: refetchFeedbacks,
 	};
 
 	return <Context.Provider value={value}>{children}</Context.Provider>;

@@ -25,17 +25,27 @@ const Container = styled.div`
 			align-items: center;
 			justify-content: flex-start;
 			width: 100%;
-			margin-top: 0.5rem;
 			padding: 0.8rem 1rem;
 			color: var(--color-dark-80);
 			cursor: pointer;
+
+			&:first-child {
+				margin-top: 0.5rem;
+			}
+
 			&:hover {
 				background-color: var(--color-gray-20);
 				color: var(--color-dark);
 			}
+
 			p {
 				margin-left: 1rem;
 			}
+		}
+
+		.feedback {
+			font-weight: 500;
+			font-size: 1.1rem;
 		}
 
 		@media (max-width: 650px) {

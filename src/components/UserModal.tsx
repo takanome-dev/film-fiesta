@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../context/GlobalContext";
 import Overlay from "./common/Overlay";
 import { profileLinks } from "./links";
 import Container from "./styles/UserModal.styled";
@@ -9,6 +11,8 @@ type Props = {
 };
 
 const UserModal: React.FC<Props> = ({ setOpenModal, openModal }) => {
+	const { user } = useContext(Context);
+
 	return (
 		<>
 			<Container>
@@ -20,6 +24,11 @@ const UserModal: React.FC<Props> = ({ setOpenModal, openModal }) => {
 					/>
 				)}
 				<div className="wrapper">
+					{user.isAdmin && (
+						<Link to="/feedbacks" className="feedback">
+							My Feedbacks
+						</Link>
+					)}
 					{profileLinks.map((l, i) => (
 						<Link
 							to={l.path}

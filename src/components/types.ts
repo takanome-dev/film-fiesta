@@ -113,7 +113,13 @@ export type JwtType = {
 	imageUrl?: string;
 };
 
-export type FeedbackType = { subject: string; message: string };
+export type FeedbackType = {
+	_id?: string;
+	subject: string;
+	message: string;
+	username?: string;
+	email?: string;
+};
 
 // ! Errors Types
 

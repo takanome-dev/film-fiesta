@@ -17,6 +17,7 @@ const Trending = lazy(() => import("../pages/Trending"));
 const Checkout = lazy(() => import("../pages/Checkout"));
 const Bookmark = lazy(() => import("../pages/Bookmark"));
 const Favorites = lazy(() => import("../pages/Favorites"));
+const Feedbacks = lazy(() => import("../pages/Feedbacks"));
 const MovieDetails = lazy(() => import("../pages/MovieDetails"));
 
 const Routes = () => {
@@ -52,6 +53,7 @@ const Routes = () => {
 						<PrivateRoute path="/favorites" component={Favorites} />
 						<PrivateRoute path="/profile" component={Profile} />
 						<PrivateRoute path="/rentals" component={Rentals} />
+						<PrivateRoute path="/feedbacks" component={Feedbacks} />
 						<PrivateRoute
 							path="/checkout"
 							render={({ history }) => (
