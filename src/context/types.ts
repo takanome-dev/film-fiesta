@@ -3,6 +3,7 @@ import {
 	RefetchOptions,
 	RefetchQueryFilters,
 } from "react-query";
+import { FeedbackType } from "../components/types";
 import { BookmarkType } from "../types/BookmarkType";
 import { FavoriteType } from "../types/FavoriteType";
 import { GenreType } from "../types/GenreType";
@@ -12,9 +13,10 @@ import { RentalType } from "../types/RentalType";
 export type InitialStateType = {
 	movies: MovieType[];
 	genres: GenreType[];
+	rentals: RentalType[];
 	favorites: FavoriteType[];
 	bookmarks: BookmarkType[];
-	rentals: RentalType[];
+	feedbacks: FeedbackType[];
 	filteredMovies?: MovieType[];
 	totalMovies?: number;
 	pageSize: number;
@@ -27,6 +29,7 @@ export type InitialStateType = {
 		_id: string;
 		name: string;
 		email: string;
+		isAdmin: boolean;
 		iat: number;
 		imageUrl: string;
 	};
@@ -50,6 +53,9 @@ export type InitialStateType = {
 	onRefetchRentals?: <TPageData>(
 		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
 	) => Promise<QueryObserverResult<RentalType[], Error>>;
+	onRefetchFeedbacks?: <TPageData>(
+		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+	) => Promise<QueryObserverResult<FeedbackType[], Error>>;
 };
 
 export type ActionType = {
