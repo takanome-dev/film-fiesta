@@ -112,7 +112,6 @@ const Provider: React.FC<Props> = ({ children }) => {
 	}, []);
 
 	useEffect(() => {
-		// const user = getCurrentUser();
 		if (state.user._id) {
 			refetchBookmarks();
 			refetchFavorites();
