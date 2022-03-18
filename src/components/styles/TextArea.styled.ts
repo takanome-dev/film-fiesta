@@ -5,6 +5,7 @@ const Container = styled.div`
 	flex-direction: column;
 	margin-bottom: 1.2rem;
 	width: 100%;
+	position: relative;
 
 	label {
 		font-size: 1.1rem;
@@ -22,17 +23,6 @@ const Container = styled.div`
 		transition: outline 100ms ease;
 		&:focus {
 			outline: 0.35rem solid var(--color-secondary-20);
-		}
-	}
-
-	.error {
-		margin-top: 1rem;
-		font-size: 1rem;
-		color: var(--color-primary);
-		&::before {
-			content: "!";
-			color: var(--color-primary);
-			margin-right: 0.2rem;
 		}
 	}
 `;

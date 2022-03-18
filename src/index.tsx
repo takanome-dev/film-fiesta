@@ -5,9 +5,9 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import App from "./app/App";
 // import reportWebVitals from "./reportWebVitals";
-// import { logger } from "./services/logger";
+import { logger } from "./services/logger";
 
-// logger.init();
+logger.init();
 const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {

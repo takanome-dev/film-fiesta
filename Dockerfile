@@ -1,23 +1,28 @@
-FROM node:16.13.2-alpine3.14
+# Stage 1: Build stage
 
-RUN addgroup app && adduser -S -G app app
+# FROM node:16.14-alpine3.15 AS build-stage
 
-# https://stackoverflow.com/questions/45972608/how-to-give-folder-permissions-inside-a-docker-container-folder#45973108
+# WORKDIR /app
 
-WORKDIR /app
+# COPY package.json ./
 
-RUN chown -R app:app /app
+# RUN yarn install
 
-RUN chmod 777 /app
+# COPY . .
 
-USER app
+# ENV REACT_APP_API_URL=http://143.198.110.90:3001/api
 
-COPY package.json ./
+# RUN yarn run build
 
-RUN yarn install
+# Stage 2: Production
 
-COPY . .
+FROM nginx:1.21.6-alpine
 
-EXPOSE 3000
+# COPY --from=build-stage /app/build /usr/share/nginx/html
+COPY /build /usr/share/nginx/html
 
-CMD [ "yarn", "start" ]
+COPY /config /etc/nginx/conf.d
+
+EXPOSE 80
+
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

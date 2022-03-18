@@ -4,11 +4,13 @@
 # testing
 /coverage
 
-# production
-/build
-
 # env
 .env
+.env.local
+
+# git 
+.git
+.gitignore
 
 # snyk
 .dccache
