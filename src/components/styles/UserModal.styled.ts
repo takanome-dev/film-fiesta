@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { appear } from "./Global.styled";
 
 const Container = styled.div`
-	animation: ${appear} 300ms;
+	animation: ${appear} 100ms;
 	.wrapper {
 		background-color: #fff;
 		max-width: 12rem;
@@ -50,7 +50,8 @@ const Container = styled.div`
 
 		@media (max-width: 650px) {
 			left: 30%;
-			top: 45%;
+			/* top: 45%; */
+			bottom: 15%;
 			z-index: 4;
 			box-shadow: 0 0.2rem 1.5rem 0.2rem rgba(0, 0, 0, 0.09);
 		}

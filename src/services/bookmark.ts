@@ -22,7 +22,7 @@ export const deleteBookmark = async (movieId: string) => {
 	return data;
 };
 
-export const clearBookmarks = async () => {
-	const { data } = await http.delete(`${endpoint}/clear`);
+export const clearBookmarks = async (userId: string) => {
+	const { data } = await http.delete(`${endpoint}/${userId}/clear`);
 	return data;
 };

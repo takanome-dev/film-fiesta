@@ -123,7 +123,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .main {
-    margin: 1rem 1rem 2rem 16rem;
+    margin: 1rem 1rem 0rem 16rem;
     transition: margin 300ms ease-in-out;
     
     @media (max-width: 1110px) {

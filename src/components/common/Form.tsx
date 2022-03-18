@@ -1,12 +1,10 @@
 import Joi, { PartialSchemaMap } from "joi";
 import React, { Component } from "react";
-import { GenreType } from "../../types/GenreType";
 import { Loader } from "../svg";
 import { FormProps, FormStateType } from "../types";
 import Button from "./Button";
 import Input from "./Input";
 import InputDate from "./InputDate";
-import Select from "./Select";
 import TextArea from "./TextArea";
 
 export default class Form extends Component<FormProps, FormStateType> {
@@ -122,20 +120,6 @@ export default class Form extends Component<FormProps, FormStateType> {
 				label={label}
 				name={name}
 				placeholder={placeholder}
-				value={data[name]}
-				error={errors[name]}
-				onChange={this.handleChange}
-			/>
-		);
-	}
-
-	renderSelect(name: string, label: string, options: GenreType[]) {
-		const { data, errors } = this.state;
-		return (
-			<Select
-				label={label}
-				name={name}
-				options={options}
 				value={data[name]}
 				error={errors[name]}
 				onChange={this.handleChange}

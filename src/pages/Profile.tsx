@@ -19,8 +19,8 @@ const Profile = () => {
 					setEditPassword={setEditPassword}
 				/>
 			)}
-			<Wrapper width="100%">
-				<Container>
+			<Container>
+				<Wrapper width="100%">
 					<div className="profile-wrapper">
 						<div className="avatar-container">
 							<div className="avatar">
@@ -81,8 +81,8 @@ const Profile = () => {
 							Update password
 						</button>
 					</div>
-				</Container>
-			</Wrapper>
+				</Wrapper>
+			</Container>
 		</>
 	);
 };

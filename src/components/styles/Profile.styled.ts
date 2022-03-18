@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const Container = styled.div`
+	padding-bottom: 2rem;
+
 	.btn-2 {
 		display: none;
 		padding: 0.8rem;
