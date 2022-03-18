@@ -71,11 +71,15 @@
 		"autoprefixer": "^10.0.2",
 		"eslint": "^8.7.0",
 		"eslint-plugin-react": "^7.28.0",
+		"husky": "^7.0.4",
+		"lint-staged": "^12.3.7",
 		"postcss": "^8.1.0",
+		"prettier": "^2.6.0",
 		"react-is": ">= 16.8.0"
 	},
 	"lint-staged": {
-		"*.{js,css,md}": "prettier --write"
+		"*.{js,css,md}": "prettier --write",
+		"*.ts": "eslint --cache --fix"
 	},
 	"peerDependencies": {
 		"@babel/core": ">=7.0.0-0 <8.0.0",
