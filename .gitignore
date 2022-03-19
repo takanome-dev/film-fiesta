@@ -12,8 +12,8 @@
 /build
 
 # dockerfile
-Dockerfile
 Dockerfile.dev
+Dockerfile.prod
 .dockerignore
 
 # config
