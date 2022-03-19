@@ -14,7 +14,7 @@ import { Context } from "../context/GlobalContext";
 import { getMovie } from "../services/movie";
 import { MovieType } from "../types/MovieType";
 
-const movieDetails: React.FC<MovieDetailsProps> = ({ match, setMovieId }) => {
+const MovieDetails: React.FC<MovieDetailsProps> = ({ match, setMovieId }) => {
 	const { user } = useContext(Context);
 
 	const { data, refetch } = useQuery<MovieType, Error>(
@@ -86,4 +86,4 @@ const movieDetails: React.FC<MovieDetailsProps> = ({ match, setMovieId }) => {
 	);
 };
 
-export default movieDetails;
+export default MovieDetails;

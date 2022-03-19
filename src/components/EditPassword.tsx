@@ -29,11 +29,9 @@ export default class EditPassword extends Form {
 	keydownHandler = (e: KeyboardEvent) => {
 		switch (e.code) {
 			case "Escape":
-				this.props.setEditPassword?.(false);
-				break;
+				return this.props.setEditPassword?.(false);
 			case "Enter":
-				this.handleSubmit;
-				break;
+				return this.handleSubmit;
 			default:
 		}
 	};
