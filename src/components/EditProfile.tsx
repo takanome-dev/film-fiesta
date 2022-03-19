@@ -35,11 +35,9 @@ export default class EditProfile extends Form {
 	keydownHandler = (e: KeyboardEvent) => {
 		switch (e.code) {
 			case "Escape":
-				this.props.setEditProfile?.(false);
-				break;
+				return this.props.setEditProfile?.(false);
 			case "Enter":
-				this.handleSubmit;
-				break;
+				return this.handleSubmit;
 			default:
 		}
 	};
