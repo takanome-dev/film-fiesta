@@ -28,7 +28,7 @@ import {
 	GET_CURRENT_USER,
 	SEARCH_QUERY,
 	SELECTED_CATEGORY,
-	SELECTED_GENRE,
+	SELECTED_GENRE
 } from "./Constant";
 import reducer from "./Reducer";
 import { InitialStateType } from "./types";
@@ -131,6 +131,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 			refetchFeedbacks();
 			refetchRentals();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleSearch = (query: string) => {

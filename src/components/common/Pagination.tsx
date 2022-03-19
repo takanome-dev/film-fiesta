@@ -31,22 +31,3 @@ const Pagination = () => {
 };
 
 export default Pagination;
-
-{
-	/* <Nav className="flex">
-<ul className="pagination flex">
-  {pages.map((p) => (
-    <li
-      key={p}
-      className={currentPage === p ? "active" : ""}
-    >
-      <span
-        onClick={() => onPageChange!(p)}
-      >
-        {p}
-      </span>
-    </li>
-  ))}
-</ul>
-</Nav> */
-}

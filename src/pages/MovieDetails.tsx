@@ -26,6 +26,7 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ match, setMovieId }) => {
 	useEffect(() => {
 		refetch();
 		setMovieId(match.params.id);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [match.params.id]);
 
 	const isLiked = data?.likes?.find((l: { _id: string }) => user._id === l._id);
