@@ -14,6 +14,7 @@ const Logout: React.FC<Props> = ({ dispatch, history }) => {
 		const user = getCurrentUser();
 		dispatch?.({ type: "GET_CURRENT_USER", payload: user });
 		history.push("/");
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return null;
