@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Form from "../components/common/Form";
 import Wrapper from "../components/common/Wrapper";
 import { RegisterStateType } from "../components/types";
+import { getCurrentUser } from "../services/auth";
 import { registerUser } from "../services/user";
 
 export default class RegisterForm extends Form {
@@ -30,7 +31,9 @@ export default class RegisterForm extends Form {
 	async submitToServer() {
 		try {
 			await registerUser(this.state.data);
-			window.location.pathname = "/";
+			const user = getCurrentUser();
+			this.props.dispatch?.({ type: "GET_CURRENT_USER", payload: user });
+			this.props.history?.replace("/");
 		} catch (err: any) {
 			if (err.request?.status === 400) {
 				const { errors } = this.state;

@@ -1,81 +1,68 @@
-import {
-	CURRENT_PAGE,
-	CURRENT_ROUTE,
-	FETCH_BOOKMARKS,
-	FETCH_FAVORITES,
-	FETCH_FEEDBACKS,
-	FETCH_GENRES,
-	FETCH_MOVIES,
-	FETCH_RENTALS,
-	GET_CURRENT_USER,
-	SEARCH_QUERY,
-	SELECTED_CATEGORY,
-	SELECTED_GENRE,
-} from "./Constant";
+import * as constants from "./Constant";
 import { ActionType, InitialStateType } from "./types";
 
 const reducer = (state: InitialStateType, action: ActionType) => {
 	switch (action.type) {
-		case SEARCH_QUERY:
+		case constants.SEARCH_QUERY:
 			return {
 				...state,
 				searchQuery: action.payload,
 				currenPage: 1,
 				selectedGenre: { _id: "", name: "" },
 			};
-		case GET_CURRENT_USER:
+		case constants.GET_CURRENT_USER:
 			return {
 				...state,
 				user: action.payload,
 			};
-		case FETCH_MOVIES:
+		case constants.FETCH_MOVIES:
 			return {
 				...state,
 				movies: action.payload,
 			};
-		case FETCH_GENRES:
+		case constants.FETCH_GENRES:
 			return {
 				...state,
 				genres: action.payload,
 			};
-		case FETCH_FAVORITES:
+		case constants.FETCH_FAVORITES:
 			return {
 				...state,
 				favorites: action.payload,
 			};
-		case FETCH_BOOKMARKS:
+		case constants.FETCH_BOOKMARKS:
 			return {
 				...state,
 				bookmarks: action.payload,
 			};
-		case FETCH_RENTALS:
+		case constants.FETCH_RENTALS:
 			return {
 				...state,
 				rentals: action.payload,
 			};
-		case FETCH_FEEDBACKS:
+		case constants.FETCH_FEEDBACKS:
 			return {
 				...state,
 				feedbacks: action.payload,
 			};
-		case CURRENT_PAGE:
+		case constants.CURRENT_PAGE:
 			return {
 				...state,
 				currentPage: action.payload,
 			};
-		case CURRENT_ROUTE:
+		case constants.CURRENT_ROUTE:
 			return {
 				...state,
 				currentRoute: action.payload,
 			};
-		case SELECTED_GENRE:
+		case constants.SELECTED_GENRE:
 			return {
 				...state,
 				selectedGenre: action.payload,
 				searchQuery: "",
 				currentPage: 1,
 			};
-		case SELECTED_CATEGORY:
+		case constants.SELECTED_CATEGORY:
 			return {
 				...state,
 				selectedCategory: action.payload,

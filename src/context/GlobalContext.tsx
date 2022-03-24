@@ -16,20 +16,7 @@ import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
 import { RentalType } from "../types/RentalType";
 import { paginate } from "../utils/paginate";
-import {
-	CURRENT_PAGE,
-	CURRENT_ROUTE,
-	FETCH_BOOKMARKS,
-	FETCH_FAVORITES,
-	FETCH_FEEDBACKS,
-	FETCH_GENRES,
-	FETCH_MOVIES,
-	FETCH_RENTALS,
-	GET_CURRENT_USER,
-	SEARCH_QUERY,
-	SELECTED_CATEGORY,
-	SELECTED_GENRE,
-} from "./Constant";
+import * as constants from "./Constant";
 import reducer from "./Reducer";
 import { InitialStateType } from "./types";
 
@@ -65,7 +52,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 	>("getMovies", async () => await getMovies(), {
 		onSuccess: (data) =>
 			dispatch({
-				type: FETCH_MOVIES,
+				type: constants.FETCH_MOVIES,
 				payload: data,
 			}),
 	});
@@ -74,7 +61,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 		onSuccess: (data) => {
 			const genres = [{ _id: "", name: "All" }, ...data];
 			dispatch({
-				type: FETCH_GENRES,
+				type: constants.FETCH_GENRES,
 				payload: genres,
 			});
 		},
@@ -85,7 +72,8 @@ const Provider: React.FC<Props> = ({ children }) => {
 		async () => await getFavorites(),
 		{
 			enabled: false,
-			onSuccess: (data) => dispatch({ type: FETCH_FAVORITES, payload: data }),
+			onSuccess: (data) =>
+				dispatch({ type: constants.FETCH_FAVORITES, payload: data }),
 		}
 	);
 
@@ -94,7 +82,8 @@ const Provider: React.FC<Props> = ({ children }) => {
 		async () => await getBookmarks(),
 		{
 			enabled: false,
-			onSuccess: (data) => dispatch({ type: FETCH_BOOKMARKS, payload: data }),
+			onSuccess: (data) =>
+				dispatch({ type: constants.FETCH_BOOKMARKS, payload: data }),
 		}
 	);
 
@@ -103,7 +92,8 @@ const Provider: React.FC<Props> = ({ children }) => {
 		async () => await getRentals(),
 		{
 			enabled: false,
-			onSuccess: (data) => dispatch({ type: FETCH_RENTALS, payload: data }),
+			onSuccess: (data) =>
+				dispatch({ type: constants.FETCH_RENTALS, payload: data }),
 		}
 	);
 
@@ -112,14 +102,15 @@ const Provider: React.FC<Props> = ({ children }) => {
 		async () => await getFeedbacks(),
 		{
 			enabled: false,
-			onSuccess: (data) => dispatch({ type: FETCH_FEEDBACKS, payload: data }),
+			onSuccess: (data) =>
+				dispatch({ type: constants.FETCH_FEEDBACKS, payload: data }),
 		}
 	);
 
 	useLayoutEffect(() => {
 		const user = getCurrentUser();
 		dispatch({
-			type: GET_CURRENT_USER,
+			type: constants.GET_CURRENT_USER,
 			payload: user,
 		});
 	}, []);
@@ -136,28 +127,28 @@ const Provider: React.FC<Props> = ({ children }) => {
 
 	const handleSearch = (query: string) => {
 		dispatch({
-			type: SEARCH_QUERY,
+			type: constants.SEARCH_QUERY,
 			payload: query,
 		});
 	};
 
 	const handlePageChange = (pageNumber: number) => {
 		dispatch({
-			type: CURRENT_PAGE,
+			type: constants.CURRENT_PAGE,
 			payload: pageNumber,
 		});
 	};
 
 	const handleRouteChange = (route: string) => {
 		dispatch({
-			type: CURRENT_ROUTE,
+			type: constants.CURRENT_ROUTE,
 			payload: route,
 		});
 	};
 
 	const handleSelectedGenre = (genre: GenreType) => {
 		dispatch({
-			type: SELECTED_GENRE,
+			type: constants.SELECTED_GENRE,
 			payload: genre,
 		});
 	};
@@ -165,17 +156,17 @@ const Provider: React.FC<Props> = ({ children }) => {
 	useEffect(() => {
 		if (location.pathname === "/popular")
 			dispatch({
-				type: SELECTED_CATEGORY,
+				type: constants.SELECTED_CATEGORY,
 				payload: "popular",
 			});
 		else if (location.pathname === "/trending")
 			dispatch({
-				type: SELECTED_CATEGORY,
+				type: constants.SELECTED_CATEGORY,
 				payload: "trending",
 			});
 		else
 			dispatch({
-				type: SELECTED_CATEGORY,
+				type: constants.SELECTED_CATEGORY,
 				payload: "",
 			});
 	}, [location.pathname]);
@@ -185,7 +176,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 		const movies = originalMovies.filter((m) => m._id !== id);
 
 		dispatch({
-			type: FETCH_MOVIES,
+			type: constants.FETCH_MOVIES,
 			payload: movies,
 		});
 
@@ -196,7 +187,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 				toast.error(err.data);
 			}
 			dispatch({
-				type: FETCH_MOVIES,
+				type: constants.FETCH_MOVIES,
 				payload: originalMovies,
 			});
 		}
@@ -208,17 +199,12 @@ const Provider: React.FC<Props> = ({ children }) => {
 			pageSize,
 			currentPage,
 			selectedGenre,
-			searchQuery,
 			selectedCategory,
 		} = state;
 
 		let filtered: MovieType[] = allMovies;
 
-		if (searchQuery)
-			filtered = allMovies.filter((m: MovieType) =>
-				m.title.toLowerCase().includes(searchQuery.toLowerCase())
-			);
-		else if (selectedGenre && selectedGenre._id)
+		if (selectedGenre && selectedGenre._id)
 			filtered = allMovies.filter(
 				(m: MovieType) => m.genre._id === selectedGenre._id
 			);
@@ -261,6 +247,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 		onRefetchBookmarks: refetchBookmarks,
 		onRefetchRentals: refetchRentals,
 		onRefetchFeedbacks: refetchFeedbacks,
+		dispatch,
 	};
 
 	return <Context.Provider value={value}>{children}</Context.Provider>;

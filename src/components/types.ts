@@ -4,10 +4,11 @@ import { Stripe, StripeElements } from "@stripe/stripe-js";
 import {
 	QueryObserverResult,
 	RefetchOptions,
-	RefetchQueryFilters,
+	RefetchQueryFilters
 } from "react-query";
 import { StaticContext } from "react-router";
 import { RouteComponentProps } from "react-router-dom";
+import { ActionType } from "../context/types";
 import { GenreType } from "../types/GenreType";
 import { MovieType, NewMovieType } from "../types/MovieType";
 import { RentalType } from "../types/RentalType";
@@ -24,12 +25,12 @@ type MatchType = {
 
 type OrderType = boolean | "asc" | "desc";
 
-type HistoryType = {
+export type HistoryType = {
 	push: (url: string) => void;
 	replace: (url: string) => void;
 };
 
-type LocationType = {
+export type LocationType = {
 	state: {
 		from: {
 			pathname: string;
@@ -43,54 +44,7 @@ export type SortColumnType = {
 };
 
 export type PaginationProps = {
-	// currentPage: number;
-	// onPageChange: (pageNumber: number) => void;
-	// itemsCount: number;
-	// pageSize: number;
 	totalMovies: number;
-};
-
-export type ListGroupType = {
-	items: GenreType[];
-	selectedItem: GenreType;
-	onItemSelected: (genre: GenreType) => void;
-};
-
-export type MoviesTableType = {
-	movies: MovieType[];
-	sortColumn: SortColumnType;
-	handleDelete: (id: string) => Promise<void | React.ReactText>;
-	handleLike: (movie: MovieType) => void;
-	handleSort: (sortColumn: SortColumnType) => void;
-};
-
-export type ColumnType = {
-	path?: string;
-	label?: string;
-	content?: (movie: MovieType) => JSX.Element;
-};
-
-export type TableType = {
-	columns: ColumnType[];
-	sortColumn: SortColumnType;
-	handleSort: (sortColumn: SortColumnType) => void;
-	data: MovieType[];
-};
-
-export type TableHeaderType = {
-	handleSort: (sortColumn: SortColumnType) => void;
-	columns: ColumnType[];
-	sortColumn: SortColumnType;
-};
-
-export type TableBodyType = {
-	data: MovieType[];
-	columns: ColumnType[];
-};
-
-export type LikeType = {
-	liked: boolean;
-	onLike: () => void;
 };
 
 export type LoginUserType = {
@@ -211,6 +165,7 @@ export type FormProps = {
 	movieId?: string;
 	elements?: StripeElements | null;
 	stripe?: Stripe | null;
+	dispatch?: React.Dispatch<ActionType>;
 	onRefetchRentals?:
 		| (<TPageData>(
 				options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
