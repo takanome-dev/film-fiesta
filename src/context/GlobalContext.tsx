@@ -208,17 +208,12 @@ const Provider: React.FC<Props> = ({ children }) => {
 			pageSize,
 			currentPage,
 			selectedGenre,
-			searchQuery,
 			selectedCategory,
 		} = state;
 
 		let filtered: MovieType[] = allMovies;
 
-		if (searchQuery)
-			filtered = allMovies.filter((m: MovieType) =>
-				m.title.toLowerCase().includes(searchQuery.toLowerCase())
-			);
-		else if (selectedGenre && selectedGenre._id)
+		if (selectedGenre && selectedGenre._id)
 			filtered = allMovies.filter(
 				(m: MovieType) => m.genre._id === selectedGenre._id
 			);
@@ -226,6 +221,18 @@ const Provider: React.FC<Props> = ({ children }) => {
 			filtered = allMovies.filter(
 				(m: MovieType) => m.category === selectedCategory
 			);
+		// if (searchQuery)
+		// 	filtered = allMovies.filter((m: MovieType) =>
+		// 		m.title.toLowerCase().includes(searchQuery.toLowerCase())
+		// 	);
+		// else if (selectedGenre && selectedGenre._id)
+		// 	filtered = allMovies.filter(
+		// 		(m: MovieType) => m.genre._id === selectedGenre._id
+		// 	);
+		// else if (selectedCategory)
+		// 	filtered = allMovies.filter(
+		// 		(m: MovieType) => m.category === selectedCategory
+		// 	);
 
 		const filteredMovies = paginate(filtered, currentPage, pageSize);
 		const totalMovies = filtered.length;

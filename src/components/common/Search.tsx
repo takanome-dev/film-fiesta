@@ -1,31 +1,19 @@
 import { useContext } from "react";
-import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { Context } from "../../context/GlobalContext";
-
-const Container = styled.div`
-	width: 30rem;
-	input {
-		width: 100%;
-		/* max-width: 40rem; */
-		/* width: 100%;: */
-		padding: 0.5rem 1rem;
-		color: var(--color-dark-80);
-		background-color: var(--color-background);
-		border: none;
-		border-radius: 0.6rem;
-		transition: outline 100ms ease;
-		&:focus {
-			outline: 0.35rem solid var(--color-secondary-20);
-		}
-	}
-
-	@media (max-width: 768px) {
-		width: 20rem;
-	}
-`;
+import Container from "../styles/Search.styled";
 
 const Search = () => {
-	const { searchQuery, onSearch } = useContext(Context);
+	const { searchQuery, onSearch, movies } = useContext(Context);
+
+	let matches = movies.filter((m) => {
+		const regex = new RegExp(`^${searchQuery}`, "gi");
+		return m.title.match(regex);
+	});
+
+	if (searchQuery.length === 0) {
+		matches = [];
+	}
 
 	return (
 		<Container>
@@ -37,6 +25,21 @@ const Search = () => {
 				value={searchQuery}
 				onChange={(e) => onSearch?.(e.currentTarget.value)}
 			/>
+			{matches.length > 0 && (
+				<div className="search-list">
+					{matches.map((m) => (
+						<Link key={m._id} to={`/movies/${m._id}`} className="link">
+							<div className="search-result">
+								<h4>{m.title}</h4>
+								<div className="movie-details">
+									<small>genre: {m.genre.name.toLowerCase()}</small>
+									<small>rate: {m.voteAverage}</small>
+								</div>
+							</div>
+						</Link>
+					))}
+				</div>
+			)}
 		</Container>
 	);
 };

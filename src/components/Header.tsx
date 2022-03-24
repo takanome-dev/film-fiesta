@@ -33,14 +33,6 @@ const Header: React.FC<Props> = ({ handleOpen }) => {
 					<h1>Vidly</h1>
 				</Link>
 				<Search />
-				{/* <input
-					type="search"
-					id="search"
-					placeholder="Search..."
-					aria-label="Search movies by title"
-					value={searchQuery}
-					onChange={(e) => onSearch?.(e.currentTarget.value)}
-				/> */}
 				{user && user._id ? (
 					<div className="avatar">
 						<Avatar handleOpenModal={() => setOpenModal(true)} />

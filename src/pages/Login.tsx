@@ -37,7 +37,6 @@ export default class LoginForm extends Form {
 			if (err.request?.status === 400) {
 				const { errors } = this.state;
 				errors.email = err.data;
-				// errors.password = err.data;
 				this.setState({ errors, isProcessing: false });
 			}
 		}

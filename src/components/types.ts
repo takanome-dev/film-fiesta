@@ -43,54 +43,7 @@ export type SortColumnType = {
 };
 
 export type PaginationProps = {
-	// currentPage: number;
-	// onPageChange: (pageNumber: number) => void;
-	// itemsCount: number;
-	// pageSize: number;
 	totalMovies: number;
-};
-
-export type ListGroupType = {
-	items: GenreType[];
-	selectedItem: GenreType;
-	onItemSelected: (genre: GenreType) => void;
-};
-
-export type MoviesTableType = {
-	movies: MovieType[];
-	sortColumn: SortColumnType;
-	handleDelete: (id: string) => Promise<void | React.ReactText>;
-	handleLike: (movie: MovieType) => void;
-	handleSort: (sortColumn: SortColumnType) => void;
-};
-
-export type ColumnType = {
-	path?: string;
-	label?: string;
-	content?: (movie: MovieType) => JSX.Element;
-};
-
-export type TableType = {
-	columns: ColumnType[];
-	sortColumn: SortColumnType;
-	handleSort: (sortColumn: SortColumnType) => void;
-	data: MovieType[];
-};
-
-export type TableHeaderType = {
-	handleSort: (sortColumn: SortColumnType) => void;
-	columns: ColumnType[];
-	sortColumn: SortColumnType;
-};
-
-export type TableBodyType = {
-	data: MovieType[];
-	columns: ColumnType[];
-};
-
-export type LikeType = {
-	liked: boolean;
-	onLike: () => void;
 };
 
 export type LoginUserType = {
