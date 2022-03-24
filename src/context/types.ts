@@ -33,6 +33,7 @@ export type InitialStateType = {
 		iat: number;
 		imageUrl: string;
 	};
+	dispatch?: React.Dispatch<ActionType>;
 	loadingMovies?: boolean;
 	onDelete?: (id: string) => Promise<void>;
 	onLike?: (isLike: boolean) => void;

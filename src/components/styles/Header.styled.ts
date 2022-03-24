@@ -33,7 +33,7 @@ export const Container = styled.header`
 			}
 		}
 
-		input {
+		/* input {
 			max-width: 40rem;
 			width: 100%;
 			padding: 0.5rem 1rem;
@@ -45,7 +45,7 @@ export const Container = styled.header`
 			&:focus {
 				outline: 0.35rem solid var(--color-secondary-20);
 			}
-		}
+		} */
 
 		.btn {
 			background-color: var(--color-secondary-40);
@@ -67,15 +67,15 @@ export const Container = styled.header`
 			margin-left: 1rem;
 		}
 
-		@media screen and (max-width: 948px) {
+		/* @media screen and (max-width: 948px) {
 			input {
 				max-width: 20rem;
 			}
-		}
+		} */
 		@media screen and (max-width: 650px) {
-			input {
+			/* input {
 				max-width: 22rem;
-			}
+			} */
 
 			.btn {
 				display: none;

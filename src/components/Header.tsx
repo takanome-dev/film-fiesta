@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../context/GlobalContext";
 import Avatar from "./common/Avatar";
+import Search from "./common/Search";
 import { Container } from "./styles/Header.styled";
 import { BarsIcon, LogoIcon, UserIcon } from "./svg";
 import UserModal from "./UserModal";
@@ -11,7 +12,7 @@ type Props = {
 };
 
 const Header: React.FC<Props> = ({ handleOpen }) => {
-	const { searchQuery, onSearch, user } = useContext(Context);
+	const { user } = useContext(Context);
 	const [openModal, setOpenModal] = useState(false);
 
 	useEffect(() => {
@@ -31,14 +32,7 @@ const Header: React.FC<Props> = ({ handleOpen }) => {
 					<LogoIcon />
 					<h1>Vidly</h1>
 				</Link>
-				<input
-					type="search"
-					id="search"
-					placeholder="Search..."
-					aria-label="Search movies by title"
-					value={searchQuery}
-					onChange={(e) => onSearch?.(e.currentTarget.value)}
-				/>
+				<Search />
 				{user && user._id ? (
 					<div className="avatar">
 						<Avatar handleOpenModal={() => setOpenModal(true)} />

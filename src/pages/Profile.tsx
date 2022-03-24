@@ -8,11 +8,15 @@ import { Context } from "../context/GlobalContext";
 const Profile = () => {
 	const [editProfile, setEditProfile] = useState(false);
 	const [editPassword, setEditPassword] = useState(false);
-	const { user } = useContext(Context);
+	const { user, dispatch } = useContext(Context);
 
 	return (
 		<>
-			<EditProfile editProfile={editProfile} setEditProfile={setEditProfile} />
+			<EditProfile
+				editProfile={editProfile}
+				setEditProfile={setEditProfile}
+				dispatch={dispatch}
+			/>
 			{editPassword && (
 				<EditPassword
 					editPassword={editPassword}
