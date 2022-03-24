@@ -131,7 +131,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 			refetchFeedbacks();
 			refetchRentals();
 		}
-		/**	// eslint-disable-next-line react-hooks/exhaustive-deps */
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleSearch = (query: string) => {

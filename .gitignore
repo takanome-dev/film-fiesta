@@ -32,6 +32,6 @@ yarn-debug.log*
 yarn-error.log*
 .dccache
 .eslintcache
-# .eslintrc.json
+.eslintrc.json
 
 /src/features
