@@ -4,10 +4,11 @@ import { Stripe, StripeElements } from "@stripe/stripe-js";
 import {
 	QueryObserverResult,
 	RefetchOptions,
-	RefetchQueryFilters,
+	RefetchQueryFilters
 } from "react-query";
 import { StaticContext } from "react-router";
 import { RouteComponentProps } from "react-router-dom";
+import { ActionType } from "../context/types";
 import { GenreType } from "../types/GenreType";
 import { MovieType, NewMovieType } from "../types/MovieType";
 import { RentalType } from "../types/RentalType";
@@ -24,12 +25,12 @@ type MatchType = {
 
 type OrderType = boolean | "asc" | "desc";
 
-type HistoryType = {
+export type HistoryType = {
 	push: (url: string) => void;
 	replace: (url: string) => void;
 };
 
-type LocationType = {
+export type LocationType = {
 	state: {
 		from: {
 			pathname: string;
@@ -164,6 +165,7 @@ export type FormProps = {
 	movieId?: string;
 	elements?: StripeElements | null;
 	stripe?: Stripe | null;
+	dispatch?: React.Dispatch<ActionType>;
 	onRefetchRentals?:
 		| (<TPageData>(
 				options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined

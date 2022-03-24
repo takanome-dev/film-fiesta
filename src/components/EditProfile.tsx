@@ -79,7 +79,13 @@ export default class EditProfile extends Form {
 
 		try {
 			await updateUser({ name, email }, user!._id!);
-			window.location.pathname = "/profile";
+			const updatedUser = getCurrentUser();
+			this.props.dispatch?.({
+				type: "GET_CURRENT_USER",
+				payload: updatedUser,
+			});
+			this.props.setEditProfile?.(false);
+			toast.success("Profile successfully updated");
 		} catch (err: any) {
 			toast.error(err.data);
 		}

@@ -247,6 +247,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 		onRefetchBookmarks: refetchBookmarks,
 		onRefetchRentals: refetchRentals,
 		onRefetchFeedbacks: refetchFeedbacks,
+		dispatch,
 	};
 
 	return <Context.Provider value={value}>{children}</Context.Provider>;

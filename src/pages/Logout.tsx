@@ -1,13 +1,22 @@
-import { Component } from "react";
-import { removeToken } from "../services/auth";
+import { useEffect } from "react";
+import { HistoryType } from "../components/types";
+import { ActionType } from "../context/types";
+import { getCurrentUser, removeToken } from "../services/auth";
 
-export default class Logout extends Component {
-	componentDidMount() {
+type Props = {
+	dispatch: React.Dispatch<ActionType> | undefined;
+	history: HistoryType;
+};
+
+const Logout: React.FC<Props> = ({ dispatch, history }) => {
+	useEffect(() => {
 		removeToken();
-		window.location.pathname = "/";
-	}
+		const user = getCurrentUser();
+		dispatch?.({ type: "GET_CURRENT_USER", payload: user });
+		history.push("/");
+	}, []);
 
-	render() {
-		return null;
-	}
-}
+	return null;
+};
+
+export default Logout;

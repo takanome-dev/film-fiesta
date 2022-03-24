@@ -33,7 +33,7 @@ const Search = () => {
 								<h4>{m.title}</h4>
 								<div className="movie-details">
 									<small>genre: {m.genre.name.toLowerCase()}</small>
-									<small>rate: {m.voteAverage}</small>
+									{/* <small>rate: {m.voteAverage}</small> */}
 								</div>
 							</div>
 						</Link>

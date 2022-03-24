@@ -19,21 +19,22 @@ const Container = styled.div`
 
 	.search-list {
 		position: absolute;
+		z-index: 2;
 		background-color: #fff;
-		padding-top: 0.5rem;
+		padding: 1rem 0;
+		margin-top: 0.3rem;
 		border-radius: 0.5rem;
 		width: 100%;
+		max-height: calc(100vh - 60px);
 		box-shadow: 0rem 1rem 3rem rgba(0, 0, 0, 0.2);
 		animation: ${appear} 300ms;
+		overflow-y: auto;
 
 		.link {
 			text-decoration: none;
 
 			.search-result {
-				border: 1px solid var(--color-gray-20);
-				border-radius: 0.5rem;
-				padding: 0.5rem;
-				margin-bottom: 0.2rem;
+				padding: 0.5rem 1rem;
 				color: var(--color-dark);
 				&:hover {
 					background-color: var(--color-gray-20);
