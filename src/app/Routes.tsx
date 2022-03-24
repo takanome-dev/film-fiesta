@@ -66,7 +66,6 @@ const Routes = () => {
 								/>
 							)}
 						/>
-
 						<Route path="/not-found" component={NotFound} />
 						<Redirect from="/" exact to="/movies" />
 						<Redirect to="not-found" />
