@@ -19,7 +19,7 @@ const Heart: React.FC<Props> = ({
 	movie,
 	refetch,
 }) => {
-	const { user, onRefetchMovies, onRefetchFavorites } = useContext(Context);
+	const { user, onRefetchFavorites } = useContext(Context);
 	const location = useLocation();
 	const match = location.pathname.match(/\/movies\/([0-9a-fA-F]){24}$/);
 
@@ -30,7 +30,6 @@ const Heart: React.FC<Props> = ({
 		try {
 			if (isLiked) {
 				const data = await deleteFavorite(movie._id);
-				onRefetchMovies?.();
 				onRefetchFavorites?.();
 				if (match?.[0]) refetch();
 				return toast.success(data);
@@ -40,8 +39,6 @@ const Heart: React.FC<Props> = ({
 				userId: user._id,
 				movieId: movie._id,
 			});
-			onRefetchMovies?.();
-			onRefetchFavorites?.();
 			if (match?.[0]) refetch();
 			return toast.success(data);
 		} catch (err: any) {

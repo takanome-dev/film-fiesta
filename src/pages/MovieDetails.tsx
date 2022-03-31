@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import { DefaultImage } from "../assets";
 import { Container } from "../components/styles/MovieDetails.styled";
 import {
 	AddBookmarkIcon,
@@ -15,7 +16,7 @@ import { getMovie } from "../services/movie";
 import { MovieType } from "../types/MovieType";
 
 const MovieDetails: React.FC<MovieDetailsProps> = ({ match, setMovieId }) => {
-	const { user } = useContext(Context);
+	const { favorites, bookmarks } = useContext(Context);
 
 	const { data, refetch } = useQuery<MovieType, Error>(
 		"getMovie",
@@ -29,16 +30,21 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ match, setMovieId }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [match.params.id]);
 
-	const isLiked = data?.likes?.find((l: { _id: string }) => user._id === l._id);
+	const isLiked = favorites.find((f: { _id: string }) => data?._id === f._id);
 
-	const isBookmarked = data?.bookmarks?.find(
-		(l: { _id: string }) => user._id === l._id
+	const isBookmarked = bookmarks.find(
+		(b: { _id: string }) => data?._id === b._id
 	);
 
 	return (
 		<Container>
 			<div className="image">
-				<img src={data?.url} alt={data?.title} />
+				<img
+					src={data?.url || DefaultImage}
+					alt={data?.title}
+					width="500"
+					height="500"
+				/>
 			</div>
 			<div className="desc">
 				<h1>{data?.title}</h1>

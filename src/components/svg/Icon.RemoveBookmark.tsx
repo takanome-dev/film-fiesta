@@ -11,7 +11,7 @@ type Props = {
 };
 
 const RemoveBookmark: React.FC<Props> = ({ movie, refetch }) => {
-	const { user, onRefetchMovies, onRefetchBookmarks } = useContext(Context);
+	const { user, onRefetchBookmarks } = useContext(Context);
 	const location = useLocation();
 	const match = location.pathname.match(/\/movies\/([0-9a-fA-F]){24}$/);
 
@@ -21,7 +21,6 @@ const RemoveBookmark: React.FC<Props> = ({ movie, refetch }) => {
 
 		try {
 			const data = await deleteBookmark(movie._id);
-			onRefetchMovies?.();
 			onRefetchBookmarks?.();
 			if (match?.[0]) refetch();
 			return toast.success(data);

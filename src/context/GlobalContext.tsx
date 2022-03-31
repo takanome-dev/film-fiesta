@@ -1,4 +1,4 @@
-import { createContext, useEffect, useLayoutEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,11 +10,8 @@ import { getFeedbacks } from "../services/feedback";
 import { getGenres } from "../services/genre";
 import { deleteMovie, getMovies } from "../services/movie";
 import { getRentals } from "../services/rental";
-import { BookmarkType } from "../types/BookmarkType";
-import { FavoriteType } from "../types/FavoriteType";
 import { GenreType } from "../types/GenreType";
 import { MovieType } from "../types/MovieType";
-import { RentalType } from "../types/RentalType";
 import { paginate } from "../utils/paginate";
 import * as constants from "./Constant";
 import reducer from "./Reducer";
@@ -28,7 +25,7 @@ const initialState: InitialStateType = {
 	favorites: [],
 	bookmarks: [],
 	feedbacks: [],
-	pageSize: 9,
+	pageSize: 12,
 	currentPage: 1,
 	currentRoute: "/movies",
 	selectedGenre: { _id: "", name: "" },
@@ -67,33 +64,49 @@ const Provider: React.FC<Props> = ({ children }) => {
 		},
 	});
 
-	const { refetch: refetchFavorites } = useQuery<FavoriteType[], Error>(
+	const { refetch: refetchFavorites } = useQuery(
 		"getFavorites",
 		async () => await getFavorites(),
 		{
 			enabled: false,
-			onSuccess: (data) =>
-				dispatch({ type: constants.FETCH_FAVORITES, payload: data }),
+			onSuccess: (data) => {
+				const favArr = data.favorites.map((fav: { movieId: string }) =>
+					state.movies.find((m: MovieType) => m._id === fav.movieId)
+				);
+				return dispatch({ type: constants.FETCH_FAVORITES, payload: favArr });
+			},
 		}
 	);
 
-	const { refetch: refetchBookmarks } = useQuery<BookmarkType[], Error>(
+	const { refetch: refetchBookmarks } = useQuery(
 		"getBookmarks",
 		async () => await getBookmarks(),
 		{
 			enabled: false,
-			onSuccess: (data) =>
-				dispatch({ type: constants.FETCH_BOOKMARKS, payload: data }),
+			onSuccess: (data) => {
+				const bookmarkArr = data.bookmarks.map((b: { movieId: string }) =>
+					state.movies.find((m: MovieType) => m._id === b.movieId)
+				);
+
+				return dispatch({
+					type: constants.FETCH_BOOKMARKS,
+					payload: bookmarkArr,
+				});
+			},
 		}
 	);
 
-	const { refetch: refetchRentals } = useQuery<RentalType[], Error>(
+	const { refetch: refetchRentals } = useQuery(
 		"getRentals",
 		async () => await getRentals(),
 		{
 			enabled: false,
-			onSuccess: (data) =>
-				dispatch({ type: constants.FETCH_RENTALS, payload: data }),
+			onSuccess: (data) => {
+				const rentalArr = data.rentals.map((r: { movieId: string }) =>
+					state.movies.find((m: MovieType) => m._id === r.movieId)
+				);
+				return dispatch({ type: constants.FETCH_RENTALS, payload: rentalArr });
+			},
 		}
 	);
 
@@ -107,20 +120,16 @@ const Provider: React.FC<Props> = ({ children }) => {
 		}
 	);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		const user = getCurrentUser();
 		dispatch({
 			type: constants.GET_CURRENT_USER,
 			payload: user,
 		});
-	}, []);
 
-	useEffect(() => {
-		if (state.user._id) {
+		if (user?._id) {
 			refetchBookmarks();
 			refetchFavorites();
-			refetchFeedbacks();
-			refetchRentals();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

@@ -7,11 +7,10 @@ const FilteredGenre = () => {
 	const { genres, onGenreSelected, selectedGenre, loadingMovies } =
 		useContext(Context);
 
-	/**
-	 * @see {@link https://www.youtube.com/watch?v=LFVFxDXQxxE}
-	 */
-
 	useEffect(() => {
+		/**
+		 * @see {@link https://www.youtube.com/watch?v=LFVFxDXQxxE}
+		 */
 		const scrollContainer = document.querySelector(
 			".scroll-container"
 		) as HTMLDivElement;

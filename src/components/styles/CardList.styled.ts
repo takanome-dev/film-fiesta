@@ -49,6 +49,9 @@ const Container = styled.div`
 				margin-left: 0.6rem;
 				font-size: 1.2rem;
 				font-weight: 500;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
 			}
 
 			.icons {
@@ -83,10 +86,9 @@ const Container = styled.div`
 
 		img {
 			max-width: 100%;
-			height: 100%;
+			height: auto;
 			object-fit: cover;
-			object-position: center;
-			animation: ${appear} 300ms;
+			animation: ${appear} 1s;
 		}
 	}
 `;

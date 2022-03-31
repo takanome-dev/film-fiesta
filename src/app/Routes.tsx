@@ -4,7 +4,6 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { PrivateRoute } from "../components";
 import ErrorBoundary from "../components/ErrorBoundary";
 import { Loader } from "../components/svg";
-import { LocationType } from "../components/types";
 import { Context } from "../context/GlobalContext";
 import { Logout, Movies } from "../pages";
 
@@ -25,7 +24,7 @@ const Routes = () => {
 	const [movieId, setMovieId] = useState("");
 	const elements = useElements();
 	const stripe = useStripe();
-	const { onRefetchRentals, dispatch } = useContext(Context);
+	const { onRefetchRentals } = useContext(Context);
 
 	return (
 		<ErrorBoundary>
@@ -47,28 +46,9 @@ const Routes = () => {
 						<Route path="/movies" component={Movies} />
 						<Route path="/popular" component={Popular} />
 						<Route path="/trending" component={Trending} />
-						<Route
-							path="/login"
-							render={({ location, history }) => (
-								<Login
-									dispatch={dispatch}
-									location={location as LocationType}
-									history={history}
-								/>
-							)}
-						/>
-						<Route
-							path="/logout"
-							render={({ history }) => (
-								<Logout dispatch={dispatch} history={history} />
-							)}
-						/>
-						<Route
-							path="/register"
-							render={({ history }) => (
-								<Register history={history} dispatch={dispatch} />
-							)}
-						/>
+						<Route path="/login" component={Login} />
+						<Route path="/logout" component={Logout} />
+						<Route path="/register" component={Register} />
 						<PrivateRoute path="/bookmarks" component={Bookmark} />
 						<PrivateRoute path="/favorites" component={Favorites} />
 						<PrivateRoute path="/profile" component={Profile} />

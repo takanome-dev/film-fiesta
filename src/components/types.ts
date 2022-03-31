@@ -4,14 +4,13 @@ import { Stripe, StripeElements } from "@stripe/stripe-js";
 import {
 	QueryObserverResult,
 	RefetchOptions,
-	RefetchQueryFilters
+	RefetchQueryFilters,
 } from "react-query";
 import { StaticContext } from "react-router";
 import { RouteComponentProps } from "react-router-dom";
 import { ActionType } from "../context/types";
 import { GenreType } from "../types/GenreType";
 import { MovieType, NewMovieType } from "../types/MovieType";
-import { RentalType } from "../types/RentalType";
 
 // ! Type Definitions
 
@@ -166,11 +165,15 @@ export type FormProps = {
 	elements?: StripeElements | null;
 	stripe?: Stripe | null;
 	dispatch?: React.Dispatch<ActionType>;
-	onRefetchRentals?:
-		| (<TPageData>(
-				options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-		  ) => Promise<QueryObserverResult<RentalType[], Error>>)
-		| undefined;
+	onRefetchRentals?: <TPageData>(
+		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+	) => Promise<QueryObserverResult<any, unknown>>;
+	// onRefetchFavorites?: <TPageData>(
+	// 	options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+	// ) => Promise<QueryObserverResult<any, unknown>>;
+	// onRefetchBookmarks?: <TPageData>(
+	// 	options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+	// ) => Promise<QueryObserverResult<any, unknown>>;
 };
 
 export type MovieDetailsProps = {

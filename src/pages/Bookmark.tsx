@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Card } from "../components";
 import Title from "../components/common/Title";
 import Container from "../components/styles/CardList.styled";
@@ -7,7 +7,12 @@ import { EmptyBookmark } from "../components/svg";
 import { Context } from "../context/GlobalContext";
 
 const Bookmark = () => {
-	const { bookmarks } = useContext(Context);
+	const { bookmarks, onRefetchBookmarks } = useContext(Context);
+
+	useEffect(() => {
+		onRefetchBookmarks?.();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<>
@@ -16,7 +21,7 @@ const Bookmark = () => {
 					<Title name="Bookmarks" />
 					<Container>
 						{bookmarks.map((b) => (
-							<Card movie={b.movie} key={b._id} />
+							<Card movie={b} key={b._id} />
 						))}
 					</Container>
 				</>

@@ -47,13 +47,13 @@ export type InitialStateType = {
 	) => Promise<QueryObserverResult<MovieType[], Error>>;
 	onRefetchFavorites?: <TPageData>(
 		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-	) => Promise<QueryObserverResult<FavoriteType[], Error>>;
+	) => Promise<QueryObserverResult<any, unknown>>;
 	onRefetchBookmarks?: <TPageData>(
 		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-	) => Promise<QueryObserverResult<BookmarkType[], Error>>;
+	) => Promise<QueryObserverResult<any, unknown>>;
 	onRefetchRentals?: <TPageData>(
 		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-	) => Promise<QueryObserverResult<RentalType[], Error>>;
+	) => Promise<QueryObserverResult<any, unknown>>;
 	onRefetchFeedbacks?: <TPageData>(
 		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
 	) => Promise<QueryObserverResult<FeedbackType[], Error>>;

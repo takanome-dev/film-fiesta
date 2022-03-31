@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { sidebarLoad } from "./Global.styled";
 
 const slideIn = keyframes`
 	from {
@@ -11,6 +12,10 @@ const slideIn = keyframes`
 
 const Navigation = styled.nav`
 	.menu {
+		animation: ${sidebarLoad} 500ms ease-in;
+		animation-delay: 300ms;
+		animation-fill-mode: forwards;
+		transform: translateX(-100%);
 		max-width: 15rem;
 		transition: all 200ms ease-in-out;
 		width: 100%;
@@ -137,6 +142,7 @@ const Navigation = styled.nav`
 			display: none;
 			max-width: 50%;
 			height: 100%;
+			transform: translateX(0%);
 
 			.sidebar {
 				align-items: flex-start;

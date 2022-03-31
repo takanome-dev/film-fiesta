@@ -9,12 +9,42 @@ export const slideIn = keyframes`
   }
 `;
 
+export const navLoad = keyframes`
+	from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+`;
+
+export const sidebarLoad = keyframes`
+	from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
 export const appear = keyframes`
   from {
     opacity: 0
   }
   to {
     opacity: 1;
+  }
+`;
+
+export const skeletonLoading = keyframes`
+  0% {
+    background-color: hsl(200,20%,70%);
+  }
+  50% {
+    background-color: hsl(200,20%,80%);
+  }
+  100% {
+    background-color: hsl(200,20%,90%);
   }
 `;
 

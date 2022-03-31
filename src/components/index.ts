@@ -1,6 +1,7 @@
 export { default as Card } from "./Card";
 export { default as CardList } from "./CardList";
 export { default as PrivateRoute } from "./common/PrivateRoute";
+export { default as Skeleton } from "./common/Skeleton";
 export { default as EditPassword } from "./EditPassword";
 export { default as FilteredGenre } from "./FilteredGenre";
 export { default as Header } from "./Header";
