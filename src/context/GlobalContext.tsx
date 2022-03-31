@@ -131,6 +131,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 			refetchBookmarks();
 			refetchFavorites();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleSearch = (query: string) => {

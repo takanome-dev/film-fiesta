@@ -1,4 +1,4 @@
-import { useContext, useLayoutEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Card } from "../components";
 import Container from "../components/styles/CardList.styled";
 import { Container as Empty } from "../components/styles/Empty.styled";
@@ -8,8 +8,9 @@ import { Context } from "../context/GlobalContext";
 const Rentals = () => {
 	const { rentals, onRefetchRentals } = useContext(Context);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		onRefetchRentals?.();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
