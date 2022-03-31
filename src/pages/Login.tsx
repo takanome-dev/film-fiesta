@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Form from "../components/common/Form";
 import Wrapper from "../components/common/Wrapper";
 import { LoginStateType } from "../components/types";
-import { getCurrentUser, logUser } from "../services/auth";
+import { logUser } from "../services/auth";
 
 export default class LoginForm extends Form {
 	state: LoginStateType = {
@@ -26,15 +26,12 @@ export default class LoginForm extends Form {
 	};
 
 	async submitToServer() {
-		const { location, dispatch, history } = this.props;
-
+		const { location } = this.props;
 		try {
 			await logUser(this.state.data);
-			const user = getCurrentUser();
-			dispatch?.({ type: "GET_CURRENT_USER", payload: user });
-			location?.state
-				? history?.replace(location?.state?.from.pathname)
-				: history?.replace("/");
+			window.location.pathname = location?.state
+				? location?.state.from.pathname
+				: "/";
 		} catch (err: any) {
 			if (err.request?.status === 400) {
 				const { errors } = this.state;

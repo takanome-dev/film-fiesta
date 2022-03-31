@@ -30,6 +30,7 @@ const Container = styled.div`
 					border-radius: 0.8rem;
 					cursor: pointer;
 					font-weight: 500;
+					white-space: nowrap;
 					transition: background 200ms ease;
 					&:hover {
 						background: var(--color-gray-40);

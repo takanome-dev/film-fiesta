@@ -1,16 +1,16 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { placeholder } from "../assets";
+import { DefaultImage } from "../assets";
 import { Context } from "../context/GlobalContext";
 import { HeartIcon, RemoveBookmarkIcon, StarIcon } from "./svg";
 import AddBookmark from "./svg/Icon.AddBookmark";
 import { CardProps } from "./types";
 
 const Card: React.FC<CardProps> = ({ movie }) => {
-	const { user } = useContext(Context);
-	const isLiked = movie.likes?.find((l: { _id: string }) => user._id === l._id);
-	const isBookmarked = movie.bookmarks?.find(
-		(l: { _id: string }) => user._id === l._id
+	const { favorites, bookmarks } = useContext(Context);
+	const isLiked = favorites.find((f: { _id: string }) => movie._id === f._id);
+	const isBookmarked = bookmarks.find(
+		(b: { _id: string }) => movie._id === b._id
 	);
 
 	return (
@@ -19,7 +19,12 @@ const Card: React.FC<CardProps> = ({ movie }) => {
 				<div className="rate flex">
 					<StarIcon /> <p>{movie.voteAverage}</p>
 				</div>
-				<img src={movie.url || placeholder} alt={movie.title} />
+				<img
+					src={movie.url || DefaultImage}
+					alt={movie.title}
+					width="500"
+					height="500"
+				/>
 			</Link>
 			<div className="card-hover">
 				<p>{movie.title}</p>

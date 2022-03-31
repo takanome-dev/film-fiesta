@@ -1,2 +1,2 @@
-export { default as comingSoon } from "./images/coming_soon.png";
-export { default as placeholder } from "./images/placeholder.jpg";
+export { default as ComingSoonImage } from "./images/coming-soon.png";
+export { default as DefaultImage } from "./images/white-background.png";

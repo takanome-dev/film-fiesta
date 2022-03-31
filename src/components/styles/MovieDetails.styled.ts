@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { appear } from "./Global.styled";
 
 export const Container = styled.div`
 	display: grid;
@@ -15,6 +16,7 @@ export const Container = styled.div`
 			border-radius: 0.8rem;
 			box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
 			aspect-ratio: 1/1;
+			animation: ${appear} 300ms ease-in;
 		}
 	}
 

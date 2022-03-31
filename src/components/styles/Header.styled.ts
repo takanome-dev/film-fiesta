@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { navLoad, slideIn } from "./Global.styled";
 
 export const Container = styled.header`
 	position: sticky;
@@ -7,7 +8,8 @@ export const Container = styled.header`
 	width: 100%;
 	box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08);
 	background-color: white;
-	/* margin-bottom: 1rem; */
+	animation: ${navLoad} 300ms ease-in;
+	/* animation: ${slideIn} 300ms ease-in; */
 
 	.container {
 		/* width: 100%; */
@@ -33,20 +35,6 @@ export const Container = styled.header`
 			}
 		}
 
-		/* input {
-			max-width: 40rem;
-			width: 100%;
-			padding: 0.5rem 1rem;
-			color: var(--color-dark-80);
-			background-color: var(--color-background);
-			border: none;
-			border-radius: 0.6rem;
-			transition: outline 100ms ease;
-			&:focus {
-				outline: 0.35rem solid var(--color-secondary-20);
-			}
-		} */
-
 		.btn {
 			background-color: var(--color-secondary-40);
 			color: var(--color-dark);
@@ -67,16 +55,7 @@ export const Container = styled.header`
 			margin-left: 1rem;
 		}
 
-		/* @media screen and (max-width: 948px) {
-			input {
-				max-width: 20rem;
-			}
-		} */
 		@media screen and (max-width: 650px) {
-			/* input {
-				max-width: 22rem;
-			} */
-
 			.btn {
 				display: none;
 			}
