@@ -8,7 +8,7 @@ const init = () =>
 		dsn: process.env.REACT_APP_SENTRY_DNS,
 		integrations: [
 			new Integrations.BrowserTracing({
-				tracingOrigins: ["http://localhost:3001"],
+				tracingOrigins: [process.env.REACT_APP_API_URL!],
 			}),
 		],
 		attachStacktrace: true,

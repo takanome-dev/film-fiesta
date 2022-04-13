@@ -70,6 +70,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 		{
 			enabled: false,
 			onSuccess: (data) => {
+				if (!data) return;
 				const favArr = data.favorites.map((fav: { movieId: string }) =>
 					state.movies.find((m: MovieType) => m._id === fav.movieId)
 				);
@@ -84,6 +85,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 		{
 			enabled: false,
 			onSuccess: (data) => {
+				if (!data) return;
 				const bookmarkArr = data.bookmarks.map((b: { movieId: string }) =>
 					state.movies.find((m: MovieType) => m._id === b.movieId)
 				);
@@ -102,6 +104,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 		{
 			enabled: false,
 			onSuccess: (data) => {
+				if (!data) return;
 				const rentalArr = data.rentals.map((r: { movieId: string }) =>
 					state.movies.find((m: MovieType) => m._id === r.movieId)
 				);
@@ -128,8 +131,10 @@ const Provider: React.FC<Props> = ({ children }) => {
 		});
 
 		if (user?._id) {
-			refetchBookmarks();
-			refetchFavorites();
+			setTimeout(() => {
+				refetchBookmarks();
+				refetchFavorites();
+			}, 3000);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
