@@ -25,6 +25,7 @@ export default class FeedBack extends Form {
 			const res = await sendFeedback(this.state.data);
 			this.props.setOpenFeedback?.(false);
 			toast.success(res);
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
 			toast.error(
 				"An unexpected error occurred, please reload the app and try again"

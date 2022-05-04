@@ -31,6 +31,7 @@ export default class RegisterForm extends Form {
 		try {
 			await registerUser(this.state.data);
 			window.location.pathname = "/";
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
 			if (err.request?.status === 400) {
 				const { errors } = this.state;

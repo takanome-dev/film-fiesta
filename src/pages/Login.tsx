@@ -32,6 +32,7 @@ export default class LoginForm extends Form {
 			window.location.pathname = location?.state
 				? location?.state.from.pathname
 				: "/";
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
 			if (err.request?.status === 400) {
 				const { errors } = this.state;

@@ -52,6 +52,7 @@ const getMovieDetails = async (id: string) => {
 		}
 
 		return final;
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	}, {} as any);
 	return result as types.MovieDetails;
 };
