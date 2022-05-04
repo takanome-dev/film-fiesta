@@ -85,7 +85,7 @@ const Provider: React.FC<Props> = ({ children }) => {
 			type: constants.GET_CURRENT_USER,
 			payload: user,
 		});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		/* // eslint-disable-next-line react-hooks/exhaustive-deps */
 	}, []);
 
 	const handleSearch = (query: string) => {

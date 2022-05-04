@@ -1,4 +1,3 @@
-// /* eslint-disable  import/no-anonymous-default-export */
 import * as types from "../types";
 import http from "./http";
 
