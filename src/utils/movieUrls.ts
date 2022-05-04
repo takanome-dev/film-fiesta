@@ -11,6 +11,7 @@ const ogImageUrl = (url: string) =>
 const embedMovieUrl = (id: number) =>
 	`${process.env.REACT_APP_TMDB_VIDEO}/movie?id=${id}`;
 
+// eslint-disable  import/no-anonymous-default-export
 export default {
 	imageUrl,
 	embedMovieUrl,

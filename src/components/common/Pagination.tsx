@@ -25,7 +25,7 @@ const Pagination: React.FC<Props> = ({ onPageChange, page, totalPages }) => {
 
 	const handlePrevPage = () => {
 		onPageChange?.(page - 1);
-		if ((page - 1) % limitPageNumber == 0) {
+		if ((page - 1) % limitPageNumber === 0) {
 			setMaxPageNumber(maxPageNumber - limitPageNumber);
 			setMinPageNumber(minPageNumber - limitPageNumber);
 		}

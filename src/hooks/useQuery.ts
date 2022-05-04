@@ -29,6 +29,7 @@ export default function useQuery(
 
 	useEffect(() => {
 		request();
+		// eslint-disable react-hooks/exhaustive-deps
 	}, [query, page]);
 
 	const handlePageChange = (page: number) => {
