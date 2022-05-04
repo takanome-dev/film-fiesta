@@ -1,6 +1,6 @@
-import { http } from "./http";
+import http from "./http";
 
-const endpoint = `${process.env.REACT_APP_API_URL}/favorites`;
+const endpoint = "/favorites";
 
 type FavoriteRequestType = {
 	userId: string;

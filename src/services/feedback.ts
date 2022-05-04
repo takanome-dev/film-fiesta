@@ -1,14 +1,14 @@
-import { FeedbackType } from "../components/types";
-import { http } from "./http";
+import { Feedback } from "../components/types";
+import http from "./http";
 
-const endpoint = `${process.env.REACT_APP_API_URL}/feedbacks`;
+const endpoint = "/feedbacks";
 
 export const getFeedbacks = async () => {
-	const { data } = await http.get<FeedbackType[]>(endpoint);
+	const { data } = await http.get<Feedback[]>(endpoint);
 	return data;
 };
 
-export const sendFeedback = async (feedback: FeedbackType) => {
+export const sendFeedback = async (feedback: Feedback) => {
 	const { data } = await http.post(endpoint, feedback);
 	return data;
 };

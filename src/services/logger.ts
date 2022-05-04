@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 

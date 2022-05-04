@@ -2,28 +2,28 @@ import styled from "styled-components";
 import { slideIn } from "./Global.styled";
 
 const Container = styled.div`
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
 	align-items: center;
 	animation-name: ${slideIn};
-	animation-duration: 300ms;
+	animation-duration: var(--animation-duration);
+	display: flex;
+	height: 100%;
+	justify-content: center;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
 
 	.modal-wrapper {
-		position: fixed;
-		z-index: 4;
-		width: 30rem;
-		animation-name: ${slideIn};
-		animation-duration: 500ms;
+		--animation-duration: 500ms;
+		animation: ${slideIn} var(--animation-duration);
 		margin: 0 1rem;
+		position: fixed;
+		width: 30rem;
+		z-index: 4;
 		.modal-header {
+			align-items: center;
 			display: flex;
 			justify-content: space-between;
-			align-items: center;
 			margin-bottom: 3rem;
 			margin-top: -1rem;
 			@media (max-width: 650px) {
@@ -36,13 +36,13 @@ const Container = styled.div`
 			}
 
 			span {
+				border-radius: 50%;
+				cursor: pointer;
 				font-size: 2rem;
 				font-weight: 500;
 				padding: 0.1rem 0.6rem;
-				border-radius: 50%;
-				cursor: pointer;
 				&:hover {
-					background-color: var(--color-gray-20);
+					background-color: var(--gray-20);
 				}
 			}
 		}

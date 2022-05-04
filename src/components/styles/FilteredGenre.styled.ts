@@ -4,61 +4,62 @@ const Container = styled.div`
 	margin-bottom: 2rem;
 
 	.scroll-container {
-		max-width: 50rem;
-		width: 100%;
-		overflow: hidden;
-		position: relative;
+		align-items: center;
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
+		max-width: 50rem;
+		overflow: hidden;
+		position: relative;
+		width: 100%;
 
 		.scroll-buttons {
-			position: absolute;
 			left: 0;
 			margin: 0 3rem;
-			transition: all 0.5s ease-in-out;
+			position: absolute;
+			transition: all var(--animation-duration) var(--animation-timing-curve);
 
 			ul {
 				list-style: none;
 				li {
-					box-shadow: 0px 2px 3px var(--color-gray-40);
-					background: var(--color-gray-20);
-					padding: 0.3rem 0.5rem;
-					overflow-wrap: normal;
-					margin-right: 1rem;
+					background: var(--gray-20);
+					box-shadow: 0px 2px 3px var(--gray-40);
 					border: none;
 					border-radius: 0.8rem;
 					cursor: pointer;
 					font-weight: 500;
+					margin-right: 1rem;
+					overflow-wrap: normal;
+					padding: 0.3rem 0.5rem;
+					transition: background var(--animation-duration)
+						var(--animation-timing-curve);
 					white-space: nowrap;
-					transition: background 200ms ease;
 					&:hover {
-						background: var(--color-gray-40);
+						background: var(--gray-40);
 					}
 					&:focus {
-						outline: 0.3rem solid var(--color-secondary-40);
+						outline: 0.3rem solid var(--secondary-40);
 					}
 				}
 
 				li.active {
-					background: var(--color-secondary-40);
+					background: var(--secondary-40);
 				}
 			}
 		}
 
 		.left-arrow,
 		.right-arrow {
-			z-index: 1;
+			border: none;
 			cursor: pointer;
 			padding: 0.8rem;
-			border: none;
+			z-index: 1;
 		}
 
 		.left-arrow {
 			background: linear-gradient(
 				to right,
-				var(--color-background),
-				var(--color-background-80)
+				var(--background),
+				var(--background-80)
 			);
 			opacity: 0;
 		}
@@ -66,8 +67,8 @@ const Container = styled.div`
 		.right-arrow {
 			background: linear-gradient(
 				to left,
-				var(--color-background),
-				var(--color-background-80)
+				var(--background),
+				var(--background-80)
 			);
 		}
 	}

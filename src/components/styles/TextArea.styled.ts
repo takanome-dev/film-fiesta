@@ -4,8 +4,8 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 1.2rem;
-	width: 100%;
 	position: relative;
+	width: 100%;
 
 	label {
 		font-size: 1.1rem;
@@ -13,16 +13,19 @@ const Container = styled.div`
 	}
 
 	textarea {
-		font-size: 1.1rem;
-		resize: none;
-		padding: 0.8rem 1rem;
-		color: var(--color-dark-80);
-		background-color: var(--color-background);
+		background-color: var(--background);
 		border: none;
 		border-radius: 0.6rem;
+		color: var(--dark-80);
+		font-size: 1.1rem;
+		padding: 0.8rem 1rem;
+		resize: none;
 		transition: outline 100ms ease;
 		&:focus {
-			outline: 0.35rem solid var(--color-secondary-20);
+			outline: 0.35rem solid var(--secondary-20);
+		}
+		&::placeholder {
+			color: var(--gray-60);
 		}
 	}
 `;

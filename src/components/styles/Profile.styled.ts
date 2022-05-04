@@ -9,7 +9,7 @@ const Container = styled.div`
 	}
 
 	.profile-wrapper {
-		border: 1px solid var(--color-gray-20);
+		border: 1px solid var(--gray-20);
 		border-radius: 0.8rem;
 		padding: 1rem 2rem;
 
@@ -18,23 +18,23 @@ const Container = styled.div`
 		}
 
 		.avatar-container {
+			align-items: center;
 			display: flex;
 			justify-content: space-between;
-			align-items: center;
 
 			.avatar {
-				display: flex;
 				align-items: center;
+				display: flex;
 				flex-wrap: wrap;
 
 				.user-avatar {
-					width: 5rem;
-					height: 5rem;
-					border: 0.1rem solid var(--color-gray-40);
+					border: 0.1rem solid var(--gray-40);
 					border-radius: 50%;
+					height: 5rem;
 					overflow: hidden;
+					width: 5rem;
+
 					img {
-						/* border-radius: 50%; */
 						max-width: 100%;
 						object-fit: cover;
 					}
@@ -47,8 +47,8 @@ const Container = styled.div`
 						font-weight: 500;
 					}
 					.email {
+						color: var(--dark-60);
 						margin-top: 0.5rem;
-						color: var(--color-dark-60);
 						overflow-wrap: break-word;
 					}
 				}
@@ -56,8 +56,8 @@ const Container = styled.div`
 		}
 
 		fieldset {
-			margin-top: 1rem;
 			border: none;
+			margin-top: 1rem;
 
 			.input-container {
 				display: flex;
@@ -69,17 +69,17 @@ const Container = styled.div`
 	}
 
 	.password-wrapper {
+		border: 1px solid var(--gray-20);
+		border-radius: 0.8rem;
 		display: flex;
 		flex-direction: column;
 		margin-top: 2rem;
-		border: 1px solid var(--color-gray-20);
-		border-radius: 0.8rem;
 		padding: 1rem 2rem;
 
 		.password-label {
+			align-items: center;
 			display: flex;
 			justify-content: space-between;
-			align-items: center;
 			margin-bottom: 1rem;
 
 			p {
@@ -93,14 +93,14 @@ const Container = styled.div`
 	}
 
 	input {
-		padding: 0.8rem 1rem;
-		color: var(--color-dark-80);
-		background-color: var(--color-background);
+		background-color: var(--background);
 		border: none;
 		border-radius: 0.6rem;
+		color: var(--dark-80);
+		padding: 0.8rem 1rem;
 		transition: outline 100ms ease;
 		&:focus {
-			outline: 0.35rem solid var(--color-secondary-20);
+			outline: 0.35rem solid var(--secondary-20);
 		}
 	}
 	label {
@@ -110,10 +110,10 @@ const Container = styled.div`
 
 	.secondary {
 		background-color: #fff;
-		border: 1px solid var(--color-gray-40);
+		border: 1px solid var(--gray-40);
 		cursor: pointer;
 		&:hover {
-			background-color: var(--color-gray-20);
+			background-color: var(--gray-20);
 		}
 	}
 

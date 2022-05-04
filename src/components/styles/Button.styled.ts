@@ -2,18 +2,24 @@ import styled from "styled-components";
 
 export const StyledButton = styled.button`
 	background-color: ${({ disabled }) =>
-		disabled ? "var(--color-secondary-20)" : "var(--color-secondary-60)"};
-	color: ${({ disabled }) =>
-		disabled ? "var(--color-dark-40)" : "var(--color-dark)"};
-	width: 50%;
-	/* width: 100%; */
+		disabled ? "var(--secondary-20)" : "var(--secondary-60)"};
+	color: ${({ disabled }) => (disabled ? "var(--dark-40)" : "var(--dark)")};
+	cursor: ${({ disabled }) => (disabled ? "auto" : "pointer")};
 	font-size: 1.2rem;
 	font-weight: 500;
 	margin-top: 1rem;
-	cursor: ${({ disabled }) => (disabled ? "auto" : "pointer")};
+	width: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	svg {
+		margin-right: 0.5rem;
+	}
+
 	&:hover {
 		background-color: ${({ disabled }) =>
-			disabled ? "var(--color-secondary-20)" : "var(--color-secondary-80)"};
+			disabled ? "var(--secondary-20)" : "var(--secondary-80)"};
 	}
 
 	@media (max-width: 500px) {

@@ -1,4 +1,4 @@
-const EmptyFav = () => {
+const EmptyFavorite = () => {
 	return (
 		<svg
 			width="156"
@@ -49,4 +49,4 @@ const EmptyFav = () => {
 	);
 };
 
-export default EmptyFav;
+export default EmptyFavorite;

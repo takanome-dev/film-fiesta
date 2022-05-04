@@ -1,14 +1,14 @@
 import Joi, { PartialSchemaMap } from "joi";
 import React, { Component } from "react";
-import { Loader } from "../svg";
-import { FormProps, FormStateType } from "../types";
+import Loader from "../common/Loader";
+import * as types from "../types";
 import Button from "./Button";
 import Input from "./Input";
 import InputDate from "./InputDate";
 import TextArea from "./TextArea";
 
-export default class Form extends Component<FormProps, FormStateType> {
-	state: FormStateType = {
+export default class Form extends Component<types.FormProps, types.FormState> {
+	state: types.FormState = {
 		data: {},
 		errors: {},
 		isProcessing: false,

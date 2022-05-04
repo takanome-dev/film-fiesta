@@ -1,52 +1,30 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
-import { DefaultImage } from "../assets";
-import { Context } from "../context/GlobalContext";
-import { HeartIcon, RemoveBookmarkIcon, StarIcon } from "./svg";
-import AddBookmark from "./svg/Icon.AddBookmark";
-import { CardProps } from "./types";
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-const Card: React.FC<CardProps> = ({ movie }) => {
-	const { favorites, bookmarks } = useContext(Context);
-	const isLiked = favorites.find((f: { _id: string }) => movie._id === f._id);
-	const isBookmarked = bookmarks.find(
-		(b: { _id: string }) => movie._id === b._id
-	);
+import { FaStar } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
+import urls from "../utils/movieUrls";
+import { CardInt } from "./types";
+
+const Card: React.FC<CardInt> = ({ movie, width = "300", height = "300" }) => {
+	const url = movie.poster_path ?? movie.backdrop_path;
+	const location = useLocation();
 
 	return (
-		<div className="card" aria-label="Movie Card" tabIndex={0}>
-			<Link to={`/movies/${movie._id}`}>
-				<div className="rate flex">
-					<StarIcon /> <p>{movie.voteAverage}</p>
+		// <div className="card" aria-label="Movie Card" tabIndex={0}>
+		<Link to={`/movies/${movie.id}`} className="card">
+			{location.pathname === "/movies" && (
+				<div className="rate">
+					<FaStar color="var(--yellow)" size={20} /> <p>{movie.vote_average}</p>
 				</div>
-				<img
-					src={movie.url || DefaultImage}
-					alt={movie.title}
-					width="500"
-					height="500"
-				/>
-			</Link>
-			<div className="card-hover">
-				<p>{movie.title}</p>
-				<div className="icons flex">
-					{isBookmarked ? (
-						<RemoveBookmarkIcon isBookmarked={isBookmarked} movie={movie} />
-					) : (
-						<AddBookmark
-							color="var(--color-dark-60)"
-							isBookmarked={isBookmarked}
-							movie={movie}
-						/>
-					)}
-					<HeartIcon
-						color={isLiked ? "var(--color-primary)" : "var(--color-dark)"}
-						fillColor={isLiked ? "var(--color-primary)" : "none"}
-						isLiked={isLiked}
-						movie={movie}
-					/>
-				</div>
-			</div>
-		</div>
+			)}
+			<img
+				src={urls.imageUrl(url!)}
+				alt={movie.title}
+				width={width}
+				height={height}
+			/>
+		</Link>
+		// {/* </div> */}
 	);
 };
 

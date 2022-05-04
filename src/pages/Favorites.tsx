@@ -1,22 +1,17 @@
-import { useContext, useEffect } from "react";
-import { Card } from "../components";
-import Title from "../components/common/Title";
-import Container from "../components/styles/CardList.styled";
+import EmptyFavorite from "../components/EmptyFavorite";
 import { Container as Empty } from "../components/styles/Empty.styled";
-import { EmptyFav } from "../components/svg";
-import { Context } from "../context/GlobalContext";
 
 const Favorites = () => {
-	const { favorites, onRefetchFavorites } = useContext(Context);
+	// const { favorites, onRefetchFavorites } = useContext(Context);
 
-	useEffect(() => {
-		onRefetchFavorites?.();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	// useEffect(() => {
+	// 	onRefetchFavorites?.();
+	// 		// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, []);
 
 	return (
 		<>
-			{favorites.length > 0 ? (
+			{/* {favorites.length > 0 ? (
 				<>
 					<Title name="Favorites" />
 					<Container>
@@ -25,15 +20,15 @@ const Favorites = () => {
 						))}
 					</Container>
 				</>
-			) : (
-				<Empty className="flex">
-					<EmptyFav />
-					<div>
-						<p>You have no favorites yet.</p>
-						<p>This is where you’ll see movies you like.</p>
-					</div>
-				</Empty>
-			)}
+			) : ( */}
+			<Empty className="flex">
+				<EmptyFavorite />
+				<div>
+					<p>You have no favorites yet.</p>
+					<p>This is where you’ll see movies you like.</p>
+				</div>
+			</Empty>
+			{/* )} */}
 		</>
 	);
 };

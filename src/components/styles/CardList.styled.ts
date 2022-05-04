@@ -3,52 +3,60 @@ import { appear } from "./Global.styled";
 
 const Container = styled.div`
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
-	/* grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); */
+	grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
 	gap: 1rem;
+	/* display: flex;
+	flex-wrap: wrap; */
 
 	.card {
+		text-decoration: none;
+		width: 100%;
+		height: 100%;
 		border-radius: 0.8rem;
-		overflow: hidden;
 		cursor: pointer;
+		overflow: hidden;
 		position: relative;
-		transition: box-shadow 300ms ease-in-out;
+		transition: box-shadow var(--animation-duration)
+			var(--animation-timing-curve);
 		&:focus {
-			outline: 0.35rem solid var(--color-secondary-60);
+			outline: 0.35rem solid var(--secondary-60);
 		}
 
 		.rate {
-			position: absolute;
-			top: 0;
-			background-color: var(--color-secondary);
-			color: var(--color-yellow);
+			display: flex;
 			padding: 0.5rem;
 			border-radius: 0 0 0.8rem 0;
+			background: var(--secondary);
+			color: var(--yellow);
+			position: absolute;
+			top: 0;
+			left: 0;
 			p {
-				margin-left: 0.5rem;
 				font-weight: bold;
+				margin-left: 0.5rem;
 			}
 		}
 
 		.card-hover {
-			position: absolute;
-			display: flex;
-			justify-content: space-between;
 			align-items: center;
-			height: 4rem;
 			bottom: 0;
-			left: 0;
-			width: 100%;
-			overflow: hidden;
 			background: linear-gradient(rgba(0, 0, 0, 0.5), rgb(0, 0, 0));
+			display: flex;
+			height: 4rem;
+			justify-content: space-between;
+			left: 0;
+			overflow: hidden;
 			opacity: 0;
-			transition: opacity 300ms ease-in-out;
+			position: absolute;
+			width: 100%;
+			transition: opacity var(--animation-duration)
+				var(--animation-timing-curve);
 
 			p {
 				color: #fff;
-				margin-left: 0.6rem;
 				font-size: 1.2rem;
 				font-weight: 500;
+				margin-left: 0.6rem;
 				overflow: hidden;
 				text-overflow: ellipsis;
 				white-space: nowrap;
@@ -56,15 +64,16 @@ const Container = styled.div`
 
 			.icons {
 				.icon {
-					background-color: var(--color-gray-80);
-					margin-right: 0.6rem;
-					padding: 0.6rem;
+					background-color: var(--gray-80);
 					border-radius: 0.3rem;
 					border: none;
 					cursor: pointer;
-					transition: all 300ms ease-in-out;
+					margin-right: 0.6rem;
+					padding: 0.6rem;
+					transition: all var(--animation-duration)
+						var(--animation-timing-curve);
 					&:hover {
-						background-color: var(--color-gray);
+						background-color: var(--gray);
 					}
 					&:active {
 						transform: scale(0.95);
@@ -72,7 +81,7 @@ const Container = styled.div`
 				}
 
 				.icon.liked {
-					background-color: var(--color-primary-60);
+					background-color: var(--primary-60);
 				}
 			}
 		}
@@ -85,10 +94,10 @@ const Container = styled.div`
 		}
 
 		img {
-			max-width: 100%;
-			height: auto;
-			object-fit: cover;
 			animation: ${appear} 1s;
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
 		}
 	}
 `;

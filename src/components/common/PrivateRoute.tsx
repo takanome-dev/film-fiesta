@@ -1,8 +1,8 @@
 import { Redirect, Route } from "react-router-dom";
 import { getCurrentUser } from "../../services/auth";
-import { PrivateRouteProps } from "../types";
+import { PrivateRouteInt } from "../types";
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({
+const PrivateRoute: React.FC<PrivateRouteInt> = ({
 	component: Component,
 	render,
 	...rest

@@ -50,6 +50,7 @@ export default class EditPassword extends Form {
 			const data = await updatePassword(this.state.data, user!._id!);
 			this.props.setEditPassword?.(false);
 			toast.success(data);
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
 			toast.error(err.data);
 		}

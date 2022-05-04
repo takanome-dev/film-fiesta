@@ -2,11 +2,11 @@ import Joi from "joi";
 import { Link } from "react-router-dom";
 import Form from "../components/common/Form";
 import Wrapper from "../components/common/Wrapper";
-import { RegisterStateType } from "../components/types";
+import { Register } from "../components/types";
 import { registerUser } from "../services/user";
 
 export default class RegisterForm extends Form {
-	state: RegisterStateType = {
+	state: Register = {
 		data: {
 			email: "",
 			password: "",
@@ -31,6 +31,7 @@ export default class RegisterForm extends Form {
 		try {
 			await registerUser(this.state.data);
 			window.location.pathname = "/";
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
 			if (err.request?.status === 400) {
 				const { errors } = this.state;

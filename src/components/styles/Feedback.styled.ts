@@ -2,24 +2,23 @@ import styled from "styled-components";
 import { appear, slideIn } from "./Global.styled";
 
 const Container = styled.div`
-	display: flex;
-	justify-content: center;
 	align-items: center;
+	animation: ${appear} var(--animation-duration);
+	display: flex;
+	height: 100%;
+	justify-content: center;
+	left: 0;
 	position: absolute;
 	top: 0;
-	left: 0;
-	/* right: 0;
-	bottom: 0; */
 	width: 100%;
-	height: 100%;
-	animation: ${appear} 300ms;
 
 	.wrapper {
-		z-index: 4;
-		position: fixed;
-		max-width: 30rem;
-		animation: ${slideIn} 500ms;
+		--animation-duration: 500ms;
+		animation: ${slideIn} var(--animation-duration);
 		margin: 0 1rem;
+		max-width: 30rem;
+		position: fixed;
+		z-index: 4;
 
 		h1 {
 			margin-bottom: 2rem;

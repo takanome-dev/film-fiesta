@@ -16,6 +16,7 @@ const Container = styled.div`
 	margin: 2rem auto;
 	padding: 2rem;
 	overflow-y: auto;
+	z-index: 5;
 	@media (max-width: 580px) {
 		padding: 1rem;
 	}

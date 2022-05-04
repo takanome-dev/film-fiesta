@@ -1,81 +1,27 @@
-// import { useEffect } from "react";
-import {
-  BookmarkIcon,
-  FavoriteIcon,
-  // FeedBackIcon,
-  FireIcon,
-  HomeIcon,
-  RentalIcon,
-  SignOutIcon,
-  TrendingIcon,
-  UserIcon,
-} from "./svg";
+import { FaFilm, FaFireAlt } from "react-icons/fa";
+import { FiTrendingUp } from "react-icons/fi";
 
-export const topLinks = [
+const links = [
   {
-    name: "Home",
-    icon: (color) => <HomeIcon color={color} />,
+    name: "Movies",
+    icon: (color) => <FaFilm color={color} size={23} />,
     path: "/movies",
   },
   {
     name: "Trending",
-    icon: (color) => <TrendingIcon color={color} />,
+    icon: (color) => <FiTrendingUp color={color} size={22} />,
     path: "/trending",
   },
   {
     name: "Popular",
-    icon: (color) => <FireIcon color={color} />,
+    icon: (color) => <FaFireAlt color={color} size={22} />,
     path: "/popular",
   },
-  {
-    name: "Bookmarks",
-    icon: (color) => <BookmarkIcon color={color} />,
-    path: "/bookmarks",
-  },
-  {
-    name: "Favorites",
-    icon: (color) => <FavoriteIcon color={color} fillColor="none" />,
-    path: "/favorites",
-  },
-  {
-    name: "Rentals",
-    icon: (color) => <RentalIcon color={color} />,
-    path: "/rentals",
-  },
-];
-
-export const bottomLinks = [
   // {
-  //   name: "Settings",
-  //   icon: (color) => <SettingsIcon color={color} />,
-  //   path: "/settings",
-  // },
-  // {
-  // 	name: "Feedback",
-  // 	icon: (color) => <FeedBackIcon color={color} />,
-  // 	path: "/feedback",
+  // 	name: "Favorites",
+  // 	icon: (color) => <FaRegHeart color={color} size={22} />,
+  // 	path: "/favorites",
   // },
 ];
 
-export const profileLinks = [
-  {
-    name: "Profile",
-    icon: <UserIcon color="var(--color-dark-60)" />,
-    path: "/profile",
-  },
-  // {
-  //   name: "Settings",
-  //   icon: <SettingsIcon color="var(--color-dark-60)" />,
-  //   path: "/settings",
-  // },
-  // {
-  //   name: "Feedback",
-  //   icon: <FeedBackIcon color="var(--color-dark-80)" />,
-  //   path: "/feedback",
-  // },
-  {
-    name: "Sign out",
-    icon: <SignOutIcon color="var(--color-dark-80)" />,
-    path: "/logout",
-  },
-];
+export default links;

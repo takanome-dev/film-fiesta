@@ -3,23 +3,23 @@ import styled from "styled-components";
 import Wrapper from "./common/Wrapper";
 
 const Container = styled.div`
+	align-items: center;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	margin-left: 5rem;
 
 	h2 {
-		text-align: center;
 		margin-bottom: 1rem;
+		text-align: center;
 	}
 
 	h3 {
+		color: var(--primary);
 		margin-bottom: 0.5rem;
-		color: var(--color-primary);
 	}
 
 	p {
-		color: var(--color-primary);
+		color: var(--primary);
 		margin-top: 1rem;
 	}
 
@@ -52,7 +52,7 @@ export default class ErrorBoundary extends Component {
 		const { hasError, errorMessage, stack } = this.state;
 		return hasError ? (
 			<Container>
-				<Wrapper width="33rem">
+				<Wrapper width="100%">
 					<h2>Oops!! Something went wrong 😟</h2>
 					<h3>❌ Error: {errorMessage}</h3>
 					<details>

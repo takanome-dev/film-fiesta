@@ -2,27 +2,28 @@ import styled from "styled-components";
 import { slideIn } from "./Global.styled";
 
 const Container = styled.div`
-	display: flex;
-	justify-content: center;
 	align-items: center;
+	animation: ${slideIn} var(--animation-duration);
+	display: flex;
+	height: 100%;
+	justify-content: center;
+	left: 0;
 	position: absolute;
 	top: 0;
-	left: 0;
 	width: 100%;
-	height: 100%;
-	animation: ${slideIn} 300ms;
 
 	.modal-wrapper {
+		--animation-duration: 500ms;
+		animation: ${slideIn} var(--animation-duration);
+		margin: 0 1rem;
 		position: fixed;
 		width: 30rem;
 		z-index: 4;
-		animation: ${slideIn} 500ms;
-		margin: 0 1rem;
 
 		.modal-header {
+			align-items: center;
 			display: flex;
 			justify-content: space-between;
-			align-items: center;
 			margin-bottom: 2rem;
 			margin-top: -1rem;
 			@media (max-width: 650px) {
@@ -35,13 +36,13 @@ const Container = styled.div`
 			}
 
 			span {
+				border-radius: 50%;
+				cursor: pointer;
 				font-size: 2rem;
 				font-weight: 500;
 				padding: 0.1rem 0.6rem;
-				border-radius: 50%;
-				cursor: pointer;
 				&:hover {
-					background-color: var(--color-gray-20);
+					background-color: var(--gray-20);
 				}
 			}
 		}
@@ -50,18 +51,18 @@ const Container = styled.div`
 			.modal-profile {
 				position: relative;
 				.profile-label {
-					width: 6rem;
-					height: 6rem;
 					border-radius: 50%;
-					border: 0.1rem solid var(--color-gray-40);
+					border: 0.1rem solid var(--gray-40);
 					cursor: pointer;
+					height: 6rem;
 					margin-bottom: 2rem;
 					overflow: hidden;
+					width: 6rem;
 					.profile-img {
 						img {
-							width: 100%;
-							height: 100%;
 							object-fit: cover;
+							height: 100%;
+							width: 100%;
 						}
 					}
 
@@ -69,28 +70,25 @@ const Container = styled.div`
 						display: none;
 					}
 					.tooltip {
+						background-color: var(--dark);
+						border-radius: 0.5rem;
+						color: #fff;
+						left: 50%;
+						padding: 0.5rem;
 						visibility: hidden;
 						position: absolute;
 						top: 50%;
-						left: 50%;
-						/* top: 33%; */
-						/* left: 51%; */
 						transform: translate(-50%, -50%);
-						background-color: var(--color-dark);
-						color: #fff;
 						z-index: 3;
-						padding: 0.5rem;
-						border-radius: 0.5rem;
 						&::before {
+							border-style: solid;
+							border-color: transparent var(--dark) transparent transparent;
+							border-width: 0.5rem;
 							content: " ";
+							margin-top: -0.5rem;
 							position: absolute;
 							right: 100%;
 							top: 50%;
-							border-width: 0.5rem;
-							margin-top: -0.5rem;
-							border-style: solid;
-							border-color: transparent var(--color-dark) transparent
-								transparent;
 						}
 
 						@media (max-width: 560px) {

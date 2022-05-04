@@ -1,8 +1,8 @@
 import { useContext } from "react";
+import { FaSignOutAlt, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Context } from "../context/GlobalContext";
 import Overlay from "./common/Overlay";
-import { profileLinks } from "./links";
 import Container from "./styles/UserModal.styled";
 
 type Props = {
@@ -29,17 +29,22 @@ const UserModal: React.FC<Props> = ({ setOpenModal, openModal }) => {
 							My Feedbacks
 						</Link>
 					)}
-					{profileLinks.map((l, i) => (
-						<Link
-							to={l.path}
-							className="flex"
-							onClick={() => setOpenModal(false)}
-							key={i}
-						>
-							{l.icon}
-							<p>{l.name}</p>
-						</Link>
-					))}
+					<Link
+						to="/profile"
+						className="flex"
+						onClick={() => setOpenModal(false)}
+					>
+						<FaUser color="var(--dark-60)" />
+						<p>Profile</p>
+					</Link>
+					<Link
+						to="/logout"
+						className="flex"
+						onClick={() => setOpenModal(false)}
+					>
+						<FaSignOutAlt color="var(--dark-60)" />
+						<p>Sign Out</p>
+					</Link>
 				</div>
 			</Container>
 		</>
