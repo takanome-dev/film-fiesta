@@ -42,11 +42,12 @@ const Provider: React.FC<Props> = ({ children }) => {
 			dispatch({
 				type: constants.FETCH_MOVIES,
 				payload: data.results,
-			}),
-				dispatch({
-					type: constants.TOTAL_PAGES,
-					payload: data.total_pages,
-				});
+			});
+
+			dispatch({
+				type: constants.TOTAL_PAGES,
+				payload: data.total_pages,
+			});
 		},
 		onError: (error) => {
 			console.log({ error });
