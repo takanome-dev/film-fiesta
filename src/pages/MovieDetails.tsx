@@ -30,7 +30,7 @@ const MovieDetails: React.FC<MovieDetailsInt> = ({ match }) => {
 	useEffect(() => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
 		refetch();
-		/* // eslint-disable-next-line react-hooks/exhaustive-deps */
+		// eslint-disable-next-line react-hooks/exhaustive-deps 
 	}, [id]);
 
 	const bgImage = result?.data?.backdrop_path;
