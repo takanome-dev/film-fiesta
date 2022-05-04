@@ -57,6 +57,7 @@ const getMovieDetails = async (id: string) => {
 	return result as types.MovieDetails;
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
 	getMovies,
 	getTrendingMovies,
