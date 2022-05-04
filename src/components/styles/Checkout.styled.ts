@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 const Container = styled.div`
 	form {
+		column-gap: 5rem;
 		display: grid;
 		grid-template-columns: 0.7fr 1fr;
-		column-gap: 5rem;
 
 		.title {
 			font-size: 1.5rem;
@@ -20,12 +20,11 @@ const Container = styled.div`
 				margin-bottom: 1rem;
 
 				img {
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
-					/* object-position: top; */
 					border-radius: 0.8rem;
 					box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+					height: 100%;
+					object-fit: cover;
+					width: 100%;
 				}
 			}
 
@@ -39,10 +38,10 @@ const Container = styled.div`
 				}
 
 				.total {
-					display: flex;
-					justify-content: space-between;
 					align-items: center;
 					border-top: 0.1rem solid var(--color-gray-40);
+					display: flex;
+					justify-content: space-between;
 					margin-top: 1rem;
 				}
 			}
@@ -56,20 +55,20 @@ const Container = styled.div`
 				}
 
 				.input-card {
-					position: relative;
-					margin: 0.5rem 0 1rem;
-					padding: 0.8rem 1rem;
-					background-color: var(--color-background);
+					background-color: var(--background);
 					border: none;
 					border-radius: 0.6rem;
+					margin: 0.5rem 0 1rem;
+					padding: 0.8rem 1rem;
+					position: relative;
 					transition: outline 100ms ease;
 					&:focus {
-						outline: 0.35rem solid var(--color-secondary-20);
+						outline: 0.35rem solid var(--secondary-20);
 					}
 				}
 
 				.info {
-					color: var(--color-secondary);
+					color: var(--secondary);
 					font-size: 1.1rem;
 					font-weight: 500;
 				}
@@ -77,18 +76,18 @@ const Container = styled.div`
 		}
 
 		@media (max-width: 995px) {
-			grid-template-columns: 1fr 1fr;
 			column-gap: 3rem;
+			grid-template-columns: 1fr 1fr;
 		}
 
 		@media (max-width: 850px) {
-			grid-template-columns: 1fr 1fr;
 			column-gap: 1rem;
+			grid-template-columns: 1fr 1fr;
 		}
 
 		@media (max-width: 748px) {
-			grid-template-columns: 1fr;
 			column-gap: 0;
+			grid-template-columns: 1fr;
 
 			.title {
 				text-align: start;

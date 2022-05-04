@@ -1,5 +1,10 @@
 import { createGlobalStyle, keyframes } from "styled-components";
 
+/**
+ * @see {@link https://www.joshwcomeau.com/css/custom-css-reset/ }
+ * for some css reset property
+ */
+
 export const slideIn = keyframes`
 	from {
     transform: translateY(-10rem);
@@ -23,7 +28,7 @@ export const sidebarLoad = keyframes`
     transform: translateX(-100%);
   }
   to {
-    transform: translateX(0);
+    transform: translateX(0%);
   }
 `;
 
@@ -51,38 +56,69 @@ export const skeletonLoading = keyframes`
 const GlobalStyles = createGlobalStyle`
 
   :root {
-    /* --color-primary: #EF233C; */
-    --color-primary: hsla(353, 86%, 54%, 1);
-    --color-primary-80: hsla(353, 86%, 54%, 0.8);
-    --color-primary-60: hsla(353, 86%, 54%, 0.6);
-    --color-primary-40: hsla(353, 86%, 54%, 0.4);
-    --color-primary-20: hsla(353, 86%, 54%, 0.2);
-    /* --color-secondary: #269EE1; */
-    --color-secondary: hsla(202, 76%, 52%, 1);
-    --color-secondary-80: hsla(202, 76%, 52%, 0.8);
-    --color-secondary-60: hsla(202, 76%, 52%, 0.6);
-    --color-secondary-40: hsla(202, 76%, 52%, 0.4);
-    --color-secondary-20: hsla(202, 76%, 52%, 0.2);
-    /* --color-dark: #2B2D42; */
-    --color-dark: hsla(235, 21%, 21%, 1);
-    --color-dark-80: hsla(235, 21%, 21%, 0.8);
-    --color-dark-60: hsla(235, 21%, 21%, 0.6);
-    --color-dark-40: hsla(235, 21%, 21%, 0.4);
-    --color-dark-20: hsla(235, 21%, 21%, 0.2);
-    /* --color-gray: #8D99AE; */
-    --color-gray:  hsla(218, 17%, 62%, 1);
-    --color-gray-80: hsla(218, 17%, 62%, 0.8);
-    --color-gray-60: hsla(218, 17%, 62%, 0.6);
-    --color-gray-40:  hsla(218, 17%, 62%, 0.4);
-    --color-gray-20: hsla(218, 17%, 62%, 0.2);
-    /* --color-background: #EDF2F4; */
-    --color-background: hsla(197, 24%, 94%, 1);
-    --color-background-80: hsla(197, 24%, 94%, 0.8);
-    --color-background-60: hsla(197, 24%, 94%, 0.6);
-    --color-background-40: hsla(197, 24%, 94%, 0.4);
-    --color-background-20: hsla(197, 24%, 94%, 0.2);
-    --color-yellow: #ffcb21;
+    /* primary: #EF233C; */
+    --primary: hsla(353, 86%, 54%, 1);
+    --primary-90: hsla(353, 86%, 54%, 0.9);
+    --primary-80: hsla(353, 86%, 54%, 0.8);
+    --primary-70: hsla(353, 86%, 54%, 0.7);
+    --primary-60: hsla(353, 86%, 54%, 0.6);
+    --primary-50: hsla(353, 86%, 54%, 0.5);
+    --primary-40: hsla(353, 86%, 54%, 0.4);
+    --primary-30: hsla(353, 86%, 54%, 0.3);
+    --primary-20: hsla(353, 86%, 54%, 0.2);
+    --primary-10: hsla(353, 86%, 54%, 0.1);
+    /* secondary: #269EE1; */
+    --secondary: hsla(202, 76%, 52%, 1);
+    --secondary-90: hsla(202, 76%, 52%, 0.9);
+    --secondary-80: hsla(202, 76%, 52%, 0.8);
+    --secondary-70: hsla(202, 76%, 52%, 0.7);
+    --secondary-60: hsla(202, 76%, 52%, 0.6);
+    --secondary-50: hsla(202, 76%, 52%, 0.5);
+    --secondary-40: hsla(202, 76%, 52%, 0.4);
+    --secondary-30: hsla(202, 76%, 52%, 0.3);
+    --secondary-20: hsla(202, 76%, 52%, 0.2);
+    --secondary-10: hsla(202, 76%, 52%, 0.1);
+    /* --dark: #2B2D42; */
+    --dark: hsla(235, 21%, 21%, 1);
+    --dark-90: hsla(235, 21%, 21%, 0.9);
+    --dark-80: hsla(235, 21%, 21%, 0.8);
+    --dark-70: hsla(235, 21%, 21%, 0.7);
+    --dark-60: hsla(235, 21%, 21%, 0.6);
+    --dark-50: hsla(235, 21%, 21%, 0.5);
+    --dark-40: hsla(235, 21%, 21%, 0.4);
+    --dark-30: hsla(235, 21%, 21%, 0.3);
+    --dark-20: hsla(235, 21%, 21%, 0.2);
+    --dark-10: hsla(235, 21%, 21%, 0.1);
+    /* --gray: #8D99AE; */
+    --gray:  hsla(218, 17%, 62%, 1);
+    --gray-90: hsla(218, 17%, 62%, 0.9);
+    --gray-80: hsla(218, 17%, 62%, 0.8);
+    --gray-70: hsla(218, 17%, 62%, 0.7);
+    --gray-60: hsla(218, 17%, 62%, 0.6);
+    --gray-50: hsla(218, 17%, 62%, 0.5);
+    --gray-40: hsla(218, 17%, 62%, 0.4);
+    --gray-30: hsla(218, 17%, 62%, 0.3);
+    --gray-20: hsla(218, 17%, 62%, 0.2);
+    --gray-10: hsla(218, 17%, 62%, 0.1);
+    /* --background: #EDF2F4; */
+    --background: hsla(197, 24%, 94%, 1);
+    --background-90: hsla(197, 24%, 94%, 0.9);
+    --background-80: hsla(197, 24%, 94%, 0.8);
+    --background-70: hsla(197, 24%, 94%, 0.7);
+    --background-60: hsla(197, 24%, 94%, 0.6);
+    --background-50: hsla(197, 24%, 94%, 0.5);
+    --background-40: hsla(197, 24%, 94%, 0.4);
+    --background-30: hsla(197, 24%, 94%, 0.3);
+    --background-20: hsla(197, 24%, 94%, 0.2);
+    --background-10: hsla(197, 24%, 94%, 0.1);
+    --yellow: #ffcb21;
+  }
+
+  :root {
     font-size: 16px;
+    --header-height: 3.5rem;
+    --animation-duration: 300ms;
+    --animation-timing-curve: ease-in-out;
   }
 
   ::-webkit-scrollbar {
@@ -95,25 +131,12 @@ const GlobalStyles = createGlobalStyle`
   } */
 
   ::-webkit-scrollbar-thumb {
-    background-color: var(--color-gray-60);
+    background-color: var(--gray-60);
     border-radius: 0.7rem;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-gray-80);
-  }
-
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
-  /**
-  * @reference: https://www.joshwcomeau.com/css/custom-css-reset/ 
-  */
-
-  html,
-  body {
-    height: 100%;
+    background-color: var(--gray-80);
   }
 
   input,
@@ -132,36 +155,19 @@ const GlobalStyles = createGlobalStyle`
   }
 
   * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
   }
 
   body {
+    background-color: var(--background);
+    color: var(--dark-80);
     font-family: 'Montserrat', sans-serif;
-    background-color: var(--color-background);
-    color: var(--color-dark);
-    overflow-x: hidden;
   }
 
   body.open {
     overflow: hidden;
-  }
-
-  .container {
-    max-width: 1440px;
-    margin: 0 auto;
-  }
-
-  .main {
-    margin: 1rem 1rem 0rem 16rem;
-    transition: margin 300ms ease-in-out;
-    
-    @media (max-width: 1110px) {
-      margin: 1rem 1rem 1rem 6rem;
-    }
-    @media (max-width: 650px) {
-      margin: 1rem;
-    }
   }
 
   .flex {
@@ -171,40 +177,39 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .btn {
-    /* width: 100%; */
     padding: 0.6rem;
     border-radius: 0.3rem;
     border: none;
   }
 
   .error {
-		font-size: 1rem;
-		color: var(--color-primary);
-		position: absolute;
+    --animation-duration: 700ms;
+		animation: ${appear} var(--animation-duration);
 		background-color: #fff;
 		box-shadow: 0 0.1rem 2rem rgba(0, 0, 0, 0.2);
-		padding: 0.3rem 0.8rem;
 		border-radius: 0.5rem;
+		color: var(--primary);
+		font-size: 1rem;
+		position: absolute;
+		padding: 0.3rem 0.8rem;
 		top: 100%;
-		/* bottom: -50%; */
 		z-index: 2;
-		animation: ${appear} 700ms;
 
 		&::before {
 			content: "❌";
-			color: var(--color-primary);
+			color: var(--primary);
 			margin-right: 0.2rem;
 		}
 
 		&::after {
-			content: " ";
-			position: absolute;
-			bottom: 100%;
-			left: 50%;
-			border-width: 0.5rem;
-			margin-left: -0.5rem;
 			border-style: solid;
 			border-color: transparent transparent #fff transparent;
+			border-width: 0.5rem;
+			bottom: 100%;
+			content: " ";
+			left: 50%;
+			margin-left: -0.5rem;
+			position: absolute;
 		}
 	}
 
@@ -223,13 +228,14 @@ const GlobalStyles = createGlobalStyle`
 
   .more {
     display: flex;
-    margin-top: 1.5rem;
     font-size: 1.15rem;
+    margin-top: 1.5rem;
+
     a {
+      color: var(--secondary);
+      font-weight: 500;
       margin-left: .5rem;
       text-decoration: none;
-      color: var(--color-secondary);
-      font-weight: 500;
       &:hover {
         text-decoration: underline;
       }
@@ -237,14 +243,13 @@ const GlobalStyles = createGlobalStyle`
 
     @media (max-width: 430px) {
       font-size: 1rem;
-      /* flex-direction: column; */
       flex-wrap: wrap;
     }
   }
 
   .loading {
-    position: absolute;
     left: 50%;
+    position: absolute;
     top: 30%;
     transform: translateY(-50%);
   }

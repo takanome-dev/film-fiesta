@@ -1,35 +1,49 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { FaRegComment, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Context } from "../context/GlobalContext";
 import Avatar from "./common/Avatar";
+import Logo from "./common/Logo";
 import Overlay from "./common/Overlay";
 import FeedBack from "./FeedBack";
-import { topLinks } from "./links";
+import links from "./links";
 import Navigation from "./styles/Sidebar.styled";
-import { FeedBackIcon, LogoIcon, SignInIcon, SignOutIcon } from "./svg";
 import UserModal from "./UserModal";
 
 type Props = {
-	open: boolean;
-	openModal: boolean;
+	isOpen: boolean;
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Sidebar: React.FC<Props> = ({
-	open,
-	setIsOpen,
-	openModal,
-	setOpenModal,
-}) => {
+const Sidebar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
 	const [openFeedback, setOpenFeedback] = useState(false);
+	const [openModal, setOpenModal] = useState(false);
 	const { currentRoute, onRouteChange, user } = useContext(Context);
-	const condition = open && window.innerWidth <= 650;
+	const condition = isOpen && window.innerWidth <= 650;
 
 	const handleClick = (path: string) => {
 		onRouteChange?.(path);
 		setIsOpen(false);
 	};
+
+	const handleClose = () => {
+		const sidebar = document.querySelector("[data-sidebar]");
+		if (isOpen && window.innerWidth <= 650) {
+			sidebar?.classList.toggle("open");
+			setIsOpen(!isOpen);
+		}
+	};
+
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth > 650) {
+				setOpenModal(false);
+			}
+		};
+
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	});
 
 	return (
 		<>
@@ -40,72 +54,73 @@ const Sidebar: React.FC<Props> = ({
 				/>
 			)}
 			<Navigation>
-				{open && (
+				{condition && (
 					<Overlay
 						bgColor="rgba(0, 0, 0, 0.2)"
 						zIndex={3}
-						handleClose={() => setIsOpen(false)}
+						handleClose={() => {
+							document
+								.querySelector("[data-sidebar]")
+								?.classList.remove("open");
+							setIsOpen(false);
+						}}
 					/>
 				)}
 				{openModal && (
 					<UserModal openModal={openModal} setOpenModal={setOpenModal} />
 				)}
-				<div className={condition ? "menu open" : "menu"}>
-					<Link to="/" className={condition ? "logo open" : "logo"}>
-						<LogoIcon />
-						<h1>Vidly</h1>
-					</Link>
-					<div className="sidebar flex">
+				<div className="container" data-sidebar>
+					<div className="logo-container">
+						<Logo onClick={handleClose} />
+					</div>
+					<div className="sidebar">
 						<div className="top-links">
-							{topLinks.map((l, i) => (
+							{links.map((l, i) => (
 								<Link
 									key={i}
-									className={
-										currentRoute === l.path ? "flex link active" : "flex link"
-									}
+									className={currentRoute === l.path ? "link active" : "link"}
 									to={l.path}
 									onClick={() => handleClick(l.path)}
 								>
 									{l.icon(
 										currentRoute === l.path
-											? "var(--color-primary)"
-											: "var(--color-dark-60)"
+											? "var(--primary)"
+											: "var(--dark-60)"
 									)}
-									<p>{l.name}</p>
+									<p className="link-name">{l.name}</p>
 								</Link>
 							))}
 						</div>
 						<div className="bottom-links">
 							<span
-								className="flex link"
+								className="link"
 								onClick={() => setOpenFeedback(true)}
 								tabIndex={0}
 							>
-								<FeedBackIcon color="var(--color-dark-60)" />
-								<p>Feedback</p>
+								<FaRegComment color="var(--dark-60)" size={22} />
+								<p className="link-name">Feedback</p>
 							</span>
 							{user && user._id && !condition && (
-								<Link className="flex link" to="/logout">
-									<SignOutIcon color="var(--color-dark-60)" />
-									<p>Sign out</p>
+								<Link className="link" to="/logout">
+									<FaSignOutAlt color="var(--dark-60)" size={22} />
+									<p className="link-name">Sign out</p>
 								</Link>
 							)}
 							{!user._id && (
 								<Link
-									className={
-										currentRoute === "/login" ? "flex link active" : "flex link"
-									}
+									className={currentRoute === "/login" ? "link active" : "link"}
 									to="/login"
 									onClick={() => onRouteChange?.("/login")}
 								>
-									<SignInIcon
+									<FaSignInAlt
 										color={
 											currentRoute === "/login"
-												? "var(--color-primary)"
-												: "var(--color-dark-80)"
+												? "var(--primary)"
+												: "var(--dark-60)"
 										}
+										size={22}
 									/>
-									<p>Sign in</p>
+									<p className="link-name">Sign in</p>
 								</Link>
 							)}
 							{condition && user && user._id && (
@@ -116,6 +131,7 @@ const Sidebar: React.FC<Props> = ({
 							)}
 						</div>
 					</div>
+					<p className="copy">&copy; takanome_dev</p>
 				</div>
 			</Navigation>
 		</>

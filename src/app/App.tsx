@@ -1,23 +1,31 @@
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { GlobalStyles, Header, Sidebar } from "../components";
+import { GlobalStyles, Header } from "../components";
+import Main from "../components/Main";
 import Provider from "../context/GlobalContext";
-import Routes from "./Routes";
-
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY as string);
 
 const App = () => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [openModal, setOpenModal] = useState(false);
+
+	const handleClick = () => {
+		setIsOpen(!isOpen);
+		const sidebar = document.querySelector("[data-sidebar]");
+		const mainContainer = document.querySelector("[data-main]");
+		const sliderContainer = document.querySelector("[data-slider]");
+
+		sidebar?.classList.toggle("open");
+		mainContainer?.classList.toggle("open");
+		sliderContainer?.classList.toggle("open");
+	};
 
 	useEffect(() => {
 		const handleResize = () => {
 			if (window.innerWidth > 650) {
 				setIsOpen(false);
-				setOpenModal(false);
+			} else {
+				document.querySelector("[data-sidebar]")?.classList.remove("open");
+				document.querySelector("[data-main]")?.classList.remove("open");
 			}
 		};
 
@@ -25,24 +33,12 @@ const App = () => {
 		return () => window.removeEventListener("resize", handleResize);
 	});
 
-	isOpen
-		? document.body.classList.add("open")
-		: document.body.classList.remove("open");
-
 	return (
 		<Provider>
 			<GlobalStyles />
 			<ToastContainer />
-			<Header handleOpen={() => setIsOpen(true)} />
-			<Sidebar
-				open={isOpen}
-				setIsOpen={setIsOpen}
-				openModal={openModal}
-				setOpenModal={setOpenModal}
-			/>
-			<Elements stripe={stripePromise}>
-				<Routes />
-			</Elements>
+			<Header onClick={handleClick} />
+			<Main isOpen={isOpen} setIsOpen={setIsOpen} />
 		</Provider>
 	);
 };

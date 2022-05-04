@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { Context } from "../context/GlobalContext";
 import Container from "./styles/FilteredGenre.styled";
-import { LeftArrowIcon, RightArrowIcon } from "./svg";
 
 const FilteredGenre = () => {
 	const { genres, onGenreSelected, selectedGenre, loadingMovies } =
@@ -65,15 +65,15 @@ const FilteredGenre = () => {
 						className="left-arrow flex"
 						aria-label="Click to scroll horizontally on the left"
 					>
-						<LeftArrowIcon />
+						<FaAngleLeft color="var(--gray)" size={20} />
 					</button>
 					<div className="scroll-buttons">
 						<ul className="flex">
 							{genres.map((g) => (
 								<li
-									key={g._id}
+									key={g.id}
 									onClick={() => onGenreSelected?.(g)}
-									className={selectedGenre._id === g._id ? "active" : ""}
+									className={selectedGenre.id === g.id ? "active" : ""}
 								>
 									{g.name}
 								</li>
@@ -84,7 +84,7 @@ const FilteredGenre = () => {
 						className="right-arrow flex"
 						aria-label="Click to scroll horizontally on the right"
 					>
-						<RightArrowIcon />
+						<FaAngleRight color="var(--gray)" size={20} />
 					</button>
 				</div>
 			)}

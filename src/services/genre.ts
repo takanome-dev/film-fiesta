@@ -1,9 +1,9 @@
-import { GenreType } from "../types/GenreType";
-import { http } from "./http";
+import { GenresResponse } from "../types";
+import http from "./http";
 
-const endpoint = `${process.env.REACT_APP_API_URL}/genres`;
+const endpoint = "/genres";
 
 export const getGenres = async () => {
-	const { data } = await http.get<GenreType[]>(endpoint);
+	const { data } = await http.get<GenresResponse>(endpoint);
 	return data;
 };

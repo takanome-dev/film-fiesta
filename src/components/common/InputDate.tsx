@@ -20,23 +20,17 @@ const Container = styled.div`
 
 	input {
 		/* margin-left: 1rem; */
-		color: var(--color-dark-80);
-		background-color: var(--color-background);
+		color: var(--dark-80);
+		background-color: var(--background);
 		padding: 0.2rem 0.5rem;
 		/* cursor: pointer; */
 		border: none;
 		border-radius: 0.6rem;
 		transition: outline 100ms ease;
 		&:focus {
-			outline: 0.35rem solid var(--color-secondary-20);
+			outline: 0.35rem solid var(--secondary-20);
 		}
 	}
-
-	/* .error {
-		position: absolute;
-		top: 100%;
-		z-index: 5;
-	} */
 `;
 
 const InputDate: React.FC<Props> = ({

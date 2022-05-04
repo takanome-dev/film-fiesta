@@ -1,30 +1,22 @@
 import {
 	QueryObserverResult,
 	RefetchOptions,
-	RefetchQueryFilters,
+	RefetchQueryFilters
 } from "react-query";
-import { FeedbackType } from "../components/types";
-import { BookmarkType } from "../types/BookmarkType";
-import { FavoriteType } from "../types/FavoriteType";
-import { GenreType } from "../types/GenreType";
-import { MovieType } from "../types/MovieType";
-import { RentalType } from "../types/RentalType";
+import { Feedback } from "../components/types";
+import * as types from "../types";
 
-export type InitialStateType = {
-	movies: MovieType[];
-	genres: GenreType[];
-	rentals: RentalType[];
-	favorites: FavoriteType[];
-	bookmarks: BookmarkType[];
-	feedbacks: FeedbackType[];
-	filteredMovies?: MovieType[];
-	totalMovies?: number;
-	pageSize: number;
-	currentPage: number;
+export interface InitialState {
+	movies: types.Movies[];
+	genres: types.Genres[];
+	feedbacks: Feedback[];
+	filteredMovies?: types.Movies[];
+	totalPages: number;
+	moviesLength?: number;
+	page: number;
 	currentRoute: string;
 	searchQuery: string;
-	selectedCategory: string;
-	selectedGenre: { _id: string; name: string };
+	selectedGenre: { id: string; name: string };
 	user: {
 		_id: string;
 		name: string;
@@ -33,18 +25,16 @@ export type InitialStateType = {
 		iat: number;
 		imageUrl: string;
 	};
-	dispatch?: React.Dispatch<ActionType>;
+	dispatch?: React.Dispatch<Action>;
 	loadingMovies?: boolean;
 	onDelete?: (id: string) => Promise<void>;
 	onLike?: (isLike: boolean) => void;
 	onBookmark?: (isBookmark: boolean) => void;
-	onGenreSelected?: (genre: GenreType) => void;
+	onGenreSelected?: (genre: types.Genres) => void;
 	onPageChange?: (pageNumber: number) => void;
 	onRouteChange?: (route: string) => void;
 	onSearch?: (query: string) => void;
-	onRefetchMovies?: <TPageData>(
-		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-	) => Promise<QueryObserverResult<MovieType[], Error>>;
+	onRefetchMovies?: any;
 	onRefetchFavorites?: <TPageData>(
 		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
 	) => Promise<QueryObserverResult<any, unknown>>;
@@ -56,10 +46,10 @@ export type InitialStateType = {
 	) => Promise<QueryObserverResult<any, unknown>>;
 	onRefetchFeedbacks?: <TPageData>(
 		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-	) => Promise<QueryObserverResult<FeedbackType[], Error>>;
-};
+	) => Promise<QueryObserverResult<Feedback[], Error>>;
+}
 
-export type ActionType = {
+export interface Action {
 	type: string;
 	payload: any;
-};
+}

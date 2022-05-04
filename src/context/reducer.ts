@@ -1,14 +1,14 @@
-import * as constants from "./Constant";
-import { ActionType, InitialStateType } from "./types";
+import * as constants from "./constant";
+import * as types from "./types";
 
-const reducer = (state: InitialStateType, action: ActionType) => {
+const reducer = (state: types.InitialState, action: types.Action) => {
 	switch (action.type) {
 		case constants.SEARCH_QUERY:
 			return {
 				...state,
 				searchQuery: action.payload,
-				currenPage: 1,
-				selectedGenre: { _id: "", name: "" },
+				currentPage: 1,
+				selectedGenre: { id: "", name: "" },
 			};
 		case constants.GET_CURRENT_USER:
 			return {
@@ -48,7 +48,12 @@ const reducer = (state: InitialStateType, action: ActionType) => {
 		case constants.CURRENT_PAGE:
 			return {
 				...state,
-				currentPage: action.payload,
+				page: action.payload,
+			};
+		case constants.TOTAL_PAGES:
+			return {
+				...state,
+				totalPages: action.payload,
 			};
 		case constants.CURRENT_ROUTE:
 			return {
@@ -68,7 +73,7 @@ const reducer = (state: InitialStateType, action: ActionType) => {
 				selectedCategory: action.payload,
 				searchQuery: "",
 				currentPage: 1,
-				selectedGenre: { _id: "", name: "" },
+				selectedGenre: { id: "", name: "" },
 			};
 		default:
 			return state;

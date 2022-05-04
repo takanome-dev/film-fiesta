@@ -27,7 +27,6 @@ const dash = keyframes`
 
 const Svg = styled.svg`
 	animation: ${rotate} 2s linear infinite;
-
 	circle {
 		animation: ${dash} 1.5s ease-in-out infinite;
 	}

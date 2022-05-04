@@ -16,7 +16,6 @@ type Props = {
 };
 
 const Overlay: React.FC<Props> = ({ handleClose, zIndex, bgColor }) => {
-	// console.log({ zIndex });
 	return (
 		<Container
 			style={{ zIndex }}

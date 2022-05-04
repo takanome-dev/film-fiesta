@@ -5,10 +5,10 @@ import { getCurrentUser } from "../services/auth";
 import { updateProfile } from "../services/profile";
 import { updateUser } from "../services/user";
 import Form from "./common/Form";
+import Loader from "./common/Loader";
 import Overlay from "./common/Overlay";
 import Wrapper from "./common/Wrapper";
 import Container from "./styles/EditProfile.styled";
-import { Loader } from "./svg";
 
 export default class EditProfile extends Form {
 	state = {

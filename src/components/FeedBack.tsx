@@ -21,9 +21,16 @@ export default class FeedBack extends Form {
 	};
 
 	async submitToServer(): Promise<void> {
-		const res = await sendFeedback(this.state.data);
-		this.props.setOpenFeedback?.(false);
-		toast.success(res);
+		try {
+			const res = await sendFeedback(this.state.data);
+			this.props.setOpenFeedback?.(false);
+			toast.success(res);
+		} catch (err: any) {
+			toast.error(
+				"An unexpected error occurred, please reload the app and try again"
+			);
+			this.setState({ isProcessing: false });
+		}
 	}
 
 	render() {

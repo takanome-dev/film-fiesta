@@ -3,11 +3,14 @@ import ReactDOM from "react-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 // import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter } from "react-router-dom";
+import "swiper/css";
+import "swiper/css/navigation";
 import App from "./app/App";
 // import reportWebVitals from "./reportWebVitals";
 import { logger } from "./services/logger";
 
 logger.init();
+
 const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {

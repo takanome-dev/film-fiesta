@@ -6,14 +6,14 @@ import { Context } from "../context/GlobalContext";
 
 const Container = styled.div`
 	.feedback-container {
-		border: 1px solid var(--color-gray-20);
+		border: 1px solid var(--gray-20);
 		border-radius: 0.8rem;
-		padding: 1rem;
 		margin-bottom: 1rem;
+		padding: 1rem;
 
 		span {
-			display: flex;
 			align-items: center;
+			display: flex;
 			margin-bottom: 0.5rem;
 
 			em {
@@ -27,8 +27,8 @@ const Container = styled.div`
 			}
 
 			@media (max-width: 360px) {
-				flex-direction: column;
 				align-items: flex-start;
+				flex-direction: column;
 
 				p {
 					margin: 0.3rem 0rem;
@@ -37,8 +37,8 @@ const Container = styled.div`
 		}
 
 		.msg {
-			flex-direction: column;
 			align-items: flex-start;
+			flex-direction: column;
 
 			p {
 				margin-top: 0.5rem;
