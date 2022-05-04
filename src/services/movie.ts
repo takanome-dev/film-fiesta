@@ -1,3 +1,4 @@
+// /* eslint-disable  import/no-anonymous-default-export */
 import * as types from "../types";
 import http from "./http";
 
@@ -56,7 +57,6 @@ const getMovieDetails = async (id: string) => {
 	return result as types.MovieDetails;
 };
 
-// eslint-disable  import/no-anonymous-default-export
 export default {
 	getMovies,
 	getTrendingMovies,
