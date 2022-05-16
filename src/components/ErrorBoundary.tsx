@@ -40,11 +40,12 @@ export default class ErrorBoundary extends Component {
 		stack: "",
 	};
 
-	static getDerivedStateFromError() {
+	static getDerivedStateFromError(): {hasError: boolean;
+}  {
 		return { hasError: true };
 	}
 
-	componentDidCatch(error: Error) {
+	componentDidCatch(error: Error): void  {
 		this.setState({ errorMessage: error.message, stack: error.stack });
 	}
 

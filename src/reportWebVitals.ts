@@ -1,6 +1,6 @@
 import { ReportHandler } from "web-vitals";
 
-const reportWebVitals = (onPerfEntry?: ReportHandler) => {
+const reportWebVitals = (onPerfEntry?: ReportHandler): void  => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
     // deepcode ignore ReactMissingArrayKeys: <please specify a reason of ignoring this>
     import("web-vitals")

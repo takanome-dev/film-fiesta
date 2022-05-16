@@ -8,7 +8,7 @@ const imageUrl = (url: string, size = "w780") =>
 const ogImageUrl = (url: string) =>
 	url ? `${src}/original${url}` : NotFoundImage;
 
-const embedMovieUrl = (id: number) =>
+const embedMovieUrl = (id: number): string  =>
 	`${process.env.REACT_APP_TMDB_VIDEO}/movie?id=${id}`;
 
 // eslint-disable-next-line import/no-anonymous-default-export

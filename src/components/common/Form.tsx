@@ -45,7 +45,7 @@ export default class Form extends Component<types.FormProps, types.FormState> {
 		this.submitToServer();
 	};
 
-	submitToServer() {
+	submitToServer(): void  {
 		// Do something
 	}
 

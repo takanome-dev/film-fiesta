@@ -36,11 +36,11 @@ export default class EditPassword extends Form {
 		}
 	};
 
-	componentDidMount() {
+	componentDidMount(): void  {
 		document.addEventListener("keydown", this.keydownHandler);
 	}
 
-	componentWillUnmount() {
+	componentWillUnmount(): void  {
 		document.removeEventListener("keydown", this.keydownHandler);
 	}
 
