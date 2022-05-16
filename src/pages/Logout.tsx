@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { removeToken } from "../services/auth";
 
-const Logout = () => {
+const Logout = (): null  => {
 	useEffect(() => {
 		removeToken();
 		window.location.pathname = "/";

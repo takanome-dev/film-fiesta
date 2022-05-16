@@ -15,9 +15,9 @@ export const logUser = async (user: Login) => {
 	setToken(data);
 };
 
-export const getToken = () => localStorage.getItem("token")!;
-export const setToken = (token: string) => localStorage.setItem("token", token);
-export const removeToken = () => localStorage.removeItem("token");
+export const getToken = (): string  => localStorage.getItem("token")!;
+export const setToken = (token: string): void  => localStorage.setItem("token", token);
+export const removeToken = (): void  => localStorage.removeItem("token");
 
 export const getCurrentUser = (): Jwt | null => {
 	try {

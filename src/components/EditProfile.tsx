@@ -43,7 +43,7 @@ export default class EditProfile extends Form {
 		}
 	};
 
-	componentDidMount() {
+	componentDidMount(): void  {
 		document.addEventListener("keydown", this.keydownHandler);
 
 		const user = getCurrentUser();
@@ -53,7 +53,7 @@ export default class EditProfile extends Form {
 		}
 	}
 
-	componentWillUnmount() {
+	componentWillUnmount(): void  {
 		document.removeEventListener("keydown", this.keydownHandler);
 	}
 
