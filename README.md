@@ -1,4 +1,5 @@
-# Vidly
+<h1>⚡ Vidly - A Movie Website 🎥</h1>
+<p align="center"><a href="https://github.com/TAKANOME-DEV/vidly-client"><img alt="GitHub Actions status" src="https://github.com/TAKANOME-DEV/vidly-client/actions/workflows/codeql-analysis.yml/badge.svg"></a></p>
 
 A movie website where you can rent movies that you want to watch.
 See [vidly-server](https://github.com/TAKANOME-DEV/vidly-client) for back-end code.
@@ -11,22 +12,22 @@ See [vidly-server](https://github.com/TAKANOME-DEV/vidly-client) for back-end co
 
   ```json
   {
-  	"env": {
-  		"browser": true,
-  		"es2021": true
-  	},
-  	"extends": [
-  		"eslint:recommended",
-  		// "plugin:react/recommended",
-  		"plugin:@typescript-eslint/recommended"
-  	],
-  	"parser": "@typescript-eslint/parser",
-  	"parserOptions": { "project": ["./tsconfig.json"] },
-  	"plugins": ["react", "@typescript-eslint"],
-  	"rules": {
-  		"prefer-destructuring": "error",
-  		"no-duplicate-imports": "error"
-  	}
+   "env": {
+    "browser": true,
+    "es2021": true
+   },
+   "extends": [
+    "eslint:recommended",
+    // "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+   ],
+   "parser": "@typescript-eslint/parser",
+   "parserOptions": { "project": ["./tsconfig.json"] },
+   "plugins": ["react", "@typescript-eslint"],
+   "rules": {
+    "prefer-destructuring": "error",
+    "no-duplicate-imports": "error"
+   }
   }
   ```
 
