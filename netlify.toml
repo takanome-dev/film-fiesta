@@ -1,0 +1,9 @@
+[[redirects]]
+  from = "/*"
+  to = "https://takanome-vidly.netlify.app"
+  status = 200
+
+[[redirects]]
+  from = "https://takanome-vidly.netlify.app/undefined"
+  to = "https://image.tmdb.org/t/p/"
+  status = 200
