@@ -64,7 +64,7 @@
 		"@babel/plugin-syntax-flow": "7.17.12",
 		"@babel/plugin-transform-react-jsx": "7.17.12",
 		"@popperjs/core": "2.11.5",
-		"@testing-library/dom": "8.11.1",
+		"@testing-library/dom": "8.13.0",
 		"@types/lodash": "4.14.182",
 		"@types/react-router-dom": "5.3.3",
 		"@types/styled-components": "5.1.25",
@@ -88,7 +88,7 @@
 		"@babel/plugin-syntax-flow": "7.14.5",
 		"@babel/plugin-transform-react-jsx": "7.14.9",
 		"@popperjs/core": "2.10.2",
-		"@testing-library/dom": "8.11.1",
+		"@testing-library/dom": "8.13.0",
 		"autoprefixer": "10.0.2",
 		"postcss": "8.1.0",
 		"react-is": ">= 16.8.0"
