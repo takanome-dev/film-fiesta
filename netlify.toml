@@ -2,9 +2,10 @@
   from = "/*"
   to = "https://takanome-vidly.netlify.app"
   status = 200
-  
+
 [[redirects]]
-  from = "https://takanome-vidly.netlify.app/undefined"
+  from = "/undefined"
   to = "https://image.tmdb.org/t/p/"
   status = 200
+  force = true
   
