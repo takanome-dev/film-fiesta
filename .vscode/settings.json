@@ -5,5 +5,10 @@
 		"titleBar.activeBackground": "#FFC600",
 		"titleBar.inactiveBackground": "#FFC600CC"
 	},
-	"cSpell.words": ["Swiper", "toastify", "vidly"]
+	"cSpell.words": [
+		"Swiper",
+		"TMDB",
+		"toastify",
+		"vidly"
+	]
 }

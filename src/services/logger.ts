@@ -6,10 +6,10 @@ import { Integrations } from "@sentry/tracing";
 
 const init = () =>
 	Sentry.init({
-		dsn: process.env.REACT_APP_SENTRY_DNS,
+		dsn: import.meta.env.VITE_SENTRY_DSN,
 		integrations: [
 			new Integrations.BrowserTracing({
-				tracingOrigins: [process.env.REACT_APP_API_URL!],
+				tracingOrigins: [import.meta.env.VITE_API_URL],
 			}),
 		],
 		attachStacktrace: true,

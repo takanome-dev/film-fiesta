@@ -19,7 +19,9 @@
     // "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "useDefineForClassFields": false,
+    "types": ["vite/client"]
   },
   "include": ["src"]
 }
