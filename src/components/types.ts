@@ -4,12 +4,10 @@ import { Stripe, StripeElements } from "@stripe/stripe-js";
 import {
 	QueryObserverResult,
 	RefetchOptions,
-	RefetchQueryFilters
-} from "react-query";
-import { StaticContext } from "react-router";
+	RefetchQueryFilters,
+} from "@tanstack/react-query";
 import { RouteComponentProps } from "react-router-dom";
 import { Action } from "../context/types";
-import * as types from "../types";
 // import { GenreType } from "../types/GenreType";
 
 export interface Jwt {
@@ -92,7 +90,7 @@ export interface Login {
 // };
 
 export interface MoviesState {
-	movies: types.Movies[];
+	movies: Movies[];
 	// genres: GenreType[];
 	pageSize: number;
 	currentPage: number;
@@ -168,20 +166,20 @@ export interface Search {
 export interface PrivateRouteInt {
 	component?:
 		| React.ComponentType<any>
-		| React.ComponentType<RouteComponentProps<any, StaticContext, unknown>>;
+		| React.ComponentType<RouteComponentProps<any, any, unknown>>;
 	render?: (
-		props: RouteComponentProps<any, StaticContext, unknown>
+		props: RouteComponentProps<any, any, unknown>
 	) => React.ReactNode;
 	path: string;
 }
 
 export interface CardList {
-	movies: types.Movies[];
+	movies: Movies[];
 }
 
 export interface CardInt {
-	movie: types.Movies;
-	handleLike?: (movie: types.Movies) => void;
+	movie: Movies;
+	handleLike?: (movie: Movies) => void;
 	width?: string;
 	height?: string;
 }

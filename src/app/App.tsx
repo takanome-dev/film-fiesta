@@ -3,7 +3,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GlobalStyles, Header } from "../components";
 import Main from "../components/Main";
-import Provider from "../context/GlobalContext";
 
 const App = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -34,12 +33,12 @@ const App = () => {
 	});
 
 	return (
-		<Provider>
+		<>
 			<GlobalStyles />
 			<ToastContainer />
 			<Header onClick={handleClick} />
 			<Main isOpen={isOpen} setIsOpen={setIsOpen} />
-		</Provider>
+		</>
 	);
 };
 

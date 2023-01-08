@@ -1,5 +1,5 @@
+import useCurrentUser from "@/hooks/useCurrentUser";
 import { Redirect, Route } from "react-router-dom";
-import { getCurrentUser } from "../../services/auth";
 import { PrivateRouteInt } from "../types";
 
 const PrivateRoute: React.FC<PrivateRouteInt> = ({
@@ -7,7 +7,7 @@ const PrivateRoute: React.FC<PrivateRouteInt> = ({
 	render,
 	...rest
 }) => {
-	const user = getCurrentUser();
+	const user = useCurrentUser();
 
 	return (
 		<Route

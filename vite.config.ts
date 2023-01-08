@@ -14,6 +14,11 @@ export default defineConfig(({command, mode}) => {
     // Relative to the root
     outDir: '../dist',
   },
+  resolve: {
+    alias: {
+      '@': '/src',
+    }
+  },
   plugins: [
     // …
     react({

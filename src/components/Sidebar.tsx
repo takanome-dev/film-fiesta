@@ -1,3 +1,4 @@
+import useCurrentUser from "@/hooks/useCurrentUser";
 import { useContext, useEffect, useState } from "react";
 import { FaRegComment, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -18,8 +19,9 @@ type Props = {
 const Sidebar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
 	const [openFeedback, setOpenFeedback] = useState(false);
 	const [openModal, setOpenModal] = useState(false);
-	const { currentRoute, onRouteChange, user } = useContext(Context);
+	const { currentRoute, onRouteChange } = useContext(Context);
 	const condition = isOpen && window.innerWidth <= 650;
+	const user = useCurrentUser()
 
 	const handleClick = (path: string) => {
 		onRouteChange?.(path);
@@ -106,7 +108,7 @@ const Sidebar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
 									<p className="link-name">Sign out</p>
 								</Link>
 							)}
-							{!user._id && (
+							{!user?._id && (
 								<Link
 									className={currentRoute === "/login" ? "link active" : "link"}
 									to="/login"

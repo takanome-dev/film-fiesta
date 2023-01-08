@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { FaStar } from "react-icons/fa";
 import Container from "../components/styles/WatchMovie.styled";
-import { Movies } from "../types";
 import urls from "../utils/movieUrls";
 
 type Props = {
-	data: Movies;
+	data: Movies | null;
 };
 
 const WatchMovie: React.FC<Props> = ({ data }) => {

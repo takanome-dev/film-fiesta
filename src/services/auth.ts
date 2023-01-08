@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import jwt_decode from "jwt-decode";
-import { Jwt } from "../components/types";
 import http, { setJwt } from "./http";
 
 const endpoint = "/auth";
@@ -18,14 +16,5 @@ export const logUser = async (user: Login) => {
 export const getToken = (): string  => localStorage.getItem("token")!;
 export const setToken = (token: string): void  => localStorage.setItem("token", token);
 export const removeToken = (): void  => localStorage.removeItem("token");
-
-export const getCurrentUser = (): Jwt | null => {
-	try {
-		const token = getToken();
-		return jwt_decode(token);
-	} catch (err) {
-		return {};
-	}
-};
 
 setJwt(getToken());

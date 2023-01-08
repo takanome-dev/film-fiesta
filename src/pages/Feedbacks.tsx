@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import useCurrentUser from "@/hooks/useCurrentUser";
 import { useContext, useEffect } from "react";
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
@@ -55,7 +56,8 @@ const Container = styled.div`
 `;
 
 const Feedbacks = () => {
-	const { feedbacks, onRefetchFeedbacks, user } = useContext(Context);
+	const { feedbacks, onRefetchFeedbacks } = useContext(Context);
+	const user = useCurrentUser()
 
 	useEffect(() => {
 		onRefetchFeedbacks?.();
@@ -64,7 +66,7 @@ const Feedbacks = () => {
 
 	return (
 		<Container className="flex">
-			{user.isAdmin ? (
+			{user?.isAdmin ? (
 				<Wrapper width="100%">
 					{feedbacks!.length > 0 ? (
 						feedbacks?.map((f) => (

@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Joi from "joi";
 import { toast } from "react-toastify";
-import { getCurrentUser } from "../services/auth";
 import { updateProfile } from "../services/profile";
 import { updateUser } from "../services/user";
 import Form from "./common/Form";
@@ -46,7 +45,9 @@ export default class EditProfile extends Form {
 	componentDidMount(): void  {
 		document.addEventListener("keydown", this.keydownHandler);
 
-		const user = getCurrentUser();
+		// TODO: update this
+		// const user = getCurrentUser();
+		const user = {} as any
 		if (user?._id) {
 			const data = { name: user.name!, email: user.email! };
 			this.setState({ data, url: user.imageUrl });
@@ -75,21 +76,22 @@ export default class EditProfile extends Form {
 
 	handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const { name, email } = this.state.data;
-		const user = getCurrentUser();
+		// TODO: update this
+		// const { name, email } = this.state.data;
+		// const user = getCurrentUser();
 
-		try {
-			await updateUser({ name, email }, user!._id!);
-			const updatedUser = getCurrentUser();
-			this.props.dispatch?.({
-				type: "GET_CURRENT_USER",
-				payload: updatedUser,
-			});
-			this.props.setEditProfile?.(false);
-			toast.success("Profile successfully updated");
-		} catch (err: any) {
-			toast.error(err.data);
-		}
+		// try {
+		// 	await updateUser({ name, email }, user!._id!);
+		// 	const updatedUser = getCurrentUser();
+		// 	this.props.dispatch?.({
+		// 		type: "GET_CURRENT_USER",
+		// 		payload: updatedUser,
+		// 	});
+		// 	this.props.setEditProfile?.(false);
+		// 	toast.success("Profile successfully updated");
+		// } catch (err: any) {
+		// 	toast.error(err.data);
+		// }
 	};
 
 	render() {

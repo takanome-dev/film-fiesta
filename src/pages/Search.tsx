@@ -4,7 +4,7 @@ import Pagination from "../components/common/Pagination";
 import SearchInput from "../components/common/SearchInput";
 import Container from "../components/styles/Search.styled";
 import useQuery from "../hooks/useQuery";
-import movieApi from "../services/movie";
+import {getMoviesByQuery} from "../services/movie";
 
 const Search = () => {
 	const {
@@ -15,7 +15,7 @@ const Search = () => {
 		movies,
 		page,
 		handlePageChange,
-	} = useQuery("search", movieApi.getMoviesByQuery);
+	} = useQuery("search", getMoviesByQuery);
 
 	return (
 		<Container>

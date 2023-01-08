@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
-// import { ReactQueryDevtools } from "react-query/devtools";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { BrowserRouter } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -17,7 +16,7 @@ const queryClient = new QueryClient({
 			refetchOnMount: false,
 			refetchOnWindowFocus: false,
 			refetchOnReconnect: false,
-			retry: false,
+			retry: 2,
 			staleTime: 30 * 60 * 1000,
 		},
 	},
@@ -28,7 +27,6 @@ ReactDOM.render(
 		<BrowserRouter>
 			<QueryClientProvider client={queryClient}>
 				<App />
-				{/* <ReactQueryDevtools initialIsOpen={false} /> */}
 			</QueryClientProvider>
 		</BrowserRouter>
 	</React.StrictMode>,

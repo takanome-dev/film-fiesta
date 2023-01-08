@@ -1,4 +1,6 @@
-export interface Movies {
+// <reference types="vite/client" />
+
+interface Movies {
 	adult?: boolean;
 	backdrop_path?: string;
 	genre_ids?: number[];
@@ -16,29 +18,18 @@ export interface Movies {
 	vote_count: number;
 }
 
-// export interface Item {
-// 	poster_path: string;
-// 	title?: string;
-// 	name?: string;
-// 	overview: string;
-// 	backdrop_path: string;
-// 	id: number;
-// 	media_type: "tv" | "movie";
-// 	vote_average: number;
-// }
-
-export interface MovieDetails {
+interface MovieDetails {
 	data: Movies;
 	similar: Movies[];
 	videos: VideoTrailer[];
 }
 
-export interface VideoTrailer {
+interface VideoTrailer {
 	name: string;
 	key: string;
 }
 
-export interface MoviesResponse {
+interface MoviesResponse {
 	dates: { maximum: string; minimum: string };
 	page: number;
 	results: Movies[];
@@ -46,11 +37,20 @@ export interface MoviesResponse {
 	total_results: number;
 }
 
-export interface Genres {
+interface Genres {
 	id: string;
 	name: string;
 }
 
-export interface GenresResponse {
+interface GenresResponse {
 	genres: { id: string; name: string }[];
+}
+
+interface Jwt {
+	_id?: string;
+	email?: string;
+	name?: string;
+	iat?: number;
+	isAdmin?: boolean;
+	imageUrl?: string;
 }

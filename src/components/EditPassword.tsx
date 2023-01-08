@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Joi from "joi";
 import { toast } from "react-toastify";
-import { getCurrentUser } from "../services/auth";
 import { updatePassword } from "../services/user";
 import Form from "./common/Form";
 import Overlay from "./common/Overlay";
@@ -45,15 +44,17 @@ export default class EditPassword extends Form {
 	}
 
 	async submitToServer() {
-		const user = getCurrentUser();
-		try {
-			const data = await updatePassword(this.state.data, user!._id!);
-			this.props.setEditPassword?.(false);
-			toast.success(data);
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		} catch (err: any) {
-			toast.error(err.data);
-		}
+		// TODO: update this
+		console.log("submitting");
+		// const user = getCurrentUser();
+		// try {
+		// 	const data = await updatePassword(this.state.data, user!._id!);
+		// 	this.props.setEditPassword?.(false);
+		// 	toast.success(data);
+		// 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		// } catch (err: any) {
+		// 	toast.error(err.data);
+		// }
 	}
 
 	render() {

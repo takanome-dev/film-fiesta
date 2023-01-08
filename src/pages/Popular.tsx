@@ -2,12 +2,12 @@ import { CardList } from "../components";
 import Pagination from "../components/common/Pagination";
 import Container from "../components/styles/Movies.styled";
 import useQuery from "../hooks/useQuery";
-import movieApi from "../services/movie";
+import {getPopularMovies} from "../services/movie";
 
 const Popular = () => {
 	const { totalPages, movies, page, handlePageChange } = useQuery(
 		"popular",
-		movieApi.getPopularMovies
+		getPopularMovies
 	);
 
 	return (

@@ -1,39 +1,38 @@
-import * as types from "../types";
 import http from "./http";
 
-const getMovies = async (page: number) => {
-	const { data } = await http.get<types.MoviesResponse>(`/movies/${page}`);
+export const getMovies = async (page: number) => {
+	const { data } = await http.get<MoviesResponse>(`/movies/${page}`);
 	return data;
 };
 
-const getMoviesByQuery = async (page: string, query?: string) => {
-	const { data } = await http.post<types.MoviesResponse>("/search", {
+export const getMoviesByQuery = async (page: string, query?: string) => {
+	const { data } = await http.post<MoviesResponse>("/search", {
 		query,
 		page,
 	});
 	return data;
 };
 
-const getTrendingMovies = async (page: string) => {
-	const { data } = await http.get<types.MoviesResponse>(
+export const getTrendingMovies = async (page: string) => {
+	const { data } = await http.get<MoviesResponse>(
 		`/movies/trending/${page}`
 	);
 	return data;
 };
 
-const getPopularMovies = async (page: string) => {
-	const { data } = await http.get<types.MoviesResponse>(
+export const getPopularMovies = async (page: string) => {
+	const { data } = await http.get<MoviesResponse>(
 		`/movies/popular/${page}`
 	);
 	return data;
 };
 
-const getMovieById = async (id: string) => {
-	const { data } = await http.get<types.Movies>(`/movies/${id}`);
+export const getMovieById = async (id: string) => {
+	const { data } = await http.get<Movies>(`/movies/${id}`);
 	return data;
 };
 
-const getMovieDetails = async (id: string) => {
+export const getMovieDetails = async (id: number) => {
 	const labels = ["data", "similar", "videos"];
 
 	const result = (
@@ -54,15 +53,6 @@ const getMovieDetails = async (id: string) => {
 		return final;
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	}, {} as any);
-	return result as types.MovieDetails;
-};
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
-	getMovies,
-	getTrendingMovies,
-	getPopularMovies,
-	getMoviesByQuery,
-	getMovieById,
-	getMovieDetails,
+	return result as MovieDetails;
 };

@@ -1,3 +1,4 @@
+import useCurrentUser from "@/hooks/useCurrentUser";
 import { useContext, useState } from "react";
 import { EditPassword } from "../components";
 import Wrapper from "../components/common/Wrapper";
@@ -8,7 +9,8 @@ import { Context } from "../context/GlobalContext";
 const Profile = () => {
 	const [editProfile, setEditProfile] = useState(false);
 	const [editPassword, setEditPassword] = useState(false);
-	const { user, dispatch } = useContext(Context);
+	const { dispatch } = useContext(Context);
+	const user = useCurrentUser()
 
 	return (
 		<>
@@ -29,11 +31,11 @@ const Profile = () => {
 						<div className="avatar-container">
 							<div className="avatar">
 								<div className="user-avatar flex">
-									<img src={user.imageUrl} alt="User avatar" />
+									<img src={user?.imageUrl} alt="User avatar" />
 								</div>
 								<div className="user-info">
-									<p className="name">{user.name}</p>
-									<p className="email">{user.email}</p>
+									<p className="name">{user?.name}</p>
+									<p className="email">{user?.email}</p>
 								</div>
 							</div>
 							<button
@@ -46,11 +48,11 @@ const Profile = () => {
 						<fieldset disabled aria-label="User information">
 							<div className="input-container">
 								<label htmlFor="name">Name</label>
-								<input readOnly id="name" type="text" value={user.name} />
+								<input readOnly id="name" type="text" value={user?.name} />
 							</div>
 							<div className="input-container">
 								<label htmlFor="email">Email</label>
-								<input readOnly id="email" type="email" value={user.email} />
+								<input readOnly id="email" type="email" value={user?.email} />
 							</div>
 						</fieldset>
 						<button
