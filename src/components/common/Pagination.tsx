@@ -8,6 +8,7 @@ type Props = {
 	totalPages: number;
 };
 
+// TODO: simplify this
 const Pagination: React.FC<Props> = ({ onPageChange, page, totalPages }) => {
 	const limitPageNumber = 5;
 	const [maxPageNumber, setMaxPageNumber] = useState(5);

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { BiCameraMovie } from "react-icons/bi";
 import { FaTimes } from "react-icons/fa";
-import { VideoTrailer } from "../types";
 import Overlay from "./common/Overlay";
 import Container from "./styles/MovieTrailer";
 
@@ -11,6 +10,7 @@ type Props = {
 	handleClose: () => void;
 };
 
+// TODO: limit number of videos to 3s
 const MovieTrailer: React.FC<Props> = ({
 	videos,
 	openTrailer,

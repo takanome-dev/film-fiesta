@@ -13,7 +13,7 @@ export const getMoviesByQuery = async (page: string, query?: string) => {
 	return data;
 };
 
-export const getTrendingMovies = async (page: string) => {
+export const getTrendingMovies = async (page: number) => {
 	const { data } = await http.get<MoviesResponse>(
 		`/movies/trending/${page}`
 	);

@@ -4,11 +4,12 @@ import { PrivateRoute } from "../components";
 import Loader from "../components/common/Loader";
 import ErrorBoundary from "../components/ErrorBoundary";
 import { Movies } from "../pages";
+import MovieDetails from "@/pages/MovieDetails";
 
 const Feedbacks = lazy(() => import("../pages/Feedbacks"));
 const Login = lazy(() => import("../pages/Login"));
 const Logout = lazy(() => import("../pages/Logout"));
-const MovieDetails = lazy(() => import("../pages/MovieDetails"));
+// const MovieDetails = lazy(() => import("../pages/MovieDetails"));
 const NotFound = lazy(() => import("../pages/404"));
 const Popular = lazy(() => import("../pages/Popular"));
 const Profile = lazy(() => import("../pages/Profile"));

@@ -8,6 +8,7 @@ import { MovieDetailsInt } from "../components/types";
 import urls from "../utils/movieUrls";
 import WatchMovie from "./WatchMovie";
 import useMovieDetails from "@/hooks/useMovieDetails";
+import Loader from "@/components/common/Loader";
 
 const MovieDetails: React.FC<MovieDetailsInt> = ({ match }) => {
 	const [openTrailer, setOpenTrailer] = useState(false);
@@ -17,11 +18,14 @@ const MovieDetails: React.FC<MovieDetailsInt> = ({ match }) => {
 	const id = searchParams.get("id");
 	const {movie, loading, refetchMovie} = useMovieDetails(Number(id))
 
-	// useEffect(() => {
-	// 	window.scrollTo({ top: 0, behavior: "smooth" });
-	// 	refetchMovie();
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps 
-	// }, [id]);
+	useEffect(() => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+		refetchMovie();
+		// eslint-disable-next-line react-hooks/exhaustive-deps 
+	}, [id]);
+
+	// TODO: move loader to the middle of the page
+	if (loading || !movie?.data.backdrop_path) return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px'}}><Loader size={50} /></div>
 
 	const bgImage = movie?.data?.backdrop_path;
 	const imageUrl = movie?.data?.poster_path;
@@ -33,10 +37,6 @@ const MovieDetails: React.FC<MovieDetailsInt> = ({ match }) => {
 					<WatchMovie data={movie?.data ?? null} />
 				</>
 			) : (
-				<>
-					{loading ? (
-						<div className="placeholder"></div>
-					) : (
 						<Container>
 							<div
 								className="movie-details"
@@ -103,8 +103,6 @@ const MovieDetails: React.FC<MovieDetailsInt> = ({ match }) => {
 								handleClose={() => setOpenTrailer(false)}
 							/>
 						</Container>
-					)}
-				</>
 			)}
 		</>
 	);

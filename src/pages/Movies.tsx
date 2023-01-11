@@ -1,29 +1,26 @@
 import useMovies from "@/hooks/useMovies";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { CardList, Skeleton } from "../components";
 import Pagination from "../components/common/Pagination";
 import Container from "../components/styles/Movies.styled";
 
 const Movies = () => {
-		const {movies, loadingMovies, totalPages} = useMovies(1)
-// TODO: update this
-		const page = 1
+	const [currentPage, setCurrentPage] = useState(1);
+		const {movies, loadingMovies, totalPages, errMovies} = useMovies(currentPage)
+
+		const history = useHistory();
+
 		const handlePageChange = async (pageNumber: number) => {
-			console.log({pageNumber})
-			// window.scrollTo({ top: 0, behavior: "smooth" });
-			// history.push({ pathname: "/movies", search: `page=${pageNumber}` });
-	
-			// const res = await getMovies(pageNumber);
-	
-			// dispatch({
-			// 	type: constants.CURRENT_PAGE,
-			// 	payload: pageNumber,
-			// });
-	
-			// dispatch({
-			// 	type: constants.FETCH_MOVIES,
-			// 	payload: res.results,
-			// });
+			setCurrentPage(pageNumber);
+			window.scrollTo({ top: 0, behavior: "smooth" });
+			history.push({ pathname: "/movies", search: `page=${pageNumber}` });
 		};
+
+		if (errMovies) {
+			console.log(errMovies);
+			return <h1>Something went wrong</h1>;
+		}
 
 	return (
 		<>
@@ -35,7 +32,7 @@ const Movies = () => {
 					<CardList movies={movies} />
 					<Pagination
 						onPageChange={handlePageChange}
-						page={page}
+						page={currentPage}
 						totalPages={totalPages}
 					/>
 				</Container>
