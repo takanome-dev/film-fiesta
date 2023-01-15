@@ -1,6 +1,6 @@
 import usePopularMovies from "@/hooks/usePopularMovies";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CardList, Skeleton } from "../components";
 import Pagination from "../components/common/Pagination";
 import Container from "../components/styles/Movies.styled";
@@ -11,12 +11,12 @@ const Popular = () => {
 
 	const {movies, error, loading, totalPages} = usePopularMovies(currentPage)
 // console.log({error, loading, totalPages, currentPage})
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	const handlePageChange = async (pageNumber: number) => {
 		setCurrentPage(pageNumber);
 		window.scrollTo({ top: 0, behavior: "smooth" });
-		history.push({ pathname: "/movies", search: `page=${pageNumber}` });
+		navigate({ pathname: "/movies", search: `page=${pageNumber}` });
 	};
 
 	if (loading) return <Skeleton />;

@@ -1,23 +1,25 @@
 import useCurrentUser from "@/hooks/useCurrentUser";
-import { useContext, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { EditPassword } from "../components";
 import Wrapper from "../components/common/Wrapper";
 import EditProfile from "../components/EditProfile";
 import Container from "../components/styles/Profile.styled";
-import { Context } from "../context/GlobalContext";
 
 const Profile = () => {
 	const [editProfile, setEditProfile] = useState(false);
 	const [editPassword, setEditPassword] = useState(false);
-	const { dispatch } = useContext(Context);
+	const navigate  = useNavigate()
 	const user = useCurrentUser()
+
+	if (!user?._id) navigate('/login')
 
 	return (
 		<>
 			<EditProfile
 				editProfile={editProfile}
 				setEditProfile={setEditProfile}
-				dispatch={dispatch}
+				// dispatch={dispatch}
 			/>
 			{editPassword && (
 				<EditPassword

@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import useCurrentUser from "@/hooks/useCurrentUser";
-import { useContext, useEffect } from "react";
+import useFeedbacks from "@/hooks/useFeedbacks";
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
-import { Context } from "../context/GlobalContext";
 
 const Container = styled.div`
 	.feedback-container {
@@ -56,13 +55,13 @@ const Container = styled.div`
 `;
 
 const Feedbacks = () => {
-	const { feedbacks, onRefetchFeedbacks } = useContext(Context);
+	const { feedbacks } = useFeedbacks();
 	const user = useCurrentUser()
 
-	useEffect(() => {
-		onRefetchFeedbacks?.();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	// useEffect(() => {
+	// 	onRefetchFeedbacks?.();
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, []);
 
 	return (
 		<Container className="flex">

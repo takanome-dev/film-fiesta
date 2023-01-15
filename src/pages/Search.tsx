@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import useSearchQuery from "@/hooks/useSearchQuery";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CardList, Skeleton } from "../components";
 import Pagination from "../components/common/Pagination";
 import SearchInput from "../components/common/SearchInput";
@@ -12,12 +12,12 @@ const Search = () => {
 
 	const {movies, error, loading, totalPages, newPage, totalResults, query} = useSearchQuery(currentPage)
 // console.log({error, loading, totalPages, currentPage})
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	const handlePageChange = async (pageNumber: number) => {
 		setCurrentPage(pageNumber);
 		window.scrollTo({ top: 0, behavior: "smooth" });
-		history.push({ pathname: "/search", search: `page=${pageNumber}` });
+		navigate({ pathname: "/search", search: `page=${pageNumber}` });
 	};
 
 	if (loading) return <Skeleton />;

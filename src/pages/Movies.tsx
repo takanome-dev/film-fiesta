@@ -1,40 +1,41 @@
-import useMovies from "@/hooks/useMovies";
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { CardList, Skeleton } from "../components";
-import Pagination from "../components/common/Pagination";
-import Container from "../components/styles/Movies.styled";
+import useMovies from '@/hooks/useMovies';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { CardList, Skeleton } from '../components';
+import Pagination from '@/components/common/Pagination';
+import Container from '@/components/styles/Movies.styled';
 
 const Movies = () => {
-	const [currentPage, setCurrentPage] = useState(1);
-		const {movies, loadingMovies, totalPages, errMovies} = useMovies(currentPage)
+  const [currentPage, setCurrentPage] = useState(1);
+  const { movies, loadingMovies, totalPages, errMovies } =
+    useMovies(currentPage);
 
-		const history = useHistory();
+  const navigate = useNavigate();
 
-		const handlePageChange = async (pageNumber: number) => {
-			setCurrentPage(pageNumber);
-			window.scrollTo({ top: 0, behavior: "smooth" });
-			history.push({ pathname: "/movies", search: `page=${pageNumber}` });
-		};
+  const handlePageChange = async (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigate({ pathname: '/movies', search: `page=${pageNumber}` });
+  };
 
-		if (loadingMovies) return <Skeleton />;
+  if (loadingMovies) return <Skeleton />;
 
-		if (errMovies) {
-			console.log(errMovies);
-			return <h1>Something went wrong</h1>;
-		}
+  if (errMovies) {
+    console.log(errMovies);
+    return <h1>Something went wrong</h1>;
+  }
 
-	return (
-				<Container>
-					{/* <FilteredGenre /> */}
-					<CardList movies={movies} />
-					<Pagination
-						onPageChange={handlePageChange}
-						page={currentPage}
-						totalPages={totalPages}
-					/>
-				</Container>
-	);
+  return (
+    <Container>
+      {/* <FilteredGenre /> */}
+      <CardList movies={movies} />
+      <Pagination
+        onPageChange={handlePageChange}
+        page={currentPage}
+        totalPages={totalPages}
+      />
+    </Container>
+  );
 };
 
 export default Movies;
