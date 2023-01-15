@@ -5,7 +5,7 @@ export const getMovies = async (page: number) => {
 	return data;
 };
 
-export const getMoviesByQuery = async (page: string, query?: string) => {
+export const getMoviesByQuery = async (page: number, query?: string) => {
 	const { data } = await http.post<MoviesResponse>("/search", {
 		query,
 		page,
@@ -20,7 +20,7 @@ export const getTrendingMovies = async (page: number) => {
 	return data;
 };
 
-export const getPopularMovies = async (page: string) => {
+export const getPopularMovies = async (page: number) => {
 	const { data } = await http.get<MoviesResponse>(
 		`/movies/popular/${page}`
 	);

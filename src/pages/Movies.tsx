@@ -17,16 +17,14 @@ const Movies = () => {
 			history.push({ pathname: "/movies", search: `page=${pageNumber}` });
 		};
 
+		if (loadingMovies) return <Skeleton />;
+
 		if (errMovies) {
 			console.log(errMovies);
 			return <h1>Something went wrong</h1>;
 		}
 
 	return (
-		<>
-			{loadingMovies ? (
-				<Skeleton />
-			) : (
 				<Container>
 					{/* <FilteredGenre /> */}
 					<CardList movies={movies} />
@@ -36,8 +34,6 @@ const Movies = () => {
 						totalPages={totalPages}
 					/>
 				</Container>
-			)}
-		</>
 	);
 };
 

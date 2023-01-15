@@ -1,19 +1,15 @@
-import { CardList } from "../components";
-import Pagination from "../components/common/Pagination";
-import Container from "../components/styles/Movies.styled";
-import useQuery from "../hooks/useQuery";
-import {getTrendingMovies} from "../services/movie";
+import useTrendingMovies from "@/hooks/useTrendingMovies";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { CardList, Skeleton } from "@/components";
+import Pagination from "@/components/common/Pagination";
+import Container from "@/components/styles/Movies.styled";
 
 const Trending = () => {
-	// TODO: use useTrendingMovies hook
-	const { totalPages, movies, page, handlePageChange } = useQuery(
-		"trending",
-		getTrendingMovies
-	);
-
 	const [currentPage, setCurrentPage] = useState(1);
-	const {movies, loadingMovies, totalPages, errMovies} = useMovies(currentPage)
 
+	const {movies, error, loading, totalPages} = useTrendingMovies(currentPage)
+// console.log({error, loading, totalPages, currentPage})
 	const history = useHistory();
 
 	const handlePageChange = async (pageNumber: number) => {
@@ -22,12 +18,19 @@ const Trending = () => {
 		history.push({ pathname: "/movies", search: `page=${pageNumber}` });
 	};
 
+	if (loading) return <Skeleton />;
+
+	if (error) {
+		console.log(error);
+		return <h1>Something went wrong</h1>;
+	}
+
 	return (
 		<Container>
 			<CardList movies={movies} />
 			<Pagination
 				onPageChange={handlePageChange}
-				page={+page}
+				page={currentPage}
 				totalPages={totalPages}
 			/>
 		</Container>
