@@ -1,4 +1,10 @@
-export { default as ComingSoonImage } from "./images/coming-soon.png";
-export { default as logo } from "./images/logo.png";
-export { default as NotFoundImage } from "./images/not_found.jpg";
-export { default as DefaultImage } from "./images/white-background.png";
+export { default as ComingSoonImage } from './images/coming-soon.png';
+export { default as logo } from './images/logo.png';
+export { default as NotFoundImage } from './images/not_found.jpg';
+export { default as DefaultImage } from './images/white-background.png';
+export { default as Movie1 } from './images/movie-1.png';
+export { default as Movie2 } from './images/movie-2.png';
+export { default as Movie3 } from './images/movie-3.png';
+export { default as Movie4 } from './images/movie-4.png';
+export { default as Movie5 } from './images/movie-5.png';
+export { default as Movie6 } from './images/movie-6.png';

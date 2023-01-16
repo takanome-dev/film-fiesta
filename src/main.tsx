@@ -1,14 +1,14 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+
+import App from '@/app/App';
+import { logger } from '@/services/logger';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import './styles/globals.css';
-import App from './app/App';
-// import reportWebVitals from "./reportWebVitals";
-import { logger } from './services/logger';
-import NotFound from './pages/404';
 
 logger.init();
 
@@ -24,23 +24,15 @@ const queryClient = new QueryClient({
   },
 });
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: (
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
-    ),
-    errorElement: <NotFound />,
-  },
-]);
-
 const container = document.getElementById('root');
 const root = createRoot(container!);
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

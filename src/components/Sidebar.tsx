@@ -1,7 +1,7 @@
 import useCurrentUser from '@/hooks/useCurrentUser';
 import { useContext, useEffect, useState } from 'react';
 import { FaRegComment, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, Outlet } from 'react-router-dom';
 // import { Context } from "../context/GlobalContext";
 import Avatar from './common/Avatar';
 import Overlay from './common/Overlay';

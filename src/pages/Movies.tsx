@@ -26,7 +26,7 @@ const Movies = () => {
   }
 
   return (
-    <Container>
+    <div className="flex flex-col">
       {/* <FilteredGenre /> */}
       <CardList movies={movies} />
       <Pagination
@@ -34,7 +34,7 @@ const Movies = () => {
         page={currentPage}
         totalPages={totalPages}
       />
-    </Container>
+    </div>
   );
 };
 

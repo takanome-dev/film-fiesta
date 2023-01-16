@@ -7,11 +7,7 @@ import SearchInput from './common/SearchInput';
 import UserModal from './UserModal';
 import { logo } from '@/assets';
 
-type Props = {
-  onClick: () => void;
-};
-
-const Header: React.FC<Props> = ({ onClick }) => {
+const Header = () => {
   const user = useCurrentUser();
   const [openModal, setOpenModal] = useState(false);
 
