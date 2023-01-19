@@ -6,6 +6,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
+    "dev:turbo": "next dev --turbo",
     "postinstall": "prisma generate",
     "lint": "npx eslint . --report-unused-disable-directives --fix",
     "format": "prettier --write **/*.{js,ts,tsx,css,md,json,yml,yaml}",
