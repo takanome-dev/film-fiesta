@@ -1,13 +1,17 @@
 {
-  "name": "test",
-  "version": "0.1.0",
+  "name": "reelrapture",
+  "description": "ReelRapture is a movie review site where users can create accounts, write reviews, and rate movies. The site is built with Next.js, React, and TypeScript. The backend is built with Prisma, NextAuth, and Trpc.",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "build": "next build",
     "dev": "next dev",
     "postinstall": "prisma generate",
-    "lint": "next lint",
-    "start": "next start"
+    "lint": "npx eslint . --report-unused-disable-directives --fix",
+    "format": "prettier --write **/*.{js,ts,tsx,css,md,json,yml,yaml}",
+    "start": "next start",
+    "types:auto-add": "npx typesync",
+    "types:auto-check": "npm run types:auto-add -- --dry"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
@@ -29,17 +33,26 @@
     "@types/prettier": "^2.7.2",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
-    "@typescript-eslint/eslint-plugin": "^5.47.1",
-    "@typescript-eslint/parser": "^5.47.1",
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "@typescript-eslint/parser": "^5.0.0",
     "autoprefixer": "^10.4.7",
-    "eslint": "^8.30.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-next": "13.1.1",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "postcss": "^8.4.14",
     "prettier": "^2.8.1",
     "prettier-plugin-tailwindcss": "^0.2.1",
     "prisma": "^4.8.0",
     "tailwindcss": "^3.2.0",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "typesync": "^0.9.2"
   },
   "ct3aMetadata": {
     "initVersion": "7.3.1"
