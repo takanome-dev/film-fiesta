@@ -9,26 +9,27 @@ import { fromZodError } from 'zod-validation-error';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import useForm from '@/hooks/useForm';
-import { loginSchema, type LoginSchema } from '@/schemas/user';
+import { registerSchema, type RegisterSchema } from '@/schemas/user';
 import { api } from '@/utils/api';
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const [error, setError] = useState<string | null>(null);
-  const { handleChange, inputs } = useForm<LoginSchema>({
+  const { handleChange, inputs } = useForm<RegisterSchema>({
+    name: '',
     email: '',
     password: '',
   });
 
   const router = useRouter();
 
-  const { mutateAsync, isLoading } = api.user.login.useMutation();
+  const { mutateAsync, isLoading } = api.user.register.useMutation();
 
   // eslint-disable-next-line consistent-return
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // TODO: create a wrapper func for this
-    const result = loginSchema.safeParse(inputs);
+    const result = registerSchema.safeParse(inputs);
 
     if (!result.success) {
       const zodError = fromZodError(result.error).message.split(':')[1];
@@ -49,14 +50,22 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center bg-movie-2 bg-cover bg-center bg-no-repeat">
+    <div className="relative flex min-h-screen flex-col items-center justify-center bg-movie-3 bg-cover bg-center bg-no-repeat">
       <div className="absolute inset-0 bg-black bg-opacity-60" />
-      <div className="w-3/4 rounded-lg bg-white bg-opacity-60 p-12 shadow backdrop-blur-sm sm:w-[500px]">
+      <div className="w-3/4 rounded-lg bg-white bg-opacity-60 p-12 shadow backdrop-blur-md sm:w-[500px]">
         <h1 className="mb-4 text-center text-3xl font-bold text-slate-800">
-          Login
+          Register
         </h1>
         {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
         <form onSubmit={handleSubmit}>
+          <Input
+            label="Name"
+            id="name"
+            type="text"
+            onChange={handleChange}
+            value={inputs.name}
+            error={null}
+          />
           <Input
             label="Email"
             id="email"
@@ -74,23 +83,21 @@ const LoginPage = () => {
             error={error}
           />
           <Button
-            title="Sign in"
+            title="Sign up"
             type="submit"
             loading={isLoading}
             className="mt-4"
           />
         </form>
         <div className="mt-4 flex justify-between">
-          <Link href="/reset-password" className="font-medium hover:underline">
-            Forgot password?
-          </Link>
-          <Link href="/register" className="font-medium hover:underline">
-            Sign up
+          <p className="font-medium">Already have an account?</p>
+          <Link href="/login" className="font-medium hover:underline">
+            Sign in
           </Link>
         </div>
         <div className="relative mt-4 flex flex-col items-center">
           <p className="font-medium text-slate-700">
-            🛡 or you can sign in with 🛡
+            🛡 or you can sign up with 🛡
           </p>
           <div className="mt-4 flex gap-6">
             <FcGoogle
@@ -110,15 +117,9 @@ const LoginPage = () => {
             />
           </div>
         </div>
-        <div className="mt-4 flex flex-col items-center">
-          <p className="mb-2 font-medium text-slate-700">🛡 or 🛡</p>
-          <Link href="/magic-link" className="font-medium hover:underline">
-            🪄 Use a Magic Link 🪄
-          </Link>
-        </div>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

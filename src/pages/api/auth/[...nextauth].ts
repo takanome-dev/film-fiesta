@@ -1,27 +1,35 @@
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { SupabaseAdapter } from '@next-auth/supabase-adapter';
 import NextAuth, { type NextAuthOptions } from 'next-auth';
 import DiscordProvider from 'next-auth/providers/discord';
-// Prisma adapter for NextAuth, optional and can be removed
+import GithubProvider from 'next-auth/providers/github';
 
-import { env } from '../../../env/server.mjs';
-import { prisma } from '../../../server/db';
+import { env as clientEnv } from '@/env/client.mjs';
+import { env as serverEnv } from '@/env/server.mjs';
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
     session({ session, user }) {
       if (session.user) {
+        // eslint-disable-next-line no-param-reassign
         session.user.id = user.id;
       }
       return session;
     },
   },
   // Configure one or more authentication providers
-  adapter: PrismaAdapter(prisma),
+  adapter: SupabaseAdapter({
+    url: clientEnv.NEXT_PUBLIC_SUPABASE_URL,
+    secret: serverEnv.SUPABASE_SERVICE_ROLE_KEY,
+  }),
   providers: [
     DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
+      clientId: serverEnv.DISCORD_CLIENT_ID,
+      clientSecret: serverEnv.DISCORD_CLIENT_SECRET,
+    }),
+    GithubProvider({
+      clientId: serverEnv.GITHUB_CLIENT_ID,
+      clientSecret: serverEnv.GITHUB_CLIENT_SECRET,
     }),
     /**
      * ...add more providers here

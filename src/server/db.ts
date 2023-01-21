@@ -1,19 +1,10 @@
-import { PrismaClient } from '@prisma/client';
+import { createClient } from '@supabase/supabase-js';
 
-import { env } from '../env/server.mjs';
+import { env } from '@/env/client.mjs';
 
-declare global {
-  // eslint-disable-next-line no-var
-  var prisma: PrismaClient | undefined;
-}
+import type { Database } from 'supabase/schema';
 
-export const prisma =
-  global.prisma ||
-  new PrismaClient({
-    log:
-      env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
-  });
-
-if (env.NODE_ENV !== 'production') {
-  global.prisma = prisma;
-}
+export const supabase = createClient<Database>(
+  env.NEXT_PUBLIC_SUPABASE_URL,
+  env.NEXT_PUBLIC_SUPABASE_API_KEY
+);
