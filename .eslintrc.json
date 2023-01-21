@@ -1,15 +1,4 @@
 {
-  "overrides": [
-    {
-      "extends": [
-        "plugin:@typescript-eslint/recommended-requiring-type-checking"
-      ],
-      "files": ["*.ts", "*.tsx"],
-      "parserOptions": {
-        "project": "tsconfig.json"
-      }
-    }
-  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json"
@@ -28,6 +17,17 @@
     "plugin:jsx-a11y/recommended",
     "eslint:recommended",
     "plugin:prettier/recommended"
+  ],
+  "overrides": [
+    {
+      "extends": [
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+      ],
+      "files": ["*.ts", "*.tsx"],
+      "parserOptions": {
+        "project": "tsconfig.json"
+      }
+    }
   ],
   "rules": {
     "@typescript-eslint/ban-ts-comment": "warn",
@@ -48,6 +48,7 @@
     "import/exports-last": "error",
     "import/first": "error",
     "import/newline-after-import": "error",
+    "import/no-extraneous-dependencies": "off",
     "import/order": [
       "error",
       {
