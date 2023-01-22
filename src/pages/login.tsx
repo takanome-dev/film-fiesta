@@ -8,7 +8,7 @@ import { fromZodError } from 'zod-validation-error';
 
 import Button from '@/components/Button';
 import Input from '@/components/Input';
-import useForm from '@/hooks/useForm';
+import useForm from '@/lib/hooks/useForm';
 import { loginSchema, type LoginSchema } from '@/schemas/user';
 import { api } from '@/utils/api';
 
