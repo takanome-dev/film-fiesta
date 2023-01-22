@@ -13,13 +13,13 @@
     "types:supabase": "npx supabase gen types typescript --project-id \"$PROJECT_ID\" --schema next_auth > supabase/schema.ts",
     "types:auto-add": "npx typesync",
     "types:auto-check": "npx types:auto-add -- --dry",
-    "supabase": "supabase",
-    "db:changes": "npx supabase -- db changes",
-    "db:commit": "npx supabase -- db commit",
-    "db:push": "npx supabase -- db push",
-    "db:reset": "npx supabase -- db reset",
-    "db:start": "npx supabase -- start",
-    "db:stop": "npx supabase -- stop"
+    "db:migrate": "npx supabase db diff -f",
+    "db:changes": "npx supabase db changes",
+    "db:commit": "npx supabase db commit",
+    "db:push": "npx supabase db push",
+    "db:reset": "npx supabase db reset",
+    "db:start": "npx supabase start",
+    "db:stop": "npx supabase stop"
   },
   "dependencies": {
     "@next-auth/supabase-adapter": "^0.2.1",
