@@ -14,5 +14,8 @@ const config = {
     locales: ['en'],
     defaultLocale: 'en',
   },
+  images: {
+    domains: ['image.tmdb.org', 'avatars.githubusercontent.com'],
+  },
 };
 export default config;

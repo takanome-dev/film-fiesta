@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable global-require */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
@@ -11,6 +13,10 @@ module.exports = {
       },
     },
   },
-  // eslint-disable-next-line global-require
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('tailwindcss-radix')({
+      variantPrefix: 'rdx',
+    }),
+  ],
 };

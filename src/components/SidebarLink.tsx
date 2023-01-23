@@ -8,12 +8,12 @@ import type { IconType } from 'react-icons';
 interface Props extends React.HTMLAttributes<HTMLAnchorElement> {
   path: string;
   name: string;
-  // color: string;
+  color?: string;
   Icon: IconType;
 }
 
 const SidebarLink: React.FC<Props> = (props) => {
-  const { path, name, Icon } = props;
+  const { path, name, Icon, color } = props;
 
   const router = useRouter();
 
@@ -24,15 +24,19 @@ const SidebarLink: React.FC<Props> = (props) => {
       className={clsx(
         'flex cursor-pointer items-center rounded px-6 py-3',
         'transition hover:bg-slate-100',
-        isActive && 'bg-blue-500'
+        isActive && 'bg-blue-300'
       )}
       href={path}
     >
       <Icon
-        className={clsx('text-slate-500', isActive && 'bg-blue-500')}
-        size={22}
+        className={clsx(
+          'text-slate-500',
+          color && color,
+          isActive && 'bg-blue-300'
+        )}
+        size={20}
       />
-      <p className="ml-4 text-slate-600">{name}</p>
+      <p className={clsx('ml-4 text-slate-600', color && color)}>{name}</p>
     </Link>
   );
 };

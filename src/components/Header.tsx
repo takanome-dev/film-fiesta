@@ -1,7 +1,10 @@
 // import { useEffect, useState } from 'react';
-// import { FaSearch } from 'react-icons/fa';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import { BiSun } from 'react-icons/bi';
+
+import SearchInput from './SearchInput';
+import UserAvatar from './UserAvatar';
 
 const Header = () => {
   const { data } = useSession();
@@ -16,10 +19,12 @@ const Header = () => {
             LOGO
           </Link>
         </div>
-        <div>
-          {/* <SearchInput /> */}
-          SEARCHINPUT
-          {user && <div className="avatar">Avatar</div>}
+        <div className="flex items-center gap-4">
+          <SearchInput />
+          <div className="rounded-full p-1 transition hover:bg-slate-100">
+            <BiSun size={25} className="cursor-pointer text-slate-600" />
+          </div>
+          {user && <UserAvatar />}
         </div>
       </div>
     </header>

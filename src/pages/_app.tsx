@@ -21,9 +21,15 @@ const MyApp = ({
   pageProps: { session, ...pageProps },
 }: ComponentWithPageLayout) => (
   <SessionProvider session={session}>
-    <main className="flex h-full gap-8 bg-slate-50 pr-8">
+    {/* <main className="flex h-full gap-8 bg-slate-50 pr-8"> */}
+    {Component.PageLayout ? (
+      <Component.PageLayout>
+        <Component {...pageProps} />
+      </Component.PageLayout>
+    ) : (
       <Component {...pageProps} />
-    </main>
+    )}
+    {/* </main> */}
   </SessionProvider>
 );
 

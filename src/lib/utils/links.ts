@@ -1,6 +1,7 @@
 import { FaSearch } from 'react-icons/fa';
 import { FcFilmReel } from 'react-icons/fc';
 import { FiTrendingUp } from 'react-icons/fi';
+import { ImFire } from 'react-icons/im';
 
 const links = [
   {
@@ -15,7 +16,7 @@ const links = [
   },
   {
     name: 'Popular',
-    Icon: FiTrendingUp,
+    Icon: ImFire,
     path: '/popular',
   },
   {
