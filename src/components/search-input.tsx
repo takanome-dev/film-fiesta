@@ -4,7 +4,6 @@
 import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 const SearchInput = () => {
@@ -25,18 +24,16 @@ const SearchInput = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex items-center overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700"
+      className="flex items-center overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700"
     >
       <Input
         type="search"
-        id="search"
         placeholder="Search..."
+        className="border-0 "
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-      <Button>
-        <FaSearch className="text-slate-300" size={20} />
-      </Button>
+      <FaSearch className="mx-2 text-slate-300" size={20} />
     </form>
   );
 };

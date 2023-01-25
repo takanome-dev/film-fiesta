@@ -4,10 +4,17 @@ const { fontFamily } = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ['class', '[data-theme="dark"]'],
+  darkMode: 'class',
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      // container: {
+      //   center: true,
+      //   padding: "1.5rem",
+      //   screens: {
+      //     "2xl": "1440px",
+      //   },
+      // },
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
       },

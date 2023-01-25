@@ -18,7 +18,10 @@ const UserAvatar = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button>
+        <Button
+          variant="ghost"
+          className="hover:bg-transparent focus:ring-0 dark:hover:bg-transparent dark:focus:ring-0"
+        >
           <Image
             src={user?.image as string}
             alt={user?.name as string}
@@ -30,16 +33,22 @@ const UserAvatar = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem>
-          <FiUser size={20} className="text-slate-600" />
-          <span className="ml-2 font-medium text-slate-600">Profile</span>
+          <FiUser size={20} className="text-slate-600 dark:text-slate-100" />
+          <span className="ml-2 font-medium text-slate-800 dark:text-slate-100">
+            Profile
+          </span>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <FiUser size={20} className="text-slate-600" />
-          <span className="ml-2 font-medium text-slate-600">Profile</span>
+          <FiUser size={20} className="text-slate-600 dark:text-slate-100" />
+          <span className="ml-2 font-medium text-slate-800 dark:text-slate-100">
+            Profile
+          </span>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <FiUser size={20} className="text-slate-600" />
-          <span className="ml-2 font-medium text-slate-600">Profile</span>
+          <FiUser size={20} className="text-slate-600 dark:text-slate-100" />
+          <span className="ml-2 font-medium text-slate-800 dark:text-slate-100">
+            Profile
+          </span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

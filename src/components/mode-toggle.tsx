@@ -11,13 +11,17 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 export default function ModeToggle() {
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
+  console.log({ theme });
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="sm">
-          <BiSun className="hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100" />
+          <BiSun
+            className="text-slate-900 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
+            size={20}
+          />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
