@@ -2,8 +2,6 @@ import { Inter as FontSans } from '@next/font/google';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 
-import Header from '@/components/header';
-// import { cn } from '@/lib/utils/classname';
 import { api } from '@/utils/api';
 
 import type { AppPropsType } from 'next/dist/shared/lib/utils';
@@ -31,8 +29,7 @@ const MyApp = ({
 }: ComponentWithPageLayout) => (
   <SessionProvider session={session}>
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <Header />
-      <main className={fontSans.variable}>
+      <div className={fontSans.variable}>
         {Component.PageLayout ? (
           <Component.PageLayout>
             <Component {...pageProps} />
@@ -40,7 +37,7 @@ const MyApp = ({
         ) : (
           <Component {...pageProps} />
         )}
-      </main>
+      </div>
     </ThemeProvider>
   </SessionProvider>
 );

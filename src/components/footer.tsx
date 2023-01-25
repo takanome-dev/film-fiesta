@@ -4,7 +4,7 @@ import { SiDiscord, SiTwitter } from 'react-icons/si';
 
 const Footer = () => (
   <footer className="mt-8 flex flex-col items-center border-t border-t-slate-200 dark:border-t-slate-700">
-    <div className="flex gap-4 pt-2">
+    <div className="flex gap-4 pt-4">
       <FaGithub size={16} className="cursor-pointer" tabIndex={0} />
       <SiDiscord
         size={16}

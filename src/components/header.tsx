@@ -10,7 +10,7 @@ const Header = () => {
   const user = data?.user;
 
   return (
-    <header className="sticky top-0 z-10 flex h-14 w-full items-center border-b border-b-slate-200 bg-white dark:border-b-slate-700 dark:bg-slate-900">
+    <header className="sticky top-0 z-10 flex h-14 w-full items-center border-b border-b-slate-200 bg-white/50 backdrop-blur-md dark:border-b-slate-700 dark:bg-slate-900/40">
       <div className="container mx-auto flex w-full items-center justify-between">
         <div className="flex items-center justify-center">
           <Link href="/" className="h-10 w-full text-slate-700 dark:text-white">

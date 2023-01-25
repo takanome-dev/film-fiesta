@@ -19,6 +19,9 @@ export const serverSchema = z.object({
     // VERCEL_URL doesn't include `https` so it cant be validated as a URL
     process.env.VERCEL ? z.string() : z.string().url()
   ),
+  SENTRY_DNS: z.string().url(),
+  STRIPE_KEY: z.string(),
+  TMDB_API_KEY: z.string(),
   DISCORD_CLIENT_ID: z.string(),
   DISCORD_CLIENT_SECRET: z.string(),
   GITHUB_CLIENT_ID: z.string(),
@@ -34,6 +37,9 @@ export const serverSchema = z.object({
 export const serverEnv = {
   DATABASE_URL: process.env.DATABASE_URL,
   NODE_ENV: process.env.NODE_ENV,
+  SENTRY_DNS: process.env.SENTRY_DNS,
+  STRIPE_KEY: process.env.STRIPE_KEY,
+  TMDB_API_KEY: process.env.TMDB_API_KEY,
   NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
   NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
@@ -51,6 +57,9 @@ export const serverEnv = {
 export const clientSchema = z.object({
   NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
   NEXT_PUBLIC_SUPABASE_API_KEY: z.string(),
+  NEXT_PUBLIC_TMDB_IMAGE: z.string().url(),
+  NEXT_PUBLIC_TMDB_URL: z.string().url(),
+  NEXT_PUBLIC_TMDB_VIDEO: z.string().url(),
 });
 
 /**
@@ -62,4 +71,7 @@ export const clientSchema = z.object({
 export const clientEnv = {
   NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
   NEXT_PUBLIC_SUPABASE_API_KEY: process.env.NEXT_PUBLIC_SUPABASE_API_KEY,
+  NEXT_PUBLIC_TMDB_IMAGE: process.env.NEXT_PUBLIC_TMDB_IMAGE,
+  NEXT_PUBLIC_TMDB_URL: process.env.NEXT_PUBLIC_TMDB_URL,
+  NEXT_PUBLIC_TMDB_VIDEO: process.env.NEXT_PUBLIC_TMDB_VIDEO,
 };
