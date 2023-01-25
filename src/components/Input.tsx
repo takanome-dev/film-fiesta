@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from './error-message';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;

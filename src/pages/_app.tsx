@@ -1,6 +1,7 @@
 import { SessionProvider } from 'next-auth/react';
+import { ThemeProvider } from 'next-themes';
 
-import { api } from '@/utils/api';
+// import { api } from '@/utils/api';
 
 import type { AppPropsType } from 'next/dist/shared/lib/utils';
 import type { Session } from 'next-auth';
@@ -21,16 +22,16 @@ const MyApp = ({
   pageProps: { session, ...pageProps },
 }: ComponentWithPageLayout) => (
   <SessionProvider session={session}>
-    {/* <main className="flex h-full gap-8 bg-slate-50 pr-8"> */}
-    {Component.PageLayout ? (
-      <Component.PageLayout>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      {Component.PageLayout ? (
+        <Component.PageLayout>
+          <Component {...pageProps} />
+        </Component.PageLayout>
+      ) : (
         <Component {...pageProps} />
-      </Component.PageLayout>
-    ) : (
-      <Component {...pageProps} />
-    )}
-    {/* </main> */}
+      )}
+    </ThemeProvider>
   </SessionProvider>
 );
 
-export default api.withTRPC(MyApp);
+export default MyApp;

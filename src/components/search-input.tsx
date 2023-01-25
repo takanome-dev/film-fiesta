@@ -1,6 +1,11 @@
+'use client';
+
 // import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 const SearchInput = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -20,19 +25,18 @@ const SearchInput = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex items-center overflow-hidden rounded-lg border focus:ring focus:ring-blue-500"
+      className="flex items-center overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700"
     >
-      <input
+      <Input
         type="search"
         id="search"
         placeholder="Search..."
-        className="h-10 border-none px-4 text-lg text-slate-800 outline-none"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-      <button type="submit" className="mr-4">
+      <Button>
         <FaSearch className="text-slate-300" size={20} />
-      </button>
+      </Button>
     </form>
   );
 };

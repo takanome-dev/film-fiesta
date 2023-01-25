@@ -1,7 +1,10 @@
-import clsx from 'clsx';
+'use client';
+
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import React from 'react';
+
+import { cn } from '@/lib/utils/classname';
 
 import type { IconType } from 'react-icons';
 
@@ -15,28 +18,35 @@ interface Props extends React.HTMLAttributes<HTMLAnchorElement> {
 const SidebarLink: React.FC<Props> = (props) => {
   const { path, name, Icon, color } = props;
 
-  const router = useRouter();
+  const pathname = usePathname();
 
-  const isActive = router.pathname === path;
+  const isActive = pathname === path;
 
   return (
     <Link
-      className={clsx(
+      className={cn(
         'flex cursor-pointer items-center rounded px-6 py-3',
-        'transition hover:bg-slate-100',
-        isActive && 'bg-blue-300'
+        'transition hover:bg-slate-100 dark:hover:bg-slate-800',
+        isActive && 'bg-slate-300 dark:bg-slate-800'
       )}
       href={path}
     >
       <Icon
-        className={clsx(
+        className={cn(
           'text-slate-500',
-          color && color,
-          isActive && 'bg-blue-300'
+          color || '',
+          isActive && 'bg-slate-300 dark:bg-slate-800'
         )}
         size={20}
       />
-      <p className={clsx('ml-4 text-slate-600', color && color)}>{name}</p>
+      <p
+        className={cn(
+          'ml-4 text-slate-700 dark:text-slate-900',
+          color && color
+        )}
+      >
+        {name}
+      </p>
     </Link>
   );
 };

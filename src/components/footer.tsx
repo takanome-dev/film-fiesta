@@ -17,8 +17,8 @@ const Footer = () => (
         tabIndex={0}
       />
     </div>
-    <p className="mt-2 text-center font-medium text-slate-600">
-      &copy; takanome_dev
+    <p className="mt-2 text-center text-slate-600">
+      &copy; <span className="font-semibold underline">takanome_dev</span>
     </p>
   </footer>
 );

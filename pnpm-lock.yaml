@@ -2,7 +2,9 @@ lockfileVersion: 5.4
 
 specifiers:
   '@next-auth/supabase-adapter': ^0.2.1
+  '@next/font': ^13.1.5
   '@radix-ui/react-dropdown-menu': ^2.0.2
+  '@radix-ui/react-scroll-area': ^1.0.2
   '@supabase/supabase-js': ^2.4.1
   '@tailwindcss/forms': ^0.5.3
   '@tanstack/react-query': ^4.20.0
@@ -17,6 +19,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.13.0
   '@typescript-eslint/parser': ^5.0.0
   autoprefixer: ^10.4.7
+  class-variance-authority: ^0.4.0
   clsx: ^1.2.1
   eslint: ^8.2.0
   eslint-config-airbnb: 19.0.4
@@ -30,6 +33,7 @@ specifiers:
   eslint-plugin-react-hooks: ^4.3.0
   next: 13.1.1
   next-auth: ^4.18.7
+  next-themes: ^0.2.1
   postcss: ^8.4.14
   prettier: ^2.8.1
   prettier-plugin-tailwindcss: ^0.2.1
@@ -39,7 +43,9 @@ specifiers:
   react-icons: ^4.7.1
   supabase: ^1.34.5
   superjson: 1.9.1
+  tailwind-merge: ^1.8.1
   tailwindcss: ^3.2.0
+  tailwindcss-animate: ^1.0.5
   tailwindcss-radix: ^2.7.0
   typescript: ^4.9.4
   typesync: ^0.9.2
@@ -48,20 +54,25 @@ specifiers:
 
 dependencies:
   '@next-auth/supabase-adapter': 0.2.1_2yoyqq62mv25x6plbaqa64vnpa
+  '@next/font': 13.1.5
   '@radix-ui/react-dropdown-menu': 2.0.2_5ndqzdd6t4rivxsukjv3i3ak2q
+  '@radix-ui/react-scroll-area': 1.0.2_biqbaboplfbrettd7655fr4n2y
   '@supabase/supabase-js': 2.4.1
   '@tanstack/react-query': 4.22.0_biqbaboplfbrettd7655fr4n2y
   '@trpc/client': 10.9.0_@trpc+server@10.9.0
   '@trpc/next': 10.9.0_x4tyufyemzhcd3jbb4hcrq3eou
   '@trpc/react-query': 10.9.0_qw4miir7nnxijwjta54q3esyeq
   '@trpc/server': 10.9.0
+  class-variance-authority: 0.4.0_typescript@4.9.4
   clsx: 1.2.1
   next: 13.1.1_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.18.8_q76c2b4vyoegvsbrcwkfvimnai
+  next-themes: 0.2.1_q76c2b4vyoegvsbrcwkfvimnai
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-icons: 4.7.1_react@18.2.0
   superjson: 1.9.1
+  tailwind-merge: 1.8.1
   tailwindcss-radix: 2.7.0
   zod: 3.20.2
   zod-validation-error: 0.3.0_zod@3.20.2
@@ -91,6 +102,7 @@ devDependencies:
   prisma: 4.9.0
   supabase: 1.34.5
   tailwindcss: 3.2.4_postcss@8.4.21
+  tailwindcss-animate: 1.0.5_tailwindcss@3.2.4
   typescript: 4.9.4
   typesync: 0.9.2
 
@@ -203,6 +215,10 @@ packages:
     dependencies:
       glob: 7.1.7
     dev: true
+
+  /@next/font/13.1.5:
+    resolution: {integrity: sha512-6M5R6yC3JkdJiqo/YJxDp6+0vDn0smXOAzl8uHt4qmDS2u53ji/19K0HM51d+5kg8xntDi+N2hw7YjaU9inkNA==}
+    dev: false
 
   /@next/swc-android-arm-eabi/13.1.1:
     resolution: {integrity: sha512-qnFCx1kT3JTWhWve4VkeWuZiyjG0b5T6J2iWuin74lORCupdrNukxkq9Pm+Z7PsatxuwVJMhjUoYz7H4cWzx2A==}
@@ -362,6 +378,12 @@ packages:
     resolution: {integrity: sha512-t1pt0Gsp+HcgPJrHFc+d/ZSAaKKWar2G/iakrE07yeKPNavDP3iVKPpfXP22OTCHZUWf7OelwKJxQgKAm5hkgw==}
     requiresBuild: true
     dev: true
+
+  /@radix-ui/number/1.0.0:
+    resolution: {integrity: sha512-Ofwh/1HX69ZfJRiRBMTy7rgjAzHmwe4kW9C9Y99HTRUcYLUuVT0KESFj15rPjRgKJs20GPq8Bm5aEDJ8DuA3vA==}
+    dependencies:
+      '@babel/runtime': 7.20.7
+    dev: false
 
   /@radix-ui/primitive/1.0.0:
     resolution: {integrity: sha512-3e7rn8FDMin4CgeL7Z/49smCA3rFYY3Ha2rUQ7HRWFadS5iCRw08ZgVT1LaNTCNqgvrUiyczLflrVrF0SRQtNA==}
@@ -599,6 +621,26 @@ packages:
       '@radix-ui/react-primitive': 1.0.1_biqbaboplfbrettd7655fr4n2y
       '@radix-ui/react-use-callback-ref': 1.0.0_react@18.2.0
       '@radix-ui/react-use-controllable-state': 1.0.0_react@18.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@radix-ui/react-scroll-area/1.0.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-k8VseTxI26kcKJaX0HPwkvlNBPTs56JRdYzcZ/vzrNUkDlvXBy8sMc7WvCpYzZkHgb+hd72VW9MqkqecGtuNgg==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@babel/runtime': 7.20.7
+      '@radix-ui/number': 1.0.0
+      '@radix-ui/primitive': 1.0.0
+      '@radix-ui/react-compose-refs': 1.0.0_react@18.2.0
+      '@radix-ui/react-context': 1.0.0_react@18.2.0
+      '@radix-ui/react-direction': 1.0.0_react@18.2.0
+      '@radix-ui/react-presence': 1.0.0_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-primitive': 1.0.1_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-use-callback-ref': 1.0.0_react@18.2.0
+      '@radix-ui/react-use-layout-effect': 1.0.0_react@18.2.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -1333,6 +1375,17 @@ packages:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
     dev: true
+
+  /class-variance-authority/0.4.0_typescript@4.9.4:
+    resolution: {integrity: sha512-74enNN8O9ZNieycac/y8FxqgyzZhZbxmCitAtAeUrLPlxjSd5zA7LfpprmxEcOmQBnaGs5hYhiSGnJ0mqrtBLQ==}
+    peerDependencies:
+      typescript: '>= 4.5.5 < 5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      typescript: 4.9.4
+    dev: false
 
   /cli-cursor/3.1.0:
     resolution: {integrity: sha512-I/zHAwsKf9FqGoXM4WWRACob9+SNukZTd94DWF57E4toouRulbCxcUh6RKUEOQlYTHJnzkPMySvPNaaSLNfLZw==}
@@ -2973,6 +3026,18 @@ packages:
       uuid: 8.3.2
     dev: false
 
+  /next-themes/0.2.1_q76c2b4vyoegvsbrcwkfvimnai:
+    resolution: {integrity: sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==}
+    peerDependencies:
+      next: '*'
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      next: 13.1.1_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
   /next-tick/1.1.0:
     resolution: {integrity: sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==}
     dev: false
@@ -3821,6 +3886,18 @@ packages:
       tslib: 2.4.1
     dev: true
 
+  /tailwind-merge/1.8.1:
+    resolution: {integrity: sha512-+fflfPxvHFr81hTJpQ3MIwtqgvefHZFUHFiIHpVIRXvG/nX9+gu2P7JNlFu2bfDMJ+uHhi/pUgzaYacMoXv+Ww==}
+    dev: false
+
+  /tailwindcss-animate/1.0.5_tailwindcss@3.2.4:
+    resolution: {integrity: sha512-UU3qrOJ4lFQABY+MVADmBm+0KW3xZyhMdRvejwtXqYOL7YjHYxmuREFAZdmVG5LPe5E9CAst846SLC4j5I3dcw==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
+    dependencies:
+      tailwindcss: 3.2.4_postcss@8.4.21
+    dev: true
+
   /tailwindcss-radix/2.7.0:
     resolution: {integrity: sha512-fIVkT5zQYdsjT9+/Mvp+DTlJDdTFpRDuyS5+PLuJDAIIVr9+rWYKhK6rsB9QtjwUwwb0YF+BkAJN6CjZivOfLA==}
     dev: false
@@ -3962,7 +4039,6 @@ packages:
     resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: true
 
   /typesync/0.9.2:
     resolution: {integrity: sha512-FnHhbgECgkcGOR/DVmE0V9Z81Od7Icu2qkXGM91GFFzVO9HaQ9fYwmSY9ibKoydN4k7IV0hRRKGLLgfenWjRFw==}
