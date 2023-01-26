@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaStar } from 'react-icons/fa';
 
+// import { getBase64Image } from '@/lib/utils/base64';
 import { imageUrl } from '@/lib/utils/movie';
 
 import type { Movie } from '@/types/movies';
@@ -22,6 +23,9 @@ const Card: React.FC<Props> = ({ movie }) => {
           width={300}
           height={300}
           className="h-full w-full object-center"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8WQ8AAncBeri2L5wAAAAASUVORK5CYII="
+          // blurDataURL={getBase64Image(300, 300)}
         />
       </div>
       <div className="w-full overflow-hidden truncate pt-4">

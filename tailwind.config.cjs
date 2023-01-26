@@ -23,6 +23,7 @@ module.exports = {
         'movie-1': 'url("../assets/movie-bg-1.jpg")',
         'movie-2': 'url("../assets/movie-bg-2.jpg")',
         'movie-3': 'url("../assets/movie-bg-3.jpg")',
+        lost: 'url("../assets/lost-bg.jpeg")',
       },
     },
   },
