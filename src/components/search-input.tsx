@@ -24,16 +24,17 @@ const SearchInput = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex items-center overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700"
+      className="relative flex items-center overflow-hidden rounded-lg border border-slate-200 dark:border-slate-500"
     >
+      <span className="sr-only">Search</span>
       <Input
         type="search"
         placeholder="Search..."
-        className="border-0 "
+        // className=""
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-      <FaSearch className="mx-2 text-slate-300" size={20} />
+      <FaSearch className="absolute inset-y-0 right-0 mr-4 h-full text-slate-300" />
     </form>
   );
 };

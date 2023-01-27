@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { FaStar } from 'react-icons/fa';
 
 // import { getBase64Image } from '@/lib/utils/base64';
+import Favorite from '@/components/favorite';
 import { imageUrl } from '@/lib/utils/movie';
 
 import type { Movie } from '@/types/movies';
@@ -15,14 +16,14 @@ const Card: React.FC<Props> = ({ movie }) => {
   const url = movie.poster_path ?? movie.backdrop_path;
 
   return (
-    <div className="relative rounded-lg border border-slate-200 bg-white/50 p-4 backdrop-blur-xl dark:border-slate-600 dark:bg-slate-900/50">
+    <div className="group relative rounded-lg border border-slate-100 bg-slate-100 p-4 shadow-slate-200 dark:border-slate-600 dark:bg-slate-900">
       <div className="h-80 w-full overflow-hidden rounded-lg">
         <Image
           src={imageUrl(url)}
           alt={movie.title}
           width={300}
           height={300}
-          className="h-full w-full object-center"
+          className="h-full w-full object-center transition group-hover:scale-105"
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8WQ8AAncBeri2L5wAAAAASUVORK5CYII="
           // blurDataURL={getBase64Image(300, 300)}
@@ -47,6 +48,7 @@ const Card: React.FC<Props> = ({ movie }) => {
           {movie.title}
         </Link>
       </div>
+      <Favorite className="group-hover:block" />
     </div>
   );
 };

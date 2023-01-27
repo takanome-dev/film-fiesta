@@ -32,7 +32,7 @@ const SidebarLink: React.FC<Props> = (props) => {
       href={path}
     >
       <Icon
-        className={cn('text-slate-500 dark:text-slate-100', className || '', {
+        className={cn('text-slate-500 dark:text-slate-200', className || '', {
           'bg-slate-300 dark:bg-slate-800': pathname === path,
         })}
         size={20}

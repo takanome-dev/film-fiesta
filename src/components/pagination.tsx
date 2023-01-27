@@ -44,8 +44,8 @@ const Pagination: React.FC<Props> = ({ totalPages }) => {
         </>
       }
       renderOnZeroPageCount={() => null}
-      className="mx-auto mt-8 flex w-max items-center gap-1 overflow-hidden rounded-lg"
-      pageClassName=" rounded-md overflow-hidden"
+      className="mx-auto mt-8 flex w-max items-center gap-1 overflow-hidden rounded-lg border border-slate-100 dark:border-0"
+      pageClassName="rounded-md overflow-hidden"
       pageLinkClassName={buttonVariants({
         variant: 'ghost',
         className: 'focus:ring-0',

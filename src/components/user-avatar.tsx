@@ -20,7 +20,7 @@ const UserAvatar = () => {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="hover:bg-transparent focus:ring-0 dark:hover:bg-transparent dark:focus:ring-0"
+          className="px-0 hover:bg-transparent focus:ring-0 dark:hover:bg-transparent dark:focus:ring-0"
         >
           <Image
             src={user?.image as string}

@@ -19,7 +19,7 @@ export default function ModeToggle() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="sm">
           <BiSun
-            className="text-slate-900 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
+            className="text-slate-900 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100"
             size={20}
           />
           <span className="sr-only">Toggle theme</span>
