@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import Card from '@/components/card';
@@ -9,6 +10,9 @@ import type { WithPageLayout } from '@/types/with-page-layout';
 
 const MoviesPage: WithPageLayout = () => {
   const movies = data.results;
+  const router = useRouter();
+  const { page } = router.query;
+  const pageNumber = Number(page) || 1;
 
   return (
     <>
@@ -17,7 +21,7 @@ const MoviesPage: WithPageLayout = () => {
           <Card movie={m} key={m.id} />
         ))}
       </div>
-      <Pagination page={1} totalPages={20} />
+      <Pagination page={pageNumber} totalPages={20} />
     </>
   );
 };
