@@ -13,6 +13,7 @@ const MoviesPage: WithPageLayout = () => {
   const router = useRouter();
   const { page } = router.query;
   const pageNumber = Number(page) || 1;
+  console.log({ pageNumber });
 
   return (
     <>
@@ -21,7 +22,7 @@ const MoviesPage: WithPageLayout = () => {
           <Card movie={m} key={m.id} />
         ))}
       </div>
-      <Pagination page={pageNumber} totalPages={20} />
+      <Pagination totalPages={40} />
     </>
   );
 };

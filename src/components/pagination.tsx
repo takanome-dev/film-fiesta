@@ -1,109 +1,68 @@
-import Link from 'next/link';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-
-import { cn } from '@/lib/utils/classname';
+import ReactPaginate from 'react-paginate';
 
 import { buttonVariants } from './ui/button';
 
 interface Props {
-  page: number;
   totalPages: number;
 }
 
-const Pagination: React.FC<Props> = ({ page, totalPages }) => {
-  console.log({ page });
-  const PAGE_SIZE = 3;
-  const MAX_PAGINATION_BUTTONS = 4;
+interface Event {
+  selected: number;
+}
 
-  const pages = Math.ceil(totalPages / PAGE_SIZE);
-  const prevNextPage = page >= pages ? page - 1 : page + 1;
+const Pagination: React.FC<Props> = ({ totalPages }) => {
+  const PAGE_SIZE = 9;
+  const pageCount = Math.ceil(totalPages / PAGE_SIZE);
 
-  if (pages <= 1) return null;
+  const router = useRouter();
+
+  if (pageCount <= 1) return null;
+
+  const handlePageClick = (event: Event) => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    router.push(`/movies?page=${event.selected + 1}`);
+  };
 
   return (
-    <div className="mx-auto mt-8 flex w-max items-center gap-1 overflow-hidden rounded-lg">
-      <Link
-        href={`/movies?page=${page - 1}`}
-        className={buttonVariants({
-          variant: 'ghost',
-          className: cn('flex items-center focus:ring-0', {
-            'pointer-events-none opacity-50': page <= 1,
-          }),
-        })}
-      >
-        <MdKeyboardArrowLeft size={16} />
-        <span className="ml-1.5">Previous</span>
-      </Link>
-      <Link
-        href={`/movies?page=${1}`}
-        className={buttonVariants({
-          variant: 'ghost',
-          className: cn('focus:ring-0', {
-            'bg-slate-300 dark:bg-slate-800': page === 1,
-          }),
-        })}
-      >
-        1
-      </Link>
-      <Link
-        href={`/movies?page=${
-          prevNextPage === pages ? prevNextPage - 1 : prevNextPage
-        }`}
-        className={buttonVariants({
-          variant: 'ghost',
-          className: cn('focus:ring-0', {
-            'bg-slate-300 dark:bg-slate-800': page === prevNextPage,
-          }),
-        })}
-      >
-        {prevNextPage === pages ? prevNextPage - 1 : prevNextPage}
-      </Link>
-      <p
-        className={buttonVariants({
-          variant: 'ghost',
-          className: cn('focus:ring-0', {
-            hidden: pages <= MAX_PAGINATION_BUTTONS,
-          }),
-        })}
-      >
-        ..
-      </p>
-      <Link
-        href={`/movies?page=${pages - 1}`}
-        className={buttonVariants({
-          variant: 'ghost',
-          className: cn('focus:ring-0', {
-            hidden: pages < MAX_PAGINATION_BUTTONS,
-          }),
-        })}
-      >
-        {pages - 1}
-      </Link>
-      <Link
-        href={`/movies?page=${pages}`}
-        className={buttonVariants({
-          variant: 'ghost',
-          className: cn('focus:ring-0', {
-            'bg-slate-300 dark:bg-slate-800': page === pages,
-          }),
-        })}
-      >
-        {pages}
-      </Link>
-      <Link
-        href={`/movies?page=${page + 1}`}
-        className={buttonVariants({
-          variant: 'ghost',
-          className: cn('flex items-center focus:ring-0', {
-            'pointer-events-none opacity-50': page >= pages,
-          }),
-        })}
-      >
-        <span className="mr-1.5">Next</span>
-        <MdKeyboardArrowRight size={16} />
-      </Link>
-    </div>
+    <ReactPaginate
+      breakLabel="..."
+      nextLabel={
+        <>
+          <span className="ml-1.5">Next</span>
+          <MdKeyboardArrowRight size={16} />
+        </>
+      }
+      onPageChange={handlePageClick}
+      pageRangeDisplayed={3}
+      pageCount={pageCount}
+      previousLabel={
+        <>
+          <MdKeyboardArrowLeft size={16} />
+          <span className="mr-1.5">Previous</span>
+        </>
+      }
+      renderOnZeroPageCount={() => null}
+      className="mx-auto mt-8 flex w-max items-center gap-1 overflow-hidden rounded-lg"
+      pageClassName=" rounded-md overflow-hidden"
+      pageLinkClassName={buttonVariants({
+        variant: 'ghost',
+        className: 'focus:ring-0',
+      })}
+      activeClassName="bg-slate-300 dark:bg-slate-800"
+      previousClassName={buttonVariants({
+        variant: 'ghost',
+        className: 'focus:ring-0',
+      })}
+      previousLinkClassName="flex items-center"
+      nextClassName={buttonVariants({
+        variant: 'ghost',
+        className: 'focus:ring-0',
+      })}
+      nextLinkClassName="flex items-center"
+      disabledClassName="pointer-events-none opacity-50"
+    />
   );
 };
 
