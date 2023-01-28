@@ -6,13 +6,14 @@ import { buttonVariants } from './ui/button';
 
 interface Props {
   totalPages: number;
+  page: number;
 }
 
 interface Event {
   selected: number;
 }
 
-const Pagination: React.FC<Props> = ({ totalPages }) => {
+const Pagination: React.FC<Props> = ({ page, totalPages }) => {
   const PAGE_SIZE = 9;
   const pageCount = Math.ceil(totalPages / PAGE_SIZE);
 
@@ -37,6 +38,7 @@ const Pagination: React.FC<Props> = ({ totalPages }) => {
       onPageChange={handlePageClick}
       pageRangeDisplayed={3}
       pageCount={pageCount}
+      forcePage={page}
       previousLabel={
         <>
           <MdKeyboardArrowLeft size={16} />

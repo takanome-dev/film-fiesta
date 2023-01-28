@@ -1,6 +1,5 @@
 import { SupabaseAdapter } from '@next-auth/supabase-adapter';
 import NextAuth, { type NextAuthOptions } from 'next-auth';
-// import CredentialsProvider from 'next-auth/providers/credentials';
 import DiscordProvider from 'next-auth/providers/discord';
 import GithubProvider from 'next-auth/providers/github';
 
@@ -17,7 +16,7 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     redirect({ url, baseUrl }) {
-      console.log({ url, baseUrl });
+      // TODO: add user last page visited in the session
       // Allows relative callback URLs
       if (url.startsWith('/')) return `${baseUrl}${url}`;
       // Allows callback URLs on the same origin

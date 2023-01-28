@@ -6,10 +6,10 @@ import { FaStar } from 'react-icons/fa';
 import Favorite from '@/components/favorite';
 import { imageUrl } from '@/lib/utils/movie';
 
-import type { Movie } from '@/types/movies';
+import type { MovieSchema } from '@/schemas/movies';
 
 interface Props {
-  movie: Movie;
+  movie: MovieSchema;
 }
 
 const Card: React.FC<Props> = ({ movie }) => {

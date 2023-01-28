@@ -1,3 +1,5 @@
+import moviesRouter from './routers/movies';
+import searchRouter from './routers/search';
 import userRouter from './routers/user';
 import { createTRPCRouter } from './trpc';
 
@@ -8,6 +10,8 @@ import { createTRPCRouter } from './trpc';
  */
 export const appRouter = createTRPCRouter({
   user: userRouter,
+  movies: moviesRouter,
+  search: searchRouter,
 });
 
 // export type definition of API
