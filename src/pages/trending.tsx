@@ -3,6 +3,7 @@ import React from 'react';
 
 import Card from '@/components/card';
 import Pagination from '@/components/pagination';
+import SkeletonWrapper from '@/components/skeleton-wrapper';
 import MainLayout from '@/layouts/main-layout';
 import { api } from '@/utils/api';
 
@@ -13,7 +14,7 @@ const TrendingPage: WithPageLayout = () => {
   const { page } = router.query;
   const pageNumber = Number(page) || 1;
 
-  const { data, error } = api.movies.getTrendingMovies.useQuery({
+  const { data, error, isLoading } = api.movies.getTrendingMovies.useQuery({
     page: pageNumber,
   });
 
@@ -23,11 +24,16 @@ const TrendingPage: WithPageLayout = () => {
   return (
     <>
       <div className="grid grid-cols-4 gap-4">
+        {isLoading && <SkeletonWrapper height={370} count={12} radius={6} />}
         {data?.results.map((m) => (
           <Card movie={m} key={m.id} />
         ))}
       </div>
-      <Pagination totalPages={data?.total_pages ?? 0} page={pageNumber} />
+      <Pagination
+        totalPages={data?.total_pages ?? 0}
+        page={pageNumber}
+        pathname="trending"
+      />
     </>
   );
 };

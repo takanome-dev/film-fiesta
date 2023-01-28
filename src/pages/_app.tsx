@@ -8,6 +8,7 @@ import type { AppPropsType } from 'next/dist/shared/lib/utils';
 import type { Session } from 'next-auth';
 
 import '../styles/globals.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 type ComponentWithPageLayout = AppPropsType & {
   Component: AppPropsType['Component'] & {

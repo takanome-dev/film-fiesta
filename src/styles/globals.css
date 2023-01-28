@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dark .react-loading-skeleton {
+  --base-color: #334155;
+  --highlight-color: #64748b;
+}

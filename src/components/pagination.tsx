@@ -7,13 +7,15 @@ import { buttonVariants } from './ui/button';
 interface Props {
   totalPages: number;
   page: number;
+  pathname: string;
 }
 
 interface Event {
   selected: number;
 }
 
-const Pagination: React.FC<Props> = ({ page, totalPages }) => {
+const Pagination: React.FC<Props> = ({ page, pathname, totalPages }) => {
+  console.log({ page });
   const PAGE_SIZE = 9;
   const pageCount = Math.ceil(totalPages / PAGE_SIZE);
 
@@ -23,7 +25,7 @@ const Pagination: React.FC<Props> = ({ page, totalPages }) => {
 
   const handlePageClick = (event: Event) => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    router.push(`/movies?page=${event.selected + 1}`);
+    router.push(`/${pathname}?page=${event.selected + 1}`);
   };
 
   return (
@@ -38,7 +40,7 @@ const Pagination: React.FC<Props> = ({ page, totalPages }) => {
       onPageChange={handlePageClick}
       pageRangeDisplayed={3}
       pageCount={pageCount}
-      forcePage={page}
+      // forcePage={page}
       previousLabel={
         <>
           <MdKeyboardArrowLeft size={16} />
