@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+
 import React from 'react';
 import { toast } from 'react-hot-toast';
 
+import ReactEmojiPicker from '@/components/emoji-picker';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -21,6 +23,7 @@ interface Props {
 }
 
 const Feedback: React.FC<Props> = ({ open, setOpen }) => {
+  // const [selectedEmojis, setSelectedEmojis] = useState<string[]>([]);
   const { inputs, clearForm, handleChange } = useForm({
     emojiCode: '',
     message: '',
@@ -39,8 +42,14 @@ const Feedback: React.FC<Props> = ({ open, setOpen }) => {
     setOpen(false);
   };
 
+  // import type { EmojiClickData } from 'emoji-picker-react';
+  // const handleSelectEmojis = (emoji: EmojiClickData) => {
+  //   console.log({ emoji });
+  //   // setSelectedEmojis([...selectedEmojis, emoji.emoji]);
+  // };
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen} key="feedback">
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
@@ -49,20 +58,27 @@ const Feedback: React.FC<Props> = ({ open, setOpen }) => {
               What do you think of this website?
             </DialogDescription>
           </DialogHeader>
-          <div className="">
-            <div className="mt-4 mb-8">
-              <p className="mb-4">
-                Do you have any thoughts you&apos;d like to share?
-              </p>
-              <Textarea
-                name="message"
-                placeholder="Type your message here."
-                onChange={handleChange}
-                value={inputs.message}
-              />
-            </div>
-            {/* TODO: remove if it's not a thing */}
-            {/* <div className="">
+          {/* <div className="flex">
+            <Emoji unified="1f615" emojiStyle={EmojiStyle.APPLE} size={22} />
+            <Emoji unified="1fae4" emojiStyle={EmojiStyle.APPLE} size={22} />
+            <Emoji unified="1f610" emojiStyle={EmojiStyle.APPLE} size={22} />
+            <Emoji unified="1f642" emojiStyle={EmojiStyle.APPLE} size={22} />
+            <Emoji unified="1f600" emojiStyle={EmojiStyle.APPLE} size={22} />
+          </div> */}
+          <ReactEmojiPicker />
+          <div className="mt-4 mb-8">
+            <p className="mb-4">
+              Do you have any thoughts you&apos;d like to share?
+            </p>
+            <Textarea
+              name="message"
+              placeholder="Type your message here."
+              onChange={handleChange}
+              value={inputs.message}
+            />
+          </div>
+          {/* TODO: remove if it's not a thing */}
+          {/* <div className="">
           <div className="flex gap-1">
             <p>May we follow you up on your feedback?</p>
             </div>
@@ -87,7 +103,6 @@ const Feedback: React.FC<Props> = ({ open, setOpen }) => {
             </div>
             </div>
           </div> */}
-          </div>
           <DialogFooter>
             <Button type="submit" disabled={isLoading}>
               Send feedback

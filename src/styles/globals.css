@@ -6,3 +6,18 @@
   --base-color: #334155;
   --highlight-color: #64748b;
 }
+
+.EmojiPickerReact.epr-dark-theme {
+  --epr-dark: #334155;
+  --epr-highlight-color: #64748b;
+  --epr-hover-bg-color: #363636f6;
+  --epr-focus-bg-color: #474747;
+  --epr-search-input-bg-color: #333333;
+  --epr-category-label-bg-color: #222222e6;
+  --epr-picker-border-color: #151617;
+  --epr-bg-color: #222222;
+  --epr-search-input-bg-color-active: var(--epr-dark);
+  --epr-emoji-variation-indicator-color: #444;
+  --epr-category-icon-active-color: #3271b7;
+  --epr-skin-tone-picker-menu-color: #22222295;
+}
