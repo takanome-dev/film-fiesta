@@ -13,12 +13,24 @@ const moviesRouter = createTRPCRouter({
   getMovies: publicProcedure
     .input(
       z.object({
-        page: z.number(),
+        page: z.number().default(1),
       })
     )
     .query(async ({ input }) => {
       const result = await http<ResponseSchema>(
         `/movie/now_playing?page=${input.page}`
+      );
+      return result;
+    }),
+  getTopRated: publicProcedure
+    .input(
+      z.object({
+        page: z.number().default(1),
+      })
+    )
+    .query(async ({ input }) => {
+      const result = await http<ResponseSchema>(
+        `/movie/top_rated?page=${input.page}`
       );
       return result;
     }),

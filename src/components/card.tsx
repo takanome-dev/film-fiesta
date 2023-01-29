@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { FaStar } from 'react-icons/fa';
 
 // import { getBase64Image } from '@/lib/utils/base64';
+// import notFoundImage from '@/assets/not-found-image.png';
+import notFoundImage from '@/assets/image-not-found.png';
 import Favorite from '@/components/favorite';
 import { imageUrl } from '@/lib/utils/movie';
 
@@ -14,12 +16,13 @@ interface Props {
 
 const Card: React.FC<Props> = ({ movie }) => {
   const url = movie.poster_path ?? movie.backdrop_path;
+  const image = url ? imageUrl(url) : notFoundImage;
 
   return (
     <div className="group relative rounded-lg border border-slate-100 bg-slate-100 p-4 shadow-slate-200 dark:border-slate-600 dark:bg-slate-900">
       <div className="h-80 w-full overflow-hidden rounded-lg">
         <Image
-          src={imageUrl(url)}
+          src={image}
           alt={movie.title}
           width={300}
           height={300}

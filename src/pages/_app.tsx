@@ -1,6 +1,7 @@
 import { Inter as FontSans } from '@next/font/google';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
+import { Toaster } from 'react-hot-toast';
 
 import { api } from '@/utils/api';
 
@@ -39,6 +40,7 @@ const MyApp = ({
           <Component {...pageProps} />
         )}
       </div>
+      <Toaster />
     </ThemeProvider>
   </SessionProvider>
 );
