@@ -8,12 +8,14 @@ import type { ResponseSchema } from '@/schemas/movies';
 
 const searchRouter = createTRPCRouter({
   getMovies: publicProcedure
-    .input(z.object({ page: z.number(), query: z.string() }))
+    .input(
+      z.object({ page: z.number().default(1), query: z.string().default('') })
+    )
     .query(async ({ input }) => {
       if (!input.query) {
         throw new TRPCError({
           code: 'BAD_REQUEST',
-          message: 'search query is required',
+          message: 'Search query is required!',
         });
       }
 

@@ -40,7 +40,12 @@ const MyApp = ({
           <Component {...pageProps} />
         )}
       </div>
-      <Toaster />
+      <Toaster
+        position="top-right"
+        containerStyle={{
+          top: 60,
+        }}
+      />
     </ThemeProvider>
   </SessionProvider>
 );

@@ -30,6 +30,17 @@ export const api = createTRPCNext<AppRouter>({
        * */
       transformer: superjson,
 
+      queryClientConfig: {
+        defaultOptions: {
+          queries: {
+            refetchOnMount: false,
+            refetchOnWindowFocus: false,
+            refetchOnReconnect: true,
+            retry: false,
+            staleTime: 30 * 60 * 1000,
+          },
+        },
+      },
       /**
        * Links used to determine request flow from client to server
        * @see https://trpc.io/docs/links
