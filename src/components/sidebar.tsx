@@ -1,14 +1,15 @@
 import { useSession } from 'next-auth/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaRegComment, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 
+import Feedback from '@/components/feedback';
 import Footer from '@/components/footer';
 import SidebarLink from '@/components/sidebar-link';
+import { Button } from '@/components/ui/button';
 import links from '@/lib/utils/links';
 
-import { Button } from './ui/button';
-
 const Sidebar = () => {
+  const [openFeedback, setOpenFeedback] = useState(false);
   const { data } = useSession();
   const user = data?.user;
 
@@ -26,6 +27,7 @@ const Sidebar = () => {
           <Button
             variant="ghost"
             className="w-full justify-start hover:bg-slate-200"
+            onClick={() => setOpenFeedback(!openFeedback)}
           >
             <FaRegComment
               className="text-slate-500 dark:text-slate-100"
@@ -45,6 +47,7 @@ const Sidebar = () => {
           )}
         </div>
       </div>
+      <Feedback open={openFeedback} setOpen={setOpenFeedback} />
       <Footer />
     </>
   );

@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { BsArrowRepeat } from 'react-icons/bs';
 import { MdBugReport } from 'react-icons/md';
 
 import Card from '@/components/card';
+import Feedback from '@/components/feedback';
 import Pagination from '@/components/pagination';
 import SkeletonWrapper from '@/components/skeleton-wrapper';
 import { Button } from '@/components/ui/button';
@@ -14,6 +15,7 @@ import { api } from '@/utils/api';
 import type { WithPageLayout } from '@/types/with-page-layout';
 
 const SearchPage: WithPageLayout = () => {
+  const [openFeedback, setOpenFeedback] = useState(false);
   const router = useRouter();
   const { q, page } = router.query;
 
@@ -40,19 +42,26 @@ const SearchPage: WithPageLayout = () => {
   if (topRatedMoviesErr) {
     toast.error(topRatedMoviesErr.message);
     return (
-      <div className="flex items-center gap-2 rounded-lg border-l-8 border-l-red-500 bg-slate-200 px-4 py-2 dark:bg-slate-500">
-        <p className="">Failed to fetch top rated movies. Please try again.</p>
-        {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-        <Button className="py-2" onClick={handleRefetch}>
-          Retry
-          <BsArrowRepeat size={20} className="ml-2" />
-        </Button>
-        {/* TODO: open feedback modal onClick */}
-        <Button className="ml-4 py-2">
-          Report
-          <MdBugReport size={20} className="ml-2" />
-        </Button>
-      </div>
+      <>
+        <div className="flex items-center gap-2 rounded-lg border-l-8 border-l-red-500 bg-slate-200 px-4 py-2 dark:bg-slate-500">
+          <p className="">
+            Failed to fetch top rated movies. Please try again.
+          </p>
+          {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+          <Button className="py-2" onClick={handleRefetch}>
+            Retry
+            <BsArrowRepeat size={20} className="ml-2" />
+          </Button>
+          <Button
+            className="ml-4 py-2"
+            onClick={() => setOpenFeedback(!openFeedback)}
+          >
+            Report
+            <MdBugReport size={20} className="ml-2" />
+          </Button>
+        </div>
+        <Feedback open={openFeedback} setOpen={setOpenFeedback} />
+      </>
     );
   }
 

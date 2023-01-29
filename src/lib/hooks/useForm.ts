@@ -5,7 +5,9 @@ export default function useForm<T extends Record<string, string>>(
 ) {
   const [inputs, setInputs] = useState(initial);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
 
     setInputs({
