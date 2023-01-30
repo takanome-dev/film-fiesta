@@ -24,7 +24,6 @@ specifiers:
   autoprefixer: ^10.4.7
   class-variance-authority: ^0.4.0
   clsx: ^1.2.1
-  emoji-picker-react: ^4.4.7
   eslint: ^8.2.0
   eslint-config-airbnb: 19.0.4
   eslint-config-airbnb-typescript: ^17.0.0
@@ -75,7 +74,6 @@ dependencies:
   '@trpc/server': 10.9.0
   class-variance-authority: 0.4.0_typescript@4.9.4
   clsx: 1.2.1
-  emoji-picker-react: 4.4.7_react@18.2.0
   next: 13.1.1_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.18.8_q76c2b4vyoegvsbrcwkfvimnai
   next-themes: 0.2.1_q76c2b4vyoegvsbrcwkfvimnai
@@ -1755,16 +1753,6 @@ packages:
   /electron-to-chromium/1.4.284:
     resolution: {integrity: sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==}
     dev: true
-
-  /emoji-picker-react/4.4.7_react@18.2.0:
-    resolution: {integrity: sha512-HcB1Fr57W6M+gLLm/W4YhbAnUQqYBUAhZBOHmPlSQODLtsDI8vecyqNIF9RrStZHfZwzUSLlpZMfY07AA6gxmA==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      react: '>=16'
-    dependencies:
-      clsx: 1.2.1
-      react: 18.2.0
-    dev: false
 
   /emoji-regex/9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}

@@ -62,6 +62,32 @@ export interface Database {
           userId?: string | null;
         };
       };
+      feedbacks: {
+        Row: {
+          created_at: string | null;
+          emojiCode: string | null;
+          emojiName: string | null;
+          id: number;
+          message: string | null;
+          userId: string | null;
+        };
+        Insert: {
+          created_at?: string | null;
+          emojiCode?: string | null;
+          emojiName?: string | null;
+          id?: number;
+          message?: string | null;
+          userId?: string | null;
+        };
+        Update: {
+          created_at?: string | null;
+          emojiCode?: string | null;
+          emojiName?: string | null;
+          id?: number;
+          message?: string | null;
+          userId?: string | null;
+        };
+      };
       sessions: {
         Row: {
           expires: string;
@@ -88,6 +114,7 @@ export interface Database {
           emailVerified: string | null;
           id: string;
           image: string | null;
+          isAdmin: boolean | null;
           name: string | null;
         };
         Insert: {
@@ -95,6 +122,7 @@ export interface Database {
           emailVerified?: string | null;
           id?: string;
           image?: string | null;
+          isAdmin?: boolean | null;
           name?: string | null;
         };
         Update: {
@@ -102,6 +130,7 @@ export interface Database {
           emailVerified?: string | null;
           id?: string;
           image?: string | null;
+          isAdmin?: boolean | null;
           name?: string | null;
         };
       };
@@ -133,6 +162,9 @@ export interface Database {
       };
     };
     Enums: {
+      [_ in never]: never;
+    };
+    CompositeTypes: {
       [_ in never]: never;
     };
   };

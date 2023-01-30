@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
+import { useSession } from 'next-auth/react';
 import React from 'react';
 import { toast } from 'react-hot-toast';
 
-import ReactEmojiPicker from '@/components/emoji-picker';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import useForm from '@/lib/hooks/useForm';
-import { api } from '@/utils/api';
+import { api } from '@/lib/utils/api';
 
 interface Props {
   open: boolean;
@@ -23,10 +23,11 @@ interface Props {
 }
 
 const Feedback: React.FC<Props> = ({ open, setOpen }) => {
-  // const [selectedEmojis, setSelectedEmojis] = useState<string[]>([]);
+  const { data } = useSession();
   const { inputs, clearForm, handleChange } = useForm({
-    emojiCode: '',
+    emoji_name: '',
     message: '',
+    user_id: '',
   });
 
   const { mutate, error, isLoading } = api.feedback.sendFeedback.useMutation({
@@ -37,16 +38,15 @@ const Feedback: React.FC<Props> = ({ open, setOpen }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (data?.user) {
+      inputs.user_id = data.user.id;
+    }
+
     mutate(inputs);
     clearForm();
     setOpen(false);
   };
-
-  // import type { EmojiClickData } from 'emoji-picker-react';
-  // const handleSelectEmojis = (emoji: EmojiClickData) => {
-  //   console.log({ emoji });
-  //   // setSelectedEmojis([...selectedEmojis, emoji.emoji]);
-  // };
 
   return (
     <Dialog open={open} onOpenChange={setOpen} key="feedback">
@@ -58,14 +58,7 @@ const Feedback: React.FC<Props> = ({ open, setOpen }) => {
               What do you think of this website?
             </DialogDescription>
           </DialogHeader>
-          {/* <div className="flex">
-            <Emoji unified="1f615" emojiStyle={EmojiStyle.APPLE} size={22} />
-            <Emoji unified="1fae4" emojiStyle={EmojiStyle.APPLE} size={22} />
-            <Emoji unified="1f610" emojiStyle={EmojiStyle.APPLE} size={22} />
-            <Emoji unified="1f642" emojiStyle={EmojiStyle.APPLE} size={22} />
-            <Emoji unified="1f600" emojiStyle={EmojiStyle.APPLE} size={22} />
-          </div> */}
-          <ReactEmojiPicker />
+          {/* <EmojiPicker /> */}
           <div className="mt-4 mb-8">
             <p className="mb-4">
               Do you have any thoughts you&apos;d like to share?

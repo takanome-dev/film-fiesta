@@ -6,11 +6,11 @@ import { FcGoogle } from 'react-icons/fc';
 import { SiDiscord } from 'react-icons/si';
 import { fromZodError } from 'zod-validation-error';
 
-import Button from '@/components/Button';
-import Input from '@/components/Input';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import useForm from '@/lib/hooks/useForm';
+import { api } from '@/lib/utils/api';
 import { registerSchema, type RegisterSchema } from '@/schemas/user';
-import { api } from '@/utils/api';
 
 const RegisterPage = () => {
   const [error, setError] = useState<string | null>(null);
@@ -22,7 +22,7 @@ const RegisterPage = () => {
 
   const router = useRouter();
 
-  const { mutateAsync, isLoading } = api.user.register.useMutation();
+  const { mutateAsync } = api.user.register.useMutation();
 
   // eslint-disable-next-line consistent-return
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -59,35 +59,23 @@ const RegisterPage = () => {
         {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
         <form onSubmit={handleSubmit}>
           <Input
-            label="Name"
             id="name"
             type="text"
             onChange={handleChange}
             value={inputs.name}
-            error={null}
           />
           <Input
-            label="Email"
             id="email"
             type="email"
             onChange={handleChange}
             value={inputs.email}
-            error={null}
           />
           <Input
             id="password"
-            label="Password"
-            type="password"
             onChange={handleChange}
             value={inputs.password}
-            error={error}
           />
-          <Button
-            title="Sign up"
-            type="submit"
-            loading={isLoading}
-            className="mt-4"
-          />
+          <Button title="Sign up" type="submit" className="mt-4" />
         </form>
         <div className="mt-4 flex justify-between">
           <p className="font-medium">Already have an account?</p>

@@ -5,7 +5,7 @@ import Card from '@/components/card';
 import Pagination from '@/components/pagination';
 import SkeletonWrapper from '@/components/skeleton-wrapper';
 import MainLayout from '@/layouts/main-layout';
-import { api } from '@/utils/api';
+import { api } from '@/lib/utils/api';
 
 import type { WithPageLayout } from '@/types/with-page-layout';
 

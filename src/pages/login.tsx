@@ -6,11 +6,11 @@ import { FcGoogle } from 'react-icons/fc';
 import { SiDiscord } from 'react-icons/si';
 import { fromZodError } from 'zod-validation-error';
 
-import Button from '@/components/Button';
 import Input from '@/components/Input';
+import { Button } from '@/components/ui/button';
 import useForm from '@/lib/hooks/useForm';
+import { api } from '@/lib/utils/api';
 import { loginSchema, type LoginSchema } from '@/schemas/user';
-import { api } from '@/utils/api';
 
 const LoginPage = () => {
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +21,7 @@ const LoginPage = () => {
 
   const router = useRouter();
 
-  const { mutateAsync, isLoading } = api.user.login.useMutation();
+  const { mutateAsync } = api.user.login.useMutation();
 
   // eslint-disable-next-line consistent-return
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -73,12 +73,7 @@ const LoginPage = () => {
             value={inputs.password}
             error={error}
           />
-          <Button
-            title="Sign in"
-            type="submit"
-            loading={isLoading}
-            className="mt-4"
-          />
+          <Button title="Sign in" type="submit" className="mt-4" />
         </form>
         <div className="mt-4 flex justify-between">
           <Link href="/reset-password" className="font-medium hover:underline">
