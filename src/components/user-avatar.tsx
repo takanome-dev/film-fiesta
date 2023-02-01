@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react';
 import React from 'react';
 import { FiUser } from 'react-icons/fi';
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -18,7 +19,11 @@ const UserAvatar = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
+        <Avatar>
+          <AvatarImage src={user?.image as string} alt={user?.name as string} />
+          <AvatarFallback>TK</AvatarFallback>
+        </Avatar>
+        {/* <Button
           variant="ghost"
           className="px-0 hover:bg-transparent focus:ring-0 dark:hover:bg-transparent dark:focus:ring-0"
         >
@@ -29,7 +34,7 @@ const UserAvatar = () => {
             width={35}
             height={35}
           />
-        </Button>
+        </Button> */}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem>

@@ -2,11 +2,28 @@ import { z } from 'zod';
 
 export const feedbackSchema = z.object({
   id: z.string().optional(),
-  userId: z.string().optional(),
-  emojiName: z.string().default(''),
-  emojiCode: z.string().default(''),
-  created_at: z.string().optional(),
+  user: z.string().optional(),
+  emojiName: z.string().optional(),
+  emojiCode: z.string().optional(),
+  createdAt: z.string().optional(),
+  updatedAt: z.string().optional(),
+  message: z.string(),
+});
+
+export const feedbacksOutputSchema = z.object({
+  id: z.string(),
+  user: z.object({
+    id: z.string(),
+    name: z.string(),
+    email: z.string(),
+    image: z.string().nullable(),
+  }),
+  emojiName: z.string().nullable(),
+  emojiCode: z.string().nullable(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
   message: z.string(),
 });
 
 export type FeedbackSchema = z.infer<typeof feedbackSchema>;
+export type FeedbacksOutputSchema = z.infer<typeof feedbacksOutputSchema>;

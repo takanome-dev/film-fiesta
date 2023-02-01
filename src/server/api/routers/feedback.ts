@@ -1,6 +1,6 @@
 import { TRPCError } from '@trpc/server';
 
-import { feedbackSchema } from '@/schemas/feedback';
+import { feedbackSchema, feedbacksOutputSchema } from '@/schemas/feedback';
 import {
   adminProcedure,
   createTRPCRouter,
@@ -11,7 +11,9 @@ const feedbackRouter = createTRPCRouter({
   sendFeedback: publicProcedure
     .input(feedbackSchema)
     .mutation(async ({ ctx, input }) => {
-      const { data, error } = await ctx.supabase.from('feedback').insert(input);
+      const { data, error } = await ctx.supabase
+        .from('feedbacks')
+        .insert(input);
 
       if (error) {
         throw new TRPCError({
@@ -22,29 +24,33 @@ const feedbackRouter = createTRPCRouter({
 
       return data;
     }),
-  getFeedbacks: adminProcedure.query(async ({ ctx }) => {
-    const { data, error } = await ctx.supabase.from('feedbacks').select(`
+  getFeedbacks: adminProcedure
+    .output(feedbacksOutputSchema)
+    .query(async ({ ctx }) => {
+      const { data, error } = await ctx.supabase.from('feedbacks').select(`
         id,
-        emoji_name,
-        emoji_code,
-        created_at,
+        emojiName,
+        emojiCode,
+        createdAt,
+        updatedAt,
         message,
-        user_id (
+        user (
           id,
           name,
-          email
+          email,
+          image
         )
       `);
 
-    if (error) {
-      throw new TRPCError({
-        code: 'INTERNAL_SERVER_ERROR',
-        message: error.message,
-      });
-    }
+      if (error) {
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error.message,
+        });
+      }
 
-    return data;
-  }),
+      return data;
+    }),
 });
 
 export default feedbackRouter;

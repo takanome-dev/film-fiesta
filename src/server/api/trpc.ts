@@ -16,13 +16,18 @@
  * processing a request
  *
  */
+import { createClient } from '@supabase/supabase-js';
 import { initTRPC, TRPCError } from '@trpc/server';
 import { type CreateNextContextOptions } from '@trpc/server/adapters/next';
 import { type Session } from 'next-auth';
 import superjson from 'superjson';
 
+import { env } from '@/env/client.mjs';
+
 import { getServerAuthSession } from '../auth';
-import { supabase } from '../db';
+// import { supabase } from '../db';
+
+import type { Database } from 'supabase/schema';
 
 /**
  * 2. INITIALIZATION
@@ -44,10 +49,26 @@ type CreateContextOptions = {
  * - trpc's `createSSGHelpers` where we don't have req/res
  * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
  */
-const createInnerTRPCContext = (opts: CreateContextOptions) => ({
-  session: opts.session,
-  supabase,
-});
+const createInnerTRPCContext = (opts: CreateContextOptions) => {
+  const supabase = createClient<Database>(
+    env.NEXT_PUBLIC_SUPABASE_URL,
+    env.NEXT_PUBLIC_SUPABASE_API_KEY,
+    {
+      global: {
+        headers: {
+          Authorization: `Bearer ${
+            opts.session?.supabaseAccessToken as string
+          }`,
+        },
+      },
+    }
+  );
+
+  return {
+    session: opts.session,
+    supabase,
+  };
+};
 
 /**
  * This is the actual context you'll use in your router. It will be used to

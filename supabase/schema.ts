@@ -62,32 +62,6 @@ export interface Database {
           userId?: string | null;
         };
       };
-      feedbacks: {
-        Row: {
-          created_at: string | null;
-          emojiCode: string | null;
-          emojiName: string | null;
-          id: number;
-          message: string | null;
-          userId: string | null;
-        };
-        Insert: {
-          created_at?: string | null;
-          emojiCode?: string | null;
-          emojiName?: string | null;
-          id?: number;
-          message?: string | null;
-          userId?: string | null;
-        };
-        Update: {
-          created_at?: string | null;
-          emojiCode?: string | null;
-          emojiName?: string | null;
-          id?: number;
-          message?: string | null;
-          userId?: string | null;
-        };
-      };
       sessions: {
         Row: {
           expires: string;
@@ -164,7 +138,69 @@ export interface Database {
     Enums: {
       [_ in never]: never;
     };
-    CompositeTypes: {
+  };
+  public: {
+    Tables: {
+      feedbacks: {
+        Row: {
+          createdAt: string;
+          emojiCode: string | null;
+          emojiName: string | null;
+          id: string;
+          message: string | null;
+          updatedAt: string;
+          user: string | null;
+        };
+        Insert: {
+          createdAt?: string;
+          emojiCode?: string | null;
+          emojiName?: string | null;
+          id?: string;
+          message?: string | null;
+          updatedAt?: string;
+          user?: string | null;
+        };
+        Update: {
+          createdAt?: string;
+          emojiCode?: string | null;
+          emojiName?: string | null;
+          id?: string;
+          message?: string | null;
+          updatedAt?: string;
+          user?: string | null;
+        };
+      };
+      users: {
+        Row: {
+          email: string | null;
+          id: string;
+          image: string | null;
+          isAdmin: boolean | null;
+          name: string | null;
+        };
+        Insert: {
+          email?: string | null;
+          id: string;
+          image?: string | null;
+          isAdmin?: boolean | null;
+          name?: string | null;
+        };
+        Update: {
+          email?: string | null;
+          id?: string;
+          image?: string | null;
+          isAdmin?: boolean | null;
+          name?: string | null;
+        };
+      };
+    };
+    Views: {
+      [_ in never]: never;
+    };
+    Functions: {
+      [_ in never]: never;
+    };
+    Enums: {
       [_ in never]: never;
     };
   };

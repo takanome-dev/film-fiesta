@@ -21,6 +21,7 @@ export const serverSchema = z.object({
   ),
   SENTRY_DNS: z.string().url(),
   STRIPE_KEY: z.string(),
+  SUPABASE_JWT_SECRET: z.string(),
   TMDB_API_KEY: z.string(),
   TMDB_BEARER_TOKEN: z.string(),
   DISCORD_CLIENT_ID: z.string(),
@@ -38,6 +39,7 @@ export const serverSchema = z.object({
 export const serverEnv = {
   DATABASE_URL: process.env.DATABASE_URL,
   NODE_ENV: process.env.NODE_ENV,
+  SUPABASE_JWT_SECRET: process.env.SUPABASE_JWT_SECRET,
   SENTRY_DNS: process.env.SENTRY_DNS,
   STRIPE_KEY: process.env.STRIPE_KEY,
   TMDB_API_KEY: process.env.TMDB_API_KEY,

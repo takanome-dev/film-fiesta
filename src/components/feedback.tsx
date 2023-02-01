@@ -25,9 +25,9 @@ interface Props {
 const Feedback: React.FC<Props> = ({ open, setOpen }) => {
   const { data } = useSession();
   const { inputs, clearForm, handleChange } = useForm({
-    emoji_name: '',
+    emojiName: '',
     message: '',
-    user_id: '',
+    userId: '',
   });
 
   const { mutate, error, isLoading } = api.feedback.sendFeedback.useMutation({
@@ -40,7 +40,7 @@ const Feedback: React.FC<Props> = ({ open, setOpen }) => {
     e.preventDefault();
 
     if (data?.user) {
-      inputs.user_id = data.user.id;
+      inputs.userId = data.user.id;
     }
 
     mutate(inputs);
