@@ -5,8 +5,11 @@ import { toast } from 'react-hot-toast';
 import { BsFillCalendarDateFill, BsStars } from 'react-icons/bs';
 import { FaPlayCircle, FaStar, FaYoutube } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
+import { Slide } from 'react-slideshow-image';
 
+import Card from '@/components/card';
 import Error from '@/components/error';
+import SkeletonWrapper from '@/components/skeleton-wrapper';
 import { Button } from '@/components/ui/button';
 import MainLayout from '@/layouts/main-layout';
 import { api } from '@/lib/utils/api';
@@ -47,6 +50,13 @@ const MovieDetailsPage: WithPageLayout = () => {
     isLoading,
     refetch,
   } = api.movies.getMovieById.useQuery({ id: id ? Number(id) : 0 });
+
+  const {
+    data: similarMovie,
+    error: similarMovieError,
+    isLoading: similarMovieLoading,
+    refetch: refetchSimilarMovie,
+  } = api.movies.getSimilarMovies.useQuery({ id: id ? Number(id) : 0 });
 
   if (error) {
     toast.error(error.message);
@@ -121,13 +131,35 @@ const MovieDetailsPage: WithPageLayout = () => {
         )}
       </div>
 
-      {/* {movie?.similar && (
-      <div className="similar" data-slider>
-        <p>Similar Movies</p>
-        <Slider data={movie.similar} />
+      <div className="mt-10">
+        <h3 className="mb-4 text-xl text-slate-500 dark:text-slate-400">
+          Similar Movies
+        </h3>
+        {similarMovieError && toast.error(similarMovieError.message) && (
+          <Error
+            resourceName="similar movies"
+            handleRefetch={() => refetchSimilarMovie()}
+          />
+        )}
+        <div className="mt-4 grid grid-cols-6 gap-4">
+          {similarMovieLoading && (
+            <SkeletonWrapper height={100} count={6} radius={6} />
+          )}
+        </div>
+        {similarMovie && (
+          <Slide
+            slidesToScroll={5}
+            slidesToShow={5}
+            indicators
+            cssClass="similar-movies-slide"
+          >
+            {similarMovie?.results.map((m) => (
+              <Card movie={m} key={m.id} />
+            ))}
+          </Slide>
+        )}
       </div>
-    )}
-    <MovieTrailer
+      {/* <MovieTrailer
       videos={movie?.videos}
       openTrailer={openTrailer}
       handleClose={() => setOpenTrailer(false)}

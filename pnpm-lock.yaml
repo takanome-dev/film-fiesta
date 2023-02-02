@@ -51,6 +51,7 @@ specifiers:
   react-loader-spinner: ^5.3.4
   react-loading-skeleton: ^3.1.0
   react-paginate: ^8.1.4
+  react-slideshow-image: ^4.2.0
   supabase: ^1.34.5
   superjson: 1.9.1
   tailwind-merge: ^1.8.1
@@ -90,6 +91,7 @@ dependencies:
   react-loader-spinner: 5.3.4_biqbaboplfbrettd7655fr4n2y
   react-loading-skeleton: 3.1.0_react@18.2.0
   react-paginate: 8.1.4_react@18.2.0
+  react-slideshow-image: 4.2.0_react@18.2.0
   superjson: 1.9.1
   tailwind-merge: 1.8.1
   tailwindcss-radix: 2.7.0
@@ -1124,6 +1126,10 @@ packages:
 
   /@trpc/server/10.9.0:
     resolution: {integrity: sha512-5psyZgbvy29pJND32hwkWTMbv6s86IbsPOeDopsgNF0VegZT6Dsijmb7Ub/TDhuJVQVq5u4u5briMXi3SxmBkw==}
+    dev: false
+
+  /@tweenjs/tween.js/18.6.4:
+    resolution: {integrity: sha512-lB9lMjuqjtuJrx7/kOkqQBtllspPIN+96OvTCeJ2j5FEzinoAXTdAMFnDAQT1KVPRlnYfBrqxtqP66vDM40xxQ==}
     dev: false
 
   /@types/json-schema/7.0.11:
@@ -3986,6 +3992,16 @@ packages:
       use-sidecar: 1.1.2_3stiutgnnbnfnf3uowm5cip22i
     dev: false
 
+  /react-slideshow-image/4.2.0_react@18.2.0:
+    resolution: {integrity: sha512-bdYyarv6EDg0H1SLzCA9lgbnavsQ/wkynVOOXaILTbcNZb8OQvUtSn5BulNemHTJRgJdsapQUVVKJNFuQMgd5A==}
+    peerDependencies:
+      react: '>=15'
+    dependencies:
+      '@tweenjs/tween.js': 18.6.4
+      react: 18.2.0
+      resize-observer-polyfill: 1.5.1
+    dev: false
+
   /react-ssr-prepass/1.5.0_react@18.2.0:
     resolution: {integrity: sha512-yFNHrlVEReVYKsLI5lF05tZoHveA5pGzjFbFJY/3pOqqjGOmMmqx83N4hIjN2n6E1AOa+eQEUxs3CgRnPmT0RQ==}
     peerDependencies:
@@ -4061,6 +4077,10 @@ packages:
     resolution: {integrity: sha512-pq2bWo9mVD43nbts2wGv17XLiNLya+GklZ8kaDLV2Z08gDCsGpnKn9BFMepvWuHCbyVvY7J5o5+BVvoQbmlJLg==}
     engines: {node: '>=8'}
     dev: true
+
+  /resize-observer-polyfill/1.5.1:
+    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
+    dev: false
 
   /resolve-from/4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}

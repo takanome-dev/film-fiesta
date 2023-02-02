@@ -21,3 +21,11 @@
   --epr-category-icon-active-color: #3271b7;
   --epr-skin-tone-picker-menu-color: #22222295;
 }
+
+.similar-movies-slide {
+  @apply grid grid-cols-5;
+}
+
+.similar-movies-slide .images-wrap {
+  @apply gap-4;
+}

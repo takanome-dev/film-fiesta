@@ -10,6 +10,7 @@ import type { Session } from 'next-auth';
 
 import '../styles/globals.css';
 import 'react-loading-skeleton/dist/skeleton.css';
+import 'react-slideshow-image/dist/styles.css';
 
 type ComponentWithPageLayout = AppPropsType & {
   Component: AppPropsType['Component'] & {

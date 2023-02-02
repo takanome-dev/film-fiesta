@@ -37,7 +37,7 @@ const Card: React.FC<Props> = ({ movie }) => {
           <div className="flex">
             <FaStar className="text-yellow-400" size={16} />
             <p className="ml-2 font-semibold text-slate-800 dark:text-slate-200">
-              {movie.vote_average}
+              {movie.vote_average.toFixed(1)}
             </p>
           </div>
           <p className="text-slate-400 dark:text-slate-500">
