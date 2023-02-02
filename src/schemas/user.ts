@@ -12,11 +12,11 @@ export const registerSchema = z.object({
 });
 
 export const userSchema = z.object({
-  email: z.string().email().optional(),
-  emailVerified: z.string().optional(),
+  email: z.string().email(),
   id: z.string(),
-  image: z.string().optional(),
-  name: z.string().optional(),
+  image: z.string().nullable(),
+  name: z.string(),
+  createdAt: z.string(),
 });
 
 export type LoginSchema = z.infer<typeof loginSchema>;

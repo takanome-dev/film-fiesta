@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { userSchema } from './user';
+
 export const feedbackSchema = z.object({
   id: z.string().optional(),
   user: z.string().optional(),
@@ -10,20 +12,17 @@ export const feedbackSchema = z.object({
   message: z.string(),
 });
 
-export const feedbacksOutputSchema = z.object({
-  id: z.string(),
-  user: z.object({
+export const feedbacksOutputSchema = z.array(
+  z.object({
     id: z.string(),
-    name: z.string(),
-    email: z.string(),
-    image: z.string().nullable(),
-  }),
-  emojiName: z.string().nullable(),
-  emojiCode: z.string().nullable(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-  message: z.string(),
-});
+    user: userSchema.nullable(),
+    emojiName: z.string().nullable(),
+    emojiCode: z.string().nullable(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
+    message: z.string().nullable(),
+  })
+);
 
 export type FeedbackSchema = z.infer<typeof feedbackSchema>;
 export type FeedbacksOutputSchema = z.infer<typeof feedbacksOutputSchema>;

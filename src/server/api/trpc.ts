@@ -50,18 +50,20 @@ type CreateContextOptions = {
  * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
  */
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
+  const token = opts.session?.supabaseAccessToken;
+
   const supabase = createClient<Database>(
     env.NEXT_PUBLIC_SUPABASE_URL,
     env.NEXT_PUBLIC_SUPABASE_API_KEY,
-    {
-      global: {
-        headers: {
-          Authorization: `Bearer ${
-            opts.session?.supabaseAccessToken as string
-          }`,
-        },
-      },
-    }
+    token
+      ? {
+          global: {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        }
+      : undefined
   );
 
   return {

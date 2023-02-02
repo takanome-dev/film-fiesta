@@ -1,10 +1,10 @@
-import Image from 'next/image';
+import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import React from 'react';
+import { FaRegComment } from 'react-icons/fa';
 import { FiUser } from 'react-icons/fi';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,29 +19,23 @@ const UserAvatar = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar>
+        <Avatar className="cursor-pointer">
           <AvatarImage src={user?.image as string} alt={user?.name as string} />
           <AvatarFallback>TK</AvatarFallback>
         </Avatar>
-        {/* <Button
-          variant="ghost"
-          className="px-0 hover:bg-transparent focus:ring-0 dark:hover:bg-transparent dark:focus:ring-0"
-        >
-          <Image
-            src={user?.image as string}
-            alt={user?.name as string}
-            className="rounded-full object-cover"
-            width={35}
-            height={35}
-          />
-        </Button> */}
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="w-36">
         <DropdownMenuItem>
-          <FiUser size={20} className="text-slate-600 dark:text-slate-100" />
-          <span className="ml-2 font-medium text-slate-800 dark:text-slate-100">
-            Profile
-          </span>
+          <FaRegComment
+            size={16}
+            className="text-slate-600 dark:text-slate-100"
+          />
+          <Link
+            href="/feedbacks"
+            className="ml-2 font-medium text-slate-800 dark:text-slate-100"
+          >
+            Feedbacks
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <FiUser size={20} className="text-slate-600 dark:text-slate-100" />

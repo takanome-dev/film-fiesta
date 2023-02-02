@@ -47,6 +47,7 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.7.1",
+    "react-loader-spinner": "^5.3.4",
     "react-loading-skeleton": "^3.1.0",
     "react-paginate": "^8.1.4",
     "superjson": "1.9.1",

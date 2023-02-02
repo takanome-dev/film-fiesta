@@ -17,8 +17,8 @@ export const authOptions: NextAuthOptions = {
         const payload = {
           aud: 'authenticated',
           exp: Math.floor(new Date(session.expires).getTime() / 1000),
-          sub: user.id,
-          email: user.email,
+          sub: user?.id,
+          email: user?.email,
           role: 'authenticated',
         };
 

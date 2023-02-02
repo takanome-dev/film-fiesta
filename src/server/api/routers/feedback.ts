@@ -24,10 +24,8 @@ const feedbackRouter = createTRPCRouter({
 
       return data;
     }),
-  getFeedbacks: adminProcedure
-    .output(feedbacksOutputSchema)
-    .query(async ({ ctx }) => {
-      const { data, error } = await ctx.supabase.from('feedbacks').select(`
+  getFeedbacks: adminProcedure.query(async ({ ctx }) => {
+    const { data, error } = await ctx.supabase.from('feedbacks').select(`
         id,
         emojiName,
         emojiCode,
@@ -38,19 +36,21 @@ const feedbackRouter = createTRPCRouter({
           id,
           name,
           email,
-          image
+          image,
+          createdAt
         )
       `);
 
-      if (error) {
-        throw new TRPCError({
-          code: 'INTERNAL_SERVER_ERROR',
-          message: error.message,
-        });
-      }
+    if (error) {
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error.message,
+      });
+    }
 
-      return data;
-    }),
+    const parsedData = feedbacksOutputSchema.parse(data);
+    return parsedData;
+  }),
 });
 
 export default feedbackRouter;
