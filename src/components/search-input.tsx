@@ -32,7 +32,7 @@ const SearchInput = () => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-      <FaSearch className="absolute inset-y-0 right-0 mr-4 h-full border-y border-slate-200 bg-white text-slate-300 dark:border-slate-500 dark:bg-slate-900" />
+      <FaSearch className="absolute inset-y-0 right-0 mr-4 h-full bg-transparent text-slate-300" />
     </form>
   );
 };
