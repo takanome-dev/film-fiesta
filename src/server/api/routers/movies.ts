@@ -3,7 +3,11 @@ import { z } from 'zod';
 import { createTRPCRouter, publicProcedure } from '@/server/api/trpc';
 import { http } from '@/server/fetch';
 
-import type { MovieSchema, ResponseSchema } from '@/schemas/movies';
+import type {
+  MovieSchema,
+  ResponseSchema,
+  ReviewResponseSchema,
+} from '@/schemas/movies';
 
 const moviesRouter = createTRPCRouter({
   discover: publicProcedure.query(async () => {
@@ -78,7 +82,6 @@ const moviesRouter = createTRPCRouter({
       const result = await http<ResponseSchema>(`/movie/${input.id}/similar`);
       return result;
     }),
-  // TODO: privateProcedure - should subscribe to te platform
   getVideos: publicProcedure
     .input(
       z.object({
@@ -87,6 +90,18 @@ const moviesRouter = createTRPCRouter({
     )
     .query(async ({ input }) => {
       const result = await http<ResponseSchema>(`/movie/${input.id}/videos`);
+      return result;
+    }),
+  getReviews: publicProcedure
+    .input(
+      z.object({
+        id: z.number(),
+      })
+    )
+    .query(async ({ input }) => {
+      const result = await http<ReviewResponseSchema>(
+        `/movie/${input.id}/reviews`
+      );
       return result;
     }),
 });

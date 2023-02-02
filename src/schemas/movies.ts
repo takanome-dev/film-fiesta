@@ -42,7 +42,31 @@ const videoTrailerSchema = z.object({
 //   videos: VideoTrailer[];
 // }
 
+const reviewSchema = z.object({
+  author: z.string(),
+  author_details: z.object({
+    name: z.string(),
+    username: z.string(),
+    avatar_path: z.string(),
+    rating: z.number(),
+  }),
+  content: z.string(),
+  created_at: z.string(),
+  id: z.string(),
+  updated_at: z.string(),
+  url: z.string(),
+});
+
+const reviewResponseSchema = z.object({
+  id: z.number(),
+  page: z.number(),
+  results: z.array(reviewSchema),
+  total_pages: z.number(),
+  total_results: z.number(),
+});
+
 export type MovieSchema = z.infer<typeof movieSchema>;
 export type ResponseSchema = z.infer<typeof responseSchema>;
 export type GenreSchema = z.infer<typeof genreSchema>;
 export type VideoTrailerSchema = z.infer<typeof videoTrailerSchema>;
+export type ReviewResponseSchema = z.infer<typeof reviewResponseSchema>;

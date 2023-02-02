@@ -1,16 +1,27 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { BsFillCalendarDateFill, BsStars } from 'react-icons/bs';
+import {
+  BsChevronExpand,
+  BsFillCalendarDateFill,
+  BsStars,
+} from 'react-icons/bs';
 import { FaPlayCircle, FaStar, FaYoutube } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
 import { Slide } from 'react-slideshow-image';
 
 import Card from '@/components/card';
+import CommentCard from '@/components/comment-card';
 import Error from '@/components/error';
 import SkeletonWrapper from '@/components/skeleton-wrapper';
 import { Button } from '@/components/ui/button';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import MainLayout from '@/layouts/main-layout';
 import { api } from '@/lib/utils/api';
 import { imageUrl } from '@/lib/utils/movie';
@@ -41,6 +52,7 @@ function SkeletonLoader() {
 }
 
 const MovieDetailsPage: WithPageLayout = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
@@ -57,6 +69,13 @@ const MovieDetailsPage: WithPageLayout = () => {
     isLoading: similarMovieLoading,
     refetch: refetchSimilarMovie,
   } = api.movies.getSimilarMovies.useQuery({ id: id ? Number(id) : 0 });
+
+  const {
+    data: reviews,
+    error: reviewsError,
+    isLoading: reviewsLoading,
+    refetch: refetchReviews,
+  } = api.movies.getReviews.useQuery({ id: id ? Number(id) : 0 });
 
   if (error) {
     toast.error(error.message);
@@ -130,6 +149,78 @@ const MovieDetailsPage: WithPageLayout = () => {
           </>
         )}
       </div>
+
+      {reviews && (
+        <div className="my-8">
+          {reviewsError && toast.error(reviewsError.message) && (
+            <Error
+              resourceName="reviews"
+              handleRefetch={() => refetchReviews()}
+            />
+          )}
+          <div className="flex">
+            {reviewsLoading && (
+              <SkeletonWrapper height={200} count={1} radius={6} />
+            )}
+          </div>
+          <Tabs defaultValue="reviews" className="">
+            <TabsList>
+              <TabsTrigger value="reviews" className="flex items-center gap-2">
+                Reviews
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-300 dark:bg-slate-600">
+                  {reviews?.total_results}
+                </span>
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="reviews">
+              <Collapsible
+                open={isOpen}
+                onOpenChange={setIsOpen}
+                className="space-y-2"
+              >
+                <div className="mb-8 flex items-center justify-between">
+                  <h4 className="font-semibold uppercase">
+                    Toggle all reviews
+                  </h4>
+                  <CollapsibleTrigger asChild>
+                    <Button variant="ghost" size="sm" className="w-9 p-0">
+                      <BsChevronExpand className="h-4 w-4" />
+                      <span className="sr-only">Toggle</span>
+                    </Button>
+                  </CollapsibleTrigger>
+                </div>
+                <CommentCard
+                  avatarUrl={imageUrl(
+                    reviews?.results?.[0]?.author_details.avatar_path as string
+                  )}
+                  title={reviews?.results?.[0]?.author as string}
+                  subTitle={
+                    reviews?.results?.[0]?.author_details?.username as string
+                  }
+                  createdAt={reviews?.results?.[0]?.created_at as string}
+                  content={reviews?.results?.[0]?.content as string}
+                  className="mb-6 p-6"
+                />
+                <CollapsibleContent className="space-y-6">
+                  {reviews?.results
+                    .slice(1, reviews?.total_results)
+                    .map((review) => (
+                      <CommentCard
+                        key={review.id}
+                        avatarUrl={imageUrl(review.author_details.avatar_path)}
+                        title={review.author}
+                        subTitle={review.author_details?.username}
+                        createdAt={review.created_at}
+                        content={review.content}
+                        className="p-6"
+                      />
+                    ))}
+                </CollapsibleContent>
+              </Collapsible>
+            </TabsContent>
+          </Tabs>
+        </div>
+      )}
 
       <div className="mt-10">
         <h3 className="mb-4 text-xl text-slate-500 dark:text-slate-400">
