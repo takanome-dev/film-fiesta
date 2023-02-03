@@ -7,6 +7,7 @@ import type {
   MovieSchema,
   ResponseSchema,
   ReviewResponseSchema,
+  TrailerSchema,
 } from '@/schemas/movies';
 
 const moviesRouter = createTRPCRouter({
@@ -85,11 +86,11 @@ const moviesRouter = createTRPCRouter({
   getVideos: publicProcedure
     .input(
       z.object({
-        id: z.number(),
+        id: z.number().default(1),
       })
     )
     .query(async ({ input }) => {
-      const result = await http<ResponseSchema>(`/movie/${input.id}/videos`);
+      const result = await http<TrailerSchema>(`/movie/${input.id}/videos`);
       return result;
     }),
   getReviews: publicProcedure

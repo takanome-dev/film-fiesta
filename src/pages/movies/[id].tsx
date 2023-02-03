@@ -21,6 +21,14 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import MainLayout from '@/layouts/main-layout';
 import { api } from '@/lib/utils/api';
@@ -51,8 +59,56 @@ function SkeletonLoader() {
   );
 }
 
+interface Props {
+  movieId: string;
+  name: string;
+  openTrailer: boolean;
+  setOpenTrailer: (open: boolean) => void;
+}
+
+function MovieTrailers(props: Props) {
+  const { name, movieId, openTrailer, setOpenTrailer } = props;
+  const { data, isLoading } = api.movies.getVideos.useQuery({
+    id: Number(movieId),
+  });
+  const videos = data?.results.slice(0, 3);
+
+  return (
+    <Dialog open={openTrailer} onOpenChange={setOpenTrailer} key="trailers">
+      <DialogContent className="max-h-[600px] sm:max-w-[700px]">
+        <DialogHeader>
+          <DialogTitle>Trailer</DialogTitle>
+          <DialogDescription>
+            <p className="truncate text-sm text-gray-500">
+              Watch the trailers of {name}
+            </p>
+          </DialogDescription>
+        </DialogHeader>
+        <div className="h-[520px]">
+          <ScrollArea className="is-trailer group">
+            {isLoading && <Skeleton />}
+            {videos?.map((v) => (
+              <div key={v?.id} className="mb-4">
+                <iframe
+                  width="100%"
+                  height="400"
+                  src={`https://www.youtube.com/embed/${v?.key}`}
+                  title={v?.name}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ))}
+          </ScrollArea>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 const MovieDetailsPage: WithPageLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [openTrailer, setOpenTrailer] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
@@ -134,12 +190,13 @@ const MovieDetailsPage: WithPageLayout = () => {
                   Overview
                 </p>
                 <p className="mt-2">{movie?.overview}</p>
-                <div className="mt-8 flex gap-4">
+                <div className="mt-12 flex gap-4">
+                  {/* TODO: add this and nprogress */}
                   <Button>
                     <FaPlayCircle className="mr-2" />
                     Watch now
                   </Button>
-                  <Button>
+                  <Button onClick={() => setOpenTrailer(true)}>
                     <FaYoutube className="mr-2" />
                     Watch Trailer
                   </Button>
@@ -250,11 +307,12 @@ const MovieDetailsPage: WithPageLayout = () => {
           </Slide>
         )}
       </div>
-      {/* <MovieTrailer
-      videos={movie?.videos}
-      openTrailer={openTrailer}
-      handleClose={() => setOpenTrailer(false)}
-    /> */}
+      <MovieTrailers
+        openTrailer={openTrailer}
+        setOpenTrailer={setOpenTrailer}
+        movieId={id as string}
+        name={movie?.title as string}
+      />
     </>
   );
 };

@@ -32,8 +32,21 @@ const genreSchema = z.object({
 });
 
 const videoTrailerSchema = z.object({
+  iso_639_1: z.string(),
+  iso_3166_1: z.string(),
   name: z.string(),
   key: z.string(),
+  site: z.string(),
+  size: z.number(),
+  type: z.string(),
+  official: z.boolean(),
+  published_at: z.string(),
+  id: z.string(),
+});
+
+const trailerSchema = z.object({
+  id: z.number(),
+  results: z.array(videoTrailerSchema),
 });
 
 // export interface MovieDetails {
@@ -69,4 +82,5 @@ export type MovieSchema = z.infer<typeof movieSchema>;
 export type ResponseSchema = z.infer<typeof responseSchema>;
 export type GenreSchema = z.infer<typeof genreSchema>;
 export type VideoTrailerSchema = z.infer<typeof videoTrailerSchema>;
+export type TrailerSchema = z.infer<typeof trailerSchema>;
 export type ReviewResponseSchema = z.infer<typeof reviewResponseSchema>;
