@@ -83,6 +83,18 @@ const moviesRouter = createTRPCRouter({
       const result = await http<ResponseSchema>(`/movie/${input.id}/similar`);
       return result;
     }),
+  getRecommendations: publicProcedure
+    .input(
+      z.object({
+        id: z.number(),
+      })
+    )
+    .query(async ({ input }) => {
+      const result = await http<ResponseSchema>(
+        `/movie/${input.id}/recommendations`
+      );
+      return result;
+    }),
   getVideos: publicProcedure
     .input(
       z.object({

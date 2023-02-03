@@ -69,7 +69,7 @@ interface Props {
 function MovieTrailers(props: Props) {
   const { name, movieId, openTrailer, setOpenTrailer } = props;
   const { data, isLoading } = api.movies.getVideos.useQuery({
-    id: Number(movieId),
+    id: movieId ? Number(movieId) : 0,
   });
   const videos = data?.results.slice(0, 3);
 
@@ -120,11 +120,11 @@ const MovieDetailsPage: WithPageLayout = () => {
   } = api.movies.getMovieById.useQuery({ id: id ? Number(id) : 0 });
 
   const {
-    data: similarMovie,
-    error: similarMovieError,
-    isLoading: similarMovieLoading,
-    refetch: refetchSimilarMovie,
-  } = api.movies.getSimilarMovies.useQuery({ id: id ? Number(id) : 0 });
+    data: recommendedMovie,
+    error: recommendedMovieError,
+    isLoading: recommendedMovieLoading,
+    refetch: refetchRecommendedMovie,
+  } = api.movies.getRecommendations.useQuery({ id: id ? Number(id) : 0 });
 
   const {
     data: reviews,
@@ -192,7 +192,12 @@ const MovieDetailsPage: WithPageLayout = () => {
                 <p className="mt-2">{movie?.overview}</p>
                 <div className="mt-12 flex gap-4">
                   {/* TODO: add this and nprogress */}
-                  <Button>
+                  <Button
+                    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                    onClick={() =>
+                      router.push(`/movies/watch?id=${id as string}`)
+                    }
+                  >
                     <FaPlayCircle className="mr-2" />
                     Watch now
                   </Button>
@@ -208,7 +213,7 @@ const MovieDetailsPage: WithPageLayout = () => {
       </div>
 
       {reviews && (
-        <div className="my-8">
+        <div className="my-8 max-w-full">
           {reviewsError && toast.error(reviewsError.message) && (
             <Error
               resourceName="reviews"
@@ -220,7 +225,7 @@ const MovieDetailsPage: WithPageLayout = () => {
               <SkeletonWrapper height={200} count={1} radius={6} />
             )}
           </div>
-          <Tabs defaultValue="reviews" className="">
+          <Tabs defaultValue="reviews" className="max-w-full">
             <TabsList>
               <TabsTrigger value="reviews" className="flex items-center gap-2">
                 Reviews
@@ -281,27 +286,28 @@ const MovieDetailsPage: WithPageLayout = () => {
 
       <div className="mt-10">
         <h3 className="mb-4 text-xl text-slate-500 dark:text-slate-400">
-          Similar Movies
+          Recommendations
         </h3>
-        {similarMovieError && toast.error(similarMovieError.message) && (
-          <Error
-            resourceName="similar movies"
-            handleRefetch={() => refetchSimilarMovie()}
-          />
-        )}
+        {recommendedMovieError &&
+          toast.error(recommendedMovieError.message) && (
+            <Error
+              resourceName="recommended movies"
+              handleRefetch={() => refetchRecommendedMovie()}
+            />
+          )}
         <div className="mt-4 grid grid-cols-6 gap-4">
-          {similarMovieLoading && (
+          {recommendedMovieLoading && (
             <SkeletonWrapper height={100} count={6} radius={6} />
           )}
         </div>
-        {similarMovie && (
+        {recommendedMovie && (
           <Slide
             slidesToScroll={5}
             slidesToShow={5}
             indicators
-            cssClass="similar-movies-slide"
+            cssClass="recommended-movies-slide"
           >
-            {similarMovie?.results.map((m) => (
+            {recommendedMovie?.results.map((m) => (
               <Card movie={m} key={m.id} />
             ))}
           </Slide>

@@ -44,6 +44,8 @@ const Card: React.FC<Props> = ({ movie }) => {
             {movie.release_date}
           </p>
         </div>
+        {/* TODO: add tooltip around */}
+
         <Link
           href={`/movies/${movie.id}`}
           className="text-xl font-semibold text-slate-800 hover:underline dark:text-slate-100"

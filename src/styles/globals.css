@@ -22,10 +22,11 @@
   --epr-skin-tone-picker-menu-color: #22222295;
 }
 
-.similar-movies-slide {
-  @apply grid grid-cols-5;
+.react-slideshow-container {
+  max-width: 1080px;
 }
 
-.similar-movies-slide .images-wrap {
-  @apply gap-4;
+.react-slideshow-container .images-wrap {
+  display: flex;
+  gap: 1rem !important;
 }
