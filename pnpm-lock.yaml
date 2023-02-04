@@ -43,6 +43,7 @@ specifiers:
   next: 13.1.1
   next-auth: ^4.18.7
   next-themes: ^0.2.1
+  nprogress: ^0.2.0
   postcss: ^8.4.14
   prettier: ^2.8.1
   prettier-plugin-tailwindcss: ^0.2.1
@@ -90,6 +91,7 @@ dependencies:
   next: 13.1.1_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.18.8_q76c2b4vyoegvsbrcwkfvimnai
   next-themes: 0.2.1_q76c2b4vyoegvsbrcwkfvimnai
+  nprogress: 0.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hot-toast: 2.4.0_owo25xnefcwdq3zjgtohz6dbju
@@ -3600,6 +3602,10 @@ packages:
     resolution: {integrity: sha512-g+DPQSkusnk7HYXr75NtzkIP4+N81i3RPsGFidF3DzHd9MT9wWngmqoeg/fnHFz5MNdtG4w03s+QnhewSLTT2Q==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dev: true
+
+  /nprogress/0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
+    dev: false
 
   /oauth/0.9.15:
     resolution: {integrity: sha512-a5ERWK1kh38ExDEfoO6qUHJb32rd7aYmPHuyCu3Fta/cnICvYmgd2uhuKXvPD+PXB+gCEYYEaQdIRAjCOwAKNA==}

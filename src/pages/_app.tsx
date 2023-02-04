@@ -1,6 +1,8 @@
 import { Inter as FontSans } from '@next/font/google';
+import Router from 'next/router';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
+import NProgress from 'nprogress';
 import { Toaster } from 'react-hot-toast';
 
 import { api } from '@/lib/utils/api';
@@ -11,6 +13,7 @@ import type { Session } from 'next-auth';
 import '../styles/globals.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 import 'react-slideshow-image/dist/styles.css';
+import '../styles/nprogress.css';
 
 type ComponentWithPageLayout = AppPropsType & {
   Component: AppPropsType['Component'] & {
@@ -20,6 +23,10 @@ type ComponentWithPageLayout = AppPropsType & {
     session: Session | null;
   };
 };
+
+Router.events.on('routeChangeStart', () => NProgress.start());
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
 
 const fontSans = FontSans({
   subsets: ['latin'],
