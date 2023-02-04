@@ -2,12 +2,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { toast } from 'react-hot-toast';
 import { BsFillCalendarDateFill, BsStars } from 'react-icons/bs';
 import { FaStar } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
 
 import notFoundImage from '@/assets/image-not-found.png';
+import Error from '@/components/error';
 import Favorite from '@/components/favorite';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import SimpleLayout from '@/layouts/simple-layout';
 import { api } from '@/lib/utils/api';
 import { embedMovieUrl, imageUrl } from '@/lib/utils/movie';
@@ -18,7 +26,7 @@ import type { WithPageLayout } from '@/types/with-page-layout';
 const WatchMoviePage: WithPageLayout = () => {
   const router = useRouter();
   const { id } = router.query;
-  console.log({ id });
+
   const {
     data: movie,
     error: movieError,
@@ -28,6 +36,13 @@ const WatchMoviePage: WithPageLayout = () => {
   const { data, isLoading, error } = api.movies.getRecommendations.useQuery({
     id: id ? Number(id) : 0,
   });
+
+  if (error || movieError) {
+    toast.error((error || movieError)?.message as string);
+    return (
+      <Error resourceName="movie details" handleRefetch={() => refetch()} />
+    );
+  }
 
   const getUrl = (movieData: MovieSchema) => {
     const url = movieData.poster_path ?? movieData.backdrop_path;
@@ -39,7 +54,7 @@ const WatchMoviePage: WithPageLayout = () => {
       {!id && <Skeleton />}
       {id && (
         <div>
-          <div className="h-[90vh">
+          <div className="h-[90vh]">
             <iframe
               src={`${embedMovieUrl(Number(id))}`}
               width="100%"
@@ -49,43 +64,62 @@ const WatchMoviePage: WithPageLayout = () => {
               allowFullScreen
             />
           </div>
-          <div className="mt-10 flex flex-col gap-4">
-            <h1 className="text-2xl font-bold">{movie?.title}</h1>
-            <div className="mt-2 flex gap-4">
-              {movie?.genres?.map((g) => (
-                <span
-                  key={g.id}
-                  className="rounded-lg border border-slate-200 px-4 py-1 dark:border-slate-700"
-                >
-                  {g.name}
-                </span>
-              ))}
+          {movieIsLoading && (
+            <div className="w-full">
+              <Skeleton height={40} className="mb-4" />
+              <Skeleton height={25} />
+              <Skeleton height={25} className="mb-4 mt-2" />
+              <Skeleton />
+              <Skeleton />
+              <div className="mt-4">
+                {Array(10)
+                  .fill(true)
+                  .map((_, index) => (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <Skeleton key={index} className="mb-2" />
+                  ))}
+              </div>
             </div>
-            <div className="mt-3 flex gap-8">
-              <div className="flex items-center gap-2">
-                <BsFillCalendarDateFill size={16} />
-                <p className="text-slate-600 dark:text-slate-300">
-                  {movie?.release_date}
+          )}
+          {movie && (
+            <div className="mt-10 flex flex-col gap-4">
+              <h1 className="text-2xl font-bold">{movie?.title}</h1>
+              <div className="mt-2 flex gap-4">
+                {movie?.genres?.map((g) => (
+                  <span
+                    key={g.id}
+                    className="rounded-lg border border-slate-200 px-4 py-1 dark:border-slate-700"
+                  >
+                    {g.name}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-3 flex gap-8">
+                <div className="flex items-center gap-2">
+                  <BsFillCalendarDateFill size={16} />
+                  <p className="text-slate-600 dark:text-slate-300">
+                    {movie?.release_date}
+                  </p>
+                </div>
+                <span>&bull;</span>
+                <div className="flex items-center gap-2">
+                  <FaStar size={16} className="text-yellow-500" />
+                  <p>{movie?.vote_average.toFixed(1)}</p>
+                </div>
+                <span>&bull;</span>
+                <div className="flex items-center gap-2">
+                  <BsStars size={16} className="text-yellow-600" />
+                  <p>{movie?.popularity} Votes</p>
+                </div>
+              </div>
+              <div className="mt-6 w-[700px]">
+                <p className="text-lg text-slate-500 dark:text-slate-500">
+                  Overview
                 </p>
-              </div>
-              <span>&bull;</span>
-              <div className="flex items-center gap-2">
-                <FaStar size={16} className="text-yellow-500" />
-                <p>{movie?.vote_average.toFixed(1)}</p>
-              </div>
-              <span>&bull;</span>
-              <div className="flex items-center gap-2">
-                <BsStars size={16} className="text-yellow-600" />
-                <p>{movie?.popularity} Votes</p>
+                <p className="mt-2">{movie?.overview}</p>
               </div>
             </div>
-            <div className="mt-6 w-[700px]">
-              <p className="text-lg text-slate-500 dark:text-slate-500">
-                Overview
-              </p>
-              <p className="mt-2">{movie?.overview}</p>
-            </div>
-          </div>
+          )}
         </div>
       )}
       <div>
@@ -116,13 +150,21 @@ const WatchMoviePage: WithPageLayout = () => {
               />
             </div>
             <div className="w-full overflow-hidden truncate">
-              {/* TODO: add tooltip around */}
-              <Link
-                href={`/movies/${recommendedMovie.id}`}
-                className="w-full text-xl font-semibold text-slate-800 hover:underline dark:text-slate-100"
-              >
-                {recommendedMovie.title}
-              </Link>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Link
+                      href={`/movies/${recommendedMovie.id}`}
+                      className="w-full text-xl font-semibold text-slate-800 hover:underline dark:text-slate-100"
+                    >
+                      {recommendedMovie.title}
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{recommendedMovie.title}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
               <div className="mt-2 flex gap-4">
                 <FaStar className="text-yellow-400" size={16} />
                 <p className="font-semibold text-slate-800 dark:text-slate-200">

@@ -3,9 +3,14 @@ import Link from 'next/link';
 import { FaStar } from 'react-icons/fa';
 
 // import { getBase64Image } from '@/lib/utils/base64';
-// import notFoundImage from '@/assets/not-found-image.png';
 import notFoundImage from '@/assets/image-not-found.png';
 import Favorite from '@/components/favorite';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { imageUrl } from '@/lib/utils/movie';
 
 import type { MovieSchema } from '@/schemas/movies';
@@ -29,7 +34,6 @@ const Card: React.FC<Props> = ({ movie }) => {
           className="h-full w-full object-center transition group-hover:scale-105"
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8WQ8AAncBeri2L5wAAAAASUVORK5CYII="
-          // blurDataURL={getBase64Image(300, 300)}
         />
       </div>
       <div className="w-full overflow-hidden truncate pt-4">
@@ -44,14 +48,21 @@ const Card: React.FC<Props> = ({ movie }) => {
             {movie.release_date}
           </p>
         </div>
-        {/* TODO: add tooltip around */}
-
-        <Link
-          href={`/movies/${movie.id}`}
-          className="text-xl font-semibold text-slate-800 hover:underline dark:text-slate-100"
-        >
-          {movie.title}
-        </Link>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                href={`/movies/${movie.id}`}
+                className="text-xl font-semibold text-slate-800 hover:underline dark:text-slate-100"
+              >
+                {movie.title}
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{movie.title}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
       <Favorite className="group-hover:block" />
     </div>
