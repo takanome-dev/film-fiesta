@@ -39,10 +39,15 @@ const WatchMoviePage: WithPageLayout = () => {
       {!id && <Skeleton />}
       {id && (
         <div>
-          {/* TODO: figure how to make the movie work */}
-
-          <div className="min-h-screen border border-red-500">
-            THIS IS THE MOVIE
+          <div className="h-[90vh">
+            <iframe
+              src={`${embedMovieUrl(Number(id))}`}
+              width="100%"
+              height="100%"
+              title={`Movie ${id as string}`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
           </div>
           <div className="mt-10 flex flex-col gap-4">
             <h1 className="text-2xl font-bold">{movie?.title}</h1>
@@ -81,14 +86,6 @@ const WatchMoviePage: WithPageLayout = () => {
               <p className="mt-2">{movie?.overview}</p>
             </div>
           </div>
-          {/* // <iframe
-          //   src={embedMovieUrl(Number(id))}
-          //   width="100%"
-          //   height="100%"
-          //   title={`Movie ${id as string}`}
-          //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          //   allowFullScreen
-          // /> */}
         </div>
       )}
       <div>
