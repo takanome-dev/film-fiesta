@@ -1,11 +1,11 @@
 import { z } from 'zod';
 
-const movieSchema = z.object({
+export const movieSchema = z.object({
   adult: z.boolean().optional(),
   backdrop_path: z.string().optional(),
   genre_ids: z.array(z.number()).optional(),
   genres: z.array(z.object({ id: z.number(), name: z.string() })).optional(),
-  id: z.number(),
+  id: z.string(),
   original_language: z.string(),
   original_title: z.string(),
   overview: z.string(),
