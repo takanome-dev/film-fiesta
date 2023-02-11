@@ -15,8 +15,6 @@ const FavoritePage: WithPageLayout = () => {
   const { data, isLoading, error, refetch } =
     api.favorite.getFavorites.useQuery();
 
-  console.log({ data });
-
   if (isLoading) {
     return (
       <div className="flex h-96 items-center justify-center">
