@@ -149,7 +149,7 @@ CREATE trigger on_auth_user_created
 CREATE TABLE IF NOT EXISTS favorites (
   id uuid NOT NULL DEFAULT uuid_generate_v4(),
   "user" uuid,
-  "movie" uuid,
+  "movie" integer,
   "created_at" timestamp with time zone NOT NULL DEFAULT now(),
   "updated_at" timestamp with time zone NOT NULL DEFAULT now(),
   CONSTRAINT favorites_pkey PRIMARY KEY (id),
@@ -170,7 +170,7 @@ CREATE POLICY "Can do everything on favorites." ON favorites for all USING (next
 -- Create movies table
 --
 CREATE TABLE IF NOT EXISTS movies (
-  id uuid NOT NULL DEFAULT uuid_generate_v4(),
+  id INTEGER NOT NULL
   adult boolean,
   backdrop_path text,
   genre_ids text[],

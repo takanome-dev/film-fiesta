@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { BsArrowRepeat } from 'react-icons/bs';
 import { Circles } from 'react-loader-spinner';
 
@@ -10,8 +11,11 @@ import { api } from '@/lib/utils/api';
 import type { WithPageLayout } from '@/types/with-page-layout';
 
 const FavoritePage: WithPageLayout = () => {
+  const router = useRouter();
   const { data, isLoading, error, refetch } =
     api.favorite.getFavorites.useQuery();
+
+  console.log({ data });
 
   if (isLoading) {
     return (
@@ -41,11 +45,26 @@ const FavoritePage: WithPageLayout = () => {
           Refresh <BsArrowRepeat className="ml-2" />
         </Button>
       </div>
-      <div className="grid grid-cols-4 gap-4">
-        {data?.map((fav) => (
-          <Card movie={fav.movie} key={fav.id} />
-        ))}
-      </div>
+      {data?.length > 0 ? (
+        <div className="grid grid-cols-4 gap-4">
+          {data?.map((fav) => (
+            <Card movie={fav.movie} key={fav.id} />
+          ))}
+        </div>
+      ) : (
+        <div className="flex h-96 flex-col items-center justify-center">
+          <p className="text-xl font-semibold">No favorites yet ❤</p>
+          <p className="my-6">Browse the movies and add your favorites</p>
+          <Button
+            variant="outline"
+            onClick={() => {
+              router.push('/movies').catch(console.error);
+            }}
+          >
+            Explore movies
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

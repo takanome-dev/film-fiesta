@@ -64,7 +64,7 @@ const Card: React.FC<Props> = ({ movie }) => {
           </Tooltip>
         </TooltipProvider>
       </div>
-      <Favorite className="group-hover:block" />
+      <Favorite movie={movie} className="group-hover:block" />
     </div>
   );
 };

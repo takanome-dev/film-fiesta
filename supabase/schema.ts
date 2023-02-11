@@ -145,21 +145,24 @@ export interface Database {
         Row: {
           created_at: string | null;
           id: string;
-          movie: string | null;
+          is_favorite: boolean | null;
+          movie: number | null;
           updated_at: string | null;
           user: string | null;
         };
         Insert: {
           created_at?: string | null;
           id?: string;
-          movie?: string | null;
+          is_favorite?: boolean | null;
+          movie?: number | null;
           updated_at?: string | null;
           user?: string | null;
         };
         Update: {
           created_at?: string | null;
           id?: string;
-          movie?: string | null;
+          is_favorite?: boolean | null;
+          movie?: number | null;
           updated_at?: string | null;
           user?: string | null;
         };
@@ -197,10 +200,9 @@ export interface Database {
         Row: {
           adult: boolean | null;
           backdrop_path: string | null;
-          created_at: string | null;
-          genre_ids: number[];
+          genre_ids: number[] | null;
           genres: Json[] | null;
-          id: string;
+          id: number;
           original_language: string | null;
           original_title: string | null;
           overview: string | null;
@@ -215,10 +217,9 @@ export interface Database {
         Insert: {
           adult?: boolean | null;
           backdrop_path?: string | null;
-          created_at?: string | null;
-          genre_ids: number[];
+          genre_ids?: number[] | null;
           genres?: Json[] | null;
-          id?: string;
+          id: number;
           original_language?: string | null;
           original_title?: string | null;
           overview?: string | null;
@@ -233,10 +234,9 @@ export interface Database {
         Update: {
           adult?: boolean | null;
           backdrop_path?: string | null;
-          created_at?: string | null;
-          genre_ids?: number[];
+          genre_ids?: number[] | null;
           genres?: Json[] | null;
-          id?: string;
+          id?: number;
           original_language?: string | null;
           original_title?: string | null;
           overview?: string | null;
@@ -283,6 +283,9 @@ export interface Database {
       [_ in never]: never;
     };
     Enums: {
+      [_ in never]: never;
+    };
+    CompositeTypes: {
       [_ in never]: never;
     };
   };

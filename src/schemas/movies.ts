@@ -5,7 +5,7 @@ export const movieSchema = z.object({
   backdrop_path: z.string().optional(),
   genre_ids: z.array(z.number()).optional(),
   genres: z.array(z.object({ id: z.number(), name: z.string() })).optional(),
-  id: z.string(),
+  id: z.number(),
   original_language: z.string(),
   original_title: z.string(),
   overview: z.string(),
@@ -13,7 +13,7 @@ export const movieSchema = z.object({
   poster_path: z.string(),
   release_date: z.string(),
   title: z.string(),
-  video: z.boolean(),
+  video: z.boolean().optional().default(false),
   vote_average: z.number(),
   vote_count: z.number(),
 });

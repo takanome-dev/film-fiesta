@@ -3,25 +3,23 @@ import { z } from 'zod';
 
 import { favoriteOutputSchema } from '@/schemas/favorites';
 import { movieSchema } from '@/schemas/movies';
-import {
-  protectedProcedure,
-  createTRPCRouter,
-  publicProcedure,
-} from '@/server/api/trpc';
+import { protectedProcedure, createTRPCRouter } from '@/server/api/trpc';
 
 const favoriteRouter = createTRPCRouter({
-  addFavorite: publicProcedure
+  addFavorite: protectedProcedure
     .input(
       z.object({
-        userId: z.string(),
-        movie: movieSchema.required(),
+        movie: movieSchema.omit({ genres: true }),
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const { data, error } = await ctx.supabase
+      const { error } = await ctx.supabase
         .from('movies')
-        .insert(input.movie)
-        .single();
+        .upsert(input.movie, {
+          onConflict: 'id',
+          ignoreDuplicates: false,
+        })
+        .select();
 
       if (error) {
         throw new TRPCError({
@@ -30,14 +28,16 @@ const favoriteRouter = createTRPCRouter({
         });
       }
 
-      const parsedData = movieSchema.parse(data);
-
-      const { error: favoriteError } = await ctx.supabase
+      const { data, error: favoriteError } = await ctx.supabase
         .from('favorites')
         .insert({
-          user: input.userId,
-          movie: parsedData.id,
+          user: ctx.session.user.id,
+          movie: input.movie.id,
         });
+
+      console.log('===========================================');
+      console.log({ data, favoriteError });
+      console.log('===========================================');
 
       if (favoriteError) {
         throw new TRPCError({
@@ -46,7 +46,7 @@ const favoriteRouter = createTRPCRouter({
         });
       }
 
-      return parsedData;
+      return data;
     }),
   getFavorites: protectedProcedure.query(async ({ ctx }) => {
     const { data, error } = await ctx.supabase
