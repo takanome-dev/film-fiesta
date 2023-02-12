@@ -17,6 +17,7 @@ export const movieSchema = z.object({
   vote_average: z.number(),
   vote_count: z.number(),
   is_favorite: z.boolean().optional().default(false),
+  is_in_db: z.boolean().optional().default(false),
 });
 
 const responseSchema = z.object({

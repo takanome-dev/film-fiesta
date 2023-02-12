@@ -67,11 +67,14 @@ const moviesRouter = createTRPCRouter({
         page: z.number().default(1),
       })
     )
-    .query(async ({ input }) => {
-      const result = await http<ResponseSchema>(
+    .query(async ({ ctx, input }) => {
+      const response = await getMoviesWithFavs(
+        ctx.supabase as SupabaseAuthClient,
+        ctx.session?.user?.id ?? '',
         `/movie/top_rated?page=${input.page}`
       );
-      return result;
+
+      return response;
     }),
   getMovieById: publicProcedure
     .input(
@@ -81,6 +84,7 @@ const moviesRouter = createTRPCRouter({
     )
     .query(async ({ input }) => {
       const result = await http<MovieSchema>(`/movie/${input.id}`);
+      // TODO: check if movie is fav and mutate
       return result;
     }),
   getPopularMovies: publicProcedure
@@ -89,11 +93,14 @@ const moviesRouter = createTRPCRouter({
         page: z.number(),
       })
     )
-    .query(async ({ input }) => {
-      const result = await http<ResponseSchema>(
+    .query(async ({ ctx, input }) => {
+      const response = await getMoviesWithFavs(
+        ctx.supabase as SupabaseAuthClient,
+        ctx.session?.user?.id ?? '',
         `/movie/popular?page=${input.page}`
       );
-      return result;
+
+      return response;
     }),
   getTrendingMovies: publicProcedure
     .input(
@@ -101,11 +108,14 @@ const moviesRouter = createTRPCRouter({
         page: z.number(),
       })
     )
-    .query(async ({ input }) => {
-      const result = await http<ResponseSchema>(
+    .query(async ({ ctx, input }) => {
+      const response = await getMoviesWithFavs(
+        ctx.supabase as SupabaseAuthClient,
+        ctx.session?.user?.id ?? '',
         `/trending/movie/day?page=${input.page}`
       );
-      return result;
+
+      return response;
     }),
   getSimilarMovies: publicProcedure
     .input(
@@ -113,9 +123,14 @@ const moviesRouter = createTRPCRouter({
         id: z.number(),
       })
     )
-    .query(async ({ input }) => {
-      const result = await http<ResponseSchema>(`/movie/${input.id}/similar`);
-      return result;
+    .query(async ({ ctx, input }) => {
+      const response = await getMoviesWithFavs(
+        ctx.supabase as SupabaseAuthClient,
+        ctx.session?.user?.id ?? '',
+        `/movie/${input.id}/similar`
+      );
+
+      return response;
     }),
   getRecommendations: publicProcedure
     .input(
@@ -123,11 +138,14 @@ const moviesRouter = createTRPCRouter({
         id: z.number(),
       })
     )
-    .query(async ({ input }) => {
-      const result = await http<ResponseSchema>(
+    .query(async ({ ctx, input }) => {
+      const response = await getMoviesWithFavs(
+        ctx.supabase as SupabaseAuthClient,
+        ctx.session?.user?.id ?? '',
         `/movie/${input.id}/recommendations`
       );
-      return result;
+
+      return response;
     }),
   getVideos: publicProcedure
     .input(

@@ -17,7 +17,6 @@ export const favoriteOutputSchema = z.array(
       id: z.string().optional(),
     }),
     movie: movieSchema,
-    is_favorite: z.boolean().optional(),
     created_at: z.string().optional(),
     updated_at: z.string().optional(),
   })

@@ -18,7 +18,6 @@ export const getFavoriteMovies = async (
       id,
       user(id),
       movie(*),
-      is_favorite,
       created_at,
       updated_at
     `
@@ -44,13 +43,31 @@ const favoriteRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      // TODO: toggle is_favorite if it's already true
+      if (input.movie.is_favorite || input.movie.is_in_db) {
+        const { error } = await ctx.supabase
+          .from('movies')
+          .update({ is_favorite: false })
+          .eq('id', input.movie.id);
+
+        if (error) {
+          throw new TRPCError({
+            code: 'INTERNAL_SERVER_ERROR',
+            message: error.message,
+          });
+        }
+
+        return { message: 'Movie removed from favorites' };
+      }
+
       const { error } = await ctx.supabase
         .from('movies')
-        .upsert(input.movie, {
-          onConflict: 'id',
-          ignoreDuplicates: false,
-        })
+        .upsert(
+          { ...input.movie, is_favorite: true },
+          {
+            onConflict: 'id',
+            ignoreDuplicates: false,
+          }
+        )
         .select();
 
       if (error) {
@@ -60,7 +77,7 @@ const favoriteRouter = createTRPCRouter({
         });
       }
 
-      const { data, error: favoriteError } = await ctx.supabase
+      const { error: favoriteError } = await ctx.supabase
         .from('favorites')
         .insert({
           user: ctx.session.user.id,
@@ -74,14 +91,16 @@ const favoriteRouter = createTRPCRouter({
         });
       }
 
-      return data;
+      return { message: 'Movie added to favorites' };
     }),
   getFavorites: protectedProcedure.query(async ({ ctx }) => {
     const data = await getFavoriteMovies(
       ctx.supabase as SupabaseAuthClient,
       ctx.session.user.id
     );
-    return data;
+
+    const filteredData = data.filter((favorite) => favorite.movie.is_favorite);
+    return filteredData;
   }),
 });
 

@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import Card from '@/components/card';
+import Error from '@/components/error';
 import Pagination from '@/components/pagination';
 import SkeletonWrapper from '@/components/skeleton-wrapper';
 import MainLayout from '@/layouts/main-layout';
@@ -14,19 +15,20 @@ const MoviesPage: WithPageLayout = () => {
   const { page } = router.query;
   const pageNumber = Number(page) || 1;
 
-  const { data, error, isLoading } = api.movies.getMovies.useQuery({
+  const { data, error, isLoading, refetch } = api.movies.getMovies.useQuery({
     page: pageNumber,
   });
 
-  // TODO: handle error
-  if (error) return <div>failed to fetch movies: {error.message}</div>;
+  if (error) {
+    return <Error handleRefetch={() => refetch()} resourceName="movies" />;
+  }
 
   return (
     <>
       <div className="grid grid-cols-4 gap-4">
         {isLoading && <SkeletonWrapper height={370} count={12} radius={6} />}
         {data?.results.map((m) => (
-          <Card movie={m} key={m.id} />
+          <Card movie={m} key={m.id} handleRefetch={refetch} />
         ))}
       </div>
       <Pagination

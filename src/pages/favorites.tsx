@@ -15,6 +15,10 @@ const FavoritePage: WithPageLayout = () => {
   const { data, isLoading, error, refetch } =
     api.favorite.getFavorites.useQuery();
 
+  const handleRefetchFavorites = () => {
+    refetch().catch(console.error);
+  };
+
   if (isLoading) {
     return (
       <div className="flex h-96 items-center justify-center">
@@ -39,14 +43,18 @@ const FavoritePage: WithPageLayout = () => {
     <div>
       <div className="flex items-center justify-between">
         <h1 className="mb-8 text-2xl font-semibold">My Favorites</h1>
-        <Button variant="subtle">
+        <Button variant="subtle" onClick={handleRefetchFavorites}>
           Refresh <BsArrowRepeat className="ml-2" />
         </Button>
       </div>
       {data?.length > 0 ? (
         <div className="grid grid-cols-4 gap-4">
           {data?.map((fav) => (
-            <Card movie={fav.movie} key={fav.id} />
+            <Card
+              movie={fav.movie}
+              key={fav.id}
+              handleRefetch={handleRefetchFavorites}
+            />
           ))}
         </div>
       ) : (

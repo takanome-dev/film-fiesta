@@ -201,8 +201,8 @@ export interface Database {
           adult: boolean | null;
           backdrop_path: string | null;
           genre_ids: number[] | null;
-          genres: Json[] | null;
           id: number;
+          is_favorite: boolean | null;
           original_language: string | null;
           original_title: string | null;
           overview: string | null;
@@ -218,8 +218,8 @@ export interface Database {
           adult?: boolean | null;
           backdrop_path?: string | null;
           genre_ids?: number[] | null;
-          genres?: Json[] | null;
           id: number;
+          is_favorite?: boolean | null;
           original_language?: string | null;
           original_title?: string | null;
           overview?: string | null;
@@ -235,8 +235,8 @@ export interface Database {
           adult?: boolean | null;
           backdrop_path?: string | null;
           genre_ids?: number[] | null;
-          genres?: Json[] | null;
           id?: number;
+          is_favorite?: boolean | null;
           original_language?: string | null;
           original_title?: string | null;
           overview?: string | null;

@@ -26,7 +26,7 @@ const SearchPage: WithPageLayout = () => {
     page: pageNumber,
   });
 
-  const { data, error, isLoading } = api.search.getMovies.useQuery({
+  const { data, error, isLoading, refetch } = api.search.getMovies.useQuery({
     query: q as string,
     page: pageNumber,
   });
@@ -63,7 +63,11 @@ const SearchPage: WithPageLayout = () => {
               <SkeletonWrapper height={360} count={12} radius={6} />
             )}
             {topRatedMovies?.results.map((m) => (
-              <Card movie={m} key={m.id} />
+              <Card
+                movie={m}
+                key={m.id}
+                handleRefetch={refetchTopRatedMovies}
+              />
             ))}
           </div>
         </div>
@@ -81,7 +85,9 @@ const SearchPage: WithPageLayout = () => {
       <div className="grid grid-cols-4 gap-4">
         {isLoading && <SkeletonWrapper height={360} count={12} radius={6} />}
         {(data?.results?.length as number) > 0 ? (
-          data?.results.map((m) => <Card movie={m} key={m.id} />)
+          data?.results.map((m) => (
+            <Card movie={m} key={m.id} handleRefetch={refetch} />
+          ))
         ) : (
           <div className="col-span-4 flex min-h-[70vh] w-full items-center justify-center">
             <div className="w-1/3 rounded-lg border-l-8 border-l-yellow-500 bg-slate-200 px-4 py-2 dark:bg-slate-500">
