@@ -202,7 +202,7 @@ export interface Database {
           backdrop_path: string | null;
           genre_ids: number[] | null;
           id: number;
-          is_favorite: boolean | null;
+          Is_in_db: boolean | null;
           original_language: string | null;
           original_title: string | null;
           overview: string | null;
@@ -219,7 +219,7 @@ export interface Database {
           backdrop_path?: string | null;
           genre_ids?: number[] | null;
           id: number;
-          is_favorite?: boolean | null;
+          Is_in_db?: boolean | null;
           original_language?: string | null;
           original_title?: string | null;
           overview?: string | null;
@@ -236,7 +236,7 @@ export interface Database {
           backdrop_path?: string | null;
           genre_ids?: number[] | null;
           id?: number;
-          is_favorite?: boolean | null;
+          Is_in_db?: boolean | null;
           original_language?: string | null;
           original_title?: string | null;
           overview?: string | null;

@@ -20,6 +20,19 @@ const getMoviesWithFavs = async (
 ) => {
   let result = await http<ResponseSchema>(path);
 
+  const { data: moviesData } = await supabase.from('movies').select('id');
+
+  const parsedData = z.array(z.object({ id: z.number() })).parse(moviesData);
+
+  result.results = result.results.map((movie) => {
+    const isInDb = parsedData.find((dbMovie) => dbMovie.id === movie.id);
+
+    return {
+      ...movie,
+      is_in_db: !!isInDb,
+    };
+  });
+
   if (userId) {
     const favMovies = await getFavoriteMovies(supabase, userId);
 
@@ -28,7 +41,7 @@ const getMoviesWithFavs = async (
 
       return {
         ...movie,
-        is_favorite: favMovie?.is_favorite || false,
+        is_favorite: favMovie?.is_favorite ?? false,
       };
     });
 

@@ -16,8 +16,9 @@ export const getFavoriteMovies = async (
     .select(
       `
       id,
-      user(id),
+      user,
       movie(*),
+      is_favorite,
       created_at,
       updated_at
     `
@@ -39,15 +40,15 @@ const favoriteRouter = createTRPCRouter({
   addFavorite: protectedProcedure
     .input(
       z.object({
-        movie: movieSchema.omit({ genres: true }),
+        movie: movieSchema.omit({ genres: true, is_favorite: true }),
       })
     )
     .mutation(async ({ ctx, input }) => {
-      if (input.movie.is_favorite || input.movie.is_in_db) {
-        const { error } = await ctx.supabase
-          .from('movies')
-          .update({ is_favorite: false })
-          .eq('id', input.movie.id);
+      if (!input.movie.is_in_db) {
+        const { error } = await ctx.supabase.from('movies').insert({
+          ...input.movie,
+          is_in_db: true,
+        });
 
         if (error) {
           throw new TRPCError({
@@ -55,20 +56,13 @@ const favoriteRouter = createTRPCRouter({
             message: error.message,
           });
         }
-
-        return { message: 'Movie removed from favorites' };
       }
 
-      const { error } = await ctx.supabase
-        .from('movies')
-        .upsert(
-          { ...input.movie, is_favorite: true },
-          {
-            onConflict: 'id',
-            ignoreDuplicates: false,
-          }
-        )
-        .select();
+      const { data, error } = await ctx.supabase
+        .from('favorites')
+        .select()
+        .eq('movie', input.movie.id)
+        .eq('user', ctx.session.user.id);
 
       if (error) {
         throw new TRPCError({
@@ -77,17 +71,34 @@ const favoriteRouter = createTRPCRouter({
         });
       }
 
-      const { error: favoriteError } = await ctx.supabase
+      if (data?.length) {
+        const { error: updateError } = await ctx.supabase
+          .from('favorites')
+          .update({ is_favorite: false })
+          .eq('id', data[0]?.id);
+
+        if (updateError) {
+          throw new TRPCError({
+            code: 'INTERNAL_SERVER_ERROR',
+            message: updateError.message,
+          });
+        }
+
+        return { message: 'Movie removed from favorites' };
+      }
+
+      const { error: insertError } = await ctx.supabase
         .from('favorites')
         .insert({
           user: ctx.session.user.id,
           movie: input.movie.id,
+          is_favorite: true,
         });
 
-      if (favoriteError) {
+      if (insertError) {
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
-          message: favoriteError.message,
+          message: insertError.message,
         });
       }
 
@@ -99,7 +110,16 @@ const favoriteRouter = createTRPCRouter({
       ctx.session.user.id
     );
 
-    const filteredData = data.filter((favorite) => favorite.movie.is_favorite);
+    const filteredData = data
+      .filter((favorite) => favorite.is_favorite)
+      .map((fav) => ({
+        ...fav,
+        movie: {
+          ...fav.movie,
+          is_favorite: true,
+        },
+      }));
+
     return filteredData;
   }),
 });

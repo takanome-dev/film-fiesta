@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { BsArrowRepeat } from 'react-icons/bs';
 import { Circles } from 'react-loader-spinner';
 
@@ -18,6 +19,10 @@ const FavoritePage: WithPageLayout = () => {
   const handleRefetchFavorites = () => {
     refetch().catch(console.error);
   };
+
+  useEffect(() => {
+    refetch().catch(console.error);
+  }, [refetch]);
 
   if (isLoading) {
     return (
@@ -50,11 +55,7 @@ const FavoritePage: WithPageLayout = () => {
       {data?.length > 0 ? (
         <div className="grid grid-cols-4 gap-4">
           {data?.map((fav) => (
-            <Card
-              movie={fav.movie}
-              key={fav.id}
-              handleRefetch={handleRefetchFavorites}
-            />
+            <Card movie={fav.movie} key={fav.id} handleRefetch={refetch} />
           ))}
         </div>
       ) : (

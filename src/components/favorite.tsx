@@ -16,7 +16,7 @@ interface Props {
 
 const Favorite: React.FC<Props> = ({ className = '', movie, onRefetch }) => {
   const [isFavorite, setIsFavorite] = useState(movie.is_favorite);
-  const { mutate, error, data, isLoading } =
+  const { mutateAsync, error, data, isLoading } =
     api.favorite.addFavorite.useMutation();
 
   if (error) {
@@ -28,11 +28,11 @@ const Favorite: React.FC<Props> = ({ className = '', movie, onRefetch }) => {
     toast.success(data.message);
   }
 
-  const handleAddFavorite = () => {
+  const handleAddFavorite = async () => {
     setIsFavorite(!isFavorite);
-    mutate({
+    await mutateAsync({
       movie,
-    });
+    }).catch(console.error);
     onRefetch();
   };
 
@@ -43,10 +43,11 @@ const Favorite: React.FC<Props> = ({ className = '', movie, onRefetch }) => {
         'absolute top-6 right-6 hidden rounded-full',
         'h-11 p-2 disabled:cursor-none disabled:opacity-50',
         isFavorite
-          ? 'bg-red-200 hover:bg-red-300 dark:bg-red-200 dark:hover:bg-red-300'
+          ? 'bg-red-100 hover:bg-red-200 dark:bg-red-100 dark:hover:bg-red-200'
           : '',
         className
       )}
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onClick={handleAddFavorite}
       disabled={isLoading}
     >
