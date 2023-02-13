@@ -30,12 +30,12 @@ const Error: React.FC<ErrorProps> = ({ handleRefetch, resourceName }) => {
           Failed to fetch {resourceName}. Please try again.
         </p>
         <div className="mt-8">
-          <Button className="py-2" onClick={handleRefetch}>
+          <Button className="py-2 focus:ring-0" onClick={handleRefetch}>
             Retry
             <BsArrowRepeat size={20} className="ml-2" />
           </Button>
           <Button
-            className="ml-4 py-2"
+            className="ml-4 py-2 focus:ring-0"
             onClick={() => setOpenFeedback(!openFeedback)}
           >
             Report

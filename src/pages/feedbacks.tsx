@@ -40,7 +40,7 @@ const FeedbacksPage: WithPageLayout = () => {
     <div>
       <div className="flex items-center justify-between">
         <h1 className="mb-8 text-2xl font-semibold">My Feedbacks</h1>
-        <Button variant="subtle">
+        <Button variant="subtle" className="focus:ring-0">
           Refresh <BsArrowRepeat className="ml-2" />
         </Button>
       </div>

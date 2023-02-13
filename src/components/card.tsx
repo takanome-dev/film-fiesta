@@ -17,9 +17,10 @@ import type { MovieSchema } from '@/schemas/movies';
 
 interface Props {
   movie: MovieSchema;
+  handleRefetch: () => any;
 }
 
-const Card: React.FC<Props> = ({ movie }) => {
+const Card: React.FC<Props> = ({ movie, handleRefetch }) => {
   const url = movie.poster_path ?? movie.backdrop_path;
   const image = url ? imageUrl(url) : notFoundImage;
 
@@ -64,7 +65,11 @@ const Card: React.FC<Props> = ({ movie }) => {
           </Tooltip>
         </TooltipProvider>
       </div>
-      <Favorite className="group-hover:block" />
+      <Favorite
+        movie={movie}
+        onRefetch={handleRefetch}
+        className="group-hover:block"
+      />
     </div>
   );
 };

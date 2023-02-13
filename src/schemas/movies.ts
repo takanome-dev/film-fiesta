@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const movieSchema = z.object({
+export const movieSchema = z.object({
   adult: z.boolean().optional(),
   backdrop_path: z.string().optional(),
   genre_ids: z.array(z.number()).optional(),
@@ -13,9 +13,11 @@ const movieSchema = z.object({
   poster_path: z.string(),
   release_date: z.string(),
   title: z.string(),
-  video: z.boolean(),
+  video: z.boolean().optional().default(false),
   vote_average: z.number(),
   vote_count: z.number(),
+  is_favorite: z.boolean().optional(),
+  is_in_db: z.boolean().optional().default(false),
 });
 
 const responseSchema = z.object({
