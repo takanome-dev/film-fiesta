@@ -8,5 +8,3 @@ export const supabase = createClient<Database>(
   env.NEXT_PUBLIC_SUPABASE_URL,
   env.NEXT_PUBLIC_SUPABASE_API_KEY
 );
-
-export type SupabaseAuthClient = ReturnType<typeof createClient>;

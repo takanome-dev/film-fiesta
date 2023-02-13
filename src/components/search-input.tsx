@@ -22,7 +22,7 @@ const SearchInput = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="relative hidden items-center overflow-hidden rounded-lg border border-slate-200 dark:border-slate-500 xs:flex"
+      className="relative flex items-center overflow-hidden rounded-lg border border-slate-200 dark:border-slate-500"
     >
       <span className="sr-only">Search</span>
       <Input

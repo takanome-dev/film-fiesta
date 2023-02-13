@@ -1,14 +1,12 @@
-// import { FaRegHeart, FaSearch } from 'react-icons/fa';
+import { FaRegHeart, FaSearch } from 'react-icons/fa';
+import { FcFilmReel } from 'react-icons/fc';
 import { FiTrendingUp } from 'react-icons/fi';
 import { ImFire } from 'react-icons/im';
-import { MdOutlineExplore } from 'react-icons/md';
 
 const links = [
   {
-    name: 'Explore',
-    Icon: MdOutlineExplore,
-    // name: 'Movies',
-    // Icon: FcFilmReel,
+    name: 'Movies',
+    Icon: FcFilmReel,
     path: '/movies',
   },
   {
@@ -21,16 +19,16 @@ const links = [
     Icon: ImFire,
     path: '/popular',
   },
-  // {
-  //   name: 'Favorites',
-  //   Icon: FaRegHeart,
-  //   path: '/favorites',
-  // },
-  // {
-  //   name: 'Search',
-  //   Icon: FaSearch,
-  //   path: '/search',
-  // },
+  {
+    name: 'Favorites',
+    Icon: FaRegHeart,
+    path: '/favorites',
+  },
+  {
+    name: 'Search',
+    Icon: FaSearch,
+    path: '/search',
+  },
 ];
 
 export default links;

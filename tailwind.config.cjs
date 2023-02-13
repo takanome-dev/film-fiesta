@@ -15,12 +15,6 @@ module.exports = {
       //     "2xl": "1440px",
       //   },
       // },
-      gridTemplateColumns: {
-        'auto-fill': 'repeat(auto-fill, minmax(220px, 1fr))',
-      },
-      screens: {
-        xs: '480px',
-      },
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
       },

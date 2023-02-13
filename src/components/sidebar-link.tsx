@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
@@ -23,7 +25,7 @@ const SidebarLink: React.FC<Props> = (props) => {
     <Link
       className={buttonVariants({
         variant: 'ghost',
-        className: cn('w-full !justify-start hover:bg-slate-200 focus:ring-0', {
+        className: cn('w-full !justify-start hover:bg-slate-200', {
           '!bg-slate-300 dark:!bg-slate-700': pathname === path,
         }),
       })}
@@ -38,7 +40,6 @@ const SidebarLink: React.FC<Props> = (props) => {
       <p
         className={cn(
           'ml-4 text-slate-800 dark:text-slate-100',
-          'hidden lg:block',
           className || ''
         )}
       >

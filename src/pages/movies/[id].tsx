@@ -14,7 +14,6 @@ import { Slide } from 'react-slideshow-image';
 import Card from '@/components/card';
 import CommentCard from '@/components/comment-card';
 import Error from '@/components/error';
-import Favorite from '@/components/favorite';
 import SkeletonWrapper from '@/components/skeleton-wrapper';
 import { Button } from '@/components/ui/button';
 import {
@@ -147,7 +146,7 @@ const MovieDetailsPage: WithPageLayout = () => {
         {isLoading && <SkeletonLoader />}
         {movie && (
           <>
-            <div className="relative h-[500px] w-fit overflow-hidden rounded-lg">
+            <div className="h-[500px] w-fit overflow-hidden rounded-lg">
               <Image
                 src={imageUrl(movie?.poster_path)}
                 alt={movie?.title}
@@ -157,7 +156,6 @@ const MovieDetailsPage: WithPageLayout = () => {
                 placeholder="blur"
                 blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8WQ8AAncBeri2L5wAAAAASUVORK5CYII="
               />
-              <Favorite movie={movie} onRefetch={refetch} className="block" />
             </div>
             <div className="flex flex-col gap-4">
               <h1 className="text-2xl font-bold">{movie?.title}</h1>
@@ -193,6 +191,7 @@ const MovieDetailsPage: WithPageLayout = () => {
                 </p>
                 <p className="mt-2">{movie?.overview}</p>
                 <div className="mt-12 flex gap-4">
+                  {/* TODO: add this and nprogress */}
                   <Button
                     // eslint-disable-next-line @typescript-eslint/no-misused-promises
                     onClick={() =>
@@ -309,11 +308,7 @@ const MovieDetailsPage: WithPageLayout = () => {
             cssClass="recommended-movies-slide"
           >
             {recommendedMovie?.results.map((m) => (
-              <Card
-                movie={m}
-                key={m.id}
-                handleRefetch={refetchRecommendedMovie}
-              />
+              <Card movie={m} key={m.id} />
             ))}
           </Slide>
         )}

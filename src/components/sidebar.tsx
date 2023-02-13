@@ -1,12 +1,6 @@
 import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
-import {
-  FaRegComment,
-  FaSignInAlt,
-  FaSignOutAlt,
-  FaRegHeart,
-  FaSearch,
-} from 'react-icons/fa';
+import { FaRegComment, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 
 import Feedback from '@/components/feedback';
 import Footer from '@/components/footer';
@@ -29,14 +23,6 @@ const Sidebar = () => {
             </li>
           ))}
         </ul>
-        <ul className="grid grid-flow-row auto-rows-max text-sm">
-          <li className="my-1">
-            <SidebarLink name="Favorites" path="/favorites" Icon={FaRegHeart} />
-          </li>
-          <li className="my-1">
-            <SidebarLink name="Search" path="/search" Icon={FaSearch} />
-          </li>
-        </ul>
         <div className="">
           <Button
             variant="ghost"
@@ -47,9 +33,7 @@ const Sidebar = () => {
               className="text-slate-500 dark:text-slate-100"
               size={20}
             />
-            <p className="ml-2 hidden text-slate-800 dark:text-slate-100 lg:block">
-              Feedback
-            </p>
+            <p className="ml-2 text-slate-800 dark:text-slate-100">Feedback</p>
           </Button>
           {user?.id ? (
             <SidebarLink

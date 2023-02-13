@@ -22,11 +22,7 @@ const Unauthorized = () => (
         Sorry, you are not authorized to view this page.
       </p>
 
-      <Button
-        variant="subtle"
-        className="mt-4 focus:ring-0"
-        onClick={Router.back}
-      >
+      <Button variant="subtle" className="mt-4" onClick={Router.back}>
         <BsArrowLeft className="mr-2" />
         Go Back
       </Button>
