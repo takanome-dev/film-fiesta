@@ -16,24 +16,23 @@ interface Props {
 
 const Favorite: React.FC<Props> = ({ className = '', movie, onRefetch }) => {
   const [isFavorite, setIsFavorite] = useState(movie.is_favorite);
-  const { mutateAsync, error, data, isLoading } =
-    api.favorite.addFavorite.useMutation();
+  const { mutate, isLoading } = api.favorite.addFavorite.useMutation();
 
-  if (error) {
-    console.error(error);
-    toast.error(error.message);
-  }
-
-  if (data) {
-    toast.success(data.message);
-  }
-
-  const handleAddFavorite = async () => {
+  const handleAddFavorite = () => {
     setIsFavorite(!isFavorite);
-    await mutateAsync({
-      movie,
-    }).catch(console.error);
-    onRefetch();
+    mutate(
+      { movie },
+      {
+        onSuccess: (data) => {
+          toast.success(data.message);
+          onRefetch();
+        },
+        onError: (error) => {
+          console.error(error);
+          toast.error(error.message);
+        },
+      }
+    );
   };
 
   return (

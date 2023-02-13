@@ -95,9 +95,23 @@ const moviesRouter = createTRPCRouter({
         id: z.number(),
       })
     )
-    .query(async ({ input }) => {
+    .query(async ({ ctx, input }) => {
       const result = await http<MovieSchema>(`/movie/${input.id}`);
-      // TODO: check if movie is fav and mutate
+
+      if (ctx.session?.user?.id) {
+        const favMovies = await getFavoriteMovies(
+          ctx.supabase as SupabaseAuthClient,
+          ctx.session.user.id
+        );
+
+        const favMovie = favMovies.find((fav) => fav.movie.id === result.id);
+
+        return {
+          ...result,
+          is_favorite: favMovie?.is_favorite ?? false,
+        };
+      }
+
       return result;
     }),
   getPopularMovies: publicProcedure

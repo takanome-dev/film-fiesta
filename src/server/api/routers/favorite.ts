@@ -72,9 +72,10 @@ const favoriteRouter = createTRPCRouter({
       }
 
       if (data?.length) {
+        const isFavorite = data[0]?.is_favorite;
         const { error: updateError } = await ctx.supabase
           .from('favorites')
-          .update({ is_favorite: false })
+          .update({ is_favorite: !isFavorite })
           .eq('id', data[0]?.id);
 
         if (updateError) {
@@ -84,7 +85,11 @@ const favoriteRouter = createTRPCRouter({
           });
         }
 
-        return { message: 'Movie removed from favorites' };
+        return {
+          message: isFavorite
+            ? 'Movie removed from favorites'
+            : 'Movie added to favorites',
+        };
       }
 
       const { error: insertError } = await ctx.supabase
