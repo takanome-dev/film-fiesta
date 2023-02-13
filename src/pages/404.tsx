@@ -17,6 +17,7 @@ const NotFoundPage = () => (
         className={buttonVariants({
           variant: 'subtle',
           size: 'lg',
+          className: 'focus:ring-0',
         })}
         href="/"
       >

@@ -97,7 +97,7 @@ const Feedback: React.FC<Props> = ({ open, setOpen }) => {
             </div>
           </div> */}
           <DialogFooter>
-            <Button type="submit" disabled={isLoading}>
+            <Button type="submit" className="focus:ring-0" disabled={isLoading}>
               Send feedback
             </Button>
           </DialogFooter>

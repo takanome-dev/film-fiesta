@@ -40,7 +40,7 @@ const Favorite: React.FC<Props> = ({ className = '', movie, onRefetch }) => {
       variant="subtle"
       className={cn(
         'absolute top-6 right-6 hidden rounded-full',
-        'h-11 p-2 disabled:cursor-none disabled:opacity-50',
+        'h-11 p-2 focus:ring-0 disabled:cursor-none disabled:opacity-50',
         isFavorite
           ? 'bg-red-100 hover:bg-red-200 dark:bg-red-100 dark:hover:bg-red-200'
           : '',

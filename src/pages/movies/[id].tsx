@@ -193,7 +193,6 @@ const MovieDetailsPage: WithPageLayout = () => {
                 </p>
                 <p className="mt-2">{movie?.overview}</p>
                 <div className="mt-12 flex gap-4">
-                  {/* TODO: add this and nprogress */}
                   <Button
                     // eslint-disable-next-line @typescript-eslint/no-misused-promises
                     onClick={() =>

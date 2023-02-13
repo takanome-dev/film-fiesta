@@ -26,7 +26,7 @@ const TrendingPage: WithPageLayout = () => {
 
   return (
     <>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-[250px] gap-4 xs:grid-cols-auto-fill">
         {isLoading && <SkeletonWrapper height={370} count={12} radius={6} />}
         {data?.results.map((m) => (
           <Card movie={m} key={m.id} handleRefetch={refetch} />

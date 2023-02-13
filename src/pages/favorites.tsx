@@ -48,7 +48,11 @@ const FavoritePage: WithPageLayout = () => {
     <div>
       <div className="flex items-center justify-between">
         <h1 className="mb-8 text-2xl font-semibold">My Favorites</h1>
-        <Button variant="subtle" onClick={handleRefetchFavorites}>
+        <Button
+          variant="subtle"
+          className="focus:ring-0"
+          onClick={handleRefetchFavorites}
+        >
           Refresh <BsArrowRepeat className="ml-2" />
         </Button>
       </div>

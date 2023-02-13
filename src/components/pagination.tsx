@@ -16,6 +16,7 @@ interface Event {
 
 const Pagination: React.FC<Props> = ({ page, pathname, totalPages }) => {
   console.log({ page });
+
   const PAGE_SIZE = 9;
   const pageCount = Math.ceil(totalPages / PAGE_SIZE);
 
@@ -38,7 +39,7 @@ const Pagination: React.FC<Props> = ({ page, pathname, totalPages }) => {
         </>
       }
       onPageChange={handlePageClick}
-      pageRangeDisplayed={3}
+      pageRangeDisplayed={1}
       pageCount={pageCount}
       // forcePage={page}
       previousLabel={
@@ -48,7 +49,7 @@ const Pagination: React.FC<Props> = ({ page, pathname, totalPages }) => {
         </>
       }
       renderOnZeroPageCount={() => null}
-      className="mx-auto mt-8 flex w-max items-center gap-1 overflow-hidden rounded-lg border border-slate-100 dark:border-0"
+      className="mx-auto mt-8 flex w-full items-center gap-1 overflow-hidden rounded-lg border border-slate-100 dark:border-0 xs:w-max"
       pageClassName="rounded-md overflow-hidden"
       pageLinkClassName={buttonVariants({
         variant: 'ghost',
