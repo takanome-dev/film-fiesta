@@ -5,7 +5,11 @@ import { BsArrowLeft } from 'react-icons/bs';
 
 import { Button } from '@/components/ui/button';
 
-const Unauthorized = () => (
+interface Props {
+  needSignIn?: boolean;
+}
+
+const Unauthorized: React.FC<Props> = ({ needSignIn = false }) => (
   <div className="grid grid-cols-2 items-center gap-8">
     <Image
       src="https://media.giphy.com/media/4VY613vurPreyrIHux/giphy.gif"
@@ -21,6 +25,8 @@ const Unauthorized = () => (
       <p className="text-lg">
         Sorry, you are not authorized to view this page.
       </p>
+      {/* TODO: add sign in modal or route */}
+      {needSignIn && <p className="text-lg">Please sign in to continue.</p>}
 
       <Button
         variant="subtle"

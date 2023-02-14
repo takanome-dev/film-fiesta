@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import React from 'react';
+import { BsArrowRight } from 'react-icons/bs';
 import { FaRegComment } from 'react-icons/fa';
 import { FiUser } from 'react-icons/fi';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,15 +14,26 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
+import type { UserSchema } from '@/schemas/user';
+
 const UserAvatar = () => {
-  const user = useSession().data?.user;
-  // TODO: add a fallback image
+  const { data: session } = useSession();
+  const user = session?.user as UserSchema;
+
+  if (!user) {
+    // TODO: add sign in route or modal
+    return (
+      <Button className="h-full bg-slate-600 py-2 font-semibold hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900">
+        Sign in <BsArrowRight className="ml-2" />
+      </Button>
+    );
+  }
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer">
-          <AvatarImage src={user?.image as string} alt={user?.name as string} />
+          <AvatarImage src={user?.image as string} alt={user?.name} />
           <AvatarFallback>TK</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>

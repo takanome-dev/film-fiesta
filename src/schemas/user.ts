@@ -11,13 +11,16 @@ export const registerSchema = z.object({
   password: z.string().min(8),
 });
 
-export const userSchema = z.object({
-  email: z.string().email(),
-  id: z.string(),
-  image: z.string().nullable(),
-  name: z.string(),
-  createdAt: z.string(),
-});
+export const userSchema = z
+  .object({
+    id: z.string(),
+    email: z.string().email(),
+    name: z.string(),
+    image: z.string().nullable(),
+    isAdmin: z.boolean().nullable(),
+    createdAt: z.string(),
+  })
+  .optional();
 
 export type LoginSchema = z.infer<typeof loginSchema>;
 export type RegisterSchema = z.infer<typeof registerSchema>;

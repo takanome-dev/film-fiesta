@@ -1,6 +1,11 @@
+import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import {
+  AiOutlineHeart,
+  AiFillHeart,
+  AiOutlineInfoCircle,
+} from 'react-icons/ai';
 
 import { Button } from '@/components/ui/button';
 import { api } from '@/lib/utils/api';
@@ -15,10 +20,28 @@ interface Props {
 }
 
 const Favorite: React.FC<Props> = ({ className = '', movie, onRefetch }) => {
+  const { data: session } = useSession();
+  const user = session?.user;
+
   const [isFavorite, setIsFavorite] = useState(movie.is_favorite);
   const { mutate, isLoading } = api.favorite.addFavorite.useMutation();
 
   const handleAddFavorite = () => {
+    if (!user) {
+      toast(
+        'You need to sign in before you can add a movie to your favorites.',
+        {
+          icon: (
+            <AiOutlineInfoCircle className="mr-2 text-amber-500" size={40} />
+          ),
+          position: 'top-center',
+          className:
+            'border-l-4 border-amber-400 dark:bg-slate-800 dark:text-slate-100',
+        }
+      );
+      return;
+    }
+
     setIsFavorite(!isFavorite);
     mutate(
       { movie },
@@ -46,7 +69,6 @@ const Favorite: React.FC<Props> = ({ className = '', movie, onRefetch }) => {
           : '',
         className
       )}
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onClick={handleAddFavorite}
       disabled={isLoading}
     >

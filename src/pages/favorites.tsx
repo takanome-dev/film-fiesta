@@ -6,6 +6,7 @@ import { Circles } from 'react-loader-spinner';
 import Card from '@/components/card';
 import Error from '@/components/error';
 import { Button } from '@/components/ui/button';
+import Unauthorized from '@/components/unauthorized';
 import MainLayout from '@/layouts/main-layout';
 import { api } from '@/lib/utils/api';
 
@@ -41,6 +42,9 @@ const FavoritePage: WithPageLayout = () => {
   }
 
   if (error) {
+    if (error.message === 'UNAUTHORIZED') {
+      return <Unauthorized needSignIn />;
+    }
     return <Error handleRefetch={() => refetch()} resourceName="favorites" />;
   }
 

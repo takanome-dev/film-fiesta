@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Footer from '@/components/footer';
 import Header from '@/components/header';
 import Sidebar from '@/components/sidebar';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -17,6 +18,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => (
         {children}
       </main>
     </div>
+    <Footer />
   </>
 );
 
