@@ -2,9 +2,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
+import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils/classname';
-
-import { buttonVariants } from './ui/button';
 
 import type { IconType } from 'react-icons';
 
@@ -12,10 +11,11 @@ interface Props extends React.HTMLAttributes<HTMLAnchorElement> {
   path: string;
   name: string;
   Icon: IconType;
+  external?: boolean;
 }
 
 const SidebarLink: React.FC<Props> = (props) => {
-  const { path, name, Icon, className } = props;
+  const { path, name, Icon, className, external } = props;
 
   const pathname = usePathname();
 
@@ -23,16 +23,16 @@ const SidebarLink: React.FC<Props> = (props) => {
     <Link
       className={buttonVariants({
         variant: 'ghost',
-        className: cn('w-full !justify-start hover:bg-slate-200 focus:ring-0', {
-          '!bg-slate-300 dark:!bg-slate-700': pathname === path,
+        className: cn('w-full !justify-start hover:bg-slate-100 focus:ring-0', {
+          '!bg-slate-200 dark:!bg-slate-700': pathname === path,
         }),
       })}
       href={path}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noreferrer' : undefined}
     >
       <Icon
-        className={cn('text-slate-500 dark:text-slate-200', className || '', {
-          'bg-slate-300 dark:bg-slate-800': pathname === path,
-        })}
+        className={cn('text-slate-500 dark:text-slate-200', className || '')}
         size={20}
       />
       <p

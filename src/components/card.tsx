@@ -25,7 +25,7 @@ const Card: React.FC<Props> = ({ movie, handleRefetch }) => {
   const image = url ? imageUrl(url) : notFoundImage;
 
   return (
-    <div className="group relative rounded-lg border border-slate-100 bg-slate-100 p-4 shadow-slate-200 dark:border-slate-600 dark:bg-slate-900">
+    <div className="group relative rounded-lg border border-slate-200 bg-white/50 p-4 shadow-slate-200 backdrop-blur-md hover:bg-white dark:border-slate-700 dark:bg-slate-900">
       <div className="h-80 w-full overflow-hidden rounded-lg">
         <Image
           src={image}

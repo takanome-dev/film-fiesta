@@ -8,6 +8,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   error: string | null;
 }
 
+// TODO: remove me
 const Input: React.FC<Props> = (props) => {
   const { label, id, type, className, error } = props;
 

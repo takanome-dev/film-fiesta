@@ -5,6 +5,7 @@ interface Props {
   error: string | null;
 }
 
+// TODO: remove me
 const ErrorMessage: React.FC<Props> = ({ error }) => {
   if (!error) return null;
 
