@@ -5,7 +5,7 @@ import ModeToggle from '@/components/mode-toggle';
 
 const SignInLayout = ({ children }: { children: React.ReactNode }) => (
   <>
-    <header className="flex h-14 items-center border border-red-500">
+    <header className="flex h-14 items-center">
       <div className="mx-8 flex w-full items-center justify-between md:container md:mx-auto">
         <Link href="/" className="h-10 w-full text-slate-700 dark:text-white">
           LOGO
