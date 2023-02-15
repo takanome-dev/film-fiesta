@@ -3,7 +3,6 @@
 <p><a href="https://github.com/TAKANOME-DEV/vidly-client"><img alt="GitHub Actions status" src="https://github.com/TAKANOME-DEV/vidly-client/actions/workflows/codeql-analysis.yml/badge.svg"></a></p>
 <strong>
 A movie website where you can rent movies that you want to watch. <br>
-See [vidly-server](https://github.com/TAKANOME-DEV/vidly-client) for back-end code.
 </strong>
 </div>
 
@@ -11,17 +10,12 @@ See [vidly-server](https://github.com/TAKANOME-DEV/vidly-client) for back-end co
 
 ![Vidly Homepage](https://user-images.githubusercontent.com/79809121/211150168-9ecf89f3-d974-4245-a83f-f6f655b0725a.png)
 
+<div align="center">
+<h2>:construction: V2: Work In Progress... :construction: </h1>
+<p><a href="https://github.com/TAKANOME-DEV/vidly-client/pull/72">Checkout the nextjs-13 branch</a></p>
+</div>
 
-# ⬇️ Installation
-
-- Clone the project: `git clone https://github.com/TAKANOME-DEV/vidly-client.git`
-- Install dependencies: `npm install` or `yarn install` or `pnpm install`
-- Start the server: `npm start`
-
-# Using Docker 🐬
-
-- Build an image: `docker build -t vidly-client .`
-- Start a container: `docker run -d -p 3000:3000 vidly-client`
+![v2](https://user-images.githubusercontent.com/79809121/219101547-98852d6b-668e-4cc8-bb4d-d5201f8a7f6b.png)
 
 # 💭 Feedback
 
