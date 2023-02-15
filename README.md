@@ -2,7 +2,7 @@
 <h2>⚡ Vidly 🎥</h1>
 <p><a href="https://github.com/TAKANOME-DEV/vidly-client"><img alt="GitHub Actions status" src="https://github.com/TAKANOME-DEV/vidly-client/actions/workflows/codeql-analysis.yml/badge.svg"></a></p>
 <strong>
-A movie website where you can rent movies that you want to watch. <br>
+A movie website where you can rent movies that you want to watch. Preview https://takanome-vidly.netlify.app/ <br>
 </strong>
 </div>
 
