@@ -1,56 +1,30 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import Wrapper from "../components/common/Wrapper";
+import Link from 'next/link';
+import React from 'react';
 
-const Container = styled.div`
-	align-items: center;
-	display: flex;
-	justify-content: center;
+import { buttonVariants } from '@/components/ui/button';
 
-	h1 {
-		text-align: center;
-	}
+const NotFoundPage = () => (
+  <div className="relative flex min-h-screen items-center justify-center bg-lost bg-cover bg-center bg-no-repeat">
+    <div className="absolute inset-0 bg-black/70" />
+    <div className="w-3/4 rounded-lg bg-white bg-opacity-60 p-12 text-center shadow backdrop-blur-sm sm:w-[500px]">
+      <h1 className="mb-8 text-3xl font-bold text-slate-900 dark:text-slate-900">
+        Ooops! Page not found
+      </h1>
+      <p className="mb-8 font-medium text-slate-900">
+        Sorry, we couldn&apos;t find the page you were looking for.
+      </p>
+      <Link
+        className={buttonVariants({
+          variant: 'subtle',
+          size: 'lg',
+          className: 'focus:ring-0',
+        })}
+        href="/"
+      >
+        Go back home
+      </Link>
+    </div>
+  </div>
+);
 
-	p {
-		font-size: 1.2rem;
-		margin-top: 1rem;
-	}
-
-	a {
-		align-self: center;
-		background-color: var(--secondary-40);
-		border-radius: 0.3rem;
-		color: var(--dark);
-		font-size: 1.3rem;
-		font-weight: 500;
-		margin-top: 2rem;
-		padding: 1rem 0.5rem;
-		text-align: center;
-		text-decoration: none;
-		width: 50%;
-		&:hover {
-			background-color: var(--secondary-60);
-		}
-
-		@media (max-width: 460px) {
-			width: 100%;
-		}
-	}
-`;
-
-const NotFound = () => {
-	return (
-		<Container>
-			<Wrapper width="30rem">
-				<h1>👀 &nbsp;-&nbsp; Not Found</h1>
-				<p>
-					Sorry, we couldn't find what you were looking for or the page no
-					longer exists 😟
-				</p>
-				<Link to="/">Go back to home</Link>
-			</Wrapper>
-		</Container>
-	);
-};
-
-export default NotFound;
+export default NotFoundPage;

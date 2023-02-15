@@ -1,9 +1,10 @@
 {
-	"workbench.colorCustomizations": {
-		"titleBar.activeForeground": "#000",
-		"titleBar.inactiveForeground": "#000000CC",
-		"titleBar.activeBackground": "#FFC600",
-		"titleBar.inactiveBackground": "#FFC600CC"
-	},
-	"cSpell.words": ["Swiper", "toastify", "vidly"]
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.tsdk": "node_modules/.pnpm/typescript@4.9.4/node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "cSpell.words": ["classname", "TMDB"]
 }

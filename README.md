@@ -6,19 +6,20 @@ A movie website where you can rent movies that you want to watch. <br>
 </strong>
 </div>
 
----
-
-![Vidly Homepage](https://user-images.githubusercontent.com/79809121/211150168-9ecf89f3-d974-4245-a83f-f6f655b0725a.png)
-
 <div align="center">
 <h2>:construction: V2: Work In Progress... :construction: </h1>
+<p>This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.</p>
 <p><a href="https://github.com/TAKANOME-DEV/vidly-client/pull/72">Checkout the nextjs-13 branch</a></p>
 </div>
 
 ![v2](https://user-images.githubusercontent.com/79809121/219101547-98852d6b-668e-4cc8-bb4d-d5201f8a7f6b.png)
 
-# 💭 Feedback
 
-If you like this project, give it a star ✨
+- [Documentation](https://create.t3.gg/)
+- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
 
-If you have suggestions, please start a Discussion!
+You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+
+## How do I deploy this?
+
+Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
