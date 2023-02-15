@@ -1,22 +1,19 @@
-# Create T3 App
+<div align="center">
+<h2>⚡ Vidly 🎥</h1>
+<p><a href="https://github.com/TAKANOME-DEV/vidly-client"><img alt="GitHub Actions status" src="https://github.com/TAKANOME-DEV/vidly-client/actions/workflows/codeql-analysis.yml/badge.svg"></a></p>
+<strong>
+A movie website where you can rent movies that you want to watch. <br>
+</strong>
+</div>
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+<div align="center">
+<h2>:construction: V2: Work In Progress... :construction: </h1>
+<p>This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.</p>
+<p><a href="https://github.com/TAKANOME-DEV/vidly-client/pull/72">Checkout the nextjs-13 branch</a></p>
+</div>
 
-## What's next? How do I make an app with this?
+![v2](https://user-images.githubusercontent.com/79809121/219101547-98852d6b-668e-4cc8-bb4d-d5201f8a7f6b.png)
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
-
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
-
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
-
-## Learn More
-
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
 
 - [Documentation](https://create.t3.gg/)
 - [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
