@@ -68,6 +68,7 @@ export const clientSchema = z.object({
   NEXT_PUBLIC_TMDB_IMAGE: z.string().url(),
   NEXT_PUBLIC_TMDB_URL: z.string().url(),
   NEXT_PUBLIC_TMDB_VIDEO: z.string().url(),
+  NEXT_PUBLIC_APP_URL: z.string().url(),
 });
 
 /**
@@ -82,4 +83,5 @@ export const clientEnv = {
   NEXT_PUBLIC_TMDB_IMAGE: process.env.NEXT_PUBLIC_TMDB_IMAGE,
   NEXT_PUBLIC_TMDB_URL: process.env.NEXT_PUBLIC_TMDB_URL,
   NEXT_PUBLIC_TMDB_VIDEO: process.env.NEXT_PUBLIC_TMDB_VIDEO,
+  NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
 };
