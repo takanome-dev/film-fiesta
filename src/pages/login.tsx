@@ -8,6 +8,8 @@ import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { SiDiscord } from 'react-icons/si';
+import { z } from 'zod';
+import { fromZodError } from 'zod-validation-error';
 
 import InputWithError from '@/components/input-with-error';
 import Meta from '@/components/meta';
@@ -15,16 +17,21 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import SignInLayout from '@/layouts/signin-layout';
 import useForm from '@/lib/hooks/useForm';
 // import { api } from '@/lib/utils/api';
-import { type LoginSchema } from '@/schemas/user';
+import { loginSchema, type LoginSchema } from '@/schemas/user';
 
 import type { WithPageLayout } from '@/types/with-page-layout';
 
 const LoginPage: WithPageLayout = () => {
   const [error, setError] = useState<string | null>(null);
-  const { handleChange, inputs } = useForm<LoginSchema>({
-    email: '',
-    password: '',
-  });
+  const [email, setEmail] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+  // const { handleChange, inputs } = useForm<LoginSchema>({
+  //   email: '',
+  //   password: '',
+  // });
 
   const handleResetPassword = () => {
     // TODO: create a custom component for toast
@@ -69,39 +76,34 @@ const LoginPage: WithPageLayout = () => {
   };
 
   // eslint-disable-next-line consistent-return
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    toast(
-      'Sorry, we have temporarily disabled credentials login. Please use Google or GitHub.',
-      {
-        icon: <AiOutlineInfoCircle className="mr-2 text-amber-500" size={40} />,
-        position: 'top-center',
-        className:
-          'border-l-4 border-amber-400 dark:bg-slate-800 dark:text-slate-100',
-      }
-    );
+    // toast(
+    //   'Sorry, we have temporarily disabled credentials login. Please use Google or GitHub.',
+    //   {
+    //     icon: <AiOutlineInfoCircle className="mr-2 text-amber-500" size={40} />,
+    //     position: 'top-center',
+    //     className:
+    //       'border-l-4 border-amber-400 dark:bg-slate-800 dark:text-slate-100',
+    //   }
+    // );
 
     // TODO: create a wrapper func for this
-    // const result = loginSchema.safeParse(inputs);
+    const result = z.string().email().safeParse(email);
 
-    // if (!result.success) {
-    //   const zodError = fromZodError(result.error).message.split(':')[1];
-    //   return setError(zodError as string);
-    // }
+    if (!result.success) {
+      return setError(result.error.message);
+    }
 
-    // // TODO: create a wrapper func for this
-    // try {
-    //   setError('');
-    //   // const response = await mutateAsync(inputs);
-    //   // console.log({ response });
-    //   console.log('Sent login request...', result);
-    //   // await router.push('/');
-    // } catch (err) {
-    //   if (err instanceof Error) {
-    //     setError(err.message);
-    //   }
-    // }
+    try {
+      setError('');
+      await signIn('email', { email, callbackUrl: '/movies' });
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      }
+    }
   };
 
   return (
@@ -119,9 +121,10 @@ const LoginPage: WithPageLayout = () => {
             label="Email"
             containerClassName="max-w-full"
             onChange={handleChange}
-            value={inputs.email}
+            value={email}
+            error={error}
           />
-          <InputWithError
+          {/* <InputWithError
             name="password"
             type="password"
             label="Password"
@@ -129,7 +132,7 @@ const LoginPage: WithPageLayout = () => {
             onChange={handleChange}
             value={inputs.password}
             error={error}
-          />
+          /> */}
           <Button className="mt-4">Sign in</Button>
         </form>
         <div className="mt-8 flex justify-between">
