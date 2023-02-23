@@ -10,6 +10,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { SiDiscord } from 'react-icons/si';
 
 import InputWithError from '@/components/input-with-error';
+import Meta from '@/components/meta';
 import { Button, buttonVariants } from '@/components/ui/button';
 import SignInLayout from '@/layouts/signin-layout';
 import useForm from '@/lib/hooks/useForm';
@@ -104,110 +105,113 @@ const LoginPage: WithPageLayout = () => {
   };
 
   return (
-    <div className="w-3/4 rounded-lg border border-slate-300 bg-white/50 p-8 shadow-lg backdrop-blur-md dark:border-slate-200 dark:bg-slate-800 sm:w-[400px]">
-      <h1 className="mb-6 text-center text-3xl font-bold text-slate-800 dark:text-slate-50">
-        Login to your account
-      </h1>
-      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <InputWithError
-          name="email"
-          type="email"
-          label="Email"
-          containerClassName="max-w-full"
-          onChange={handleChange}
-          value={inputs.email}
-        />
-        <InputWithError
-          name="password"
-          type="password"
-          label="Password"
-          containerClassName="max-w-full"
-          onChange={handleChange}
-          value={inputs.password}
-          error={error}
-        />
-        <Button className="mt-4">Sign in</Button>
-      </form>
-      <div className="mt-8 flex justify-between">
-        {/* TODO: add reset passwd feature */}
-        {/* <Link href="/reset-password" className="font-medium hover:underline">
+    <>
+      <Meta page="Login" />
+      <div className="w-3/4 rounded-lg border border-slate-300 bg-white/50 p-8 shadow-lg backdrop-blur-md dark:border-slate-200 dark:bg-slate-800 sm:w-[400px]">
+        <h1 className="mb-6 text-center text-3xl font-bold text-slate-800 dark:text-slate-50">
+          Login to your account
+        </h1>
+        {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <InputWithError
+            name="email"
+            type="email"
+            label="Email"
+            containerClassName="max-w-full"
+            onChange={handleChange}
+            value={inputs.email}
+          />
+          <InputWithError
+            name="password"
+            type="password"
+            label="Password"
+            containerClassName="max-w-full"
+            onChange={handleChange}
+            value={inputs.password}
+            error={error}
+          />
+          <Button className="mt-4">Sign in</Button>
+        </form>
+        <div className="mt-8 flex justify-between">
+          {/* TODO: add reset passwd feature */}
+          {/* <Link href="/reset-password" className="font-medium hover:underline">
           Forgot password?
         </Link> */}
-        <Button
-          variant="link"
-          className="text-md"
-          onClick={handleResetPassword}
-        >
-          Forget password?
-        </Button>
-        <Link
-          href="/register"
-          className={buttonVariants({
-            variant: 'link',
-            className: 'text-md',
-          })}
-        >
-          Sign up
-        </Link>
-      </div>
-      <div className="relative mt-4 flex flex-col items-center">
-        <div className="relative flex w-full justify-center">
-          <div className="absolute top-1/2 left-0 block h-[1px] w-full bg-slate-300 dark:bg-slate-400" />
-          <span className="z-50 bg-slate-50 px-2 text-center dark:bg-slate-800">
-            or
-          </span>
-        </div>
-        <div className="mt-4 flex gap-2">
           <Button
-            variant="ghost"
-            size="sm"
-            className="h-10 dark:hover:bg-slate-600"
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            onClick={() => handleOauthLogin('google')}
+            variant="link"
+            className="text-md"
+            onClick={handleResetPassword}
           >
-            <FcGoogle size={24} className="" />
+            Forget password?
           </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-10 dark:hover:bg-slate-600"
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            onClick={() => handleOauthLogin('github')}
+          <Link
+            href="/register"
+            className={buttonVariants({
+              variant: 'link',
+              className: 'text-md',
+            })}
           >
-            <FaGithub size={24} className="" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-10 dark:hover:bg-slate-600"
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            onClick={() => handleOauthLogin('discord')}
-          >
-            <SiDiscord size={24} className="text-[#5865F2]" />
-          </Button>
+            Sign up
+          </Link>
         </div>
-      </div>
-      <div className="mt-4 flex flex-col items-center">
-        <div className="relative flex w-full justify-center">
-          <div className="absolute top-1/2 left-0 block h-[1px] w-full bg-slate-300 dark:bg-slate-400" />
-          <span className="z-50 bg-slate-50 px-2 text-center dark:bg-slate-800">
-            or
-          </span>
+        <div className="relative mt-4 flex flex-col items-center">
+          <div className="relative flex w-full justify-center">
+            <div className="absolute top-1/2 left-0 block h-[1px] w-full bg-slate-300 dark:bg-slate-400" />
+            <span className="z-50 bg-slate-50 px-2 text-center dark:bg-slate-800">
+              or
+            </span>
+          </div>
+          <div className="mt-4 flex gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-10 dark:hover:bg-slate-600"
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
+              onClick={() => handleOauthLogin('google')}
+            >
+              <FcGoogle size={24} className="" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-10 dark:hover:bg-slate-600"
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
+              onClick={() => handleOauthLogin('github')}
+            >
+              <FaGithub size={24} className="" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-10 dark:hover:bg-slate-600"
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
+              onClick={() => handleOauthLogin('discord')}
+            >
+              <SiDiscord size={24} className="text-[#5865F2]" />
+            </Button>
+          </div>
         </div>
-        {/* TODO: add magic link */}
-        {/* <Link href="/magic-link" className="mt-4 font-medium hover:underline">
+        <div className="mt-4 flex flex-col items-center">
+          <div className="relative flex w-full justify-center">
+            <div className="absolute top-1/2 left-0 block h-[1px] w-full bg-slate-300 dark:bg-slate-400" />
+            <span className="z-50 bg-slate-50 px-2 text-center dark:bg-slate-800">
+              or
+            </span>
+          </div>
+          {/* TODO: add magic link */}
+          {/* <Link href="/magic-link" className="mt-4 font-medium hover:underline">
           🪄 &nbsp; Use a Magic Link &nbsp; 🪄
         </Link> */}
-        <Button
-          variant="link"
-          className="text-md mt-4"
-          onClick={handleResetPassword}
-        >
-          🪄 &nbsp; Use a Magic Link &nbsp; 🪄
-        </Button>
+          <Button
+            variant="link"
+            className="text-md mt-4"
+            onClick={handleResetPassword}
+          >
+            🪄 &nbsp; Use a Magic Link &nbsp; 🪄
+          </Button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

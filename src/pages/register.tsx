@@ -10,6 +10,7 @@ import { SiDiscord } from 'react-icons/si';
 // import { fromZodError } from 'zod-validation-error';
 
 import InputWithError from '@/components/input-with-error';
+import Meta from '@/components/meta';
 import { Button } from '@/components/ui/button';
 import SignInLayout from '@/layouts/signin-layout';
 import useForm from '@/lib/hooks/useForm';
@@ -97,83 +98,86 @@ const RegisterPage: WithPageLayout = () => {
   };
 
   return (
-    <div className="w-3/4 rounded-lg border border-slate-300 bg-white/50 p-8 shadow-lg backdrop-blur-md dark:border-slate-200 dark:bg-slate-800 sm:w-[400px]">
-      <h1 className="mb-6 text-center text-3xl font-bold text-slate-800 dark:text-slate-50">
-        Create an account
-      </h1>
-      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <InputWithError
-          name="name"
-          type="text"
-          label="Name"
-          containerClassName="max-w-full"
-          onChange={handleChange}
-          value={inputs.name}
-        />
-        <InputWithError
-          name="email"
-          type="email"
-          label="Email"
-          containerClassName="max-w-full"
-          onChange={handleChange}
-          value={inputs.email}
-        />
-        <InputWithError
-          name="password"
-          type="password"
-          label="Password"
-          containerClassName="max-w-full"
-          onChange={handleChange}
-          value={inputs.password}
-          error={error}
-        />
-        <Button className="mt-4">Sign up</Button>
-      </form>
-      <div className="mt-4 flex justify-between">
-        <p className="font-medium">Already have an account?</p>
-        <Link href="/login" className="font-medium hover:underline">
-          Sign in
-        </Link>
-      </div>
-      <div className="relative mt-4 flex flex-col items-center">
-        <div className="relative flex w-full justify-center">
-          <div className="absolute top-1/2 left-0 block h-[1px] w-full bg-slate-300 dark:bg-slate-400" />
-          <span className="z-50 bg-slate-50 px-2 text-center dark:bg-slate-800">
-            or
-          </span>
+    <>
+      <Meta page="Register" />
+      <div className="w-3/4 rounded-lg border border-slate-300 bg-white/50 p-8 shadow-lg backdrop-blur-md dark:border-slate-200 dark:bg-slate-800 sm:w-[400px]">
+        <h1 className="mb-6 text-center text-3xl font-bold text-slate-800 dark:text-slate-50">
+          Create an account
+        </h1>
+        {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <InputWithError
+            name="name"
+            type="text"
+            label="Name"
+            containerClassName="max-w-full"
+            onChange={handleChange}
+            value={inputs.name}
+          />
+          <InputWithError
+            name="email"
+            type="email"
+            label="Email"
+            containerClassName="max-w-full"
+            onChange={handleChange}
+            value={inputs.email}
+          />
+          <InputWithError
+            name="password"
+            type="password"
+            label="Password"
+            containerClassName="max-w-full"
+            onChange={handleChange}
+            value={inputs.password}
+            error={error}
+          />
+          <Button className="mt-4">Sign up</Button>
+        </form>
+        <div className="mt-4 flex justify-between">
+          <p className="font-medium">Already have an account?</p>
+          <Link href="/login" className="font-medium hover:underline">
+            Sign in
+          </Link>
         </div>
-        <div className="mt-4 flex gap-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-10 dark:hover:bg-slate-600"
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            onClick={() => handleOauthLogin('google')}
-          >
-            <FcGoogle size={24} className="" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-10 dark:hover:bg-slate-600"
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            onClick={() => handleOauthLogin('github')}
-          >
-            <FaGithub size={24} className="" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-10 dark:hover:bg-slate-600"
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            onClick={() => handleOauthLogin('discord')}
-          >
-            <SiDiscord size={24} className="text-[#5865F2]" />
-          </Button>
+        <div className="relative mt-4 flex flex-col items-center">
+          <div className="relative flex w-full justify-center">
+            <div className="absolute top-1/2 left-0 block h-[1px] w-full bg-slate-300 dark:bg-slate-400" />
+            <span className="z-50 bg-slate-50 px-2 text-center dark:bg-slate-800">
+              or
+            </span>
+          </div>
+          <div className="mt-4 flex gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-10 dark:hover:bg-slate-600"
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
+              onClick={() => handleOauthLogin('google')}
+            >
+              <FcGoogle size={24} className="" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-10 dark:hover:bg-slate-600"
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
+              onClick={() => handleOauthLogin('github')}
+            >
+              <FaGithub size={24} className="" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-10 dark:hover:bg-slate-600"
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
+              onClick={() => handleOauthLogin('discord')}
+            >
+              <SiDiscord size={24} className="text-[#5865F2]" />
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

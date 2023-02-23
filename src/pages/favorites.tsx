@@ -5,6 +5,7 @@ import { Circles } from 'react-loader-spinner';
 
 import Card from '@/components/card';
 import Error from '@/components/error';
+import Meta from '@/components/meta';
 import { Button } from '@/components/ui/button';
 import Unauthorized from '@/components/unauthorized';
 import MainLayout from '@/layouts/main-layout';
@@ -49,38 +50,41 @@ const FavoritePage: WithPageLayout = () => {
   }
 
   return (
-    <div>
-      <div className="flex items-center justify-between">
-        <h1 className="mb-8 text-2xl font-semibold">My Favorites</h1>
-        <Button
-          variant="subtle"
-          className="focus:ring-0"
-          onClick={handleRefetchFavorites}
-        >
-          Refresh <BsArrowRepeat className="ml-2" />
-        </Button>
-      </div>
-      {data?.length > 0 ? (
-        <div className="grid grid-cols-4 gap-4">
-          {data?.map((fav) => (
-            <Card movie={fav.movie} key={fav.id} handleRefetch={refetch} />
-          ))}
-        </div>
-      ) : (
-        <div className="flex h-96 flex-col items-center justify-center">
-          <p className="text-xl font-semibold">No favorites yet ❤</p>
-          <p className="my-6">Browse the movies and add your favorites</p>
+    <>
+      <Meta page="Favorite Movies" noindex />
+      <div>
+        <div className="flex items-center justify-between">
+          <h1 className="mb-8 text-2xl font-semibold">My Favorites</h1>
           <Button
-            variant="outline"
-            onClick={() => {
-              router.push('/movies').catch(console.error);
-            }}
+            variant="subtle"
+            className="focus:ring-0"
+            onClick={handleRefetchFavorites}
           >
-            Explore movies
+            Refresh <BsArrowRepeat className="ml-2" />
           </Button>
         </div>
-      )}
-    </div>
+        {data?.length > 0 ? (
+          <div className="grid grid-cols-4 gap-4">
+            {data?.map((fav) => (
+              <Card movie={fav.movie} key={fav.id} handleRefetch={refetch} />
+            ))}
+          </div>
+        ) : (
+          <div className="flex h-96 flex-col items-center justify-center">
+            <p className="text-xl font-semibold">No favorites yet ❤</p>
+            <p className="my-6">Browse the movies and add your favorites</p>
+            <Button
+              variant="outline"
+              onClick={() => {
+                router.push('/movies').catch(console.error);
+              }}
+            >
+              Explore movies
+            </Button>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
