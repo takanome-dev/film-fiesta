@@ -1,5 +1,3 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { type OAuthProviderType } from 'next-auth/providers';
 import { signIn } from 'next-auth/react';
 import React, { useState } from 'react';
@@ -8,16 +6,12 @@ import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { SiDiscord } from 'react-icons/si';
-import { z } from 'zod';
-import { fromZodError } from 'zod-validation-error';
 
 import InputWithError from '@/components/input-with-error';
 import Meta from '@/components/meta';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import SignInLayout from '@/layouts/signin-layout';
-import useForm from '@/lib/hooks/useForm';
-// import { api } from '@/lib/utils/api';
-import { loginSchema, type LoginSchema } from '@/schemas/user';
+import { loginSchema } from '@/schemas/user';
 
 import type { WithPageLayout } from '@/types/with-page-layout';
 
@@ -28,28 +22,10 @@ const LoginPage: WithPageLayout = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
-  // const { handleChange, inputs } = useForm<LoginSchema>({
-  //   email: '',
-  //   password: '',
-  // });
-
-  const handleResetPassword = () => {
-    // TODO: create a custom component for toast
-    toast(
-      'Sorry, this feature is not available yet. Please contact the developer.',
-      {
-        icon: <AiOutlineInfoCircle className="mr-2 text-amber-500" size={40} />,
-        position: 'top-center',
-        className:
-          'border-l-4 border-amber-400 dark:bg-slate-800 dark:text-slate-100',
-      }
-    );
-  };
-
-  const router = useRouter();
 
   const handleOauthLogin = async (provider: OAuthProviderType) => {
     if (provider === 'discord') {
+      // TODO: create a custom component for toast
       toast(
         'Sorry, we have temporarily disabled Discord login. Please use Google or GitHub.',
         {
@@ -65,8 +41,7 @@ const LoginPage: WithPageLayout = () => {
     }
 
     try {
-      await signIn(provider);
-      router.push('/movies').catch(console.error);
+      await signIn(provider, { callbackUrl: '/movies' });
     } catch (err) {
       toast.error('Something went wrong. Please try again.');
       if (err instanceof Error) {
@@ -79,18 +54,7 @@ const LoginPage: WithPageLayout = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // toast(
-    //   'Sorry, we have temporarily disabled credentials login. Please use Google or GitHub.',
-    //   {
-    //     icon: <AiOutlineInfoCircle className="mr-2 text-amber-500" size={40} />,
-    //     position: 'top-center',
-    //     className:
-    //       'border-l-4 border-amber-400 dark:bg-slate-800 dark:text-slate-100',
-    //   }
-    // );
-
-    // TODO: create a wrapper func for this
-    const result = z.string().email().safeParse(email);
+    const result = loginSchema.safeParse(email);
 
     if (!result.success) {
       return setError(result.error.message);
@@ -124,39 +88,8 @@ const LoginPage: WithPageLayout = () => {
             value={email}
             error={error}
           />
-          {/* <InputWithError
-            name="password"
-            type="password"
-            label="Password"
-            containerClassName="max-w-full"
-            onChange={handleChange}
-            value={inputs.password}
-            error={error}
-          /> */}
           <Button className="mt-4">Sign in</Button>
         </form>
-        <div className="mt-8 flex justify-between">
-          {/* TODO: add reset passwd feature */}
-          {/* <Link href="/reset-password" className="font-medium hover:underline">
-          Forgot password?
-        </Link> */}
-          <Button
-            variant="link"
-            className="text-md"
-            onClick={handleResetPassword}
-          >
-            Forget password?
-          </Button>
-          <Link
-            href="/register"
-            className={buttonVariants({
-              variant: 'link',
-              className: 'text-md',
-            })}
-          >
-            Sign up
-          </Link>
-        </div>
         <div className="relative mt-4 flex flex-col items-center">
           <div className="relative flex w-full justify-center">
             <div className="absolute top-1/2 left-0 block h-[1px] w-full bg-slate-300 dark:bg-slate-400" />
@@ -193,25 +126,6 @@ const LoginPage: WithPageLayout = () => {
               <SiDiscord size={24} className="text-[#5865F2]" />
             </Button>
           </div>
-        </div>
-        <div className="mt-4 flex flex-col items-center">
-          <div className="relative flex w-full justify-center">
-            <div className="absolute top-1/2 left-0 block h-[1px] w-full bg-slate-300 dark:bg-slate-400" />
-            <span className="z-50 bg-slate-50 px-2 text-center dark:bg-slate-800">
-              or
-            </span>
-          </div>
-          {/* TODO: add magic link */}
-          {/* <Link href="/magic-link" className="mt-4 font-medium hover:underline">
-          🪄 &nbsp; Use a Magic Link &nbsp; 🪄
-        </Link> */}
-          <Button
-            variant="link"
-            className="text-md mt-4"
-            onClick={handleResetPassword}
-          >
-            🪄 &nbsp; Use a Magic Link &nbsp; 🪄
-          </Button>
         </div>
       </div>
     </>
