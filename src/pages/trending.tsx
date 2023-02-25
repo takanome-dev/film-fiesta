@@ -3,6 +3,7 @@ import React from 'react';
 
 import Card from '@/components/card';
 import Error from '@/components/error';
+import Meta from '@/components/meta';
 import Pagination from '@/components/pagination';
 import SkeletonWrapper from '@/components/skeleton-wrapper';
 import MainLayout from '@/layouts/main-layout';
@@ -26,6 +27,7 @@ const TrendingPage: WithPageLayout = () => {
 
   return (
     <>
+      <Meta page="Settings" />
       <div className="grid grid-cols-[250px] gap-4 xs:grid-cols-auto-fill">
         {isLoading && <SkeletonWrapper height={370} count={12} radius={6} />}
         {data?.results.map((m) => (

@@ -31,6 +31,11 @@ export const serverSchema = z.object({
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
   SUPABASE_SERVICE_ROLE_KEY: z.string(),
+  EMAIL_SERVER_USER: z.string(),
+  EMAIL_SERVER_PASSWORD: z.string(),
+  EMAIL_SERVER_HOST: z.string(),
+  EMAIL_SERVER_PORT: z.string(),
+  EMAIL_FROM: z.string(),
 });
 
 /**
@@ -55,6 +60,11 @@ export const serverEnv = {
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
+  EMAIL_SERVER_USER: process.env.EMAIL_SERVER_USER,
+  EMAIL_SERVER_PASSWORD: process.env.EMAIL_SERVER_PASSWORD,
+  EMAIL_SERVER_HOST: process.env.EMAIL_SERVER_HOST,
+  EMAIL_SERVER_PORT: process.env.EMAIL_SERVER_PORT,
+  EMAIL_FROM: process.env.EMAIL_FROM,
 };
 
 /**
@@ -68,6 +78,7 @@ export const clientSchema = z.object({
   NEXT_PUBLIC_TMDB_IMAGE: z.string().url(),
   NEXT_PUBLIC_TMDB_URL: z.string().url(),
   NEXT_PUBLIC_TMDB_VIDEO: z.string().url(),
+  NEXT_PUBLIC_APP_URL: z.string().url(),
 });
 
 /**
@@ -82,4 +93,5 @@ export const clientEnv = {
   NEXT_PUBLIC_TMDB_IMAGE: process.env.NEXT_PUBLIC_TMDB_IMAGE,
   NEXT_PUBLIC_TMDB_URL: process.env.NEXT_PUBLIC_TMDB_URL,
   NEXT_PUBLIC_TMDB_VIDEO: process.env.NEXT_PUBLIC_TMDB_VIDEO,
+  NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
 };

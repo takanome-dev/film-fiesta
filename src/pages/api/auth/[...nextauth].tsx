@@ -1,15 +1,15 @@
 import { SupabaseAdapter } from '@next-auth/supabase-adapter';
 import jwt from 'jsonwebtoken';
 import NextAuth, { type NextAuthOptions } from 'next-auth';
-// import CredentialsProvider from 'next-auth/providers/credentials';
 import DiscordProvider from 'next-auth/providers/discord';
+import EmailProvider from 'next-auth/providers/email';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 
 import { env as clientEnv } from '@/env/client.mjs';
 import { env as serverEnv } from '@/env/server.mjs';
-
-// import type { LoginSchema } from '@/schemas/user';
+import sendMail from '@/root/emails';
+import LoginLink from '@/root/emails/LoginLink';
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
@@ -65,26 +65,26 @@ export const authOptions: NextAuthOptions = {
       clientId: serverEnv.GOOGLE_CLIENT_ID,
       clientSecret: serverEnv.GOOGLE_CLIENT_SECRET,
     }),
-    // CredentialsProvider({
-    //   // The name to display on the sign in form (e.g. "Sign in with...")
-    //   name: 'Credentials',
-    //   // `credentials` is used to generate a form on the sign in page.
-    //   // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-    //   // e.g. domain, username, password, 2FA token, etc.
-    //   // You can pass any HTML attribute to the <input> tag through the object.
-    //   credentials: {},
-    //   async authorize(credentials: LoginSchema, req) {
-    //     // Add logic here to look up the user from the credentials supplied
-    //     const { email, password } = credentials;
-    //     if (email !== 'test@test.com' || password !== 'password') {
-    //       // Any object returned will be saved in `user` property of the JWT
-    //       throw new Error('Invalid email or password');
-    //     }
-    //     return null;
-
-    //     // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
-    //   },
-    // }),
+    EmailProvider({
+      server: {
+        host: serverEnv.EMAIL_SERVER_HOST,
+        port: Number(serverEnv.EMAIL_SERVER_PORT ?? 587),
+        auth: {
+          user: serverEnv.EMAIL_SERVER_USER,
+          pass: serverEnv.EMAIL_SERVER_PASSWORD,
+        },
+      },
+      from: serverEnv.EMAIL_FROM,
+      async sendVerificationRequest({ identifier, url, provider }) {
+        console.log({ identifier, url, provider });
+        const result = await sendMail({
+          subject: 'Your FilmFiesta login link',
+          to: identifier,
+          component: <LoginLink url={url} />,
+        }).catch(console.error);
+        console.log({ result });
+      },
+    }),
     /**
      * ...add more providers here
      *
@@ -95,9 +95,6 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
-  // pages: {
-  //   signIn: '/register',
-  // },
 };
 
 export default NextAuth(authOptions);

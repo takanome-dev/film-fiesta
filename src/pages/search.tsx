@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 
 import Card from '@/components/card';
 import Error from '@/components/error';
+import Meta from '@/components/meta';
 import Pagination from '@/components/pagination';
 import SkeletonWrapper from '@/components/skeleton-wrapper';
 import MainLayout from '@/layouts/main-layout';
@@ -45,69 +46,76 @@ const SearchPage: WithPageLayout = () => {
 
   if (!q) {
     return (
-      <div className="min-h-screen">
-        <div className="flex flex-col items-center rounded-lg border-l-8 border-l-yellow-500 bg-slate-200 px-4 py-2 dark:bg-slate-500">
-          <h3 className="text-lg font-semibold">
-            No search keyword or results found
-          </h3>
-          <p className="">
-            Try different keywords or remove search filters to see more results.
-          </p>
-        </div>
-        <div className="mt-8">
-          <h5 className="mb-6 text-xl text-slate-800 dark:text-slate-400">
-            Top Rated Movies
-          </h5>
-          <div className="grid grid-cols-[250px] gap-4 xs:grid-cols-auto-fill">
-            {topRatedMoviesLoading && (
-              <SkeletonWrapper height={360} count={12} radius={6} />
-            )}
-            {topRatedMovies?.results.map((m) => (
-              <Card
-                movie={m}
-                key={m.id}
-                handleRefetch={refetchTopRatedMovies}
-              />
-            ))}
+      <>
+        <Meta page="Search Movies" />
+        <div className="min-h-screen">
+          <div className="flex flex-col items-center rounded-lg border-l-8 border-l-yellow-500 bg-slate-200 px-4 py-2 dark:bg-slate-500">
+            <h3 className="text-lg font-semibold">
+              No search keyword or results found
+            </h3>
+            <p className="">
+              Try different keywords or remove search filters to see more
+              results.
+            </p>
+          </div>
+          <div className="mt-8">
+            <h5 className="mb-6 text-xl text-slate-800 dark:text-slate-400">
+              Top Rated Movies
+            </h5>
+            <div className="grid grid-cols-[250px] gap-4 xs:grid-cols-auto-fill">
+              {topRatedMoviesLoading && (
+                <SkeletonWrapper height={360} count={12} radius={6} />
+              )}
+              {topRatedMovies?.results.map((m) => (
+                <Card
+                  movie={m}
+                  key={m.id}
+                  handleRefetch={refetchTopRatedMovies}
+                />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 
   return (
-    <div>
-      {!!data?.total_results && (
-        <h3 className="mb-6 text-lg dark:text-slate-300">
-          🕵 {data?.total_results ?? 0} results found for &lsquo;{q}&lsquo;
-        </h3>
-      )}
-      <div className="grid grid-cols-4 gap-4">
-        {isLoading && <SkeletonWrapper height={360} count={12} radius={6} />}
-        {(data?.results?.length as number) > 0 ? (
-          data?.results.map((m) => (
-            <Card movie={m} key={m.id} handleRefetch={refetch} />
-          ))
-        ) : (
-          <div className="col-span-4 flex min-h-[70vh] w-full items-center justify-center">
-            <div className="w-1/3 rounded-lg border-l-8 border-l-yellow-500 bg-slate-200 px-4 py-2 dark:bg-slate-500">
-              <h3 className="mb-2 text-lg font-semibold">
-                No search keyword or results found
-              </h3>
-              <p className="">
-                Try different keywords or remove search filters to see more
-                results.
-              </p>
-            </div>
-          </div>
+    <>
+      <Meta page="Search Movies" />
+      <div>
+        {!!data?.total_results && (
+          <h3 className="mb-6 text-lg dark:text-slate-300">
+            🕵 {data?.total_results ?? 0} results found for &lsquo;{q}&lsquo;
+          </h3>
         )}
+        <div className="grid grid-cols-4 gap-4">
+          {isLoading && <SkeletonWrapper height={360} count={12} radius={6} />}
+          {(data?.results?.length as number) > 0 ? (
+            data?.results.map((m) => (
+              <Card movie={m} key={m.id} handleRefetch={refetch} />
+            ))
+          ) : (
+            <div className="col-span-4 flex min-h-[70vh] w-full items-center justify-center">
+              <div className="w-1/3 rounded-lg border-l-8 border-l-yellow-500 bg-slate-200 px-4 py-2 dark:bg-slate-500">
+                <h3 className="mb-2 text-lg font-semibold">
+                  No search keyword or results found
+                </h3>
+                <p className="">
+                  Try different keywords or remove search filters to see more
+                  results.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+        <Pagination
+          totalPages={data?.total_pages ?? 0}
+          page={pageNumber}
+          pathname="search"
+        />
       </div>
-      <Pagination
-        totalPages={data?.total_pages ?? 0}
-        page={pageNumber}
-        pathname="search"
-      />
-    </div>
+    </>
   );
 };
 
