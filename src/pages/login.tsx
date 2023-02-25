@@ -90,7 +90,7 @@ const LoginPage: WithPageLayout = () => {
           />
           <Button className="mt-4">Sign in</Button>
         </form>
-        <div className="relative mt-4 flex flex-col items-center">
+        <div className="relative mt-12 flex flex-col items-center">
           <div className="relative flex w-full justify-center">
             <div className="absolute top-1/2 left-0 block h-[1px] w-full bg-slate-300 dark:bg-slate-400" />
             <span className="z-50 bg-slate-50 px-2 text-center dark:bg-slate-800">
