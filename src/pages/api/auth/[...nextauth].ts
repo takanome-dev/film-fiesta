@@ -1,8 +1,8 @@
 import { SupabaseAdapter } from '@next-auth/supabase-adapter';
 import jwt from 'jsonwebtoken';
 import NextAuth, { type NextAuthOptions } from 'next-auth';
-// import CredentialsProvider from 'next-auth/providers/credentials';
 import DiscordProvider from 'next-auth/providers/discord';
+import EmailProvider from 'next-auth/providers/email';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 
@@ -64,6 +64,18 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: serverEnv.GOOGLE_CLIENT_ID,
       clientSecret: serverEnv.GOOGLE_CLIENT_SECRET,
+    }),
+    EmailProvider({
+      server: {
+        // TODO: use real email server
+        host: 'smtp.ethereal.email',
+        port: 587,
+        auth: {
+          user: serverEnv.EMAIL_SERVER_USER,
+          pass: serverEnv.EMAIL_SERVER_PASSWORD,
+        },
+      },
+      from: serverEnv.EMAIL_FROM,
     }),
     // CredentialsProvider({
     //   // The name to display on the sign in form (e.g. "Sign in with...")
