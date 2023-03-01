@@ -24,6 +24,7 @@ specifiers:
   '@types/jsonwebtoken': ^9.0.1
   '@types/node': ^18.11.18
   '@types/nodemailer': ^6.4.7
+  '@types/nprogress': ^0.2.0
   '@types/prettier': ^2.7.2
   '@types/react': ^18.0.26
   '@types/react-dom': ^18.0.10
@@ -118,6 +119,7 @@ devDependencies:
   '@types/jsonwebtoken': 9.0.1
   '@types/node': 18.11.18
   '@types/nodemailer': 6.4.7
+  '@types/nprogress': 0.2.0
   '@types/prettier': 2.7.2
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
@@ -1269,6 +1271,10 @@ packages:
     resolution: {integrity: sha512-f5qCBGAn/f0qtRcd4SEn88c8Fp3Swct1731X4ryPKqS61/A3LmmzN8zaEz7hneJvpjFbUUgY7lru/B/7ODTazg==}
     dependencies:
       '@types/node': 18.11.18
+    dev: true
+
+  /@types/nprogress/0.2.0:
+    resolution: {integrity: sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A==}
     dev: true
 
   /@types/parse-json/4.0.0:
