@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaStar } from 'react-icons/fa';
 
-// import { getBase64Image } from '@/lib/utils/base64';
 import notFoundImage from '@/assets/image-not-found.png';
 import Favorite from '@/components/favorite';
 import {
@@ -17,7 +16,7 @@ import type { MovieSchema } from '@/schemas/movies';
 
 interface Props {
   movie: MovieSchema;
-  handleRefetch: () => any;
+  handleRefetch?: () => any;
 }
 
 const Card: React.FC<Props> = ({ movie, handleRefetch }) => {
