@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 import Card from '@/components/card';
@@ -8,6 +8,7 @@ import Meta from '@/components/meta';
 import Pagination from '@/components/pagination';
 import SkeletonWrapper from '@/components/skeleton-wrapper';
 import MainLayout from '@/layouts/main-layout';
+import { useSingleStorage } from '@/lib/hooks/useLocalStorage';
 import { api } from '@/lib/utils/api';
 
 import type { WithPageLayout } from '@/types/with-page-layout';
@@ -31,6 +32,15 @@ const SearchPage: WithPageLayout = () => {
     query: q as string,
     page: pageNumber,
   });
+
+  const { setItemToStorage } = useSingleStorage('filmfiesta_keywords');
+
+  useEffect(() => {
+    if (q) {
+      setItemToStorage(q as string);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [q]);
 
   if (error) toast.error(error.message);
 

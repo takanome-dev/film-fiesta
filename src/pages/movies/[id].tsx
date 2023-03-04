@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import {
   BsChevronExpand,
@@ -32,6 +32,7 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import MainLayout from '@/layouts/main-layout';
+import { useSingleStorage } from '@/lib/hooks/useLocalStorage';
 import { api } from '@/lib/utils/api';
 import { imageUrl } from '@/lib/utils/movie';
 
@@ -120,6 +121,8 @@ const MovieDetailsPage: WithPageLayout = () => {
     refetch,
   } = api.movies.getMovieById.useQuery({ id: id ? Number(id) : 0 });
 
+  const { setItemToStorage } = useSingleStorage('filmfiesta_movies');
+
   const {
     data: recommendedMovie,
     error: recommendedMovieError,
@@ -133,6 +136,11 @@ const MovieDetailsPage: WithPageLayout = () => {
     isLoading: reviewsLoading,
     refetch: refetchReviews,
   } = api.movies.getReviews.useQuery({ id: id ? Number(id) : 0 });
+
+  useEffect(() => {
+    if (movie) setItemToStorage(movie);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [movie]);
 
   if (error) {
     toast.error(error.message);

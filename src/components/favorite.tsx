@@ -16,7 +16,7 @@ import type { MovieSchema } from '@/schemas/movies';
 interface Props {
   className?: string;
   movie: MovieSchema;
-  onRefetch: () => any;
+  onRefetch?: () => any;
 }
 
 const Favorite: React.FC<Props> = ({ className = '', movie, onRefetch }) => {
@@ -48,7 +48,7 @@ const Favorite: React.FC<Props> = ({ className = '', movie, onRefetch }) => {
       {
         onSuccess: (data) => {
           toast.success(data.message);
-          onRefetch();
+          onRefetch?.();
         },
         onError: (error) => {
           console.error(error);
