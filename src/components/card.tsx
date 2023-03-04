@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaStar } from 'react-icons/fa';
+import { HiTrash } from 'react-icons/hi';
 
 import notFoundImage from '@/assets/image-not-found.png';
 import Favorite from '@/components/favorite';
+import { Button } from '@/components/ui/button';
 import {
   Tooltip,
   TooltipContent,
@@ -12,14 +14,35 @@ import {
 } from '@/components/ui/tooltip';
 import { imageUrl } from '@/lib/utils/movie';
 
+import type { LocalStorageKeys } from '@/lib/hooks/useLocalStorage';
 import type { MovieSchema } from '@/schemas/movies';
 
 interface Props {
   movie: MovieSchema;
-  handleRefetch?: () => any;
+  handleRefetch?: () => void;
+  isHistory?: boolean;
+  handleRemoveFromHistory?: (key: LocalStorageKeys, value: MovieSchema) => void;
 }
 
-const Card: React.FC<Props> = ({ movie, handleRefetch }) => {
+const RemoveFromHistory = ({ onRemove }: { onRemove: () => void }) => (
+  <Button
+    variant="subtle"
+    className="absolute top-6 right-6 h-11 rounded-full bg-red-100 p-2 hover:bg-red-200 focus:ring-0 disabled:cursor-none disabled:opacity-50 dark:bg-red-100 dark:hover:bg-red-200"
+    onClick={onRemove}
+  >
+    <HiTrash
+      className="text-red-500 hover:text-red-700 dark:text-red-500 hover:dark:text-red-700"
+      size={24}
+    />
+  </Button>
+);
+
+const Card: React.FC<Props> = ({
+  movie,
+  handleRefetch,
+  isHistory,
+  handleRemoveFromHistory,
+}) => {
   const url = movie.poster_path ?? movie.backdrop_path;
   const image = url ? imageUrl(url) : notFoundImage;
 
@@ -64,11 +87,17 @@ const Card: React.FC<Props> = ({ movie, handleRefetch }) => {
           </Tooltip>
         </TooltipProvider>
       </div>
-      <Favorite
-        movie={movie}
-        onRefetch={handleRefetch}
-        className="group-hover:block"
-      />
+      {isHistory ? (
+        <RemoveFromHistory
+          onRemove={() => handleRemoveFromHistory?.('filmfiesta_movies', movie)}
+        />
+      ) : (
+        <Favorite
+          movie={movie}
+          onRefetch={handleRefetch}
+          className="group-hover:block"
+        />
+      )}
     </div>
   );
 };

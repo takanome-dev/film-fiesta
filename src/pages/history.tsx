@@ -1,7 +1,11 @@
+import { AiOutlineClose } from 'react-icons/ai';
+import { BiTrashAlt } from 'react-icons/bi';
 import { z } from 'zod';
 
 import Card from '@/components/card';
 import Meta from '@/components/meta';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import MainLayout from '@/layouts/main-layout';
 import { useMultipleStorages } from '@/lib/hooks/useLocalStorage';
 import { movieSchema, type MovieSchema } from '@/schemas/movies';
@@ -9,10 +13,11 @@ import { movieSchema, type MovieSchema } from '@/schemas/movies';
 import type { WithPageLayout } from '@/types/with-page-layout';
 
 const HistoryPage: WithPageLayout = () => {
-  const { getItemsFromStorage } = useMultipleStorages<MovieSchema[], string[]>(
-    'filmfiesta_movies',
-    'filmfiesta_keywords'
-  );
+  const { getItemsFromStorage, removeItemFromStorage, clearStorage } =
+    useMultipleStorages<MovieSchema, string>(
+      'filmfiesta_movies',
+      'filmfiesta_keywords'
+    );
 
   const histories = getItemsFromStorage('filmfiesta_movies');
   const keywords = getItemsFromStorage('filmfiesta_keywords');
@@ -24,8 +29,15 @@ const HistoryPage: WithPageLayout = () => {
     <>
       <Meta page="History" noindex />
       <div>
-        <div className="flex items-center justify-between">
-          <h1 className="mb-8 text-2xl font-semibold">My History</h1>
+        <div className="mb-10 flex items-center justify-between">
+          <h1 className="text-2xl font-semibold">My History</h1>
+          <Button
+            variant="subtle"
+            className="font-semibold focus:ring-0"
+            onClick={clearStorage}
+          >
+            Clear History <BiTrashAlt className="ml-2 h-4 w-4" />
+          </Button>
         </div>
         <div className="flex gap-8">
           <div className="flex-1">
@@ -39,44 +51,47 @@ const HistoryPage: WithPageLayout = () => {
                 </div>
               )}
               {parsedHistories.map((m) => (
-                <Card movie={m} key={m.id} />
+                <Card
+                  movie={m}
+                  key={m.id}
+                  isHistory
+                  handleRemoveFromHistory={removeItemFromStorage}
+                />
               ))}
             </div>
           </div>
-          <div className="rounded-lg border border-slate-200 p-4 dark:border-slate-700">
-            <h2 className="mb-4 text-xl font-semibold">
-              Recent searched keywords
-            </h2>
-            <div className="flex flex-col gap-4 p-4">
-              {parsedKeywords.length === 0 && (
-                <p className="mt-10 text-center text-lg">
-                  No keywords found 🤷
-                </p>
-              )}
-              {parsedKeywords.map((k) => (
-                <div
-                  className="flex items-center justify-between rounded-lg bg-slate-100 px-4 py-2 dark:bg-slate-800"
-                  key={k}
-                >
-                  <p className="text-sm font-semibold">{k}</p>
-                  <button className="focus:outline-none">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
+          <ScrollArea className="max-h-[75vh] rounded-lg border border-slate-200 dark:border-slate-700">
+            <div className="max-w-md p-4">
+              <h2 className="mb-4 text-xl font-semibold">
+                Recent searched keywords
+              </h2>
+              <div className="flex flex-col gap-4 p-2">
+                {parsedKeywords.length === 0 && (
+                  <p className="mt-10 text-center text-lg">
+                    No keywords found 🤷
+                  </p>
+                )}
+                {parsedKeywords.map((k) => (
+                  <div
+                    className="flex items-center justify-between rounded-lg bg-slate-100 px-4 py-2 dark:bg-slate-800"
+                    key={k}
+                  >
+                    <p className="max-w-[90%] truncate text-sm font-semibold">
+                      {k}
+                    </p>
+                    <Button
+                      className="px-2 focus:outline-none"
+                      onClick={() =>
+                        removeItemFromStorage('filmfiesta_keywords', k)
+                      }
                     >
-                      <path
-                        fillRule="evenodd"
-                        d="M3.293 3.293a1 1 0 011.414 0L10 8.586l5.293-5.293a1 1 0 111.414 1.414l-5.293 5.293 5.293 5.293a1 1 0 01-1.414 1.414L10 11.414l-5.293 5.293a1 1 0 01-1.414-1.414L8.586 10 3.293 4.707a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              ))}
+                      <AiOutlineClose className="h-4 w-4 font-bold" />
+                    </Button>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          </ScrollArea>
         </div>
       </div>
     </>
