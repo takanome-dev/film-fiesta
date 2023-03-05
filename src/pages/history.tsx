@@ -28,7 +28,7 @@ const HistoryPage: WithPageLayout = () => {
   return (
     <>
       <Meta page="History" noindex />
-      <div>
+      <div className="min-h-[75vh]">
         <div className="mb-10 flex items-center justify-between">
           <h1 className="text-2xl font-semibold">My History</h1>
           <Button
@@ -39,7 +39,7 @@ const HistoryPage: WithPageLayout = () => {
             Clear History <BiTrashAlt className="ml-2 h-4 w-4" />
           </Button>
         </div>
-        <div className="flex gap-8">
+        <div className="flex flex-col-reverse gap-8 md:flex-row">
           <div className="flex-1">
             <h2 className="mb-4 text-xl font-semibold">
               Recent visited movies

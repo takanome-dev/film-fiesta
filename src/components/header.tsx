@@ -1,13 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { CgMenuRightAlt } from 'react-icons/cg';
 
 import ModeToggle from '@/components/mode-toggle';
 import SearchInput from '@/components/search-input';
+import { Button } from '@/components/ui/button';
 import UserAvatar from '@/components/user-avatar';
 
 const Header = () => (
   <header className="sticky top-0 z-20 flex h-16 w-full items-center border-b border-b-slate-200 bg-white/50 backdrop-blur-md dark:border-b-slate-700 dark:bg-slate-900/40">
-    <div className="mx-8 flex w-full items-center justify-between md:container md:mx-auto">
+    <div className="mx-8 flex w-full items-center justify-between 2xl:container 2xl:mx-auto">
       <div className="flex items-center justify-center">
         <Link
           href="/"
@@ -28,6 +30,9 @@ const Header = () => (
         <SearchInput />
         <ModeToggle />
         <UserAvatar />
+        <Button variant="ghost" size="sm" className="sm:hidden">
+          <CgMenuRightAlt className="h-6 w-6" />
+        </Button>
       </div>
     </div>
   </header>

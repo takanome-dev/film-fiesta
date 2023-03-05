@@ -77,7 +77,7 @@ const Sidebar = () => {
     <>
       <div className="flex h-[calc(100vh-4rem)] flex-col justify-between px-2 py-8">
         <div>
-          <p className="mb-4 ml-4 text-sm font-semibold text-slate-400 dark:text-slate-500">
+          <p className="mb-4 ml-1 text-sm font-semibold text-slate-400 dark:text-slate-500 lg:ml-4">
             Menu
           </p>
           <ul className="grid grid-flow-row auto-rows-max text-sm">
@@ -89,7 +89,7 @@ const Sidebar = () => {
           </ul>
         </div>
         <div className="-mt-20">
-          <p className="mb-4 ml-4 text-sm font-semibold text-slate-400 dark:text-slate-500">
+          <p className="mb-4 ml-1 text-sm font-semibold text-slate-400 dark:text-slate-500 lg:ml-4">
             Library
           </p>
           <ul className="grid grid-flow-row auto-rows-max text-sm">
