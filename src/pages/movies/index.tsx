@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import React from 'react';
 
 import Card from '@/components/card';
 import Error from '@/components/error';

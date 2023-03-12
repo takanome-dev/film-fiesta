@@ -29,6 +29,8 @@ const SearchInput = () => {
     await router
       .push(`/search?q=${query ?? searchQuery}&page=${1}`)
       .catch(console.error);
+    setOpenSearchDialog(false);
+    setSearchQuery('');
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -36,6 +38,8 @@ const SearchInput = () => {
     if (searchQuery.trim()) {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       sendQuery();
+      setOpenSearchDialog(false);
+      setSearchQuery('');
     }
   };
 
@@ -71,14 +75,15 @@ const SearchInput = () => {
           placeholder="Search a movie..."
           value={searchQuery}
           onValueChange={(query) => setSearchQuery(query)}
-          onSubmit={handleSubmit}
+          onKeyDown={(e) =>
+            e.key === 'Enter' && searchQuery ? handleSubmit(e) : null
+          }
         />
         <CommandList>
           <CommandGroup heading="Suggestions">
             {suggestions.map((suggestion) => (
               <CommandItem
-                // eslint-disable-next-line @typescript-eslint/no-misused-promises
-                onClick={() => sendQuery(suggestion)}
+                onSelect={() => sendQuery(suggestion)}
                 key={suggestion}
               >
                 {suggestion}

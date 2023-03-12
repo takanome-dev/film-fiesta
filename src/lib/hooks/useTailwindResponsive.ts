@@ -19,16 +19,13 @@ export default function useTailWindResponsive(
 ) {
   const inputQueryMapped = screenSizes[query];
   const inputMediaQuery = `(${screenConstraint}-width: ${inputQueryMapped})`;
-  console.log('inputMediaQuery', inputMediaQuery);
   const [matches, setMatches] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log('IM RUNNING WOOOOO......');
     function handleChange(e: MediaQueryListEvent) {
       setMatches(e.matches);
     }
     const matchQueryList = window.matchMedia(inputMediaQuery);
-    console.log('matchQueryList', matchQueryList);
     setMatches(matchQueryList.matches);
 
     matchQueryList.addEventListener('change', handleChange);

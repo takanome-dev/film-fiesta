@@ -43,7 +43,13 @@ const CommandInput = React.forwardRef<
     // eslint-disable-next-line react/no-unknown-property
     cmdk-input-wrapper=""
   >
-    <FaSearch className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+    <FaSearch
+      className="mr-2 h-4 w-4 shrink-0 opacity-50"
+      onClick={() =>
+        /* eslint-disable-next-line */
+        props.onKeyDown ? (props.onKeyDown as any)({ key: 'Enter' }) : null
+      }
+    />
     <CommandPrimitive.Input
       ref={ref}
       className={cn(

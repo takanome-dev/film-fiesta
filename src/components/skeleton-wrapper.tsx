@@ -14,7 +14,7 @@ const SkeletonWrapper = ({
   width,
   height,
   radius,
-}: SkeletonWrapperProps): JSX.Element => {
+}: SkeletonWrapperProps) => {
   const skeletonArray = Array(count || 1).fill(true);
   return (
     <>

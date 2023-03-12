@@ -32,8 +32,10 @@ const SidebarLink: React.FC<Props> = (props) => {
       rel={external ? 'noreferrer' : undefined}
     >
       <Icon
-        className={cn('text-slate-500 dark:text-slate-200', className || '')}
-        size={20}
+        className={cn(
+          'h-5 w-5 text-slate-500 dark:text-slate-200 lg:h-6 lg:w-6',
+          className || ''
+        )}
       />
       <p
         className={cn(
@@ -47,4 +49,5 @@ const SidebarLink: React.FC<Props> = (props) => {
     </Link>
   );
 };
+
 export default SidebarLink;

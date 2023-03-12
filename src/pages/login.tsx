@@ -76,7 +76,6 @@ const LoginPage: WithPageLayout = () => {
         <h1 className="mb-6 text-center text-3xl font-bold text-slate-800 dark:text-slate-50">
           Login to your account
         </h1>
-        {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <InputWithError
             name="email"
@@ -101,7 +100,6 @@ const LoginPage: WithPageLayout = () => {
               variant="ghost"
               size="sm"
               className="h-10 dark:hover:bg-slate-600"
-              // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onClick={() => handleOauthLogin('google')}
             >
               <FcGoogle size={24} className="" />
@@ -110,7 +108,6 @@ const LoginPage: WithPageLayout = () => {
               variant="ghost"
               size="sm"
               className="h-10 dark:hover:bg-slate-600"
-              // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onClick={() => handleOauthLogin('github')}
             >
               <FaGithub size={24} className="" />
@@ -119,7 +116,6 @@ const LoginPage: WithPageLayout = () => {
               variant="ghost"
               size="sm"
               className="h-10 dark:hover:bg-slate-600"
-              // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onClick={() => handleOauthLogin('discord')}
             >
               <SiDiscord size={24} className="text-[#5865F2]" />

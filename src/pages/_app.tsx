@@ -3,6 +3,7 @@ import Router from 'next/router';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 import NProgress from 'nprogress';
+import React from 'react';
 import { Toaster } from 'react-hot-toast';
 
 import { api } from '@/lib/utils/api';
