@@ -16,7 +16,7 @@ import type { MovieSchema } from '@/schemas/movies';
 interface Props {
   className?: string;
   movie: MovieSchema;
-  onRefetch?: () => any;
+  onRefetch?: () => void;
 }
 
 const Favorite: React.FC<Props> = ({ className = '', movie, onRefetch }) => {

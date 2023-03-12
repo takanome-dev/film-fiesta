@@ -3,20 +3,43 @@ import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 
 import { Button } from '@/components/ui/button';
+import {
+  CommandDialog,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
 import { Input } from '@/components/ui/input';
+
+const suggestions = [
+  'Avatar',
+  'Avengers',
+  'Batman',
+  'Black Widow',
+  'Captain America',
+];
 
 const SearchInput = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [openSearchDialog, setOpenSearchDialog] = useState(false);
   const router = useRouter();
+
+  const sendQuery = async (query?: string) => {
+    await router
+      .push(`/search?q=${query ?? searchQuery}&page=${1}`)
+      .catch(console.error);
+    setOpenSearchDialog(false);
+    setSearchQuery('');
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      router.push({
-        pathname: '/search',
-        search: `q=${searchQuery}&page=${1}`,
-      });
+      sendQuery();
+      setOpenSearchDialog(false);
+      setSearchQuery('');
     }
   };
 
@@ -39,9 +62,36 @@ const SearchInput = () => {
           onClick={handleSubmit}
         />
       </form>
-      <Button variant="ghost" size="sm" className="sm:hidden">
+      <Button
+        variant="ghost"
+        size="sm"
+        className="sm:hidden"
+        onClick={() => setOpenSearchDialog(true)}
+      >
         <FaSearch className="h-4 w-4 bg-transparent text-slate-300" />
       </Button>
+      <CommandDialog open={openSearchDialog} onOpenChange={setOpenSearchDialog}>
+        <CommandInput
+          placeholder="Search a movie..."
+          value={searchQuery}
+          onValueChange={(query) => setSearchQuery(query)}
+          onKeyDown={(e) =>
+            e.key === 'Enter' && searchQuery ? handleSubmit(e) : null
+          }
+        />
+        <CommandList>
+          <CommandGroup heading="Suggestions">
+            {suggestions.map((suggestion) => (
+              <CommandItem
+                onSelect={() => sendQuery(suggestion)}
+                key={suggestion}
+              >
+                {suggestion}
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
     </>
   );
 };

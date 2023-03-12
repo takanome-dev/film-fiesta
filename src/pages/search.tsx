@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 import Card from '@/components/card';
@@ -39,8 +39,7 @@ const SearchPage: WithPageLayout = () => {
     if (q) {
       setItemToStorage(q as string);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [q]);
+  }, [q, setItemToStorage]);
 
   if (error) toast.error(error.message);
 
@@ -99,7 +98,7 @@ const SearchPage: WithPageLayout = () => {
             🕵 {data?.total_results ?? 0} results found for &lsquo;{q}&lsquo;
           </h3>
         )}
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-[250px] gap-4 xs:grid-cols-auto-fill">
           {isLoading && <SkeletonWrapper height={360} count={12} radius={6} />}
           {(data?.results?.length as number) > 0 ? (
             data?.results.map((m) => (

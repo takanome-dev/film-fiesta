@@ -139,8 +139,7 @@ const MovieDetailsPage: WithPageLayout = () => {
 
   useEffect(() => {
     if (movie) setItemToStorage(movie);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [movie]);
+  }, [movie, setItemToStorage]);
 
   if (error) {
     toast.error(error.message);
@@ -202,7 +201,6 @@ const MovieDetailsPage: WithPageLayout = () => {
                 <p className="mt-2">{movie?.overview}</p>
                 <div className="mt-12 flex gap-4">
                   <Button
-                    // eslint-disable-next-line @typescript-eslint/no-misused-promises
                     onClick={() =>
                       router.push(`/movies/watch?id=${id as string}`)
                     }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type ChangeEvent } from 'react';
 
 export default function useForm<T extends Record<string, string>>(
   initial = {} as T
@@ -6,7 +6,7 @@ export default function useForm<T extends Record<string, string>>(
   const [inputs, setInputs] = useState(initial);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
 

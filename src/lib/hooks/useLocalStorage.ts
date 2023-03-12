@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 
 import type { MovieSchema } from '@/schemas/movies';
 
@@ -102,28 +102,36 @@ export function useSingleStorage<T>(key: LocalStorageKeys) {
     return [];
   });
 
-  const setItemToStorage = (value: T) => {
-    if (items.includes(value)) return;
+  const setItemToStorage = useCallback(
+    (value: T) => {
+      if (items.includes(value)) return;
 
-    const newItems = [...items, value];
-    localStorage.setItem(key, JSON.stringify([...new Set(newItems)]));
-    setItems(newItems);
-  };
+      const newItems = [...items, value];
+      localStorage.setItem(key, JSON.stringify([...new Set(newItems)]));
+      setItems(newItems);
+      console.log('SET ITEM TO STORAGE IS CALLED...');
+    },
+    [items, key]
+  );
 
-  const getItemsFromStorage = () => [...new Set(items)];
+  const getItemsFromStorage = useCallback(() => [...new Set(items)], [items]);
 
-  const removeItemFromStorage = (value: T) => {
-    const newItems = items.filter((item) => {
-      if (isMovieSchema(item) && isMovieSchema(value)) {
-        return item.id !== value.id;
-      }
+  const removeItemFromStorage = useCallback(
+    (value: T) => {
+      const newItems = items.filter((item) => {
+        if (isMovieSchema(item) && isMovieSchema(value)) {
+          return item.id !== value.id;
+        }
 
-      return item !== value;
-    });
+        return item !== value;
+      });
 
-    localStorage.setItem(key, JSON.stringify(newItems));
-    setItems(newItems);
-  };
+      localStorage.setItem(key, JSON.stringify(newItems));
+      setItems(newItems);
+      console.log('REMOVE ITEM FROM STORAGE IS CALLED...');
+    },
+    [items, key]
+  );
 
   return {
     setItemToStorage,

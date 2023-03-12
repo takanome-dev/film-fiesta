@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-
 import { useSession } from 'next-auth/react';
 import React from 'react';
 import { toast } from 'react-hot-toast';

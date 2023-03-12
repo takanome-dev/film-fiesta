@@ -56,7 +56,6 @@ const SignOutModal: React.FC<SignOutProps> = ({ open, setOpen }) => {
             variant="destructive"
             size="lg"
             className="font-semibold"
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onClick={handleSignOut}
           >
             Sign Out
@@ -119,10 +118,7 @@ const Sidebar = () => {
                 className="w-full justify-start hover:bg-slate-200"
                 onClick={() => setOpenFeedback(!openFeedback)}
               >
-                <FaRegComment
-                  className="text-slate-500 dark:text-slate-100"
-                  size={20}
-                />
+                <FaRegComment className="h-5 w-5 text-slate-500 dark:text-slate-100 lg:h-6 lg:w-6" />
                 <p className="ml-4 hidden text-slate-800 dark:text-slate-100 lg:block">
                   Feedback
                 </p>
@@ -145,7 +141,7 @@ const Sidebar = () => {
               className="w-full justify-start text-red-500 hover:bg-slate-200 dark:text-red-500 dark:hover:text-red-500"
               onClick={() => setOpenSignOut(!openSignOut)}
             >
-              <FaSignOutAlt className="" size={20} />
+              <FaSignOutAlt className="h-5 w-5 lg:h-6 lg:w-6" />
               <p className="ml-2 hidden lg:block">Sign out</p>
             </Button>
           ) : (
@@ -154,10 +150,7 @@ const Sidebar = () => {
               className="w-full justify-start hover:bg-slate-200"
               onClick={() => setOpenFeedback(!openFeedback)}
             >
-              <FaSignInAlt
-                className="text-slate-500 dark:text-slate-100"
-                size={20}
-              />
+              <FaSignInAlt className="h-5 w-5 text-slate-500 dark:text-slate-100 lg:h-6 lg:w-6" />
               <p className="ml-2 hidden text-slate-800 dark:text-slate-100 lg:block">
                 Sign in
               </p>
