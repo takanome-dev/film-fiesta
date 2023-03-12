@@ -41,7 +41,9 @@ const LoginPage: WithPageLayout = () => {
     }
 
     try {
-      await signIn(provider, { callbackUrl: '/movies' });
+      const options =
+        provider === 'email' ? { callbackUrl: '/movies' } : undefined;
+      await signIn(provider, options);
     } catch (err) {
       toast.error('Something went wrong. Please try again.');
       if (err instanceof Error) {
