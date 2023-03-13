@@ -1,18 +1,10 @@
 <div align="center">
-<h2>⚡ Vidly 🎥</h1>
-<p><a href="https://github.com/TAKANOME-DEV/vidly-client"><img alt="GitHub Actions status" src="https://github.com/TAKANOME-DEV/vidly-client/actions/workflows/codeql-analysis.yml/badge.svg"></a></p>
-<strong>
-A movie website where you can rent movies that you want to watch. <br>
-</strong>
-</div>
-
-<div align="center">
 <h2>:construction: V2: Work In Progress... :construction: </h1>
 <p>This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.</p>
-<p><a href="https://github.com/TAKANOME-DEV/vidly-client/pull/72">Checkout the nextjs-13 branch</a></p>
 </div>
 
-![v2](https://user-images.githubusercontent.com/79809121/219101547-98852d6b-668e-4cc8-bb4d-d5201f8a7f6b.png)
+![og-dark](https://user-images.githubusercontent.com/79809121/224662523-1206dd14-bcde-45d4-973d-7b4718a251ed.png)
+
 
 
 - [Documentation](https://create.t3.gg/)
