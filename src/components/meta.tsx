@@ -10,8 +10,7 @@ interface Props {
 
 export default function Meta({ noindex, page }: Props) {
   const url = env.NEXT_PUBLIC_APP_URL;
-  // TODO: update og image
-  const ogUrl = new URL(`${url}/og.png`);
+  const ogUrl = new URL(`${url}/og-light.png`);
 
   return (
     <Head>

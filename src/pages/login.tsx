@@ -2,7 +2,7 @@ import { type OAuthProviderType } from 'next-auth/providers';
 import { signIn } from 'next-auth/react';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { AiOutlineInfoCircle } from 'react-icons/ai';
+// import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { SiDiscord } from 'react-icons/si';
@@ -25,25 +25,23 @@ const LoginPage: WithPageLayout = () => {
 
   const handleOauthLogin = async (provider: OAuthProviderType) => {
     // TODO: create a custom component for toast
-    if (provider === 'discord') {
-      toast(
-        'Sorry, we have temporarily disabled Discord login. Please use Google or GitHub.',
-        {
-          icon: (
-            <AiOutlineInfoCircle className="mr-2 text-amber-500" size={40} />
-          ),
-          position: 'top-center',
-          className:
-            'border-l-4 border-amber-400 dark:bg-slate-800 dark:text-slate-100',
-        }
-      );
-      return;
-    }
+    // if (provider === 'discord') {
+    //   toast(
+    //     'Sorry, we have temporarily disabled Discord login. Please use Google or GitHub.',
+    //     {
+    //       icon: (
+    //         <AiOutlineInfoCircle className="mr-2 text-amber-500" size={40} />
+    //       ),
+    //       position: 'top-center',
+    //       className:
+    //         'border-l-4 border-amber-400 dark:bg-slate-800 dark:text-slate-100',
+    //     }
+    //   );
+    //   return;
+    // }
 
     try {
-      const options =
-        provider === 'email' ? { callbackUrl: '/movies' } : undefined;
-      await signIn(provider, options);
+      await signIn(provider, { callbackUrl: '/movies' });
     } catch (err) {
       toast.error('Something went wrong. Please try again.');
       if (err instanceof Error) {

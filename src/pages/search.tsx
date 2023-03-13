@@ -71,7 +71,7 @@ const SearchPage: WithPageLayout = () => {
             <h5 className="mb-6 text-xl text-slate-800 dark:text-slate-400">
               Top Rated Movies
             </h5>
-            <div className="grid grid-cols-[250px] gap-4 xs:grid-cols-auto-fill">
+            <div className="grid grid-cols-[300px] justify-center gap-4 xs:grid-cols-auto-fill">
               {topRatedMoviesLoading && (
                 <SkeletonWrapper height={360} count={12} radius={6} />
               )}

@@ -14,17 +14,19 @@ interface Props {
 
 const Header: React.FC<Props> = (props) => (
   <header className="sticky top-0 z-20 flex h-16 w-full items-center border-b border-b-slate-200 bg-white/50 backdrop-blur-md dark:border-b-slate-700 dark:bg-slate-900/40">
-    <div className="mx-8 flex w-full items-center justify-between 2xl:container 2xl:mx-auto">
+    <div className="mx-2 flex w-full items-center justify-between xs:mx-8 2xl:container 2xl:mx-auto">
       <div className="flex items-center justify-center">
         <Link
           href="/"
           className="flex h-10 w-full gap-2 text-slate-800 dark:text-white"
         >
           <Image src="/favicon.svg" alt="FilmFiesta" width={40} height={40} />
-          <span className="self-end text-xl font-semibold">FilmFiesta</span>
+          <span className="self-end text-lg font-semibold xs:text-xl">
+            FilmFiesta
+          </span>
         </Link>
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 xs:gap-4">
         <SearchInput />
         <ModeToggle />
         <UserAvatar />
