@@ -1,7 +1,5 @@
 import { z } from 'zod';
 
-import { userSchema } from './user';
-
 export const feedbackSchema = z.object({
   id: z.string().optional(),
   user: z.string().optional(),
@@ -15,7 +13,16 @@ export const feedbackSchema = z.object({
 export const feedbacksOutputSchema = z.array(
   z.object({
     id: z.string(),
-    user: userSchema.nullable(),
+    user: z
+      .object({
+        id: z.string(),
+        email: z.string().email().nullish(),
+        name: z.string().nullish(),
+        image: z.string().nullish(),
+        isAdmin: z.boolean().nullish(),
+        createdAt: z.string(),
+      })
+      .nullable(),
     emojiName: z.string().nullable(),
     emojiCode: z.string().nullable(),
     createdAt: z.string(),

@@ -1,3 +1,3 @@
-import HistoryPage from './history';
+import ProfilePage from './user/[name]';
 
-export default HistoryPage;
+export default ProfilePage;

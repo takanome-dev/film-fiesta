@@ -1,12 +1,11 @@
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
-import React from 'react';
+import { signOut, useSession } from 'next-auth/react';
 import { BsArrowRight, BsGear } from 'react-icons/bs';
-import { FaRegComment } from 'react-icons/fa';
+import { FaRegComment, FaSignOutAlt } from 'react-icons/fa';
 import { FiUser } from 'react-icons/fi';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { buttonVariants } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,7 +20,6 @@ const UserAvatar = () => {
   const user = session?.user as UserSchema;
 
   if (!user) {
-    // TODO: add sign in route or modal
     return (
       <Link
         href="/login"
@@ -43,50 +41,52 @@ const UserAvatar = () => {
           <AvatarFallback>TK</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-36">
+      <DropdownMenuContent align="end" className="w-44">
         <DropdownMenuItem>
-          <FiUser size={20} className="text-slate-600 dark:text-slate-100" />
           <Link
             href={`/user/${user?.name}`}
-            className="ml-2 font-medium text-slate-800 dark:text-slate-100"
+            className="flex w-full gap-2 font-medium text-slate-800 dark:text-slate-100"
           >
+            <FiUser size={20} className="text-slate-600 dark:text-slate-100" />
             Profile
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <BsGear size={20} className="text-slate-600 dark:text-slate-100" />
           <Link
             href="/settings"
-            className="ml-2 font-medium text-slate-800 dark:text-slate-100"
+            className="flex w-full gap-2 font-medium text-slate-800 dark:text-slate-100"
           >
+            <BsGear size={20} className="text-slate-600 dark:text-slate-100" />
             Settings
           </Link>
         </DropdownMenuItem>
         {user?.isAdmin && (
           <DropdownMenuItem>
-            <FaRegComment
-              size={16}
-              className="text-slate-600 dark:text-slate-100"
-            />
             <Link
               href="/feedbacks"
-              className="ml-2 font-medium text-slate-800 dark:text-slate-100"
+              className="flex w-full gap-2 font-medium text-slate-800 dark:text-slate-100"
             >
+              <FaRegComment
+                size={16}
+                className="text-slate-600 dark:text-slate-100"
+              />
               Feedbacks
             </Link>
           </DropdownMenuItem>
         )}
-        {/* <DropdownMenuItem>
-          <FaSignOutAlt className="text-red-500 dark:text-red-500" size={20} />
+        <DropdownMenuItem asChild>
           <Button
             variant="ghost"
-            className="w-full justify-start text-red-500 dark:text-red-500"
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            onClick={() => signOut().catch(console.error)}
+            className="mt-2 w-full justify-start text-red-500 dark:text-red-500"
+            onClick={() => signOut()}
           >
+            <FaSignOutAlt
+              className="mr-2 text-red-500 dark:text-red-500"
+              size={20}
+            />
             Sign out
           </Button>
-        </DropdownMenuItem> */}
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
