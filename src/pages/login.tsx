@@ -2,7 +2,7 @@ import { type OAuthProviderType } from 'next-auth/providers';
 import { signIn } from 'next-auth/react';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-// import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { SiDiscord } from 'react-icons/si';
@@ -11,7 +11,7 @@ import InputWithError from '@/components/input-with-error';
 import Meta from '@/components/meta';
 import { Button } from '@/components/ui/button';
 import SignInLayout from '@/layouts/signin-layout';
-import { loginSchema } from '@/schemas/user';
+// import { loginSchema } from '@/schemas/user';
 
 import type { WithPageLayout } from '@/types/with-page-layout';
 
@@ -50,23 +50,31 @@ const LoginPage: WithPageLayout = () => {
     }
   };
 
-  // eslint-disable-next-line consistent-return
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const result = loginSchema.safeParse(email);
-    if (!result.success) {
-      return setError(result.error.message);
-    }
-
-    try {
-      setError('');
-      await signIn('email', { email, callbackUrl: '/movies' });
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
+    toast(
+      'Sorry, we have temporarily disabled Email login. Please use Google or GitHub.',
+      {
+        icon: <AiOutlineInfoCircle className="mr-2 text-amber-500" size={40} />,
+        position: 'top-center',
+        className:
+          'border-l-4 border-amber-400 dark:bg-slate-800 dark:text-slate-100',
       }
-    }
+    );
+
+    // const result = loginSchema.safeParse(email);
+    // if (!result.success) {
+    //   return setError(result.error.message);
+    // }
+
+    // try {
+    //   setError('');
+    //   await signIn('email', { email, callbackUrl: '/movies' });
+    // } catch (err) {
+    //   if (err instanceof Error) {
+    //     setError(err.message);
+    //   }
+    // }
   };
 
   return (

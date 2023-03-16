@@ -1,17 +1,71 @@
 <div align="center">
-<h2>:construction: V2: Work In Progress... :construction: </h1>
-<p>This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.</p>
+  <h2 style="display:flex;justify-content:center;color:white;">
+    <img src="./public/film-fiesta.png" alt="FilmFiesta Logo" width="30px" height="30px" />
+    <p style="margin-left:5px;">FilmFiesta</p>
+  </h2>
+  <strong>Celebrate the magic of movies</strong>
 </div>
+<p align="center">
+  <a href="https://github.com/takanome-dev/film-fiesta/actions/workflows/dev.yml">
+    <img src="https://github.com/takanome-dev/film-fiesta/actions/workflows/dev.yml/badge.svg" alt="Dev" style="max-width: 100%;">
+  </a>
+  <a href="https://github.com/takanome-dev/film-fiesta/actions/workflows/codeql-analysis.yml">
+    <img src="https://github.com/takanome-dev/film-fiesta/actions/workflows/codeql-analysis.yml/badge.svg" alt="CodeQL" style="max-width: 100%;">
+  </a>
+  <img src=
+  <img src="https://img.shields.io/github/languages/code-size/takanome-dev/film-fiesta" alt="GitHub code size in bytes">
+  <img src="https://img.shields.io/github/commit-activity/w/takanome-dev/film-fiesta" alt="GitHub commit activity">
+  <a href="https://twitter.com/takanome_dev">
+    <img src="https://img.shields.io/twitter/follow/takanome_dev?label=Follow&style=social" alt="Twitter">
+  </a>
+</p>
+
+---
 
 ![og-dark](https://user-images.githubusercontent.com/79809121/224662523-1206dd14-bcde-45d4-973d-7b4718a251ed.png)
 
+## Prerequisites
 
+- `node>=16.7.0`
+- `npm>=8.0.0`
+- copy `.env.example` to `.env` and fill in the values
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+### 🖥️ Local development
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+To install the application:
 
-## How do I deploy this?
+```shell
+# clone the repo
+git clone https://github.com/TAKANOME-DEV/film-fiesta.git
+# cd into the repo
+cd film-fiesta
+# install dependencies
+pnpm install
+```
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+You can also use `npm` or `yarn` instead of `pnpm`.
+
+To start a local copy of the app on port `3000`:
+
+```shell
+pnpm dev
+```
+
+### 🛠 Stack
+
+This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [tRPC](https://trpc.io/)
+- [NextAuth.js](https://next-auth.js.org/)
+- [Supabase](https://supabase.io/)
+
+### :balance_scale: LICENSE
+
+The project is licensed under the [MIT License](LICENSE).
+
+### :pray: Support
+
+This project needs a star from you ⭐. Don't forget to leave one if you like it :wink:

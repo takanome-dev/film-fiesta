@@ -1,8 +1,18 @@
 {
-  "name": "reelrapture",
-  "description": "ReelRapture is a movie review site where users can create accounts, write reviews, and rate movies. The site is built with Next.js, React, and TypeScript. The backend is built with Supabase, NextAuth, and Trpc.",
+  "name": "film-fiesta",
+  "description": "Discover and watch your favorite movies online with FilmFiesta. Browse our collection, watch trailers, and add to your favorites. The site is built with Next.js, React, and TypeScript. The backend is built with Supabase, NextAuth, and Trpc.",
+  "author": "TAKANOME-DEV <takanomedev221@gmail.com>",
   "version": "2.0.0",
   "private": true,
+  "homepage": "https://github.com/TAKANOME-DEV/film-fiesta#readme",
+  "bugs": {
+    "url": "https://github.com/TAKANOME-DEV/film-fiesta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/TAKANOME-DEV/film-fiesta.git"
+  },
+  "keywords": [],
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -12,7 +22,7 @@
     "start": "next start",
     "types:supabase": "npx supabase gen types typescript --project-id \"$PROJECT_ID\" --schema next_auth > supabase/schema.ts",
     "types:auto-add": "npx typesync",
-    "types:auto-check": "npx types:auto-add -- --dry",
+    "types:auto-check": "pnpm types:auto-add --dry",
     "db:migrate": "npx supabase db diff --use-migra -f",
     "db:types": "npx supabase gen types typescript --local --schema next_auth > supabase/schema.ts ",
     "db:start": "npx supabase start",
