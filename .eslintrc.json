@@ -21,6 +21,7 @@
   "rules": {
     "@typescript-eslint/ban-ts-comment": "warn",
     "@typescript-eslint/consistent-type-imports": "warn",
+    "@typescript-eslint/naming-convention": "warn",
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/no-floating-promises": "warn",
     "@typescript-eslint/no-misused-promises": "off",
@@ -81,6 +82,7 @@
     "no-param-reassign": "warn",
     "no-shadow": ["error", { "allow": ["err", "resolve", "reject"] }],
     "no-trailing-spaces": ["error"],
+    "no-underscore-dangle": "off",
     "no-var": "warn",
     "no-void": "warn",
     "no-duplicate-imports": "error",

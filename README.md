@@ -6,8 +6,8 @@
   <strong>Celebrate the magic of movies</strong>
 </div>
 <p align="center">
-  <a href="https://github.com/takanome-dev/film-fiesta/actions/workflows/dev.yml">
-    <img src="https://github.com/takanome-dev/film-fiesta/actions/workflows/dev.yml/badge.svg" alt="Dev" style="max-width: 100%;">
+  <a href="https://github.com/takanome-dev/film-fiesta/actions/workflows/ci.yml">
+    <img src="https://github.com/takanome-dev/film-fiesta/actions/workflows/dev.yml/badge.svg" alt="CI" style="max-width: 100%;">
   </a>
   <a href="https://github.com/takanome-dev/film-fiesta/actions/workflows/codeql-analysis.yml">
     <img src="https://github.com/takanome-dev/film-fiesta/actions/workflows/codeql-analysis.yml/badge.svg" alt="CodeQL" style="max-width: 100%;">

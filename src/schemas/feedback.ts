@@ -16,10 +16,10 @@ export const feedbacksOutputSchema = z.array(
     user: z
       .object({
         id: z.string(),
-        email: z.string().email().nullish(),
-        name: z.string().nullish(),
-        image: z.string().nullish(),
-        isAdmin: z.boolean().nullish(),
+        email: z.string().email().optional(),
+        name: z.string().optional(),
+        image: z.string().optional(),
+        isAdmin: z.boolean().optional(),
         createdAt: z.string(),
       })
       .nullable(),

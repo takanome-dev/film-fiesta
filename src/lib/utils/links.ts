@@ -1,4 +1,3 @@
-// import { FaRegHeart, FaSearch } from 'react-icons/fa';
 import { FiTrendingUp } from 'react-icons/fi';
 import { ImFire } from 'react-icons/im';
 import { MdOutlineExplore } from 'react-icons/md';
@@ -7,8 +6,6 @@ const links = [
   {
     name: 'Explore',
     Icon: MdOutlineExplore,
-    // name: 'Movies',
-    // Icon: FcFilmReel,
     path: '/movies',
   },
   {

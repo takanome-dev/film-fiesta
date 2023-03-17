@@ -7,7 +7,7 @@ import Feedback from '@/components/feedback';
 import { Button } from '@/components/ui/button';
 
 interface ErrorProps {
-  handleRefetch: () => any;
+  handleRefetch: () => void;
   resourceName: string;
 }
 

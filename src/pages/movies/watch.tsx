@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { toast } from 'react-hot-toast';
 import { BsFillCalendarDateFill, BsStars } from 'react-icons/bs';
 import { FaStar } from 'react-icons/fa';
@@ -178,7 +177,7 @@ const WatchMoviePage: WithPageLayout = () => {
                 </p>
               </div>
             </div>
-            <Favorite className="right-52 group-hover:block" />
+            <Favorite movie={movie} className="right-52 group-hover:block" />
           </div>
         ))}
       </div>

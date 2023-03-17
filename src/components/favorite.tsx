@@ -15,7 +15,7 @@ import type { MovieSchema } from '@/schemas/movies';
 
 interface Props {
   className?: string;
-  movie: MovieSchema;
+  movie?: MovieSchema;
   onRefetch?: () => void;
 }
 
@@ -23,8 +23,10 @@ const Favorite: React.FC<Props> = ({ className = '', movie, onRefetch }) => {
   const { data: session } = useSession();
   const user = session?.user;
 
-  const [isFavorite, setIsFavorite] = useState(movie.is_favorite);
+  const [isFavorite, setIsFavorite] = useState(movie?.is_favorite ?? false);
   const { mutate, isLoading } = api.favorite.addFavorite.useMutation();
+
+  if (!movie) return null;
 
   const handleAddFavorite = () => {
     if (!user) {

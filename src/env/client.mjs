@@ -12,6 +12,7 @@ export const formatErrors = (
       if (value && '_errors' in value) {
         return `${name}: ${value._errors.join(', ')}\n`;
       }
+      return null;
     })
     .filter(Boolean);
 
@@ -23,6 +24,7 @@ if (!_clientEnv.success) {
   throw new Error('Invalid environment variables');
 }
 
+// eslint-disable-next-line no-restricted-syntax
 for (const key of Object.keys(_clientEnv.data)) {
   if (!key.startsWith('NEXT_PUBLIC_')) {
     console.warn(

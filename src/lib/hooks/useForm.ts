@@ -20,8 +20,7 @@ export default function useForm<T extends Record<string, string>>(
 
   const clearForm = () => {
     const clearState = Object.fromEntries(
-      // eslint-disable-next-line no-unused-vars
-      Object.entries(inputs).map(([key, value]) => [key, ''])
+      Object.entries(inputs).map(([key]) => [key, ''])
     );
     setInputs(clearState as T);
   };

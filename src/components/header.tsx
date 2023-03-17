@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import UserAvatar from '@/components/user-avatar';
 
 interface Props {
-  toggleMobileNav: () => void;
+  toggleMobileNav?: () => void;
 }
 
 const Header: React.FC<Props> = (props) => (
