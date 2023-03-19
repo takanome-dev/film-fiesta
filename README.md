@@ -67,3 +67,7 @@ The project is licensed under the [MIT License](LICENSE).
 ### :pray: Support
 
 This project needs a star from you ⭐. Don't forget to leave one if you like it :wink:
+
+## 🎦 Repository Visualization
+
+[![Visualization of this repository](./public/diagram.svg)](./src)
