@@ -3,8 +3,9 @@
     <img src="./public/film-fiesta.png" alt="FilmFiesta Logo" width="30px" height="30px" />
     <p style="margin-left:5px;">FilmFiesta</p>
   </h2>
-  <strong>Celebrate the magic of movies</strong>
+  <strong>🧙 Celebrate the magic of movies 🧙</strong>
 </div>
+<br />
 <p align="center">
   <a href="https://github.com/takanome-dev/film-fiesta/actions/workflows/ci.yml">
     <img src="https://github.com/takanome-dev/film-fiesta/actions/workflows/ci.yml/badge.svg" alt="CI" style="max-width: 100%;" />
