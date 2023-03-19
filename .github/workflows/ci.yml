@@ -99,6 +99,3 @@ jobs:
         with:
           name: diagram
           path: public/diagram.svg
-
-      - name: '🔍 lint code'
-        run: pnpm lint
