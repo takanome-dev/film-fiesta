@@ -44,7 +44,7 @@ const HistoryPage: WithPageLayout = () => {
             <h2 className="mb-4 text-xl font-semibold">
               Recent visited movies
             </h2>
-            <div className="grid grid-cols-[250px] gap-4 xs:grid-cols-auto-fill">
+            <div className="grid grid-cols-1 gap-4 xs:grid-cols-auto-fill">
               {parsedHistories.length === 0 && (
                 <div className="">
                   <p className="mt-10 text-center text-lg">No history yet 🕵</p>

@@ -63,8 +63,9 @@ jobs:
       - name: '🔍 lint code'
         run: pnpm lint
 
-      - name: '📦 build application'
-        run: pnpm build
+      # exclude build step for now because of missing envs
+      # - name: '📦 build application'
+      #   run: pnpm build
 
   build:
     name: Build Repo Visualizer
@@ -99,6 +100,3 @@ jobs:
         with:
           name: diagram
           path: public/diagram.svg
-
-      - name: '🔍 lint code'
-        run: pnpm lint
