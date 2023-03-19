@@ -64,7 +64,7 @@ const FavoritePage: WithPageLayout = () => {
           </Button>
         </div>
         {data?.length > 0 ? (
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 gap-4 xs:grid-cols-auto-fill">
             {data?.map((fav) => (
               <Card movie={fav.movie} key={fav.id} handleRefetch={refetch} />
             ))}

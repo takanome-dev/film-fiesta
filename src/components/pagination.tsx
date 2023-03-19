@@ -7,7 +7,7 @@ import { buttonVariants } from './ui/button';
 
 interface Props {
   totalPages: number;
-  page: number;
+  page?: number;
   pathname: string;
 }
 
@@ -15,9 +15,8 @@ interface Event {
   selected: number;
 }
 
-const Pagination: React.FC<Props> = ({ page, pathname, totalPages }) => {
+const Pagination: React.FC<Props> = ({ pathname, totalPages, page }) => {
   console.log({ page });
-
   const PAGE_SIZE = 9;
   const pageCount = Math.ceil(totalPages / PAGE_SIZE);
 
@@ -54,7 +53,8 @@ const Pagination: React.FC<Props> = ({ page, pathname, totalPages }) => {
       pageClassName="rounded-md overflow-hidden"
       pageLinkClassName={buttonVariants({
         variant: 'ghost',
-        className: 'focus:ring-0',
+        className:
+          'focus:ring-0 border border-slate-500 xs:border-0 w-4 xs:w-full',
       })}
       activeClassName="bg-slate-300 dark:bg-slate-800"
       previousClassName={buttonVariants({

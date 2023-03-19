@@ -1,4 +1,5 @@
 import { Inter as FontSans } from '@next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 import Router from 'next/router';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
@@ -49,6 +50,7 @@ const MyApp = ({
           <Component {...pageProps} />
         )}
       </div>
+      <Analytics />
       <Toaster
         position="top-right"
         containerStyle={{

@@ -20,7 +20,6 @@ export const serverSchema = z.object({
     process.env.VERCEL ? z.string() : z.string().url()
   ),
   SENTRY_DNS: z.string().url(),
-  STRIPE_KEY: z.string(),
   SUPABASE_JWT_SECRET: z.string(),
   TMDB_API_KEY: z.string(),
   TMDB_BEARER_TOKEN: z.string(),
@@ -46,7 +45,6 @@ export const serverEnv = {
   NODE_ENV: process.env.NODE_ENV,
   SUPABASE_JWT_SECRET: process.env.SUPABASE_JWT_SECRET,
   SENTRY_DNS: process.env.SENTRY_DNS,
-  STRIPE_KEY: process.env.STRIPE_KEY,
   TMDB_API_KEY: process.env.TMDB_API_KEY,
   TMDB_BEARER_TOKEN: process.env.TMDB_BEARER_TOKEN,
   NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,

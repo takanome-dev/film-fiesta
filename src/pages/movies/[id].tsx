@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import {
   BsChevronExpand,
@@ -150,23 +150,23 @@ const MovieDetailsPage: WithPageLayout = () => {
 
   return (
     <>
-      <div className="grid grid-cols-[350px,1fr] gap-8">
+      <div className="grid grid-cols-details gap-8">
         {isLoading && <SkeletonLoader />}
         {movie && (
           <>
-            <div className="relative h-[500px] w-fit overflow-hidden rounded-lg">
+            <div className="relative aspect-auto h-[500px] overflow-hidden rounded-lg">
               <Image
                 src={imageUrl(movie?.poster_path)}
                 alt={movie?.title}
-                width={300}
-                height={300}
+                width={500}
+                height={500}
                 className="h-full w-full object-fill"
                 placeholder="blur"
                 blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8WQ8AAncBeri2L5wAAAAASUVORK5CYII="
               />
               <Favorite movie={movie} onRefetch={refetch} className="block" />
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col flex-wrap gap-4">
               <h1 className="text-2xl font-bold">{movie?.title}</h1>
               <div className="mt-2 flex gap-4">
                 {movie?.genres?.map((g) => (
@@ -194,7 +194,7 @@ const MovieDetailsPage: WithPageLayout = () => {
                   <p>{movie?.popularity} Votes</p>
                 </div>
               </div>
-              <div className="mt-6 w-[540px]">
+              <div className="mt-6 w-full xl:w-[540px]">
                 <p className="text-lg text-slate-500 dark:text-slate-500">
                   Overview
                 </p>
@@ -312,7 +312,7 @@ const MovieDetailsPage: WithPageLayout = () => {
             slidesToScroll={5}
             slidesToShow={5}
             indicators
-            cssClass="recommended-movies-slide"
+            cssClass="recommended-movies-slide py-4"
           >
             {recommendedMovie?.results.map((m) => (
               <Card
