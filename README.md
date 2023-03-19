@@ -7,17 +7,14 @@
 </div>
 <p align="center">
   <a href="https://github.com/takanome-dev/film-fiesta/actions/workflows/ci.yml">
-    <img src="https://github.com/takanome-dev/film-fiesta/actions/workflows/dev.yml/badge.svg" alt="CI" style="max-width: 100%;">
+    <img src="https://github.com/takanome-dev/film-fiesta/actions/workflows/ci.yml/badge.svg" alt="CI" style="max-width: 100%;" />
   </a>
   <a href="https://github.com/takanome-dev/film-fiesta/actions/workflows/codeql-analysis.yml">
-    <img src="https://github.com/takanome-dev/film-fiesta/actions/workflows/codeql-analysis.yml/badge.svg" alt="CodeQL" style="max-width: 100%;">
+    <img src="https://github.com/takanome-dev/film-fiesta/actions/workflows/codeql-analysis.yml/badge.svg" alt="CodeQL" style="max-width: 100%;" />
   </a>
-  <img src=
-  <img src="https://img.shields.io/github/languages/code-size/takanome-dev/film-fiesta" alt="GitHub code size in bytes">
-  <img src="https://img.shields.io/github/commit-activity/w/takanome-dev/film-fiesta" alt="GitHub commit activity">
-  <a href="https://twitter.com/takanome_dev">
-    <img src="https://img.shields.io/twitter/follow/takanome_dev?label=Follow&style=social" alt="Twitter">
-  </a>
+  <a href="https://github.com/TAKANOME-DEV/film-fiesta"><img alt="Licence Badge" src="https://img.shields.io/github/license/TAKANOME-DEV/film-fiesta?color=%2330C151"></a>
+  <img src="https://img.shields.io/github/languages/code-size/takanome-dev/film-fiesta" alt="GitHub code size in bytes" />
+
 </p>
 
 ---
