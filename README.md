@@ -143,7 +143,7 @@ Deploying your Expo application works slightly differently compared to Next.js o
 2. After the initial setup, you can create your first build. You can build for Android and iOS platforms and use different [**eas.json** build profiles](https://docs.expo.dev/build-reference/eas-json/) to create production builds or development, or test builds. Let's make a production build for iOS.
 
    ```
-   $ eas build --platform ios --profile production
+   eas build --platform ios --profile production
    ```
 
    > If you don't specify the `--profile` flag, EAS uses the `production` profile by default.
@@ -151,7 +151,7 @@ Deploying your Expo application works slightly differently compared to Next.js o
 3. Now that you have your first production build, you can submit this to the stores. [EAS Submit](https://docs.expo.dev/submit/introduction/) can help you send the build to the stores.
 
    ```
-   $ eas submit --platform ios --latest
+   eas submit --platform ios --latest
    ```
 
    > You can also combine build and submit in a single command, using `eas build ... --auto-submit`.
@@ -176,8 +176,8 @@ Deploying your Expo application works slightly differently compared to Next.js o
 7. Now that everything is ready for updates, let's create a new update for `production` builds. With the `--auto` flag, EAS Update uses your current git branch name and commit message for this update. See [How EAS Update works](https://docs.expo.dev/eas-update/how-eas-update-works/#publishing-an-update) for more information.
 
    ```bash
-   $ cd apps/expo
-   $ eas update --auto
+   cd apps/expo
+   eas update --auto
    ```
 
    > Your OTA (Over The Air) updates must always follow the app store's rules. You can't change your app's primary functionality without getting app store approval. But this is a fast way to update your app for minor changes and bug fixes.
