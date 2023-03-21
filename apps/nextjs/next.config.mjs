@@ -6,6 +6,20 @@
 
 /** @type {import("next").NextConfig} */
 const config = {
+  reactStrictMode: true,
+  swcMinify: true,
+  experimental: {},
+  i18n: {
+    locales: ["en"],
+    defaultLocale: "en",
+  },
+  images: {
+    domains: [
+      "image.tmdb.org",
+      "avatars.githubusercontent.com",
+      "media.giphy.com",
+    ],
+  },
   /** Enables hot reloading for local packages without a build step */
   transpilePackages: ["@acme/api", "@acme/auth", "@acme/db"],
   /** We already do linting and typechecking as separate tasks in CI */

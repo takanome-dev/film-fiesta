@@ -36,6 +36,7 @@
     "eslint": "^8.34.0",
     "eslint-config-acme": "0.0.0",
     "postcss": "^8.4.21",
+    "prettier-config-acme": "*",
     "tailwindcss": "^3.2.7",
     "tsx": "^3.12.3",
     "typescript": "^5.0.0"
