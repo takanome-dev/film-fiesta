@@ -6,23 +6,25 @@
  * tl;dr - this is where all the tRPC server stuff is created and plugged in.
  * The pieces you will need to use are documented accordingly near the end
  */
+
+// import { prisma } from "@acme/db";
+
+import { createClient } from "@supabase/supabase-js";
 import { TRPCError, initTRPC } from "@trpc/server";
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
+import type { Database } from "supabase/schema";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { getServerSession, type Session } from "@acme/auth";
-import { prisma } from "@acme/db";
 
 /**
- * 1. CONTEXT
+ * 2. INITIALIZATION
  *
- * This section defines the "contexts" that are available in the backend API
- *
- * These allow you to access things like the database, the session, etc, when
- * processing a request
- *
+ * This is where the trpc api is initialized, connecting the context and
+ * transformer
  */
+
 type CreateContextOptions = {
   session: Session | null;
 };
@@ -37,9 +39,25 @@ type CreateContextOptions = {
  * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
  */
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
+  const token = opts.session?.supabaseAccessToken;
+
+  const supabase = createClient<Database>(
+    env.NEXT_PUBLIC_SUPABASE_URL,
+    env.NEXT_PUBLIC_SUPABASE_API_KEY,
+    token
+      ? {
+          global: {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        }
+      : undefined,
+  );
+
   return {
     session: opts.session,
-    prisma,
+    supabase,
   };
 };
 
@@ -59,12 +77,6 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
   });
 };
 
-/**
- * 2. INITIALIZATION
- *
- * This is where the trpc api is initialized, connecting the context and
- * transformer
- */
 const t = initTRPC.context<typeof createTRPCContext>().create({
   transformer: superjson,
   errorFormatter({ shape, error }) {
@@ -106,8 +118,24 @@ export const publicProcedure = t.procedure;
  * procedure
  */
 const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
-  if (!ctx.session?.user) {
+  if (!ctx.session || !ctx.session.user) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+
+  return next({
+    ctx: {
+      // infers the `session` as non-nullable
+      session: { ...ctx.session, user: ctx.session.user },
+    },
+  });
+});
+
+const enforcedUserIsAdmin = t.middleware(({ ctx, next }) => {
+  if (!ctx.session || !ctx.session.user) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+  if (!ctx.session.user.isAdmin) {
+    throw new TRPCError({ code: "FORBIDDEN" });
   }
   return next({
     ctx: {
@@ -127,3 +155,4 @@ const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
  * @see https://trpc.io/docs/procedures
  */
 export const protectedProcedure = t.procedure.use(enforceUserIsAuthed);
+export const adminProcedure = t.procedure.use(enforcedUserIsAdmin);

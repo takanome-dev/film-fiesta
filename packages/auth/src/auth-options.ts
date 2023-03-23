@@ -12,17 +12,16 @@ import { prisma } from "@acme/db";
  **/
 declare module "next-auth" {
   interface Session extends DefaultSession {
+    supabaseAccessToken?: string;
     user: {
       id: string;
-      // ...other properties
-      // role: UserRole;
+      isAdmin: boolean;
     } & DefaultSession["user"];
   }
 
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
+  interface User {
+    isAdmin: boolean;
+  }
 }
 
 /**
@@ -31,20 +30,59 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  **/
 export const authOptions: NextAuthOptions = {
+  debug: env.NODE_ENV === "development",
   callbacks: {
     session({ session, user }) {
+      const signingSecret = serverEnv.SUPABASE_JWT_SECRET;
+
+      if (signingSecret) {
+        const payload = {
+          aud: "authenticated",
+          exp: Math.floor(new Date(session.expires).getTime() / 1000),
+          sub: user?.id,
+          email: user?.email,
+          role: "authenticated",
+        };
+
+        session.supabaseAccessToken = jwt.sign(payload, signingSecret);
+      }
+
       if (session.user) {
         session.user.id = user.id;
-        // session.user.role = user.role; <-- put other properties on the session here
+        session.user.isAdmin = user.isAdmin;
       }
       return session;
     },
   },
-  adapter: PrismaAdapter(prisma),
+  // Configure one or more authentication providers
+  adapter: SupabaseAdapter({
+    url: clientEnv.NEXT_PUBLIC_SUPABASE_URL,
+    secret: serverEnv.SUPABASE_SERVICE_ROLE_KEY,
+  }),
   providers: [
     DiscordProvider({
-      clientId: process.env.DISCORD_CLIENT_ID as string,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
+      clientId: serverEnv.DISCORD_CLIENT_ID,
+      clientSecret: serverEnv.DISCORD_CLIENT_SECRET,
+    }),
+    GithubProvider({
+      clientId: serverEnv.GITHUB_CLIENT_ID,
+      clientSecret: serverEnv.GITHUB_CLIENT_SECRET,
+    }),
+    GoogleProvider({
+      clientId: serverEnv.GOOGLE_CLIENT_ID,
+      clientSecret: serverEnv.GOOGLE_CLIENT_SECRET,
+    }),
+    EmailProvider({
+      server: {
+        // TODO: use real email server
+        host: "smtp.ethereal.email",
+        port: 587,
+        auth: {
+          user: serverEnv.EMAIL_SERVER_USER,
+          pass: serverEnv.EMAIL_SERVER_PASSWORD,
+        },
+      },
+      from: serverEnv.EMAIL_FROM,
     }),
     /**
      * ...add more providers here
@@ -54,6 +92,6 @@ export const authOptions: NextAuthOptions = {
      * `refresh_token_expires_in` field to the Account model. Refer to the
      * NextAuth.js docs for the provider you want to use. Example:
      * @see https://next-auth.js.org/providers/github
-     **/
+     */
   ],
 };

@@ -18,9 +18,20 @@ const server = z.object({
     // VERCEL_URL doesn't include `https` so it cant be validated as a URL
     process.env.VERCEL ? z.string() : z.string().url(),
   ),
-  // Add `.min(1) on ID and SECRET if you want to make sure they're not empty
+  SENTRY_DNS: z.string().url(),
+  SUPABASE_JWT_SECRET: z.string(),
+  TMDB_API_KEY: z.string(),
+  TMDB_BEARER_TOKEN: z.string(),
   DISCORD_CLIENT_ID: z.string(),
   DISCORD_CLIENT_SECRET: z.string(),
+  GITHUB_CLIENT_ID: z.string(),
+  GITHUB_CLIENT_SECRET: z.string(),
+  GOOGLE_CLIENT_ID: z.string(),
+  GOOGLE_CLIENT_SECRET: z.string(),
+  SUPABASE_SERVICE_ROLE_KEY: z.string(),
+  EMAIL_SERVER_USER: z.string(),
+  EMAIL_SERVER_PASSWORD: z.string(),
+  EMAIL_FROM: z.string(),
 });
 
 /**
@@ -28,7 +39,12 @@ const server = z.object({
  * built with invalid env vars. To expose them to the client, prefix them with `NEXT_PUBLIC_`.
  */
 const client = z.object({
-  // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
+  NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
+  NEXT_PUBLIC_SUPABASE_API_KEY: z.string(),
+  NEXT_PUBLIC_TMDB_IMAGE: z.string().url(),
+  NEXT_PUBLIC_TMDB_URL: z.string().url(),
+  NEXT_PUBLIC_TMDB_VIDEO: z.string().url(),
+  NEXT_PUBLIC_APP_URL: z.string().url(),
 });
 
 /**
@@ -42,9 +58,26 @@ const processEnv = {
   NODE_ENV: process.env.NODE_ENV,
   NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
   NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+  SENTRY_DNS: process.env.SENTRY_DNS,
+  SUPABASE_JWT_SECRET: process.env.SUPABASE_JWT_SECRET,
+  TMDB_API_KEY: process.env.TMDB_API_KEY,
+  TMDB_BEARER_TOKEN: process.env.TMDB_BEARER_TOKEN,
   DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
   DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
-  // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
+  GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
+  GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
+  EMAIL_SERVER_USER: process.env.EMAIL_SERVER_USER,
+  EMAIL_SERVER_PASSWORD: process.env.EMAIL_SERVER_PASSWORD,
+  EMAIL_FROM: process.env.EMAIL_FROM,
+  NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+  NEXT_PUBLIC_SUPABASE_API_KEY: process.env.NEXT_PUBLIC_SUPABASE_API_KEY,
+  NEXT_PUBLIC_TMDB_IMAGE: process.env.NEXT_PUBLIC_TMDB_IMAGE,
+  NEXT_PUBLIC_TMDB_URL: process.env.NEXT_PUBLIC_TMDB_URL,
+  NEXT_PUBLIC_TMDB_VIDEO: process.env.NEXT_PUBLIC_TMDB_VIDEO,
+  NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
 };
 
 // Don't touch the part below
