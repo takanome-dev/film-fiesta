@@ -18,3 +18,5 @@ export {
   type TrailerSchema,
   type ReviewResponseSchema,
 } from "./movies";
+
+export { env } from "./env.mjs";

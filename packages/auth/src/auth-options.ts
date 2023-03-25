@@ -1,8 +1,12 @@
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { type DefaultSession, type NextAuthOptions } from "next-auth";
+import { SupabaseAdapter } from "@next-auth/supabase-adapter";
+import jwt from "jsonwebtoken";
+import NextAuth, { type DefaultSession, type NextAuthOptions } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
+import EmailProvider from "next-auth/providers/email";
+import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 
-import { prisma } from "@acme/db";
+import { env } from "@acme/schemas";
 
 /**
  * Module augmentation for `next-auth` types
@@ -33,7 +37,7 @@ export const authOptions: NextAuthOptions = {
   debug: env.NODE_ENV === "development",
   callbacks: {
     session({ session, user }) {
-      const signingSecret = serverEnv.SUPABASE_JWT_SECRET;
+      const signingSecret = env.SUPABASE_JWT_SECRET;
 
       if (signingSecret) {
         const payload = {
@@ -57,20 +61,20 @@ export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
   adapter: SupabaseAdapter({
     url: clientEnv.NEXT_PUBLIC_SUPABASE_URL,
-    secret: serverEnv.SUPABASE_SERVICE_ROLE_KEY,
+    secret: env.SUPABASE_SERVICE_ROLE_KEY,
   }),
   providers: [
     DiscordProvider({
-      clientId: serverEnv.DISCORD_CLIENT_ID,
-      clientSecret: serverEnv.DISCORD_CLIENT_SECRET,
+      clientId: env.DISCORD_CLIENT_ID,
+      clientSecret: env.DISCORD_CLIENT_SECRET,
     }),
     GithubProvider({
-      clientId: serverEnv.GITHUB_CLIENT_ID,
-      clientSecret: serverEnv.GITHUB_CLIENT_SECRET,
+      clientId: env.GITHUB_CLIENT_ID,
+      clientSecret: env.GITHUB_CLIENT_SECRET,
     }),
     GoogleProvider({
-      clientId: serverEnv.GOOGLE_CLIENT_ID,
-      clientSecret: serverEnv.GOOGLE_CLIENT_SECRET,
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
     EmailProvider({
       server: {
@@ -78,11 +82,11 @@ export const authOptions: NextAuthOptions = {
         host: "smtp.ethereal.email",
         port: 587,
         auth: {
-          user: serverEnv.EMAIL_SERVER_USER,
-          pass: serverEnv.EMAIL_SERVER_PASSWORD,
+          user: env.EMAIL_SERVER_USER,
+          pass: env.EMAIL_SERVER_PASSWORD,
         },
       },
-      from: serverEnv.EMAIL_FROM,
+      from: env.EMAIL_FROM,
     }),
     /**
      * ...add more providers here
