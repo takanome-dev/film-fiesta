@@ -1,27 +1,27 @@
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import { FaSearch } from 'react-icons/fa';
+import React, { useState } from "react";
+import { useRouter } from "next/router";
+import { FaSearch } from "react-icons/fa";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "~/components/ui/button";
 import {
   CommandDialog,
   CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command';
-import { Input } from '@/components/ui/input';
+} from "~/components/ui/command";
+import { Input } from "~/components/ui/input";
 
 const suggestions = [
-  'Avatar',
-  'Avengers',
-  'Batman',
-  'Black Widow',
-  'Captain America',
+  "Avatar",
+  "Avengers",
+  "Batman",
+  "Black Widow",
+  "Captain America",
 ];
 
 const SearchInput = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [openSearchDialog, setOpenSearchDialog] = useState(false);
   const router = useRouter();
 
@@ -30,7 +30,7 @@ const SearchInput = () => {
       .push(`/search?q=${query ?? searchQuery}&page=${1}`)
       .catch(console.error);
     setOpenSearchDialog(false);
-    setSearchQuery('');
+    setSearchQuery("");
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -39,7 +39,7 @@ const SearchInput = () => {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       sendQuery();
       setOpenSearchDialog(false);
-      setSearchQuery('');
+      setSearchQuery("");
     }
   };
 
@@ -76,7 +76,7 @@ const SearchInput = () => {
           value={searchQuery}
           onValueChange={(query) => setSearchQuery(query)}
           onKeyDown={(e) =>
-            e.key === 'Enter' && searchQuery ? handleSubmit(e) : null
+            e.key === "Enter" && searchQuery ? handleSubmit(e) : null
           }
         />
         <CommandList>

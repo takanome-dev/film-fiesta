@@ -1,14 +1,15 @@
+import { z } from "zod";
+
+import { type SupabaseAuthClient } from "@acme/db";
 import type {
   MovieSchema,
   ResponseSchema,
   ReviewResponseSchema,
   TrailerSchema,
-} from "@/schemas/movies";
-import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
-import type { SupabaseAuthClient } from "@/server/db";
-import { http } from "@/server/fetch";
-import { z } from "zod";
+} from "@acme/schema";
 
+import { http } from "../fetch";
+import { createTRPCRouter, publicProcedure } from "../trpc";
 import { getFavoriteMovies } from "./favorite";
 
 const getMoviesWithFavs = async (

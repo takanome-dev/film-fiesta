@@ -1,9 +1,9 @@
-import React from 'react';
-import { MdError } from 'react-icons/md';
+import React from "react";
+import { MdError } from "react-icons/md";
 
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { cn } from '@/lib/utils/classname';
+import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
+import { cn } from "~/lib/utils/classname";
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -19,8 +19,8 @@ const InputWithError = React.forwardRef<HTMLInputElement, Props>(
       <>
         <div
           className={cn(
-            'grid w-full max-w-sm items-center gap-1.5',
-            containerClassName
+            "grid w-full max-w-sm items-center gap-1.5",
+            containerClassName,
           )}
         >
           <Label htmlFor={name} className="mb-2">
@@ -36,7 +36,7 @@ const InputWithError = React.forwardRef<HTMLInputElement, Props>(
         )}
       </>
     );
-  }
+  },
 );
 
 export default InputWithError;

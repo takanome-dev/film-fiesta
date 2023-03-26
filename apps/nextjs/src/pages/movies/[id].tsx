@@ -1,42 +1,41 @@
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { toast } from "react-hot-toast";
 import {
   BsChevronExpand,
   BsFillCalendarDateFill,
   BsStars,
-} from 'react-icons/bs';
-import { FaPlayCircle, FaStar, FaYoutube } from 'react-icons/fa';
-import Skeleton from 'react-loading-skeleton';
-import { Slide } from 'react-slideshow-image';
+} from "react-icons/bs";
+import { FaPlayCircle, FaStar, FaYoutube } from "react-icons/fa";
+import Skeleton from "react-loading-skeleton";
+import { Slide } from "react-slideshow-image";
 
-import Card from '@/components/card';
-import CommentCard from '@/components/comment-card';
-import Error from '@/components/error';
-import Favorite from '@/components/favorite';
-import SkeletonWrapper from '@/components/skeleton-wrapper';
-import { Button } from '@/components/ui/button';
+import Card from "~/components/card";
+import CommentCard from "~/components/comment-card";
+import Error from "~/components/error";
+import Favorite from "~/components/favorite";
+import SkeletonWrapper from "~/components/skeleton-wrapper";
+import { Button } from "~/components/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@/components/ui/collapsible';
+} from "~/components/ui/collapsible";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import MainLayout from '@/layouts/main-layout';
-import { useSingleStorage } from '@/lib/hooks/useLocalStorage';
-import { api } from '@/lib/utils/api';
-import { imageUrl } from '@/lib/utils/movie';
-
-import type { WithPageLayout } from '@/types/with-page-layout';
+} from "~/components/ui/dialog";
+import { ScrollArea } from "~/components/ui/scroll-area";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import MainLayout from "~/layouts/main-layout";
+import { useSingleStorage } from "~/lib/hooks/useLocalStorage";
+import { api } from "~/lib/utils/api";
+import { imageUrl } from "~/lib/utils/movie";
+import type { WithPageLayout } from "~/types/with-page-layout";
 
 function SkeletonLoader() {
   return (
@@ -52,7 +51,6 @@ function SkeletonLoader() {
           {Array(10)
             .fill(true)
             .map((_, index) => (
-              // eslint-disable-next-line react/no-array-index-key
               <Skeleton key={index} className="mb-2" />
             ))}
         </div>
@@ -121,7 +119,7 @@ const MovieDetailsPage: WithPageLayout = () => {
     refetch,
   } = api.movies.getMovieById.useQuery({ id: id ? Number(id) : 0 });
 
-  const { setItemToStorage } = useSingleStorage('filmfiesta_movies');
+  const { setItemToStorage } = useSingleStorage("filmfiesta_movies");
 
   const {
     data: recommendedMovie,
@@ -150,7 +148,7 @@ const MovieDetailsPage: WithPageLayout = () => {
 
   return (
     <>
-      <div className="grid grid-cols-details gap-8">
+      <div className="grid-cols-details grid gap-8">
         {isLoading && <SkeletonLoader />}
         {movie && (
           <>
@@ -260,7 +258,7 @@ const MovieDetailsPage: WithPageLayout = () => {
                 </div>
                 <CommentCard
                   avatarUrl={imageUrl(
-                    reviews?.results?.[0]?.author_details.avatar_path as string
+                    reviews?.results?.[0]?.author_details.avatar_path as string,
                   )}
                   title={reviews?.results?.[0]?.author as string}
                   subTitle={

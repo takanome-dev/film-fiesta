@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import Router from 'next/router';
-import React from 'react';
-import { BsArrowLeft } from 'react-icons/bs';
+import React from "react";
+import Image from "next/image";
+import Router from "next/router";
+import { BsArrowLeft } from "react-icons/bs";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "~/components/ui/button";
 
 interface Props {
   needSignIn?: boolean;

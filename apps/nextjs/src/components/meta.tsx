@@ -1,7 +1,8 @@
-import Head from 'next/head';
+import Head from "next/head";
 
-import { env } from '@/env/client.mjs';
-import { siteConfig } from '@/lib/config/site';
+import { env } from "@acme/schema";
+
+import { siteConfig } from "~/lib/config/site";
 
 interface Props {
   noindex?: boolean;
@@ -14,7 +15,7 @@ export default function Meta({ noindex, page }: Props) {
 
   return (
     <Head>
-      <title>{`${page ?? 'Explore'} - ${siteConfig.name}`}</title>
+      <title>{`${page ?? "Explore"} - ${siteConfig.name}`}</title>
       <meta charSet="utf-8" />
       <meta name="description" content={siteConfig.description} />
       <link

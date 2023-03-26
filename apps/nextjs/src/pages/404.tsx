@@ -1,12 +1,12 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-import Meta from '@/components/meta';
-import { buttonVariants } from '@/components/ui/button';
+import Meta from "~/components/meta";
+import { buttonVariants } from "~/components/ui/button";
 
 const NotFoundPage = () => (
   <>
     <Meta page="Not Found Page" />
-    <div className="relative flex min-h-screen items-center justify-center bg-lost bg-cover bg-center bg-no-repeat">
+    <div className="bg-lost relative flex min-h-screen items-center justify-center bg-cover bg-center bg-no-repeat">
       <div className="absolute inset-0 bg-black/70" />
       <div className="w-3/4 rounded-lg bg-white bg-opacity-60 p-12 text-center shadow backdrop-blur-sm sm:w-[500px]">
         <h1 className="mb-8 text-3xl font-bold text-slate-900 dark:text-slate-900">
@@ -17,9 +17,9 @@ const NotFoundPage = () => (
         </p>
         <Link
           className={buttonVariants({
-            variant: 'subtle',
-            size: 'lg',
-            className: 'focus:ring-0',
+            variant: "subtle",
+            size: "lg",
+            className: "focus:ring-0",
           })}
           href="/"
         >

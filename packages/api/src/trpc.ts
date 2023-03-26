@@ -7,16 +7,13 @@
  * The pieces you will need to use are documented accordingly near the end
  */
 
-// import { prisma } from "@acme/db";
-
-import { createClient } from "@supabase/supabase-js";
 import { TRPCError, initTRPC } from "@trpc/server";
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
-import type { Database } from "supabase/schema";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { getServerSession, type Session } from "@acme/auth";
+import { getSupabaseClient } from "@acme/db";
 
 /**
  * 2. INITIALIZATION
@@ -40,20 +37,7 @@ type CreateContextOptions = {
  */
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
   const token = opts.session?.supabaseAccessToken;
-
-  const supabase = createClient<Database>(
-    env.NEXT_PUBLIC_SUPABASE_URL,
-    env.NEXT_PUBLIC_SUPABASE_API_KEY,
-    token
-      ? {
-          global: {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        }
-      : undefined,
-  );
+  const supabase = getSupabaseClient(token);
 
   return {
     session: opts.session,

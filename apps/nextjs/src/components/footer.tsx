@@ -1,15 +1,15 @@
-import Link from 'next/link';
-import { FaGithub } from 'react-icons/fa';
-import { SiTwitter } from 'react-icons/si';
+import Link from "next/link";
+import { FaGithub } from "react-icons/fa";
+import { SiTwitter } from "react-icons/si";
 
-import { buttonVariants } from '@/components/ui/button';
-import { siteConfig } from '@/lib/config/site';
+import { buttonVariants } from "~/components/ui/button";
+import { siteConfig } from "~/lib/config/site";
 
 const Footer = () => (
   <footer className="border-t border-t-slate-200 dark:border-t-slate-700">
-    <div className="container mx-auto flex w-full items-center justify-between px-12 py-6 xs:px-0">
+    <div className="xs:px-0 container mx-auto flex w-full items-center justify-between px-12 py-6">
       <p className="mt-1 text-center text-slate-800 dark:text-slate-100">
-        🛠 Built by{' '}
+        🛠 Built by{" "}
         <Link
           href={siteConfig.links.twitter}
           target="_blank"
@@ -23,8 +23,8 @@ const Footer = () => (
         <Link href={siteConfig.links.github} target="_blank" rel="noreferrer">
           <div
             className={buttonVariants({
-              size: 'sm',
-              variant: 'ghost',
+              size: "sm",
+              variant: "ghost",
             })}
           >
             <FaGithub size={18} className="cursor-pointer" />
@@ -34,8 +34,8 @@ const Footer = () => (
         <Link href={siteConfig.links.twitter} target="_blank" rel="noreferrer">
           <div
             className={buttonVariants({
-              size: 'sm',
-              variant: 'ghost',
+              size: "sm",
+              variant: "ghost",
             })}
           >
             <SiTwitter size={18} className="text-[#1DA1F2]" />

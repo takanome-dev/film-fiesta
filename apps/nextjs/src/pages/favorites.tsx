@@ -1,17 +1,16 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { BsArrowRepeat } from 'react-icons/bs';
-import { Circles } from 'react-loader-spinner';
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { BsArrowRepeat } from "react-icons/bs";
+import { Circles } from "react-loader-spinner";
 
-import Card from '@/components/card';
-import Error from '@/components/error';
-import Meta from '@/components/meta';
-import { Button } from '@/components/ui/button';
-import Unauthorized from '@/components/unauthorized';
-import MainLayout from '@/layouts/main-layout';
-import { api } from '@/lib/utils/api';
-
-import type { WithPageLayout } from '@/types/with-page-layout';
+import Card from "~/components/card";
+import Error from "~/components/error";
+import Meta from "~/components/meta";
+import { Button } from "~/components/ui/button";
+import Unauthorized from "~/components/unauthorized";
+import MainLayout from "~/layouts/main-layout";
+import { api } from "~/lib/utils/api";
+import type { WithPageLayout } from "~/types/with-page-layout";
 
 const FavoritePage: WithPageLayout = () => {
   const router = useRouter();
@@ -43,7 +42,7 @@ const FavoritePage: WithPageLayout = () => {
   }
 
   if (error) {
-    if (error.message === 'UNAUTHORIZED') {
+    if (error.message === "UNAUTHORIZED") {
       return <Unauthorized needSignIn />;
     }
     return <Error handleRefetch={() => refetch()} resourceName="favorites" />;
@@ -64,7 +63,7 @@ const FavoritePage: WithPageLayout = () => {
           </Button>
         </div>
         {data?.length > 0 ? (
-          <div className="grid grid-cols-1 gap-4 xs:grid-cols-auto-fill">
+          <div className="xs:grid-cols-auto-fill grid grid-cols-1 gap-4">
             {data?.map((fav) => (
               <Card movie={fav.movie} key={fav.id} handleRefetch={refetch} />
             ))}
@@ -76,7 +75,7 @@ const FavoritePage: WithPageLayout = () => {
             <Button
               variant="outline"
               onClick={() => {
-                router.push('/movies').catch(console.error);
+                router.push("/movies").catch(console.error);
               }}
             >
               Explore movies

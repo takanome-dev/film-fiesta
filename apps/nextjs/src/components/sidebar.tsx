@@ -1,35 +1,34 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { useSession, signOut } from 'next-auth/react';
-import React, { useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { AiOutlineHistory } from 'react-icons/ai';
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import type { Session } from "next-auth";
+import { signOut, useSession } from "next-auth/react";
+import { toast } from "react-hot-toast";
+import { AiOutlineHistory } from "react-icons/ai";
 import {
   FaRegComment,
-  FaSignInAlt,
-  FaSignOutAlt,
   FaRegHeart,
   FaSearch,
-} from 'react-icons/fa';
-import { MdBugReport } from 'react-icons/md';
+  FaSignInAlt,
+  FaSignOutAlt,
+} from "react-icons/fa";
+import { MdBugReport } from "react-icons/md";
 
-import Feedback from '@/components/feedback';
-import SidebarLink from '@/components/sidebar-link';
-import { Button } from '@/components/ui/button';
+import Feedback from "~/components/feedback";
+import SidebarLink from "~/components/sidebar-link";
+import { Button } from "~/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Separator } from '@/components/ui/separator';
-import { Sheet, SheetContent, SheetHeader } from '@/components/ui/sheet';
-import { siteConfig } from '@/lib/config/site';
-import useTailWindResponsive from '@/lib/hooks/useTailwindResponsive';
-import links from '@/lib/utils/links';
-
-import type { Session } from 'next-auth';
+} from "~/components/ui/dialog";
+import { Separator } from "~/components/ui/separator";
+import { Sheet, SheetContent, SheetHeader } from "~/components/ui/sheet";
+import { siteConfig } from "~/lib/config/site";
+import useTailWindResponsive from "~/lib/hooks/useTailwindResponsive";
+import links from "~/lib/utils/links";
 
 interface SignOutProps {
   open: boolean;
@@ -43,7 +42,7 @@ interface MobileNavProps {
   setOpenFeedback: (open: boolean) => void;
   openSignOut: boolean;
   setOpenSignOut: (open: boolean) => void;
-  user?: Session['user'];
+  user?: Session["user"];
 }
 
 const SignOutModal: React.FC<SignOutProps> = ({ open, setOpen }) => {
@@ -51,7 +50,7 @@ const SignOutModal: React.FC<SignOutProps> = ({ open, setOpen }) => {
   const handleSignOut = async () => {
     await signOut();
     setOpen(false);
-    toast.success('Signed out successfully!');
+    toast.success("Signed out successfully!");
   };
 
   return (
@@ -84,10 +83,10 @@ const SignOutModal: React.FC<SignOutProps> = ({ open, setOpen }) => {
 };
 
 const MobileSidebar: React.FC<MobileNavProps> = (props) => {
-  const matches = useTailWindResponsive('xs');
+  const matches = useTailWindResponsive("xs");
   return (
     <Sheet open={props.openNav} onOpenChange={props.setOpenNav}>
-      <SheetContent position="left" size={matches ? 'lg' : 'xl'}>
+      <SheetContent position="left" size={matches ? "lg" : "xl"}>
         <SheetHeader>
           <Link
             href="/"
@@ -204,8 +203,8 @@ const MobileSidebar: React.FC<MobileNavProps> = (props) => {
   );
 };
 
-const Sidebar: React.FC<Pick<MobileNavProps, 'openNav' | 'setOpenNav'>> = (
-  props
+const Sidebar: React.FC<Pick<MobileNavProps, "openNav" | "setOpenNav">> = (
+  props,
 ) => {
   const [openFeedback, setOpenFeedback] = useState(false);
   const [openSignOut, setOpenSignOut] = useState(false);

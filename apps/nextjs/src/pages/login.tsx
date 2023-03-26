@@ -1,23 +1,23 @@
-import { type OAuthProviderType } from 'next-auth/providers';
-import { signIn } from 'next-auth/react';
-import React, { useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { AiOutlineInfoCircle } from 'react-icons/ai';
-import { FaGithub } from 'react-icons/fa';
-import { FcGoogle } from 'react-icons/fc';
-import { SiDiscord } from 'react-icons/si';
+import React, { useState } from "react";
+import { type OAuthProviderType } from "next-auth/providers";
+import { signIn } from "next-auth/react";
+import { toast } from "react-hot-toast";
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import { FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { SiDiscord } from "react-icons/si";
 
-import InputWithError from '@/components/input-with-error';
-import Meta from '@/components/meta';
-import { Button } from '@/components/ui/button';
-import SignInLayout from '@/layouts/signin-layout';
-// import { loginSchema } from '@/schemas/user';
+import InputWithError from "~/components/input-with-error";
+import Meta from "~/components/meta";
+import { Button } from "~/components/ui/button";
+import SignInLayout from "~/layouts/signin-layout";
+// import { loginSchema } from '~/schemas/user';
 
-import type { WithPageLayout } from '@/types/with-page-layout';
+import type { WithPageLayout } from "~/types/with-page-layout";
 
 const LoginPage: WithPageLayout = () => {
   const [error, setError] = useState<string | null>(null);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -41,9 +41,9 @@ const LoginPage: WithPageLayout = () => {
     // }
 
     try {
-      await signIn(provider, { callbackUrl: '/movies' });
+      await signIn(provider, { callbackUrl: "/movies" });
     } catch (err) {
-      toast.error('Something went wrong. Please try again.');
+      toast.error("Something went wrong. Please try again.");
       if (err instanceof Error) {
         setError(err.message);
       }
@@ -53,13 +53,13 @@ const LoginPage: WithPageLayout = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     toast(
-      'Sorry, we have temporarily disabled Email login. Please use Google or GitHub.',
+      "Sorry, we have temporarily disabled Email login. Please use Google or GitHub.",
       {
         icon: <AiOutlineInfoCircle className="mr-2 text-amber-500" size={40} />,
-        position: 'top-center',
+        position: "top-center",
         className:
-          'border-l-4 border-amber-400 dark:bg-slate-800 dark:text-slate-100',
-      }
+          "border-l-4 border-amber-400 dark:bg-slate-800 dark:text-slate-100",
+      },
     );
 
     // const result = loginSchema.safeParse(email);
@@ -108,7 +108,7 @@ const LoginPage: WithPageLayout = () => {
               variant="ghost"
               size="sm"
               className="h-10 dark:hover:bg-slate-600"
-              onClick={() => handleOauthLogin('google')}
+              onClick={() => handleOauthLogin("google")}
             >
               <FcGoogle size={24} className="" />
             </Button>
@@ -116,7 +116,7 @@ const LoginPage: WithPageLayout = () => {
               variant="ghost"
               size="sm"
               className="h-10 dark:hover:bg-slate-600"
-              onClick={() => handleOauthLogin('github')}
+              onClick={() => handleOauthLogin("github")}
             >
               <FaGithub size={24} className="" />
             </Button>
@@ -124,7 +124,7 @@ const LoginPage: WithPageLayout = () => {
               variant="ghost"
               size="sm"
               className="h-10 dark:hover:bg-slate-600"
-              onClick={() => handleOauthLogin('discord')}
+              onClick={() => handleOauthLogin("discord")}
             >
               <SiDiscord size={24} className="text-[#5865F2]" />
             </Button>

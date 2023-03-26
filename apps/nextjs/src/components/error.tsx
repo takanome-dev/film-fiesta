@@ -1,10 +1,10 @@
-import Image from 'next/image';
-import React, { useState } from 'react';
-import { BsArrowRepeat } from 'react-icons/bs';
-import { MdBugReport } from 'react-icons/md';
+import React, { useState } from "react";
+import Image from "next/image";
+import { BsArrowRepeat } from "react-icons/bs";
+import { MdBugReport } from "react-icons/md";
 
-import Feedback from '@/components/feedback';
-import { Button } from '@/components/ui/button';
+import Feedback from "~/components/feedback";
+import { Button } from "~/components/ui/button";
 
 interface ErrorProps {
   handleRefetch: () => void;

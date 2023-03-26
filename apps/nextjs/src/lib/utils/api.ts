@@ -15,6 +15,17 @@ export const api = createTRPCNext<AppRouter>({
   config() {
     return {
       transformer: superjson,
+      queryClientConfig: {
+        defaultOptions: {
+          queries: {
+            refetchOnMount: false,
+            refetchOnWindowFocus: false,
+            refetchOnReconnect: true,
+            retry: false,
+            staleTime: 30 * 60 * 1000,
+          },
+        },
+      },
       links: [
         loggerLink({
           enabled: (opts) =>

@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { cn } from '@/lib/utils/classname';
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { cn } from "~/lib/utils/classname";
 
 interface CommentCardProps {
   avatarUrl: string;
@@ -18,8 +18,8 @@ const CommentCard: React.FC<CommentCardProps> = (props) => {
   return (
     <div
       className={cn(
-        'w-full rounded-lg border border-slate-200 p-4 dark:border-slate-700',
-        className || ''
+        "w-full rounded-lg border border-slate-200 p-4 dark:border-slate-700",
+        className || "",
       )}
     >
       <div className="flex justify-between">
@@ -36,8 +36,8 @@ const CommentCard: React.FC<CommentCardProps> = (props) => {
           </div>
         </div>
         <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-          {new Intl.DateTimeFormat('en-US').format(
-            new Date(createdAt ?? Date.now())
+          {new Intl.DateTimeFormat("en-US").format(
+            new Date(createdAt ?? Date.now()),
           )}
         </p>
       </div>

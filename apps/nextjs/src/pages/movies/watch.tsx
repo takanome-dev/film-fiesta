@@ -1,29 +1,29 @@
 /* eslint-disable */
 // eslint disabled because CI keeps failing for some reason
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { toast } from 'react-hot-toast';
-import { BsFillCalendarDateFill, BsStars } from 'react-icons/bs';
-import { FaStar } from 'react-icons/fa';
-import Skeleton from 'react-loading-skeleton';
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { toast } from "react-hot-toast";
+import { BsFillCalendarDateFill, BsStars } from "react-icons/bs";
+import { FaStar } from "react-icons/fa";
+import Skeleton from "react-loading-skeleton";
 
-import notFoundImage from '@/assets/image-not-found.png';
-import Error from '@/components/error';
-import Favorite from '@/components/favorite';
+import type { MovieSchema } from "@acme/schema";
+
+import Error from "~/components/error";
+import Favorite from "~/components/favorite";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
-import SimpleLayout from '@/layouts/simple-layout';
-import { api } from '@/lib/utils/api';
-import { embedMovieUrl, imageUrl } from '@/lib/utils/movie';
-
-import type { MovieSchema } from '@/schemas/movies';
-import type { WithPageLayout } from '@/types/with-page-layout';
+} from "~/components/ui/tooltip";
+import notFoundImage from "~/assets/image-not-found.png";
+import SimpleLayout from "~/layouts/simple-layout";
+import { api } from "~/lib/utils/api";
+import { embedMovieUrl, imageUrl } from "~/lib/utils/movie";
+import type { WithPageLayout } from "~/types/with-page-layout";
 
 const WatchMoviePage: WithPageLayout = () => {
   const router = useRouter();

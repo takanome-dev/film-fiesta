@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import Header from '@/components/header';
+import Header from "~/components/header";
 
 const SimpleLayout = ({ children }: { children: React.ReactNode }) => (
   <>

@@ -1,9 +1,10 @@
-import { favoriteOutputSchema } from "@/schemas/favorites";
-import { movieSchema } from "@/schemas/movies";
-import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
-import type { SupabaseAuthClient } from "@/server/db";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+
+import { type SupabaseAuthClient } from "@acme/db";
+import { favoriteOutputSchema, movieSchema } from "@acme/schema";
+
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const getFavoriteMovies = async (
   supabase: SupabaseAuthClient,

@@ -1,17 +1,16 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import toast from 'react-hot-toast';
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
-import Card from '@/components/card';
-import Error from '@/components/error';
-import Meta from '@/components/meta';
-import Pagination from '@/components/pagination';
-import SkeletonWrapper from '@/components/skeleton-wrapper';
-import MainLayout from '@/layouts/main-layout';
-import { useSingleStorage } from '@/lib/hooks/useLocalStorage';
-import { api } from '@/lib/utils/api';
-
-import type { WithPageLayout } from '@/types/with-page-layout';
+import Card from "~/components/card";
+import Error from "~/components/error";
+import Meta from "~/components/meta";
+import Pagination from "~/components/pagination";
+import SkeletonWrapper from "~/components/skeleton-wrapper";
+import MainLayout from "~/layouts/main-layout";
+import { useSingleStorage } from "~/lib/hooks/useLocalStorage";
+import { api } from "~/lib/utils/api";
+import type { WithPageLayout } from "~/types/with-page-layout";
 
 const SearchPage: WithPageLayout = () => {
   const router = useRouter();
@@ -33,7 +32,7 @@ const SearchPage: WithPageLayout = () => {
     page: pageNumber,
   });
 
-  const { setItemToStorage } = useSingleStorage('filmfiesta_keywords');
+  const { setItemToStorage } = useSingleStorage("filmfiesta_keywords");
 
   useEffect(() => {
     if (q) {
@@ -71,7 +70,7 @@ const SearchPage: WithPageLayout = () => {
             <h5 className="mb-6 text-xl text-slate-800 dark:text-slate-400">
               Top Rated Movies
             </h5>
-            <div className="grid grid-cols-1 justify-center gap-4 xs:grid-cols-auto-fill">
+            <div className="xs:grid-cols-auto-fill grid grid-cols-1 justify-center gap-4">
               {topRatedMoviesLoading && (
                 <SkeletonWrapper height={360} count={12} radius={6} />
               )}
@@ -98,7 +97,7 @@ const SearchPage: WithPageLayout = () => {
             🕵 {data?.total_results ?? 0} results found for &lsquo;{q}&lsquo;
           </h3>
         )}
-        <div className="grid grid-cols-[250px] gap-4 xs:grid-cols-auto-fill">
+        <div className="xs:grid-cols-auto-fill grid grid-cols-[250px] gap-4">
           {isLoading && <SkeletonWrapper height={360} count={12} radius={6} />}
           {(data?.results?.length as number) > 0 ? (
             data?.results.map((m) => (

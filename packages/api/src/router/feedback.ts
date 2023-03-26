@@ -1,10 +1,8 @@
-import { feedbackSchema, feedbacksOutputSchema } from "@/schemas/feedback";
-import {
-  adminProcedure,
-  createTRPCRouter,
-  publicProcedure,
-} from "@/server/api/trpc";
 import { TRPCError } from "@trpc/server";
+
+import { feedbackSchema, feedbacksOutputSchema } from "@acme/schema";
+
+import { adminProcedure, createTRPCRouter, publicProcedure } from "../trpc";
 
 const feedbackRouter = createTRPCRouter({
   sendFeedback: publicProcedure

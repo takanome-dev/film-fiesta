@@ -1,16 +1,15 @@
-import React from 'react';
-import { BsArrowRepeat } from 'react-icons/bs';
-import { Circles } from 'react-loader-spinner';
+import React from "react";
+import { BsArrowRepeat } from "react-icons/bs";
+import { Circles } from "react-loader-spinner";
 
-import Error from '@/components/error';
-import Meta from '@/components/meta';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import Unauthorized from '@/components/unauthorized';
-import MainLayout from '@/layouts/main-layout';
-import { api } from '@/lib/utils/api';
-
-import type { WithPageLayout } from '@/types/with-page-layout';
+import Error from "~/components/error";
+import Meta from "~/components/meta";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { Button } from "~/components/ui/button";
+import Unauthorized from "~/components/unauthorized";
+import MainLayout from "~/layouts/main-layout";
+import { api } from "~/lib/utils/api";
+import type { WithPageLayout } from "~/types/with-page-layout";
 
 const FeedbacksPage: WithPageLayout = () => {
   const { data, isLoading, error, refetch } =
@@ -33,7 +32,7 @@ const FeedbacksPage: WithPageLayout = () => {
   }
 
   if (error) {
-    if (error.message === 'UNAUTHORIZED') return <Unauthorized />;
+    if (error.message === "UNAUTHORIZED") return <Unauthorized />;
     return <Error handleRefetch={() => refetch()} resourceName="feedbacks" />;
   }
 
@@ -64,16 +63,16 @@ const FeedbacksPage: WithPageLayout = () => {
                   </Avatar>
                   <div className="ml-4">
                     <h3 className="text-lg font-semibold">
-                      {feedback.user?.name ?? 'Anonymous'}
+                      {feedback.user?.name ?? "Anonymous"}
                     </h3>
                     <p className="text-sm text-slate-600 dark:text-slate-400">
-                      {feedback.user?.email ?? 'anonymous@example.com'}
+                      {feedback.user?.email ?? "anonymous@example.com"}
                     </p>
                   </div>
                 </div>
                 <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">
-                  {new Intl.DateTimeFormat('en-US').format(
-                    new Date(feedback.createdAt) ?? Date.now()
+                  {new Intl.DateTimeFormat("en-US").format(
+                    new Date(feedback.createdAt) ?? Date.now(),
                   )}
                 </p>
               </div>

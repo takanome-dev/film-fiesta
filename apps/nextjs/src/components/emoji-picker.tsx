@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "~/components/ui/button";
 
 interface Emoji {
   name: string;
@@ -8,13 +8,13 @@ interface Emoji {
 }
 
 const emojis: Emoji[] = [
-  { name: 'like', emoji: '👍' },
-  { name: 'dislike', emoji: '👎' },
-  { name: 'clap', emoji: '👏' },
-  { name: 'love', emoji: '❤️' },
-  { name: 'hooray', emoji: '🎉' },
-  { name: 'confused', emoji: '😕' },
-  { name: 'rocket', emoji: '🚀' },
+  { name: "like", emoji: "👍" },
+  { name: "dislike", emoji: "👎" },
+  { name: "clap", emoji: "👏" },
+  { name: "love", emoji: "❤️" },
+  { name: "hooray", emoji: "🎉" },
+  { name: "confused", emoji: "😕" },
+  { name: "rocket", emoji: "🚀" },
 ];
 
 const EmojiPicker = () => {

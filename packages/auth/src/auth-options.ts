@@ -1,12 +1,12 @@
 import { SupabaseAdapter } from "@next-auth/supabase-adapter";
 import jwt from "jsonwebtoken";
-import NextAuth, { type DefaultSession, type NextAuthOptions } from "next-auth";
+import { type DefaultSession, type NextAuthOptions } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
 import EmailProvider from "next-auth/providers/email";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
-import { env } from "@acme/schemas";
+import { env } from "@acme/schema";
 
 /**
  * Module augmentation for `next-auth` types
@@ -60,7 +60,7 @@ export const authOptions: NextAuthOptions = {
   },
   // Configure one or more authentication providers
   adapter: SupabaseAdapter({
-    url: clientEnv.NEXT_PUBLIC_SUPABASE_URL,
+    url: env.NEXT_PUBLIC_SUPABASE_URL,
     secret: env.SUPABASE_SERVICE_ROLE_KEY,
   }),
   providers: [

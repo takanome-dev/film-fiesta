@@ -5,13 +5,10 @@
   "types": "./index.ts",
   "license": "MIT",
   "scripts": {
-    "clean": "rm -rf .turbo node_modules",
-    "db:generate": "prisma generate",
-    "db:push": "prisma db push --skip-generate",
-    "dev": "prisma studio --port 5556"
+    "clean": "rm -rf .turbo node_modules"
   },
   "dependencies": {
-    "@acme/schemas": "*",
+    "@acme/schema": "*",
     "@supabase/supabase-js": "^2.4.1"
   },
   "devDependencies": {

@@ -1,25 +1,24 @@
 /* eslint-disable */
 // eslint disabled because CI keeps failing for some reason
 
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
-import { FaStar } from 'react-icons/fa';
-import { HiTrash } from 'react-icons/hi';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { FaStar } from "react-icons/fa";
+import { HiTrash } from "react-icons/hi";
 
-import notFoundImage from '@/assets/image-not-found.png';
-import Favorite from '@/components/favorite';
-import { Button } from '@/components/ui/button';
+import Favorite from "~/components/favorite";
+import { Button } from "~/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { imageUrl } from '@/lib/utils/movie';
-
-import type { LocalStorageKeys } from '@/lib/hooks/useLocalStorage';
-import type { MovieSchema } from '@/schemas/movies';
+} from "~/components/ui/tooltip";
+import notFoundImage from "~/assets/image-not-found.png";
+import type { LocalStorageKeys } from "~/lib/hooks/useLocalStorage";
+import { imageUrl } from "~/lib/utils/movie";
+import type { MovieSchema } from "~/schemas/movies";
 
 interface Props {
   movie: MovieSchema;
@@ -93,7 +92,7 @@ const Card: React.FC<Props> = ({
       </div>
       {isHistory ? (
         <RemoveFromHistory
-          onRemove={() => handleRemoveFromHistory?.('filmfiesta_movies', movie)}
+          onRemove={() => handleRemoveFromHistory?.("filmfiesta_movies", movie)}
         />
       ) : (
         <Favorite

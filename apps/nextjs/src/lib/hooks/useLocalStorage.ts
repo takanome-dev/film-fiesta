@@ -1,27 +1,27 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useCallback, useEffect, useMemo, useState } from "react";
 
-import type { MovieSchema } from '@/schemas/movies';
+import type { MovieSchema } from "@acme/schema";
 
 export const LOCAL_STORAGE_KEYS = {
-  RECENT_SEARCHES: 'filmfiesta_keywords',
-  RECENT_CHECKED_MOVIES: 'filmfiesta_movies',
+  RECENT_SEARCHES: "filmfiesta_keywords",
+  RECENT_CHECKED_MOVIES: "filmfiesta_movies",
 } as const;
 
 export type LocalStorageKeys =
   (typeof LOCAL_STORAGE_KEYS)[keyof typeof LOCAL_STORAGE_KEYS];
 
 const isMovieSchema = (value: any): value is MovieSchema =>
-  typeof value === 'object' && 'id' in value;
+  typeof value === "object" && "id" in value;
 
 export function useMultipleStorages<T, U>(...keys: LocalStorageKeys[]) {
   const [mapItems, setMapItems] = useState(
-    new Map<LocalStorageKeys, (T | U)[]>()
+    new Map<LocalStorageKeys, (T | U)[]>(),
   );
 
   const map = useMemo(() => new Map<LocalStorageKeys, (T | U)[]>(), []);
 
   keys.forEach((key) => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     map.set(
       key,
@@ -31,10 +31,10 @@ export function useMultipleStorages<T, U>(...keys: LocalStorageKeys[]) {
               JSON.parse(localStorage.getItem(key) as LocalStorageKeys) as (
                 | T
                 | U
-              )[]
+              )[],
             ),
           ]
-        : []
+        : [],
     );
   });
 
@@ -89,11 +89,11 @@ export function useMultipleStorages<T, U>(...keys: LocalStorageKeys[]) {
 
 export function useSingleStorage<T>(key: LocalStorageKeys) {
   const [items, setItems] = useState<T[]>(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       return localStorage.getItem(key)
         ? [
             ...new Set(
-              JSON.parse(localStorage.getItem(key) as LocalStorageKeys) as T[]
+              JSON.parse(localStorage.getItem(key) as LocalStorageKeys) as T[],
             ),
           ]
         : [];
@@ -109,9 +109,9 @@ export function useSingleStorage<T>(key: LocalStorageKeys) {
       const newItems = [...items, value];
       localStorage.setItem(key, JSON.stringify([...new Set(newItems)]));
       setItems(newItems);
-      console.log('SET ITEM TO STORAGE IS CALLED...');
+      console.log("SET ITEM TO STORAGE IS CALLED...");
     },
-    [items, key]
+    [items, key],
   );
 
   const getItemsFromStorage = useCallback(() => [...new Set(items)], [items]);
@@ -128,9 +128,9 @@ export function useSingleStorage<T>(key: LocalStorageKeys) {
 
       localStorage.setItem(key, JSON.stringify(newItems));
       setItems(newItems);
-      console.log('REMOVE ITEM FROM STORAGE IS CALLED...');
+      console.log("REMOVE ITEM FROM STORAGE IS CALLED...");
     },
-    [items, key]
+    [items, key],
   );
 
   return {

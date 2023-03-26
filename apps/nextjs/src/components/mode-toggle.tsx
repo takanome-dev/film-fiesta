@@ -1,14 +1,14 @@
-import { useTheme } from 'next-themes';
-import * as React from 'react';
-import { BiSun, BiMoon, BiLaptop } from 'react-icons/bi';
+import * as React from "react";
+import { useTheme } from "next-themes";
+import { BiLaptop, BiMoon, BiSun } from "react-icons/bi";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "~/components/ui/dropdown-menu";
 
 export default function ModeToggle() {
   const { setTheme } = useTheme();
@@ -25,15 +25,15 @@ export default function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>
+        <DropdownMenuItem onClick={() => setTheme("light")}>
           <BiSun className="mr-2 h-4 w-4" />
           <span>Light</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
+        <DropdownMenuItem onClick={() => setTheme("dark")}>
           <BiMoon className="mr-2 h-4 w-4" />
           <span>Dark</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
+        <DropdownMenuItem onClick={() => setTheme("system")}>
           <BiLaptop className="mr-2 h-4 w-4" />
           <span>System</span>
         </DropdownMenuItem>

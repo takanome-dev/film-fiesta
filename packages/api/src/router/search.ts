@@ -1,8 +1,10 @@
-import type { ResponseSchema } from "@/schemas/movies";
-import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
-import { http } from "@/server/fetch";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+
+import { type ResponseSchema } from "@acme/schema";
+
+import { http } from "../fetch";
+import { createTRPCRouter, publicProcedure } from "../trpc";
 
 const searchRouter = createTRPCRouter({
   getMovies: publicProcedure

@@ -1,19 +1,18 @@
-import Link from 'next/link';
-import { signOut, useSession } from 'next-auth/react';
-import { BsArrowRight, BsGear } from 'react-icons/bs';
-import { FaRegComment, FaSignOutAlt } from 'react-icons/fa';
-import { FiUser } from 'react-icons/fi';
+import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
+import { BsArrowRight, BsGear } from "react-icons/bs";
+import { FaRegComment, FaSignOutAlt } from "react-icons/fa";
+import { FiUser } from "react-icons/fi";
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { Button, buttonVariants } from "~/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-
-import type { UserSchema } from '@/schemas/user';
+} from "~/components/ui/dropdown-menu";
+import type { UserSchema } from "~/schemas/user";
 
 const UserAvatar = () => {
   const { data: session } = useSession();
@@ -25,7 +24,7 @@ const UserAvatar = () => {
         href="/login"
         className={buttonVariants({
           className:
-            'h-full bg-slate-600 py-2 font-semibold hover:bg-slate-800 dark:bg-slate-50 dark:text-slate-900',
+            "h-full bg-slate-600 py-2 font-semibold hover:bg-slate-800 dark:bg-slate-50 dark:text-slate-900",
         })}
       >
         Sign in <BsArrowRight className="ml-2" />

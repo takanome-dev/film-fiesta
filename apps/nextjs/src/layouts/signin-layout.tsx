@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
-import ModeToggle from '@/components/mode-toggle';
+import ModeToggle from "~/components/mode-toggle";
 
 const SignInLayout = ({ children }: { children: React.ReactNode }) => (
   <>

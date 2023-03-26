@@ -1,8 +1,8 @@
-import { useSession } from 'next-auth/react';
-import React from 'react';
-import { toast } from 'react-hot-toast';
+import React from "react";
+import { useSession } from "next-auth/react";
+import { toast } from "react-hot-toast";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "~/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,10 +10,10 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Textarea } from '@/components/ui/textarea';
-import useForm from '@/lib/hooks/useForm';
-import { api } from '@/lib/utils/api';
+} from "~/components/ui/dialog";
+import { Textarea } from "~/components/ui/textarea";
+import useForm from "~/lib/hooks/useForm";
+import { api } from "~/lib/utils/api";
 
 interface Props {
   open: boolean;
@@ -23,13 +23,13 @@ interface Props {
 const Feedback: React.FC<Props> = ({ open, setOpen }) => {
   const { data } = useSession();
   const { inputs, clearForm, handleChange } = useForm({
-    emojiName: '',
-    message: '',
-    userId: '',
+    emojiName: "",
+    message: "",
+    userId: "",
   });
 
   const { mutate, error, isLoading } = api.feedback.sendFeedback.useMutation({
-    onSuccess: () => toast.success('Thanks for your feedback!'),
+    onSuccess: () => toast.success("Thanks for your feedback!"),
   });
 
   if (error) toast.error(error.message);

@@ -1,15 +1,14 @@
-import { useRouter } from 'next/router';
-import React from 'react';
+import React from "react";
+import { useRouter } from "next/router";
 
-import Card from '@/components/card';
-import Error from '@/components/error';
-import Meta from '@/components/meta';
-import Pagination from '@/components/pagination';
-import SkeletonWrapper from '@/components/skeleton-wrapper';
-import MainLayout from '@/layouts/main-layout';
-import { api } from '@/lib/utils/api';
-
-import type { WithPageLayout } from '@/types/with-page-layout';
+import Card from "~/components/card";
+import Error from "~/components/error";
+import Meta from "~/components/meta";
+import Pagination from "~/components/pagination";
+import SkeletonWrapper from "~/components/skeleton-wrapper";
+import MainLayout from "~/layouts/main-layout";
+import { api } from "~/lib/utils/api";
+import type { WithPageLayout } from "~/types/with-page-layout";
 
 const TrendingPage: WithPageLayout = () => {
   const router = useRouter();
@@ -28,7 +27,7 @@ const TrendingPage: WithPageLayout = () => {
   return (
     <>
       <Meta page="Settings" />
-      <div className="grid grid-cols-1 justify-center gap-4 xs:grid-cols-auto-fill">
+      <div className="xs:grid-cols-auto-fill grid grid-cols-1 justify-center gap-4">
         {isLoading && <SkeletonWrapper height={370} count={12} radius={6} />}
         {data?.results.map((m) => (
           <Card movie={m} key={m.id} handleRefetch={refetch} />

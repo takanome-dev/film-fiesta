@@ -1,7 +1,7 @@
-import favoriteRouter from "./routers/favorite";
-import feedbackRouter from "./routers/feedback";
-import moviesRouter from "./routers/movies";
-import searchRouter from "./routers/search";
+import favoriteRouter from "./router/favorite";
+import feedbackRouter from "./router/feedback";
+import moviesRouter from "./router/movies";
+import searchRouter from "./router/search";
 import { createTRPCRouter } from "./trpc";
 
 export const appRouter = createTRPCRouter({

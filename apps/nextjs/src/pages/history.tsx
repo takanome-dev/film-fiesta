@@ -1,26 +1,25 @@
-import { AiOutlineClose } from 'react-icons/ai';
-import { BiTrashAlt } from 'react-icons/bi';
-import { z } from 'zod';
+import { AiOutlineClose } from "react-icons/ai";
+import { BiTrashAlt } from "react-icons/bi";
+import { z } from "zod";
 
-import Card from '@/components/card';
-import Meta from '@/components/meta';
-import { Button } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import MainLayout from '@/layouts/main-layout';
-import { useMultipleStorages } from '@/lib/hooks/useLocalStorage';
-import { movieSchema, type MovieSchema } from '@/schemas/movies';
-
-import type { WithPageLayout } from '@/types/with-page-layout';
+import Card from "~/components/card";
+import Meta from "~/components/meta";
+import { Button } from "~/components/ui/button";
+import { ScrollArea } from "~/components/ui/scroll-area";
+import MainLayout from "~/layouts/main-layout";
+import { useMultipleStorages } from "~/lib/hooks/useLocalStorage";
+import { movieSchema, type MovieSchema } from "~/schemas/movies";
+import type { WithPageLayout } from "~/types/with-page-layout";
 
 const HistoryPage: WithPageLayout = () => {
   const { getItemsFromStorage, removeItemFromStorage, clearStorage } =
     useMultipleStorages<MovieSchema, string>(
-      'filmfiesta_movies',
-      'filmfiesta_keywords'
+      "filmfiesta_movies",
+      "filmfiesta_keywords",
     );
 
-  const histories = getItemsFromStorage('filmfiesta_movies');
-  const keywords = getItemsFromStorage('filmfiesta_keywords');
+  const histories = getItemsFromStorage("filmfiesta_movies");
+  const keywords = getItemsFromStorage("filmfiesta_keywords");
 
   const parsedHistories = z.array(movieSchema).parse(histories);
   const parsedKeywords = z.array(z.string()).parse(keywords);
@@ -44,7 +43,7 @@ const HistoryPage: WithPageLayout = () => {
             <h2 className="mb-4 text-xl font-semibold">
               Recent visited movies
             </h2>
-            <div className="grid grid-cols-1 gap-4 xs:grid-cols-auto-fill">
+            <div className="xs:grid-cols-auto-fill grid grid-cols-1 gap-4">
               {parsedHistories.length === 0 && (
                 <div className="">
                   <p className="mt-10 text-center text-lg">No history yet 🕵</p>
@@ -82,7 +81,7 @@ const HistoryPage: WithPageLayout = () => {
                     <Button
                       className="px-2 focus:outline-none"
                       onClick={() =>
-                        removeItemFromStorage('filmfiesta_keywords', k)
+                        removeItemFromStorage("filmfiesta_keywords", k)
                       }
                     >
                       <AiOutlineClose className="h-4 w-4 font-bold" />
