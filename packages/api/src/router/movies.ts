@@ -65,6 +65,7 @@ const moviesRouter = createTRPCRouter({
       }),
     )
     .query(async ({ ctx, input }) => {
+      console.log({ session: ctx.session, input });
       const response = await getMoviesWithFavs(
         ctx.supabase as SupabaseAuthClient,
         ctx.session?.user?.id ?? "",
