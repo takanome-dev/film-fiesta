@@ -1,9 +1,9 @@
 import type { ExpoConfig } from "@expo/config";
 
 const defineConfig = (): ExpoConfig => ({
-  name: "expo",
-  slug: "expo",
-  scheme: "expo",
+  name: "Film Fiesta",
+  slug: "film-fiesta",
+  scheme: "dev",
   version: "1.0.0",
   orientation: "portrait",
   icon: "./assets/icon.png",
@@ -26,10 +26,11 @@ const defineConfig = (): ExpoConfig => ({
       foregroundImage: "./assets/icon.png",
       backgroundColor: "#1F104A",
     },
+    package: "com.takanome.filmfiesta",
   },
   extra: {
     eas: {
-      projectId: "2dca6125-277e-4129-926c-22ae0cab33cb",
+      projectId: "92a90519-6e4f-41d6-8f24-8cdfc640f9e1",
     },
   },
   plugins: ["./expo-plugins/with-modify-gradle.js"],

@@ -24,6 +24,7 @@ const getBaseUrl = () => {
    * you don't have anything else running on it, or you'd have to change it.
    */
   const localhost = Constants.manifest?.debuggerHost?.split(":")[0];
+  console.log({ localhost });
   if (!localhost) {
     // return "https://your-production-url.com";
     throw new Error(

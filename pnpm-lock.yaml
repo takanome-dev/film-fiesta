@@ -60,6 +60,7 @@ importers:
       tailwindcss: ^3.2.7
       typescript: ^4.9.5
     dependencies:
+      '@acme/api': link:../../packages/api
       '@shopify/flash-list': 1.4.0_2lxibwflkc27rb4mviuq3zkk7y
       '@tanstack/react-query': 4.24.10_bblof3d6od7kdqr2urb3dykbey
       '@trpc/client': 10.14.0_@trpc+server@10.14.0
@@ -79,7 +80,6 @@ importers:
       react-native-screens: 3.20.0_yqouayos4dnow7nnkhah4yzuzq
       superjson: 1.9.1
     devDependencies:
-      '@acme/api': link:../../packages/api
       '@acme/tailwind-config': link:../../packages/config/tailwind
       '@babel/core': 7.20.12
       '@babel/preset-env': 7.20.2_@babel+core@7.20.12
@@ -135,6 +135,7 @@ importers:
       next: ^13.2.3
       next-auth: ^4.20.1
       next-themes: ^0.2.1
+      node-gyp-build: ^4.6.0
       nprogress: ^0.2.0
       postcss: ^8.4.21
       react: 18.2.0
@@ -182,6 +183,7 @@ importers:
       next: 13.2.3_biqbaboplfbrettd7655fr4n2y
       next-auth: 4.20.1_nvzgbose6yf6w7ijjprgspqefi
       next-themes: 0.2.1_nvzgbose6yf6w7ijjprgspqefi
+      node-gyp-build: 4.6.0
       nprogress: 0.2.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0

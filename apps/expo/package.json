@@ -1,6 +1,6 @@
 {
   "name": "@acme/expo",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "main": "index.tsx",
   "scripts": {
     "clean": "git clean -xdf .expo .turbo node_modules",
@@ -12,6 +12,7 @@
     "FIXME(no-work):type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@acme/api": "*",
     "@shopify/flash-list": "1.4.0",
     "@tanstack/react-query": "^4.24.10",
     "@trpc/client": "^10.14.0",
@@ -32,7 +33,6 @@
     "superjson": "1.9.1"
   },
   "devDependencies": {
-    "@acme/api": "*",
     "@acme/tailwind-config": "*",
     "@babel/core": "^7.20.0",
     "@babel/preset-env": "^7.20.0",
