@@ -2,12 +2,14 @@ import { createClient } from "@supabase/supabase-js";
 
 import { env } from "@acme/schema";
 
-import type { Database } from "./supabase/schema";
-
 // export const supabase = createClient<Database>(
 //   env.NEXT_PUBLIC_SUPABASE_URL,
 //   env.NEXT_PUBLIC_SUPABASE_API_KEY,
 // );
+import movies from "./movies.json";
+import type { Database } from "./supabase/schema";
+
+export { movies };
 
 export const getSupabaseClient = (token?: string) => {
   return createClient<Database>(

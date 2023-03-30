@@ -29,6 +29,8 @@ importers:
   apps/expo:
     specifiers:
       '@acme/api': '*'
+      '@acme/db': '*'
+      '@acme/schema': '*'
       '@acme/tailwind-config': '*'
       '@babel/core': ^7.20.0
       '@babel/preset-env': ^7.20.0
@@ -61,6 +63,8 @@ importers:
       typescript: ^4.9.5
     dependencies:
       '@acme/api': link:../../packages/api
+      '@acme/db': link:../../packages/db
+      '@acme/schema': link:../../packages/schema
       '@shopify/flash-list': 1.4.0_2lxibwflkc27rb4mviuq3zkk7y
       '@tanstack/react-query': 4.24.10_bblof3d6od7kdqr2urb3dykbey
       '@trpc/client': 10.14.0_@trpc+server@10.14.0
