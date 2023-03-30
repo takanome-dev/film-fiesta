@@ -37,6 +37,7 @@ importers:
       '@babel/runtime': ^7.20.0
       '@expo/config-plugins': ^6.0.0
       '@shopify/flash-list': 1.4.0
+      '@tailwindcss/line-clamp': ^0.4.4
       '@tanstack/react-query': ^4.24.10
       '@trpc/client': ^10.14.0
       '@trpc/react-query': ^10.14.0
@@ -89,6 +90,7 @@ importers:
       '@babel/preset-env': 7.20.2_@babel+core@7.20.12
       '@babel/runtime': 7.20.7
       '@expo/config-plugins': 6.0.0
+      '@tailwindcss/line-clamp': 0.4.4_tailwindcss@3.2.7
       '@types/react': 18.0.27
       '@types/webpack-env': 1.18.0
       eslint: 8.34.0
@@ -304,12 +306,14 @@ importers:
   packages/config/tailwind:
     specifiers:
       '@tailwindcss/forms': ^0.5.3
+      '@tailwindcss/line-clamp': ^0.4.4
       autoprefixer: ^10.4.13
       postcss: ^8.4.21
       tailwindcss: ^3.2.7
       tailwindcss-animate: ^1.0.5
     devDependencies:
       '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.7
+      '@tailwindcss/line-clamp': 0.4.4_tailwindcss@3.2.7
       autoprefixer: 10.4.13_postcss@8.4.21
       postcss: 8.4.21
       tailwindcss: 3.2.7_postcss@8.4.21
@@ -3766,6 +3770,14 @@ packages:
       tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
     dependencies:
       mini-svg-data-uri: 1.4.4
+      tailwindcss: 3.2.7_postcss@8.4.21
+    dev: true
+
+  /@tailwindcss/line-clamp/0.4.4_tailwindcss@3.2.7:
+    resolution: {integrity: sha512-5U6SY5z8N42VtrCrKlsTAA35gy2VSyYtHWCsg1H87NU1SXnEfekTVlrga9fzUDrrHcGi2Lb5KenUWb4lRQT5/g==}
+    peerDependencies:
+      tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
+    dependencies:
       tailwindcss: 3.2.7_postcss@8.4.21
     dev: true
 

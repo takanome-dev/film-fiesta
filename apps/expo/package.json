@@ -40,6 +40,7 @@
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
     "@expo/config-plugins": "^6.0.0",
+    "@tailwindcss/line-clamp": "^0.4.4",
     "@types/react": "^18.0.27",
     "@types/webpack-env": "^1.18.0",
     "eslint": "^8.34.0",

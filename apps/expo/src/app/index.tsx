@@ -27,12 +27,12 @@ const Index = () => {
 
   return (
     <SafeAreaView className="bg-slate-900">
-      {/* <Stack.Screen options={{ title: "Home Page" }} /> */}
-      <View className="h-full w-full p-4">
+      <Stack.Screen options={{ title: "Home", headerShown: false }} />
+      <View className="h-full w-full p-6">
         <FlashList
           data={movies.results ?? []}
           estimatedItemSize={20}
-          ItemSeparatorComponent={() => <View className="h-2" />}
+          ItemSeparatorComponent={() => <View className="h-4" />}
           renderItem={(movie) => <Card movie={movie.item} />}
         />
       </View>

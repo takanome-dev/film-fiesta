@@ -22,7 +22,7 @@ const RootLayout = () => {
             },
           }}
         />
-        <StatusBar />
+        <StatusBar style="light" />
       </SafeAreaProvider>
     </TRPCProvider>
   );
