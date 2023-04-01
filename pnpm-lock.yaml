@@ -44,6 +44,8 @@ importers:
       '@trpc/server': ^10.14.0
       '@types/react': ^18.0.27
       '@types/webpack-env': ^1.18.0
+      class-variance-authority: ^0.4.0
+      clsx: ^1.2.1
       eslint: ^8.34.0
       eslint-config-acme: 0.0.0
       expo: ^48.0.4
@@ -60,6 +62,7 @@ importers:
       react-native-safe-area-context: 4.5.0
       react-native-screens: ~3.20.0
       superjson: 1.9.1
+      tailwind-merge: ^1.8.1
       tailwindcss: ^3.2.7
       typescript: ^4.9.5
     dependencies:
@@ -71,6 +74,8 @@ importers:
       '@trpc/client': 10.14.0_@trpc+server@10.14.0
       '@trpc/react-query': 10.14.0_ewqbv5apgvis5mngp6qivio3iy
       '@trpc/server': 10.14.0
+      class-variance-authority: 0.4.0_typescript@4.9.5
+      clsx: 1.2.1
       expo: 48.0.4_@babel+core@7.20.12
       expo-constants: 14.2.1_expo@48.0.4
       expo-linking: 4.0.1_expo@48.0.4
@@ -84,6 +89,7 @@ importers:
       react-native-safe-area-context: 4.5.0_yqouayos4dnow7nnkhah4yzuzq
       react-native-screens: 3.20.0_yqouayos4dnow7nnkhah4yzuzq
       superjson: 1.9.1
+      tailwind-merge: 1.10.0
     devDependencies:
       '@acme/tailwind-config': link:../../packages/config/tailwind
       '@babel/core': 7.20.12
