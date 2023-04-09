@@ -2,12 +2,8 @@
   "compilerOptions": {
     "target": "es2017",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "@/root/*": ["./*"]
-    },
     "allowJs": true,
+    "checkJs": true,
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -19,28 +15,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "noUncheckedIndexedAccess": true,
-    "composite": false,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitThis": true,
-    "noFallthroughCasesInSwitch": true,
-    "strictNullChecks": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "noUncheckedIndexedAccess": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.cjs",
-    "**/*.mjs",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": ["node_modules"]
+  "include": [".eslintrc.js", "prettier.config.cjs"]
 }

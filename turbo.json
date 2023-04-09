@@ -1,0 +1,65 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "globalDependencies": ["**/.env"],
+  "pipeline": {
+    "db:generate": {
+      "inputs": ["prisma/schema.prisma"],
+      "cache": false
+    },
+    "db:push": {
+      "inputs": ["prisma/schema.prisma"],
+      "cache": false
+    },
+    "dev": {
+      "persistent": true,
+      "cache": false
+    },
+    "build": {
+      "dependsOn": ["^build", "^db:generate"],
+      "outputs": [".next/**", ".expo/**"]
+    },
+    "lint": {},
+    "lint:fix": {},
+    "clean": {
+      "cache": false
+    },
+    "//#clean": {
+      "cache": false
+    },
+    "type-check": {
+      "dependsOn": ["^db:generate"],
+      "cache": false
+    }
+  },
+  "globalEnv": [
+    "CI",
+    "DATABASE_URL",
+    "DISCORD_CLIENT_ID",
+    "DISCORD_CLIENT_SECRET",
+    "EXPO_ROUTER_APP_ROOT",
+    "NEXTAUTH_SECRET",
+    "NEXTAUTH_URL",
+    "NODE_ENV",
+    "SKIP_ENV_VALIDATION",
+    "VERCEL",
+    "VERCEL_URL",
+    "SENTRY_DNS",
+    "SUPABASE_JWT_SECRET",
+    "TMDB_API_KEY",
+    "TMDB_BEARER_TOKEN",
+    "GITHUB_CLIENT_ID",
+    "GITHUB_CLIENT_SECRET",
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET",
+    "SUPABASE_SERVICE_ROLE_KEY",
+    "EMAIL_SERVER_USER",
+    "EMAIL_SERVER_PASSWORD",
+    "EMAIL_FROM",
+    "NEXT_PUBLIC_SUPABASE_URL",
+    "NEXT_PUBLIC_SUPABASE_API_KEY",
+    "NEXT_PUBLIC_TMDB_IMAGE",
+    "NEXT_PUBLIC_TMDB_URL",
+    "NEXT_PUBLIC_TMDB_VIDEO",
+    "NEXT_PUBLIC_APP_URL"
+  ]
+}
