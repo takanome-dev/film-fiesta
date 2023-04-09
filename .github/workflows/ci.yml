@@ -2,89 +2,64 @@ name: CI
 
 on:
   pull_request:
-    types:
-      - opened
-      - edited
-      - synchronize
-      - reopened
+    branches: ["*"]
+  push:
+    branches: ["main"]
+  merge_group:
   workflow_dispatch:
 
+# You can leverage Vercel Remote Caching with Turbo to speed up your builds
+# @link https://turborepo.org/docs/core-concepts/remote-caching#remote-caching-on-vercel-builds
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+
 jobs:
-  # test:
-  #   timeout-minutes: 5
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: '☁️ checkout repository'
-  #       uses: actions/checkout@v2
-
-  #     - name: '🔧 setup node'
-  #       uses: actions/setup-node@v2
-  #       with:
-  #         node-version: '16.x'
-
-  #     - name: '🔧 install pnpm@latest'
-  #       run: npm i -g pnpm
-
-  #     - name: '📦 Install dependencies'
-  #       run: pnpm install
-
-  #     - name: '🔧 Install Playwright Browsers'
-  #       run: npx playwright install --with-deps
-
-  #     - name: '🔍 Run Playwright tests'
-  #       run: xvfb-run --auto-servernum -- pnpm test
-
-  #     - uses: actions/upload-artifact@v3
-  #       if: always()
-  #       with:
-  #         name: playwright-report
-  #         path: playwright-report/
-  #         retention-days: 30
-
-  lint:
-    name: Lint application
+  build-lint:
+    env:
+      DATABASE_URL: file:./db.sqlite
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+
     steps:
-      - name: '☁️ checkout repository'
+      - name: '☁️ Checkout repo'
         uses: actions/checkout@v3
 
-      - name: '🔧 setup node'
-        uses: actions/setup-node@v3.5.1
+      - name: '🔧 Setup pnpm'
+        uses: pnpm/action-setup@v2.2.4
+
+      - name: '🔧 Setup Node 18'
+        uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: 18
 
-      - name: '🔧 install pnpm@latest'
-        run: npm i -g pnpm
+      - name: '🔧 Get pnpm store directory'
+        id: pnpm-cache
+        run: |
+          echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-      - name: '📦 install dependencies'
+      - name: '🔧 Setup pnpm cache'
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: '📦 Install deps (with cache)'
         run: pnpm install
 
-      - name: '🔍 lint code'
-        run: pnpm lint
+      # Normally, this would be done as part of the turbo pipeline - however since the Expo app doesn't depend on `@acme/db` it doesn't care.
+      # TODO: Free for all to find a better solution here.
+      - name: Generate Prisma Client
+        run: pnpm turbo db:generate
 
-      # exclude build step for now because of missing envs
-      # - name: '📦 build application'
-      #   run: pnpm build
+      - name: '🛠 Build, lint and type-check'
+        run: pnpm turbo build lint type-check
+        env:
+          SKIP_ENV_VALIDATION: true
 
-  build:
-    name: Build Repo Visualizer
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: '☁️ checkout repository'
-        uses: actions/checkout@v3
-
-      - name: '🔧 setup node'
-        uses: actions/setup-node@v3.5.1
-        with:
-          node-version: '16.x'
-
-      - name: '🔧 install pnpm@latest'
-        run: npm i -g pnpm
-
-      - name: '📦 install dependencies'
-        run: pnpm install
+      - name: '🕵 Check workspaces'
+        run: pnpm manypkg check
 
       - name: '📊 repository visualizer'
         id: diagram
@@ -100,3 +75,4 @@ jobs:
         with:
           name: diagram
           path: public/diagram.svg
+
