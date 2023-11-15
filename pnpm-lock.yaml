@@ -2497,7 +2497,7 @@ packages:
       eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.48.2)(eslint-import-resolver-typescript@3.5.3)(eslint@8.32.0)
       object.assign: 4.1.4
       object.entries: 1.1.6
-      semver: 6.3.0
+      semver: 6.3.1
     dev: true
 
   /eslint-config-airbnb-typescript@17.0.0(@typescript-eslint/eslint-plugin@5.48.2)(@typescript-eslint/parser@5.48.2)(eslint-plugin-import@2.27.5)(eslint@8.32.0):
@@ -2654,7 +2654,7 @@ packages:
       minimatch: 3.1.2
       object.values: 1.1.6
       resolve: 1.22.1
-      semver: 6.3.0
+      semver: 6.3.1
       tsconfig-paths: 3.14.1
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
@@ -2684,7 +2684,7 @@ packages:
       minimatch: 3.1.2
       object.entries: 1.1.6
       object.fromentries: 2.0.6
-      semver: 6.3.0
+      semver: 6.3.1
     dev: true
 
   /eslint-plugin-prettier@4.2.1(eslint-config-prettier@8.6.0)(eslint@8.32.0)(prettier@2.8.3):
@@ -2733,7 +2733,7 @@ packages:
       object.values: 1.1.6
       prop-types: 15.8.1
       resolve: 2.0.0-next.4
-      semver: 6.3.0
+      semver: 6.3.1
       string.prototype.matchall: 4.0.8
     dev: true
 
@@ -4486,8 +4486,8 @@ packages:
       loose-envify: 1.4.0
     dev: false
 
-  /semver@6.3.0:
-    resolution: {integrity: sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==}
+  /semver@6.3.1:
+    resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
     dev: true
 
