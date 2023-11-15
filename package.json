@@ -69,7 +69,7 @@
     "superjson": "1.9.1",
     "tailwind-merge": "^1.8.1",
     "tailwindcss-radix": "^2.7.0",
-    "zod": "^3.20.2",
+    "zod": "^3.22.3",
     "zod-validation-error": "^0.3.0"
   },
   "devDependencies": {
